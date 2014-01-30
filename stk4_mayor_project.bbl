@@ -1,0 +1,10 @@
+\begin{thebibliography}{1}
+
+\bibitem{slam}
+M.~W M~G Dissanayake, P.~Newman, S.~Clark, H.F. Durrant-Whyte, and M.~Csorba.
+\newblock A solution to the simultaneous localization and map building (slam)
+  problem.
+\newblock {\em Robotics and Automation, IEEE Transactions on}, 17(3):229--241,
+  Jun 2001.
+
+\end{thebibliography}
