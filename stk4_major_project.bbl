@@ -1,5 +1,11 @@
 \begin{thebibliography}{1}
 
+\bibitem{coverage}
+N.~Agmon, N.~Hazon, and G.A. Kaminka.
+\newblock Constructing spanning trees for efficient multi-robot coverage.
+\newblock In {\em Robotics and Automation, 2006. ICRA 2006. Proceedings 2006
+  IEEE International Conference on}, pages 1698--1703, May 2006.
+
 \bibitem{slam}
 M.~W M~G Dissanayake, P.~Newman, S.~Clark, H.F. Durrant-Whyte, and M.~Csorba.
 \newblock A solution to the simultaneous localization and map building (slam)
