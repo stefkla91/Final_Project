@@ -1,0 +1,25 @@
+\begin{thebibliography}{1}
+
+\bibitem{citeulike:8530320}
+M.~W. M.~G. Dissanayake, P.~Newman, S.~Clark, H.~F. Durrant-Whyte, and
+  M.~Csorba.
+\newblock {A solution to the simultaneous localization and map building (SLAM)
+  problem}.
+\newblock {\em Robotics and Automation, IEEE Transactions on}, 17(3):229--241,
+  June 2001.
+
+\bibitem{citeulike:4509551}
+S.~Poduri and G.~Sukhatme.
+\newblock {Constrained coverage for mobile sensor networks}.
+\newblock In {\em Robotics and Automation, 2004. Proceedings. ICRA \&\#039;04.
+  2004 IEEE International Conference on}, volume~1, pages 165--171 Vol.1. IEEE,
+  April 2004.
+
+\bibitem{citeulike:130355}
+Craig~W. Reynolds.
+\newblock {Flocks, Herds and Schools: A Distributed Behavioral Model}.
+\newblock In {\em Proceedings of the 14th Annual Conference on Computer
+  Graphics and Interactive Techniques}, volume~21 of {\em SIGGRAPH '87}, pages
+  25--34, New York, NY, USA, July 1987. ACM.
+
+\end{thebibliography}
