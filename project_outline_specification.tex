@@ -14,8 +14,8 @@
 \textbf{Supervisor:} Myra Wilsonm mxw@aber.ac.uk\\[3ex]
 \textbf{Degree scheme title and code:} AI \& Robotics GH76\\[3ex]
 \textbf{Module code:} CS39440\\[3ex]
-\textbf{Version:} 0.2\\[3ex]
-\textbf{Status:} Release\\
+\textbf{Version:} 0.3\\[3ex]
+\textbf{Status:} Draft\\
 
 \newpage
 
@@ -44,9 +44,32 @@ As this is a very research heavy project the information in this section is the 
 \newpage
 
 \section{Proposed Tasks}
+The simulator I am going to use is the Webots\texttrademark simulator which I will use to simulate a flock of E-puck robots. The programming language I am going to use is C. \\
+My project is very research heavy and will perform research throughout the entire project. So far I have looked at research papers concerning SLAM (Simultaneous Localization and Map building)\cite{citeulike:8530320}, flock intelligence\cite{citeulike:130355} and networking between robots\cite{citeulike:4509551}. Theses gave me a general idea for a solution, however I have to look more into similar papers. \\[3ex]
+
+The robots need to be able to deploy effectively while still staying in communication range to each other, as well covering the largest possible area. In a scenario where a number of different rooms exist a solution must be found to keep up communication, assuming that communication through walls is not possible. \\ 
+For this kind of scenario it would be essential to assign roles to the different robots e.g. scout and communicator roles. Where the communicator stays in range of other communicators while the scouts map the area inside their communication range. This would mean that a room can be mapped by the scouts while the communicators stays inside the doorway and keeps contact with the rest of the flock.\\
+I am at this moment not sure how to define scout and communicator roles as I image that it would be more useful to have all robots scouting in the beginning of a session and change then up into smaller "groups" which stay in contact through the communicators once the flock spreads out into corridor/room areas. I am not yet sure how to handle this problem yet and I am doing research on this matter.\\[3ex]
+
+For the mapping part of the area I am going to use distances sensors for the simulated robots. I will also use this range data for obstacle avoidance techniques. The main problem here is to be able to define global reference points which will allow me to piece together the different map fragments I get from the different robots. As I for realism sake  do not have GPS information I will have to use the data from the range finders. I am not sure how to deal with the global reference point problem as of yet.\\
+One possible solution would be to build the map dynamically on a central robot which would mean that all map data need to be transferred to it the moment it is acquired, this could lead to networking problems on larger flocks and I am doing research on to tackle this problem.\\[3ex]
+
+\section{Project Deliverables}
+\subsection{Final Program}
+A working program which holds solutions to the deployment, communication and mapping problems. \\
+The solution should be scalable for a flock of any size and a demonstration will show that the flock is able to deploy effectively and map the area as accurately as possible. 
+
+\subsection{Source Code and Testing}
+The complete, commented source code as well as any testing data which have been acquired. \\
+The testing data will be part of the final documentation while the code can be delivered separately.\\
+This also includes any world and robot files I created and used for the Webots\texttrademark simulator.
+
+\subsection{Final Report}
+The full report detailing the process as well as any changes to the design. This will include the design of the system and my reasoning for this design, the output data and detailed, analysed testing data. The testing analyse will hold all information I gather, problems I found during the testing and how I solved them. \\
+It will hold a reference section of all sources I used for my research and the report will hold information about what information I gathered from them.  This will including dates of access for web pages. \\
 
 \newpage
-\nocite{*}
+
 \bibliography{stefkla}
 
 
