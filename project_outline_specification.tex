@@ -14,23 +14,42 @@
 \textbf{Supervisor:} Myra Wilsonm mxw@aber.ac.uk\\[3ex]
 \textbf{Degree scheme title and code:} AI \& Robotics GH76\\[3ex]
 \textbf{Module code:} CS39440\\[3ex]
-\textbf{Version:} 0.1\\[3ex]
+\textbf{Version:} 0.2\\[3ex]
 \textbf{Status:} Release\\
+
 \newpage
+
 \section{Project Description }
-The goal of my project is to be able to use swarm intelligence to map a target area. Some of the key points of this is:
+The goal of my project is to be able to use swarm intelligence to map a target area. Some of the key points of this task are:
 
 \begin{itemize}
 \item networking between nodes(robots)
 \item finding a good deployment solution for the swarm
 \item mapping the area (including obstacle avoidance )
 \item moving the swarm in unison while covering the largest possible area with the sensors
+\end{itemize}
+
+Each of this tasks has to be completed in order of getting a reasonably good solution with might be used to map unknown areas,however it does not need to be limited to mapping. The underlying key features: networking between the robots, deployment and obstacle avoidance techniques etc. can be used in all kind of applications which require robot flocking. One example could be to use robots equipped with cameras to get an inside view of potential dangerous buildings to asses the area before sending in humans. In my project however the solution will be limited to range finder and communication sensors to simply map the target area. I believe this is a worthwhile project as robot applications can gain greatly when used correctly in flocks.\\[3ex]
+
+The main aspect of my project is to find a good deployment and communication solution for the flock, to assure that no units loose communication with the other and to be able to move the flock in unison while covering the largest possible area. \\
+As I said above I am going to use the flock to map the area but theoretically a user can configure the robots to hold any kind of sensor e.g cameras. Given this and my plan to assure maximum area coverage while not having the need of a previous map or location information like GPS a user can then use the flock and their sensors for what ever task which requires wide area coverage.  \\
+In my project I am going to use a limited number of robots however the flocking solution should be scalable enough for a flock of any size.\\[3ex]
+
+The  mapping part of my project is going to use simple obstacle recognition and avoidance techniques which in the same time is going to be mapped. The problem with this is that I have to find a solution for map sharing between the robots as well as how to improve map accuracy. Each unit can easily map an area using distance sensors however to able to compare the map fragments with each other a global reference point(or a number of reference points) will be needed. \\
+As my project is going to be simulator only this should not be a problem however as my indention is to make it program as applicable for the real world as possible as solution needs to be found. In one of the research papers I am using a solution using a millimetre wave radar was used to keep track of the global reference points while acquiring new obstacles\cite{citeulike:8530320}. As I planed to make my solution suitable for E-puck robots I will have to find a suitable solution using simpler techniques, however I do not have a clear idea how to do this as of this moment.\\[3ex]
+
+My project is as stated before simulator based, this is for a sake of simplicity and the limited timespan we have to complete the project.  I am going to use the Webots\texttrademark robotic simulator and programs which work in the simulator should also work problem less on the E-puck robots (assuming real world restrictions are fulfilled i.e. the robots have the same sensor equipment). \\
+The programming language I am going to use is C. \\
+As this is a very research heavy project the information in this section is the outline as to date however I might have to change some aspects of it once I acquire new information and find newer, better solutions to a problem.
+\newpage
+
+\section{Proposed Tasks}
 
 \newpage
 \nocite{*}
 \bibliography{stefkla}
 
-\end{itemize}
+
 \end{flushleft}
 
 \end{document}
