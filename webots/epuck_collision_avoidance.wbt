@@ -1,0 +1,89 @@
+#VRML_SIM V7.3.0 utf8
+WorldInfo {
+  info [
+    "Description"
+    "Author: first name last name <e-mail>"
+    "Date: DD MMM YYYY"
+  ]
+  basicTimeStep 16
+}
+Viewpoint {
+  orientation -0.987012 0.111529 0.115625 0.858203
+  position 0.157324 1.53555 0.818261
+}
+Background {
+  skyColor [
+    0.4 0.7 1
+  ]
+}
+DEF FLOOR CheckeredFloor {
+}
+EPuck {
+  controller "my_controller_epuk_go_forward"
+}
+DEF BALL Solid {
+  translation 0 0.1 -0.2
+  children [
+    Shape {
+      appearance Appearance {
+        texture ImageTexture {
+          url [
+            "textures/bricks.png"
+          ]
+        }
+      }
+      geometry DEF BALL_GEOMETRY Sphere {
+        radius 0.05
+      }
+    }
+  ]
+  boundingObject USE BALL_GEOMETRY
+  physics Physics {
+  }
+}
+DEF WALL_1 Solid {
+  translation 0 0.05 0.5
+  children [
+    DEF Wall_Shape Shape {
+      appearance DEF WALL_APPEARANCE Appearance {
+        material Material {
+          diffuseColor 0 0.666667 1
+        }
+      }
+      geometry DEF WALLS Box {
+        size 1 0.1 0.01
+      }
+    }
+  ]
+  boundingObject USE WALLS
+}
+DEF WALL_2 Solid {
+  translation 0 0.05 -0.5
+  children [
+    Shape {
+    }
+    USE Wall_Shape
+  ]
+  boundingObject USE WALLS
+}
+DEF WALL_3 Solid {
+  translation -0.498916 0.05 0.00513011
+  rotation 0 1 0 1.5708
+  children [
+    USE Wall_Shape
+  ]
+  boundingObject USE WALLS
+}
+DEF WALL_4 Solid {
+  translation 0.503447 0.05 -0.00362355
+  rotation 0 1 0 1.5708
+  children [
+    USE Wall_Shape
+  ]
+  boundingObject USE WALLS
+}
+DirectionalLight {
+  ambientIntensity 0.5
+  direction 1 -2 1
+  castShadows TRUE
+}
