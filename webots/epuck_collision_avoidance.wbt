@@ -1,4 +1,4 @@
-#VRML_SIM V7.3.0 utf8
+#VRML_SIM V7.4.0 utf8
 WorldInfo {
   info [
     "Description"
@@ -8,8 +8,8 @@ WorldInfo {
   basicTimeStep 16
 }
 Viewpoint {
-  orientation -0.987012 0.111529 0.115625 0.858203
-  position 0.157324 1.53555 0.818261
+  orientation 0.997636 0.00338755 -0.0686315 5.50053
+  position 0.0427965 2.46026 1.93128
 }
 Background {
   skyColor [
@@ -19,10 +19,10 @@ Background {
 DEF FLOOR CheckeredFloor {
 }
 EPuck {
-  controller "my_controller_epuk_go_forward"
+  controller "epuck_scanline"
 }
 DEF BALL Solid {
-  translation 0 0.1 -0.2
+  translation 0.281215 0.1 0.248203
   children [
     Shape {
       appearance Appearance {
