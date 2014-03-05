@@ -8,8 +8,8 @@ WorldInfo {
   basicTimeStep 16
 }
 Viewpoint {
-  orientation 0.997636 0.00338755 -0.0686315 5.50053
-  position 0.0427965 2.46026 1.93128
+  orientation 0.998972 0.0397005 -0.0218786 5.00022
+  position 0.0211828 2.33349 0.379675
 }
 Background {
   skyColor [
@@ -19,6 +19,7 @@ Background {
 DEF FLOOR CheckeredFloor {
 }
 EPuck {
+  rotation 0 1 0 3.14159
   controller "epuck_scanline"
 }
 DEF BALL Solid {
@@ -60,8 +61,6 @@ DEF WALL_1 Solid {
 DEF WALL_2 Solid {
   translation 0 0.05 -0.5
   children [
-    Shape {
-    }
     USE Wall_Shape
   ]
   boundingObject USE WALLS

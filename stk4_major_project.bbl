@@ -1,4 +1,9 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{Abolhasan2004Review}
+Mehran Abolhasan, Tadeusz Wysocki, and Eryk Dutkiewicz.
+\newblock {A review of routing protocols for mobile ad hoc networks}.
+\newblock {\em Ad Hoc Networks}, 2(1):1--22, January 2004.
 
 \bibitem{coverage}
 N.~Agmon, N.~Hazon, and G.A. Kaminka.
@@ -6,11 +11,96 @@ N.~Agmon, N.~Hazon, and G.A. Kaminka.
 \newblock In {\em Robotics and Automation, 2006. ICRA 2006. Proceedings 2006
   IEEE International Conference on}, pages 1698--1703, May 2006.
 
+\bibitem{Batalin2003Coverage}
+MaximA Batalin and GauravS Sukhatme.
+\newblock {Coverage, Exploration, and Deployment by a Mobile Robot and
+  Communication Network}.
+\newblock In Feng Zhao and Leonidas Guibas, editors, {\em Information
+  Processing in Sensor Networks}, volume 2634 of {\em Lecture Notes in Computer
+  Science}, pages 376--391. Springer Berlin Heidelberg, 2003.
+
+\bibitem{Burgard2000Collaborative}
+W.~Burgard, M.~Moors, D.~Fox, R.~Simmons, and S.~Thrun.
+\newblock {Collaborative multi-robot exploration}.
+\newblock In {\em Robotics and Automation, 2000. Proceedings. ICRA \&\#039;00.
+  IEEE International Conference on}, volume~1, pages 476--481 vol.1. IEEE,
+  2000.
+
+\bibitem{Dissanayake2001Solution}
+M.~W. M.~G. Dissanayake, P.~Newman, S.~Clark, H.~F. Durrant-Whyte, and
+  M.~Csorba.
+\newblock {A solution to the simultaneous localization and map building (SLAM)
+  problem}.
+\newblock {\em Robotics and Automation, IEEE Transactions on}, 17(3):229--241,
+  June 2001.
+
 \bibitem{slam}
 M.~W M~G Dissanayake, P.~Newman, S.~Clark, H.F. Durrant-Whyte, and M.~Csorba.
 \newblock A solution to the simultaneous localization and map building (slam)
   problem.
 \newblock {\em Robotics and Automation, IEEE Transactions on}, 17(3):229--241,
   Jun 2001.
+
+\bibitem{Fox1999Markov}
+Dieter Fox, Wolfram Burgard, and Sebastian Thrun.
+\newblock {Markov Localization for Mobile Robots in Dynamic Environments}.
+\newblock In {\em Journal of Artificial Intelligence Research}, volume~11,
+  pages 391--427, 1999.
+
+\bibitem{Mei2006Deployment}
+Yongguo Mei, Yung-Hsiang Lu, Y.~C. Hu, and C.~S.~G. Lee.
+\newblock {Deployment of mobile robots with energy and timing constraints}.
+\newblock {\em Robotics, IEEE Transactions on}, 22(3):507--522, June 2006.
+
+\bibitem{Poduri2004Constrained}
+S.~Poduri and G.~Sukhatme.
+\newblock {Constrained coverage for mobile sensor networks}.
+\newblock In {\em Robotics and Automation, 2004. Proceedings. ICRA \&\#039;04.
+  2004 IEEE International Conference on}, volume~1, pages 165--171 Vol.1. IEEE,
+  April 2004.
+
+\bibitem{Reynolds1987Flocks}
+Craig~W. Reynolds.
+\newblock {Flocks, Herds and Schools: A Distributed Behavioral Model}.
+\newblock In {\em Proceedings of the 14th Annual Conference on Computer
+  Graphics and Interactive Techniques}, volume~21 of {\em SIGGRAPH '87}, pages
+  25--34, New York, NY, USA, July 1987. ACM.
+
+\bibitem{Singh1993Map}
+K.~Singh and K.~Fujimura.
+\newblock {Map making by cooperating mobile robots}.
+\newblock In {\em Robotics and Automation, 1993. Proceedings., 1993 IEEE
+  International Conference on}, pages 254--259 vol.2. IEEE, May 1993.
+
+\bibitem{Thrun2000Realtime}
+S.~Thrun, W.~Burgard, and D.~Fox.
+\newblock {A real-time algorithm for mobile robot mapping with applications to
+  multi-robot and 3D mapping}.
+\newblock In {\em Robotics and Automation, 2000. Proceedings. ICRA \&\#039;00.
+  IEEE International Conference on}, volume~1, pages 321--328 vol.1. IEEE,
+  2000.
+
+\bibitem{Thrun2001Learning}
+Sebastian Thrun.
+\newblock {Learning Occupancy Grids with Forward Models}.
+\newblock In {\em In Proceedings of the Conference on Intelligent Robots and
+  Systems 2001}, pages 1676--1681, 2001.
+
+\bibitem{Thrun1998Probabilistic}
+Sebastian Thrun, Wolfram Burgard, Dieter Fox, Henry Hexmoor, and Maja Mataric.
+\newblock {A Probabilistic Approach to Concurrent Mapping and Localization for
+  Mobile Robots}.
+\newblock In {\em Machine Learning}, pages 29--53, 1998.
+
+\bibitem{Thrun2001Robust}
+Sebastian Thrun, Dieter Fox, Wolfram Burgard, and Frank Dellaert.
+\newblock {Robust Monte Carlo Localization for Mobile Robots}.
+\newblock 2001.
+
+\bibitem{Yang2014Adaptive}
+Han-Xin Yang and Ming Tang.
+\newblock {Adaptive routing strategy on networks of mobile nodes}.
+\newblock {\em Physica A: Statistical Mechanics and its Applications},
+  402:1--7, May 2014.
 
 \end{thebibliography}

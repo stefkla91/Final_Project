@@ -1,2 +1,6 @@
 \select@language {english}
-\contentsline {section}{\numberline {1}First Section}{3}{section.1}
+\contentsline {section}{\numberline {1}Background and Design}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}What the Project is about}{3}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Background}{3}{subsection.1.2}
+\contentsline {subsubsection}{\numberline {1.2.1}SLAM - Simultaneous Localization And Mapping}{3}{subsubsection.1.2.1}
+\contentsline {subsubsection}{\numberline {1.2.2}Deployment}{3}{subsubsection.1.2.2}

@@ -1,26 +1,30 @@
-/*
- * File:          epuck_scanline.c
- * Date:          
- * Description:   
- * Author:        
- * Modifications: 
- */
+/*****************************************
+  
+  intermediate_lawn_mower
+  Author: Rohrer Fabien
+  
+******************************************/
 
-#include <webots/robot.h>
-#include <webots/differential_wheels.h>
-#include <webots/distance_sensor.h>
+
+
+// Included libraries
+#include <webots/robot.h> //obtain main library of webots
+#include <webots/distance_sensor.h> // distance sensor library
+#include <webots/differential_wheels.h>   //obtain dif. wheels library
 #include <stdlib.h>
+#include <time.h>
 #include <stdio.h>
 
-//clobal definitions
-#define TIME_STEP 64 //timestep in msec
-#define LEFT 0 //left motor
-#define RIGHT 1 //right motor
-#define THRESHOLD_DIST 300 //threshold distance for the sensor
+// Global defines
+#define THRESHOLD_DIST 300
+#define TIME_STEP 32 // [ms] // time step of the simulation
+#define SIMULATION 0 // for robot_get_mode() function
+#define REALITY 2    // for robot_get_mode() function
+#define LEFT 0        // Left side
+#define RIGHT 1       // right side
 
-
-//8 IR proximity sensors
-#define NUM_DIST_SENS 8
+// 8 IR proximity sensors
+#define NB_DIST_SENS 8
 #define PS_RIGHT_10 0
 #define PS_RIGHT_45 1
 #define PS_RIGHT_90 2
@@ -29,66 +33,81 @@
 #define PS_LEFT_90 5
 #define PS_LEFT_45 6
 #define PS_LEFT_10 7
+WbDeviceTag ps[NB_DIST_SENS];	/* proximity sensors */
+int ps_value[NB_DIST_SENS]={0,0,0,0,0,0,0,0};
+int ps_offset_sim[NB_DIST_SENS] = {35,35,35,35,35,35,35,35};
+int ps_offset_real[NB_DIST_SENS] = {375,158,423,682,447,594,142,360}; // to be modified according to your robot
+int obstacle[NB_DIST_SENS]; // will contain a boolean information about obstacles
 
-//states for the FSM
+// wheel
+#define WHEEL_RADIUS 0.02
+#define AXLE_LENGTH 0.026
+#define ENCODER_RESOLUTION 159.23
+
+// FSM
 #define FORWARD 0
 #define STOP 1
 #define UTURN 2
 #define TURNRIGHT 3
 #define TURNLEFT 4
 
-//wheel stats
-#define WHEEL_RADIUS 0.02
-#define AXLE_LENGTH 0.026
-#define ENCODER_RESOLUTION 159.23
-
-/**
-Global Values
-*/
-//defines for the ps_sensors
-WbDeviceTag ps[NUM_DIST_SENS];
-int ps_value[NUM_DIST_SENS]={0,0,0,0,0,0,0,0};
-int ps_offset[NUM_DIST_SENS] = {35,35,35,35,35,35,35,35};
-
-//start state for the FSM
-int state = FORWARD;
-
-//array with boolean information about ps_sensor values
-int obstacle[NUM_DIST_SENS];
-
-//global speed arrays
+// motor speeds
 int speed[2] = {0,0};
-int fsm_speed[2] = {0,0};
+// current state
+int state = FORWARD;
+// timer emulation : use a counter
+int n=0;
+int old_encoder=0;
 
-/**
-enables the needed sensor devices 
-*/
-static void reset(void){
-  int it, i;
+static void reset(void)
+{ 
+  srand(time(0));
   
-  //get the distance sensors
+  int it;
+  
+  // get distance sensors
   char textPS[] = "ps0";
-  for (it = 0;it < NUM_DIST_SENS;it++){
+  for (it=0;it<NB_DIST_SENS;it++) {
     ps[it] = wb_robot_get_device(textPS);
     textPS[2]++;
   }
   
-  //enable the distance sensor and light sensor devices
-  for(i = 0;i < NUM_DIST_SENS;i++){
-    wb_distance_sensor_enable(ps[i], TIME_STEP);
+  // enable distance sensor and light sensor devices
+  int i;
+  for(i=0;i<NB_DIST_SENS;i++) {
+    wb_distance_sensor_enable(ps[i],TIME_STEP);
   }
   
-  //enable encoders
+  //enable the encoders
   wb_differential_wheels_enable_encoders(TIME_STEP);
+  wb_differential_wheels_set_encoders(0,0);
 }
 
-/**
-Function which holds the FSM 
-*/
-void fsm(){
-  int old_encoder = 0, new_encoder, n=0;
-  double d_step, d_meter;
-    
+static int run(void) {
+
+  // 0. Preprocessing
+  // Obtain the correct offset
+  int ps_offset[NB_DIST_SENS] = {0,0,0,0,0,0,0,0};
+  int i;
+  
+  if (wb_robot_get_mode() == SIMULATION) {
+    for(i=0;i<NB_DIST_SENS;i++){
+      ps_offset[i] = ps_offset_sim[i];
+    }
+  }
+  else {
+    for(i=0;i<NB_DIST_SENS;i++){
+      ps_offset[i] = ps_offset_real[i];
+    }
+  }
+
+  // 1. Get the sensors values
+  // obstacle will contain a boolean information about a collision
+  for(i=0;i<NB_DIST_SENS;i++){
+    ps_value[i] = (int)wb_distance_sensor_get_value(ps[i]);
+    obstacle[i] = ps_value[i]-ps_offset[i]>THRESHOLD_DIST;
+  }
+  
   //define boolean for sensor states for cleaner implementation
   bool ob_front = 
     obstacle[PS_RIGHT_10] ||
@@ -100,21 +119,37 @@ void fsm(){
   bool ob_left = 
     obstacle[PS_LEFT_90];
   
-  switch(state){
+  // 2. Compute output values (FSM)
+  int new_encoder;
+  double d_step, d_meter;
+  switch (state) {
     case FORWARD:
-      fsm_speed[LEFT] = 300;
-      fsm_speed[RIGHT] = 300;
-      if(ob_front){
-        state = STOP;
-        n = 0;
+      speed[LEFT] = 300;
+      speed[RIGHT] = 300;
+      if (ob_front) {
+        state=STOP;
+        n=0;
+      }/*
+      else if((obstacle[PS_RIGHT_10] ||obstacle[PS_LEFT_10]) && obstacle[PS_LEFT_90]){
+        state = TURNRIGHT;
+        old_encoder=abs(wb_differential_wheels_get_left_encoder());
       }
+      else if((obstacle[PS_RIGHT_10] ||obstacle[PS_LEFT_10]) && obstacle[PS_RIGHT_90]){
+        state = TURNLEFT;
+        old_encoder=abs(wb_differential_wheels_get_left_encoder());
+      }*/
+      printf("Forward");
       break;
-   
-   case STOP:
-      fsm_speed[LEFT] = 0;
-      fsm_speed[RIGHT] = 0;
+    case STOP:
+      speed[LEFT] = 0;
+      speed[RIGHT] = 0;
       n++;
-      if (ob_front&& ob_right && ob_left && n>40) {
+    /*  if (n>40){
+        state=UTURN;
+        old_encoder=abs(wb_differential_wheels_get_left_encoder());
+      }
+   */
+      if ((ob_front)&& ob_right && ob_left && n>40) {
         state=UTURN;
         old_encoder=abs(wb_differential_wheels_get_left_encoder());
       }
@@ -130,90 +165,66 @@ void fsm(){
         state = UTURN;
         old_encoder=abs(wb_differential_wheels_get_left_encoder());
       }
+      printf("Stop");
       break;
-      
-   case UTURN:
-      fsm_speed[LEFT] = 150;
-      fsm_speed[RIGHT] = -150;
+    case UTURN:
+      speed[LEFT] = 150;
+      speed[RIGHT] = -150;
       new_encoder=abs(wb_differential_wheels_get_left_encoder());
       d_step = (double) new_encoder-old_encoder;
       d_meter = (double)d_step * WHEEL_RADIUS / ENCODER_RESOLUTION;
-      if (d_meter/AXLE_LENGTH>3.14){ //standard value 3.14
+      if (d_meter/AXLE_LENGTH>3.14){ //standard valie 3.14
         state=FORWARD;
       }
+      printf("U-Turn");
       break;
-    
     case TURNRIGHT:
-      fsm_speed[LEFT] = 150;
-      fsm_speed[RIGHT] = -150;
+      speed[LEFT] = 150;
+      speed[RIGHT] = -150;
       new_encoder=abs(wb_differential_wheels_get_left_encoder());
       d_step = (double)new_encoder-old_encoder;
       d_meter = (double)d_step*WHEEL_RADIUS / ENCODER_RESOLUTION;
       if(d_meter/AXLE_LENGTH > 1.65){
         state=FORWARD;
       }
+      printf("turn right");
       break;
-   
     case TURNLEFT:
-      fsm_speed[LEFT] = -150;
-      fsm_speed[RIGHT] = 150;
+      speed[LEFT] = -150;
+      speed[RIGHT] = 150;
       new_encoder=abs(wb_differential_wheels_get_right_encoder());
       d_step = (double)new_encoder-old_encoder;
       d_meter = (double)d_step*WHEEL_RADIUS / ENCODER_RESOLUTION;
       if(d_meter/AXLE_LENGTH > 1.65){
         state=FORWARD;
       }
+      printf("turn left");
       break;    
-   
     default:
       state=FORWARD;
   }
-  wb_differential_wheels_set_speed(fsm_speed[LEFT], fsm_speed[RIGHT]);
-}
+  /*
+  // Use a random number:
+  int test = 20.0*rand()/(double)RAND_MAX;
+  printf("Random numer = %d\n",test);
+  */
+  // 3. Send the values to actuators
+  wb_differential_wheels_set_speed(speed[LEFT],speed[RIGHT]);
 
-/**
-The run method which calls the other modules
-*/
-static int run(void){
-  int run_speed[2] = {0,0};
-  int i;
-  
-  //gets the ps_sensor values and applies the offset and thresshold
-    for(i=0;i<NUM_DIST_SENS;i++){
-      ps_value[i] = (int)wb_distance_sensor_get_value(ps[i]);
-      obstacle[i] = ps_value[i]-ps_offset[i]>THRESHOLD_DIST;
-    }
-    
-   /* wb_differential_wheels_set_encoders(0,0);
-    if(abs(wb_differential_wheels_get_left_encoder() < 1234)){
-      fsm();
-    }
-    else{
-      run_speed[LEFT] = 0;
-      run_speed[RIGHT] = 0;
-    }
-    */
-    fsm();
-    //set actuators
-    wb_differential_wheels_set_speed(
-      speed[LEFT] + fsm_speed[LEFT] + run_speed[LEFT],
-      speed[RIGHT] + fsm_speed[RIGHT] + run_speed[RIGHT]
-      );
   return TIME_STEP;
 }
 
-/**
-Main method  
-*/
-int main(){
+int main() {
   wb_robot_init();
   
   reset();
-  while(wb_robot_step(TIME_STEP) != 1){
+  
+  /* main loop */
+  while(wb_robot_step(TIME_STEP) != -1) {
     run();
   }
+  
   wb_robot_cleanup();
   
   return 0;
 }
-
