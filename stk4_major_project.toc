@@ -4,3 +4,4 @@
 \contentsline {subsection}{\numberline {1.2}Background}{3}{subsection.1.2}
 \contentsline {subsubsection}{\numberline {1.2.1}SLAM - Simultaneous Localization And Mapping}{3}{subsubsection.1.2.1}
 \contentsline {subsubsection}{\numberline {1.2.2}Deployment}{3}{subsubsection.1.2.2}
+\contentsline {subsubsection}{\numberline {1.2.3}Communication}{4}{subsubsection.1.2.3}
