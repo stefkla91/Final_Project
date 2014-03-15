@@ -57,10 +57,11 @@
 %	\end{lstlisting}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
-\bibliographystyle{plain}
+\bibliographystyle{IEEEannot}
 \maketitle
 \newpage
 \tableofcontents
+\listoffigures
 \newpage
 \begin{flushleft}
 \section{Background and Design}
@@ -69,6 +70,12 @@ This project is about the map building using swarm intelligence.\\
 The aspects of the project include SLAM(Simultaneous Localization And Mapping) as well as communication between a swarm of robots.\\
 This document will disuse aspects such as robot localisation, deployment of the swarm, communication between robots and environment mapping.\\
 My work is based on the research themes in these areas and I am using the robot simulator software Webots\textsuperscript{\texttrademark}. The mobile robot platform I am using is a virtual representation of the E-Puck robot. \\
+The Programming will be done in C, using the Webots\textsuperscript{\texttrademark} API.\\[3ex]
+
+One possible scenario for the program I am developing would be the mapping of an environment that would have become partially unknown after e.g. an nature catastrophe. I specify it this way since the team which would deploy this program on their robot swarm would most likely know the estimated size of the target environment, this is important in order to find an appropriate size for the robot swarm.\\
+In such an scenario it is not always possible to achieve GPS coverage so the program should at its best function without the need for GPS localisation, so too find a localisation method which does not requires it is key. Another important features of the robot are obviously distance sensors, the E-Puck robot comes equipped with laser distance sensors, which I will use. Other features cover communication possibilities between robots, motor encoders which are needed for moving the robots in a controlled pattern and odometry calculations which will improve the movement and mapping significantly. \\[3ex]
+While it is true that the E-puck robot platform is most likely not suitable for such a scenario I use it because of the time limitation for this project and its good integration inside the Webots\textsuperscript{\texttrademark} simulator. 
+
 
 \subsection{Background}
 \subsubsection{SLAM - Simultaneous Localization And Mapping}
@@ -100,19 +107,56 @@ Obviously the most effective way to do this is by implementing different behavio
 To surpass the problems of obstacles obstructing the communication the comm robots would need to position them self on logical places i.e. in order to scan a room it would be important that a comm robot places it self inside, or close to, the doorway so that others can explore the room and still communicated back to the rest of the swarm. The robot would need to stay inside the doorway as signals can not always travel through walls and the energy reserves of mobile robots are limited so they most likely can not send high power signals. \\
 I have yet to decide how I am going to implement the communication part of in the project as I am not sure if the E-puck models implemented inside the simulator are able to send signals to other robots. While I know that it is able to transfer signals through the E-puck's laser sensors I do not know if I will implement it as this is fairly difficult and time consuming. I will come back to this should I have enough time available at the end of the project or if no other alternative can be found.\\[3ex]
 
-The theory of what I am going to implement uses a defined maximum communication range for the robots and a grouping strategy which specifies that each scout robot need to stay in contact which at least 1 comm robot while the comm robots always need at least 1 other comm robot inside their communication range. If implemented correctly the comm robots would on this way create a communication link back to the lead robot/starting location which the scout robots can use to transfer all new information back.
-\newpage
+The theory of what I am going to implement uses a defined maximum communication range for the robots and a grouping strategy which specifies that each scout robot need to stay in contact which at least 1 comm robot while the comm robots always need at least 1 other comm robot inside their communication range. If implemented correctly the comm robots would on this way create a communication link back to the lead robot/starting location which the scout robots can use to transfer all new information back.\\
 
 \begin{figure}[h]
 \centering
-\includegraphics[width = 1\textwidth]{figures/comm_example.png} 
+\includegraphics[width = 0.8\textwidth]{figures/comm_example.png} 
 \caption{An example of the communication link}
 \label{Picture 1}
 \end{figure}
 
 Figure 1 shows one possible example of the communication link, where the lead robot/ or in some cases a stationary uplink point is in the center and the communication robots(in red) placed in such positions that their comm range overlaps the comm range of other robots and the lead robot. \\
 This configuration allows the scouts(in blue) to move and explore anything inside the communication range of the different comm robots. When the robots at the right side of the figure would now try to move outside the comm range one of them would have to change their behaviour pattern to "communication mode" at the outer range of the other comm nodes range while the last remaining scout continuous exploring in this direction. \\
-This example shows that it is important to have a swarm of a suitable size for an environment to be able to cover at much area with the robots at hand and for cases in which this is not possible to be able to move the whole swarm in one unified direction to explore unmapped locations. This is however only doable when there is a lead robot since a stationary comm/uplink point is by definition, stationary.
+This example shows that it is important to have a swarm of a suitable size for an environment to be able to cover at much area with the robots at hand and for cases in which this is not possible to be able to move the whole swarm in one unified direction to explore unmapped locations. This is however only doable when there is a lead robot since a stationary comm/uplink point is by definition, stationary.\\
+
+\subsection{Design}
+In this section I will describe my design as of the date of the project outline description. \\
+This is the design I will follow and try to implement, however this is more of a guideline rather than exact plan since I have to figure out what the API and simulator are able to do and what I am able to implement inside the given time.\\
+
+\subsubsection{Environment Design}
+The final environment which I will create for this project will consist of a large starting area, with a corridor adjacent to it. The corridor will hold 1 smaller room to either side, 1 of them with an obstacle inside which will have to be traversed and mapped. The size of the corridor should not be to big so that it is still a challenge to move through it however it should rather not be to small to make movement through it too problematic. \\
+A to small size could also make the corridor not distinctive enough from the rest of the wall so the E-Puck could have problem registering and moving into it.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/environment_example.png} 
+\caption{Environment Design}
+\label{Picture 2}
+\end{figure}
+
+\subsubsection{Mapping and Swarm Size}
+For mapping I will use a occupancy grid, and the occupancy will be acquired by the E-Puck's laser sensors. 
+I will yet have to decide on a resolution, for the grid.\\
+I will use a swarm of 5 E-Puck robots, of which 1 will remain stationary and only function as the "Uplink point" to which all robot send the acquired data. 
+The stationary robot will also be used as reference point for the localisation method.
+
+\subsubsection{Deployment}
+I am of this moment still undecided for which deployment strategy will be implemented. \\
+There are 2 deployment strategies which I decided for based on the background research I have done.\\[3ex]
+
+One of them is based on a nearest neighbour approach in which the robots will emit signals to each other which will cause them to drive away from each other until a previous maximum communication distance has been reached. This relationship between robots could be described similar to magnets which can repulse and pull in each other in order to hold a given maximum distance and thereby cover the largest possible area\\
+The movement of the robots would be a random walk with included obstacle avoidance. One possibility could be to add a wall following functionality to it as well. However this would require some form of higher functions which to keep the robot from being stuck inside a loop. These higher functions could work by keeping track of the robots position on the map and react once the robot starts traversing the same area again, in this case the algorithm could force to robot back into a random walk.\\[3ex]
+
+The other deployment strategy would implement a more controlled movement pattern. This pattern would move the robots inside a rectangular pattern which would implement a function to move around obstacles on the way before moving back into the original pattern. 
+While this reason is more controlled I am not sure which one will turn out to be more effective, that it why I will implement both inside a testing phase and will then decide which of them I will use.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/scanline_example.png} 
+\caption{Movement pattern example}
+\label{Picture 2}
+\end{figure}
 
 \nocite{*}
 \newpage

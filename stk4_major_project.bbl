@@ -1,106 +1,196 @@
 \begin{thebibliography}{10}
+\providecommand{\url}[1]{#1}
+\csname url@rmstyle\endcsname
+\providecommand{\newblock}{\relax}
+\providecommand{\bibinfo}[2]{#2}
+\providecommand\BIBentrySTDinterwordspacing{\spaceskip=0pt\relax}
+\providecommand\BIBentryALTinterwordstretchfactor{4}
+\providecommand\BIBentryALTinterwordspacing{\spaceskip=\fontdimen2\font plus
+\BIBentryALTinterwordstretchfactor\fontdimen3\font minus
+  \fontdimen4\font\relax}
+\providecommand\BIBforeignlanguage[2]{{%
+\expandafter\ifx\csname l@#1\endcsname\relax
+\typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
+\typeout{** loaded for the language `#1'. Using the pattern for}%
+\typeout{** the default language instead.}%
+\else
+\language=\csname l@#1\endcsname
+\fi
+#2}}
 
 \bibitem{Abolhasan2004Review}
-Mehran Abolhasan, Tadeusz Wysocki, and Eryk Dutkiewicz.
-\newblock {A review of routing protocols for mobile ad hoc networks}.
-\newblock {\em Ad Hoc Networks}, 2(1):1--22, January 2004.
+\BIBentryALTinterwordspacing
+M.~Abolhasan, T.~Wysocki, and E.~Dutkiewicz, ``{A review of routing protocols
+  for mobile ad hoc networks},'' \emph{Ad Hoc Networks}, vol.~2, no.~1, pp.
+  1--22, Jan. 2004. [Online]. Available:
+  \url{http://dx.doi.org/10.1016/s1570-8705(03)00043-x}
+\BIBentrySTDinterwordspacing
+
 
 \bibitem{coverage}
-N.~Agmon, N.~Hazon, and G.A. Kaminka.
-\newblock Constructing spanning trees for efficient multi-robot coverage.
-\newblock In {\em Robotics and Automation, 2006. ICRA 2006. Proceedings 2006
-  IEEE International Conference on}, pages 1698--1703, May 2006.
+N.~Agmon, N.~Hazon, and G.~Kaminka, ``Constructing spanning trees for efficient
+  multi-robot coverage,'' in \emph{Robotics and Automation, 2006. ICRA 2006.
+  Proceedings 2006 IEEE International Conference on}, May 2006, pp. 1698--1703.
+
 
 \bibitem{Batalin2003Coverage}
-MaximA Batalin and GauravS Sukhatme.
-\newblock {Coverage, Exploration, and Deployment by a Mobile Robot and
-  Communication Network}.
-\newblock In Feng Zhao and Leonidas Guibas, editors, {\em Information
-  Processing in Sensor Networks}, volume 2634 of {\em Lecture Notes in Computer
-  Science}, pages 376--391. Springer Berlin Heidelberg, 2003.
+\BIBentryALTinterwordspacing
+M.~Batalin and G.~Sukhatme, ``{Coverage, Exploration, and Deployment by a
+  Mobile Robot and Communication Network},'' in \emph{Information Processing in
+  Sensor Networks}, ser. Lecture Notes in Computer Science, F.~Zhao and
+  L.~Guibas, Eds.\hskip 1em plus 0.5em minus 0.4em\relax Springer Berlin
+  Heidelberg, 2003, vol. 2634, pp. 376--391. [Online]. Available:
+  \url{http://dx.doi.org/10.1007/3-540-36978-3\_25}
+\BIBentrySTDinterwordspacing
+
 
 \bibitem{Burgard2000Collaborative}
-W.~Burgard, M.~Moors, D.~Fox, R.~Simmons, and S.~Thrun.
-\newblock {Collaborative multi-robot exploration}.
-\newblock In {\em Robotics and Automation, 2000. Proceedings. ICRA \&\#039;00.
-  IEEE International Conference on}, volume~1, pages 476--481 vol.1. IEEE,
-  2000.
+\BIBentryALTinterwordspacing
+W.~Burgard, M.~Moors, D.~Fox, R.~Simmons, and S.~Thrun, ``{Collaborative
+  multi-robot exploration},'' in \emph{Robotics and Automation, 2000.
+  Proceedings. ICRA \&\#039;00. IEEE International Conference on},
+  vol.~1.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2000, pp. 476--481
+  vol.1. [Online]. Available: \url{http://dx.doi.org/10.1109/robot.2000.844100}
+\BIBentrySTDinterwordspacing
+
 
 \bibitem{Dissanayake2001Solution}
+\BIBentryALTinterwordspacing
 M.~W. M.~G. Dissanayake, P.~Newman, S.~Clark, H.~F. Durrant-Whyte, and
-  M.~Csorba.
-\newblock {A solution to the simultaneous localization and map building (SLAM)
-  problem}.
-\newblock {\em Robotics and Automation, IEEE Transactions on}, 17(3):229--241,
-  June 2001.
+  M.~Csorba, ``{A solution to the simultaneous localization and map building
+  (SLAM) problem},'' \emph{Robotics and Automation, IEEE Transactions on},
+  vol.~17, no.~3, pp. 229--241, June 2001. [Online]. Available:
+  \url{http://dx.doi.org/10.1109/70.938381}
+\BIBentrySTDinterwordspacing
+ \begin{quotation}\noindent This paper proves that SLAM is possible and gives a
+  solution using global referance points for map building. The solution in this
+  paper however was used on only a single car rather than a flock and using a
+  millimeter wave radar for localising different obstacles and referance
+  points. This makes this solution not applicable for my project, however it
+  gave me some ideas concerning referance points \end{quotation}
 
 \bibitem{slam}
-M.~W M~G Dissanayake, P.~Newman, S.~Clark, H.F. Durrant-Whyte, and M.~Csorba.
-\newblock A solution to the simultaneous localization and map building (slam)
-  problem.
-\newblock {\em Robotics and Automation, IEEE Transactions on}, 17(3):229--241,
-  Jun 2001.
+M.~W. M.~G. Dissanayake, P.~Newman, S.~Clark, H.~Durrant-Whyte, and M.~Csorba,
+  ``A solution to the simultaneous localization and map building (slam)
+  problem,'' \emph{Robotics and Automation, IEEE Transactions on}, vol.~17,
+  no.~3, pp. 229--241, Jun 2001.
+
 
 \bibitem{Fox1999Markov}
-Dieter Fox, Wolfram Burgard, and Sebastian Thrun.
-\newblock {Markov Localization for Mobile Robots in Dynamic Environments}.
-\newblock In {\em Journal of Artificial Intelligence Research}, volume~11,
-  pages 391--427, 1999.
+\BIBentryALTinterwordspacing
+D.~Fox, W.~Burgard, and S.~Thrun, ``{Markov Localization for Mobile Robots in
+  Dynamic Environments},'' in \emph{Journal of Artificial Intelligence
+  Research}, vol.~11, 1999, pp. 391--427. [Online]. Available:
+  \url{http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.34.372}
+\BIBentrySTDinterwordspacing
+
 
 \bibitem{Mei2006Deployment}
-Yongguo Mei, Yung-Hsiang Lu, Y.~C. Hu, and C.~S.~G. Lee.
-\newblock {Deployment of mobile robots with energy and timing constraints}.
-\newblock {\em Robotics, IEEE Transactions on}, 22(3):507--522, June 2006.
+\BIBentryALTinterwordspacing
+Y.~Mei, Y.-H. Lu, Y.~C. Hu, and C.~S.~G. Lee, ``{Deployment of mobile robots
+  with energy and timing constraints},'' \emph{Robotics, IEEE Transactions on},
+  vol.~22, no.~3, pp. 507--522, June 2006. [Online]. Available:
+  \url{http://dx.doi.org/10.1109/tro.2006.875494}
+\BIBentrySTDinterwordspacing
+
 
 \bibitem{Poduri2004Constrained}
-S.~Poduri and G.~Sukhatme.
-\newblock {Constrained coverage for mobile sensor networks}.
-\newblock In {\em Robotics and Automation, 2004. Proceedings. ICRA \&\#039;04.
-  2004 IEEE International Conference on}, volume~1, pages 165--171 Vol.1. IEEE,
-  April 2004.
+\BIBentryALTinterwordspacing
+S.~Poduri and G.~Sukhatme, ``{Constrained coverage for mobile sensor
+  networks},'' in \emph{Robotics and Automation, 2004. Proceedings. ICRA
+  \&\#039;04. 2004 IEEE International Conference on}, vol.~1.\hskip 1em plus
+  0.5em minus 0.4em\relax IEEE, Apr. 2004, pp. 165--171 Vol.1. [Online].
+  Available: \url{http://dx.doi.org/10.1109/robot.2004.1307146}
+\BIBentrySTDinterwordspacing
+ \begin{quotation}\noindent This paper gives a good solution to the flock
+  deployment and communication problem using a nearest-neighbor approach. This
+  approach is scalable for a flock of any size and is my base idea for the
+  deployment I will implement in my program \end{quotation}
 
 \bibitem{Reynolds1987Flocks}
-Craig~W. Reynolds.
-\newblock {Flocks, Herds and Schools: A Distributed Behavioral Model}.
-\newblock In {\em Proceedings of the 14th Annual Conference on Computer
-  Graphics and Interactive Techniques}, volume~21 of {\em SIGGRAPH '87}, pages
-  25--34, New York, NY, USA, July 1987. ACM.
+\BIBentryALTinterwordspacing
+C.~W. Reynolds, ``{Flocks, Herds and Schools: A Distributed Behavioral
+  Model},'' in \emph{Proceedings of the 14th Annual Conference on Computer
+  Graphics and Interactive Techniques}, ser. SIGGRAPH '87, vol.~21,
+  no.~4.\hskip 1em plus 0.5em minus 0.4em\relax New York, NY, USA: ACM, July
+  1987, pp. 25--34. [Online]. Available:
+  \url{http://dx.doi.org/10.1145/37401.37406}
+\BIBentrySTDinterwordspacing
+ \begin{quotation}\noindent While not entirely relevant to my problem it rises
+  a few important points about flock behavior. These include collision
+  avoidance between members of the flock and the reduced perceptance of members
+  which hare moving in the middle of the flock. Collision avoidance between
+  members will play a big role when trying to navigate the flock through a
+  tight environment. \end{quotation}
 
 \bibitem{Singh1993Map}
-K.~Singh and K.~Fujimura.
-\newblock {Map making by cooperating mobile robots}.
-\newblock In {\em Robotics and Automation, 1993. Proceedings., 1993 IEEE
-  International Conference on}, pages 254--259 vol.2. IEEE, May 1993.
+\BIBentryALTinterwordspacing
+K.~Singh and K.~Fujimura, ``{Map making by cooperating mobile robots},'' in
+  \emph{Robotics and Automation, 1993. Proceedings., 1993 IEEE International
+  Conference on}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, May 1993, pp.
+  254--259 vol.2. [Online]. Available:
+  \url{http://dx.doi.org/10.1109/robot.1993.292155}
+\BIBentrySTDinterwordspacing
+
 
 \bibitem{Thrun2000Realtime}
-S.~Thrun, W.~Burgard, and D.~Fox.
-\newblock {A real-time algorithm for mobile robot mapping with applications to
-  multi-robot and 3D mapping}.
-\newblock In {\em Robotics and Automation, 2000. Proceedings. ICRA \&\#039;00.
-  IEEE International Conference on}, volume~1, pages 321--328 vol.1. IEEE,
-  2000.
+\BIBentryALTinterwordspacing
+S.~Thrun, W.~Burgard, and D.~Fox, ``{A real-time algorithm for mobile robot
+  mapping with applications to multi-robot and 3D mapping},'' in \emph{Robotics
+  and Automation, 2000. Proceedings. ICRA \&\#039;00. IEEE International
+  Conference on}, vol.~1.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2000,
+  pp. 321--328 vol.1. [Online]. Available:
+  \url{http://dx.doi.org/10.1109/robot.2000.844077}
+\BIBentrySTDinterwordspacing
+ \begin{quotation}\noindent Methods in this paper are based on real robots and
+  use odometry data. Their approach uses sample data from the sensors and the
+  odometry calculation. This sample data is then used in a gradient descent
+  algorithm with each sample as a starting point. This guarantees that the
+  global maximum likelihood can be found, and by that the best map. Their
+  approach also works with the absence of odometry data, as long as the world
+  has sufficient variation. Should the world be to feature less no accurate map
+  will be generated. The map generated using the odometry data will always be
+  more accurate. Though the title implements the usage of multiple robots the
+  only documented approach to this is to rescan the map after a original map
+  has been build by the "lead" robot. The second robot then localises it self
+  on the map and improves the map, using the position of the first robot as a
+  referance point for the already generated map. This appears to be highly
+  accurate, however not entirely useful for my approach. Uses Monte Carlo
+  localisation which is similar to Markov localisation. \end{quotation}
 
 \bibitem{Thrun2001Learning}
-Sebastian Thrun.
-\newblock {Learning Occupancy Grids with Forward Models}.
-\newblock In {\em In Proceedings of the Conference on Intelligent Robots and
-  Systems 2001}, pages 1676--1681, 2001.
+\BIBentryALTinterwordspacing
+S.~Thrun, ``{Learning Occupancy Grids with Forward Models},'' in \emph{In
+  Proceedings of the Conference on Intelligent Robots and Systems 2001}, 2001,
+  pp. 1676--1681. [Online]. Available:
+  \url{http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.19.6014}
+\BIBentrySTDinterwordspacing
+
 
 \bibitem{Thrun1998Probabilistic}
-Sebastian Thrun, Wolfram Burgard, Dieter Fox, Henry Hexmoor, and Maja Mataric.
-\newblock {A Probabilistic Approach to Concurrent Mapping and Localization for
-  Mobile Robots}.
-\newblock In {\em Machine Learning}, pages 29--53, 1998.
+\BIBentryALTinterwordspacing
+S.~Thrun, W.~Burgard, D.~Fox, H.~Hexmoor, and M.~Mataric, ``{A Probabilistic
+  Approach to Concurrent Mapping and Localization for Mobile Robots},'' in
+  \emph{Machine Learning}, 1998, pp. 29--53. [Online]. Available:
+  \url{http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.18.1128}
+\BIBentrySTDinterwordspacing
+
 
 \bibitem{Thrun2001Robust}
-Sebastian Thrun, Dieter Fox, Wolfram Burgard, and Frank Dellaert.
-\newblock {Robust Monte Carlo Localization for Mobile Robots}.
-\newblock 2001.
+\BIBentryALTinterwordspacing
+S.~Thrun, D.~Fox, W.~Burgard, and F.~Dellaert, ``{Robust Monte Carlo
+  Localization for Mobile Robots},'' 2001. [Online]. Available:
+  \url{http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.18.8488}
+\BIBentrySTDinterwordspacing
+
 
 \bibitem{Yang2014Adaptive}
-Han-Xin Yang and Ming Tang.
-\newblock {Adaptive routing strategy on networks of mobile nodes}.
-\newblock {\em Physica A: Statistical Mechanics and its Applications},
-  402:1--7, May 2014.
+\BIBentryALTinterwordspacing
+H.-X. Yang and M.~Tang, ``{Adaptive routing strategy on networks of mobile
+  nodes},'' \emph{Physica A: Statistical Mechanics and its Applications}, vol.
+  402, pp. 1--7, May 2014. [Online]. Available:
+  \url{http://dx.doi.org/10.1016/j.physa.2014.01.063}
+\BIBentrySTDinterwordspacing
+
 
 \end{thebibliography}
