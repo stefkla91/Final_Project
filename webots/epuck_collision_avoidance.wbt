@@ -20,7 +20,7 @@ DEF FLOOR CheckeredFloor {
 }
 EPuck {
   rotation 0 1 0 3.14159
-  controller "epuck_scanline"
+  controller "Main"
 }
 DEF BALL Solid {
   translation 0.281215 0.1 0.248203

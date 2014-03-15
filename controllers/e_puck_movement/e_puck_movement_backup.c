@@ -1,21 +1,19 @@
 /*
- * File:          my_controller_movement.c
- * Date:          13.03.2014
+ * File:          e_puck_movement.c
+ * Date:          10.03.2014
  * Description:   
  * Author:        Stefan Klaus
- * Modifications: v 0.1
+ * Modifications: V 0.3
  */
+
 #include <webots/robot.h>
 #include <webots/differential_wheels.h>
 #include <webots/distance_sensor.h>
 #include <webots/light_sensor.h>
 #include <webots/camera.h>
-//#include <webots/accelerometer.h>
+#include <webots/accelerometer.h>
 #include <webots/led.h>
 #include <math.h>
-#include <webots/display.h> 
-//include odometry file
-//#include "../../lib/odometry.h" 
 
 #ifndef M_PI
 	#define M_PI 3.1415926535897932384626433832795L
@@ -31,58 +29,6 @@
 #define MIN_DIST 20.0f //minimum distance before slowing down
 #define MIN_SPEED 10.0f //speed when slowing down
 #define NUMTOURNAMENTS 1 //5
-
-//occupancy code:
-#define THRESHOLD_DIST 100
-#define OCCUPANCE_DIST 150
-#define LEFT 0        // Left side
-#define RIGHT 1       // right side
-// 8 IR proximity sensors
-#define NUM_DIST_SENS 8
-#define PS_RIGHT_10 0
-#define PS_RIGHT_45 1
-#define PS_RIGHT_90 2
-#define PS_RIGHT_REAR 3
-#define PS_LEFT_REAR 4
-#define PS_LEFT_90 5
-#define PS_LEFT_45 6
-#define PS_LEFT_10 7
-#define SIMULATION 0 // for robot_get_mode() function
-//map definitions
-#define MAP_SIZE 70
-#define CELL_SIZE 0.015 //[m] width and hight 
-
-//defines for the ps_sensors
-WbDeviceTag ps[NUM_DIST_SENS];
-int ps_value[NUM_DIST_SENS]={0,0,0,0,0,0,0,0};
-int ps_offset_sim[NUM_DIST_SENS] = {35,35,35,35,35,35,35,35};
-int obstacle[NUM_DIST_SENS]; //array with boolean information about ps_sensor values
-bool ob_front, ob_right, ob_left;
-
-//display
-WbDeviceTag display;
-WbImageRef background;
-int display_width;
-int display_height;
-
-//movement
-double d_meter, d_step;
-int new_encoder;
-
-//instantiat odometry track and goto structures
-struct sOdometryTrack ot;
-
-//instantiate map structures
-int map[MAP_SIZE][MAP_SIZE];
-
-// the robot position on the map
-int robot_x = MAP_SIZE / 2;
-int robot_y = MAP_SIZE / 2;
-
-// this is the angle at which the IR sensors are placed on the robot
-float angle_offset[NUM_DIST_SENS] = {0.2793, 0.7854, 1.5708, 2.618, -2.618, -1.5708, -0.7854, -0.2793};
-
-/////////////////////////////
 
 double dCurSpeed[2] = {0.0f, 0.0f}; // global buffer to store the current speed values. orig:dMSpeed
 double dPrevEncPos[2] = {0.0f, 0.0f}; // global buffer to save the previous encoder postions.
@@ -109,203 +55,28 @@ static void measure_CounterClockWise(double dSpeed, double dDistance);
 // LEDs:
 static void set_leds(int iActive);
 
-/* Occupany functions before the main, movement after */
-
-/**
- * Initiate the display with a white color
- */
-static void init_display(){
-	display = wb_robot_get_device("display");
-	display_width = wb_display_get_width(display);
-	display_height = wb_display_get_height(display);
-	wb_display_fill_rectangle(display,0,0,display_width,display_height);
-	background = wb_display_image_copy(display,0,0,display_width,display_height);
-}
-
-/**
- * Those 2 functions do the coordinate transform between the world coordinates (w)
- * and the map coordinates (m) in X and Y direction.
- */
-static int wtom(float x)
-{
-	return (int)(MAP_SIZE / 2 + x / CELL_SIZE);
-}
-
-/*
- * Set the coresponding cell to 1 (occuM_PIed)
- * and display it
- */
-void occuM_PIed_cell(int x, int y, float theta){
-	// normalize angle
-	while (theta > M_PI) {
-		theta -= 2*M_PI;
-	}
-	while (theta < -M_PI) {
-		theta += 2*M_PI;
-	}
-
-	// front cell
-	if (-M_PI/6 <= theta && theta <= M_PI/6) {
-		if (y+1 < MAP_SIZE) {
-			map[x][y+1] = 1;
-			wb_display_draw_rectangle(display,x,display_height-y,1,1);
-		}
-	}
-	// right cell
-	if (M_PI/3 <= theta && theta <= 2*M_PI/3) {
-		if (x+1 < MAP_SIZE) {
-			map[x+1][y] = 1;
-			wb_display_draw_rectangle(display,x+1,display_height-1-y,1,1);
-		}
-	}
-	// left cell
-	if (-2*M_PI/3 <= theta && theta <= -M_PI/3) {
-		if (x-1 > 0) {
-			map[x-1][y] = 1;
-			wb_display_draw_rectangle(display,x-1,display_height-1-y,1,1);
-		}
-	}
-	// back cell
-	if (5*M_PI/6 <= theta || theta <= -5*M_PI/6) {
-		if (y-1 > 0) {
-			map[x][y-1] = 1;
-			wb_display_draw_rectangle(display,x,display_height-y-2,1,1);
-		}
-	}
-}
-
-/**
-enables the needed sensor devices 
-*/
-static void reset(void){
-	int it, i, j;
-
-	//get the distance sensors
-	char textPS[] = "ps0";
-	for (it = 0;it < NUM_DIST_SENS;it++){
-		ps[it] = wb_robot_get_device(textPS);
-		textPS[2]++;
-	}
-	init_display();
-
-	//enable the distance sensor and light sensor devices
-	for(i = 0;i < NUM_DIST_SENS;i++){
-		wb_distance_sensor_enable(ps[i], TIME_STEP);
-	}
-
-	/* //enable encoders
-	wb_differential_wheels_enable_encoders(TIME_STEP);
-	wb_differential_wheels_set_encoders(0,0); */
-	
-	// map init to 0
-	for (i = 0; i < MAP_SIZE; i++) {
-		for (j = 0; j < MAP_SIZE; j++) {
-			map[i][j] = 0;
-		}
-	}
-}
-
-static int run(void){
+int main(int argc, char *argv[]){
 	int i;
 	
 	//define variables
 	double dSpeed = 200.0f;
 	double dDistance = 0.20f;
 	
-	int ps_offset[NUM_DIST_SENS] = {0,0,0,0,0,0,0,0};
-	
-	if (wb_robot_get_mode() == SIMULATION) {
-		for(i=0;i<NUM_DIST_SENS;i++){
-			ps_offset[i] = ps_offset_sim[i];
-		}
-	}
-/* 	// for each sensor if the value is above threshold we declare the
-	// corresponding cell as occuM_PIed
-	wb_display_image_paste(display,background,0,0);
-	wb_display_set_color(display,0x000000);
-	for (i = 0; i < NUM_DIST_SENS; i++) {
-		if (wb_distance_sensor_get_value(ps[i]) > OCCUPANCE_DIST) {
-			occuM_PIed_cell(robot_x, robot_y, ot.result.theta + angle_offset[i]);
-		}
-	}
-	wb_display_image_delete(display,background);
-	background = wb_display_image_copy(display,0,0,display_width,display_height);
-	*/
-	// 1. Get the sensors values
-	// obstacle will contain a boolean information about a collision
-	for(i=0;i<NUM_DIST_SENS;i++){
-		ps_value[i] = (int)wb_distance_sensor_get_value(ps[i]);
-		obstacle[i] = ps_value[i]-ps_offset[i]>THRESHOLD_DIST;
-	} 
-
-	//define boolean for sensor states for cleaner implementation
-	bool ob_front = 
-	obstacle[PS_RIGHT_10] ||
-	obstacle[PS_LEFT_10];
-
-	bool ob_right = 
-	obstacle[PS_RIGHT_90];
-
-	bool ob_left = 
-	obstacle[PS_LEFT_90];
-	
-	//move_forward(4, 0.25);
-	if(ob_front && ob_left){
-		turn_right(dSpeed);
-	} else if(ob_front && ob_right){
-		turn_left(dSpeed);
-	} else if(ob_front){
-		turn_right(dSpeed);
-	} else {
-		move_forward(dSpeed, dDistance);
-	}
-	
-	/* odometry_track_step(&ot);
-		
-	// update position on the map
-	robot_x = wtom(ot.result.x);
-	robot_y = wtom(ot.result.y);
-	
-	wb_display_set_color(display,0xFF0000);
-	wb_display_draw_rectangle(display,robot_x, display_height-robot_y-1,1,1); */
-	
-	return TIME_STEP;
-}
-
-
-int main(int argc, char *argv[]){
-	int i;
-	
 	//init Webots
 	wb_robot_init();
-	reset();
 	//emable and initialize the wheel encoders
 	wb_differential_wheels_enable_encoders(TIME_STEP*4);
-    wb_differential_wheels_set_encoders(0.0f, 0.0f);
+         wb_differential_wheels_set_encoders(0.0f, 0.0f);
 	
 	// initialize the LEDs ...
 	led[0] = wb_robot_get_device("led0");
 	led[1] = wb_robot_get_device("led2");
 	led[2] = wb_robot_get_device("led6");
-	
-	init_display();
-	odometry_track_start(&ot);
-	ot.result.x = 0.008;
-	ot.result.y = 0.008;
-	ot.result.theta = 1.5731;
-	while (wb_robot_step(TIME_STEP) != -1) {
-//	stop_robot(); // precaution ...
-	run();
-	//initalizes tracking and goto strucutres
-	/* odometry_track_step(&ot);
-		
-	// update position on the map
-	robot_x = wtom(ot.result.x);
-	robot_y = wtom(ot.result.y);
-	
-	wb_display_set_color(display,0xFF0000);
-	wb_display_draw_rectangle(display,robot_x, display_height-robot_y-1,1,1); */
-/* 	// start the UMBmark method ...
+
+	//while (wb_robot_step(TIME_STEP) != -1) {
+	stop_robot(); // precaution ...
+
+	// start the UMBmark method ...
 	UMBmark(dSpeed, dDistance);
 	// deactivate the LEDs - show that the process is finished now ...
 	set_leds(0);
@@ -327,8 +98,8 @@ int main(int argc, char *argv[]){
 		turn_right(4);
 		move_forward(4,0.25);
 		turn_right(4);
-	} */
 	}
+	
 	//clean up
 	wb_robot_cleanup();
 	return 0;	
@@ -342,9 +113,6 @@ void stop_robot() {
 	wb_differential_wheels_set_speed(dCurSpeed[0], dCurSpeed[1]);
 }
 
-/**
-Function to move the robot forward a given distance at a given speed
-*/
 void move_forward(double dSpeed, double dDist){
 	double dStepCount = 0.0f;
 	double dStopPosLeft = 0.0f;
@@ -369,36 +137,9 @@ void move_forward(double dSpeed, double dDist){
 		set_motor_speed(dSpeed, dSpeed);
 		
 		while((point_dEncPos[0] < dStopPosLeft) && (point_dEncPos[1] < dStopPosRight)){
-			///////////////////////////////////////////////
 			//get odometry data
 			point_dOdometryData = compute_odometry_data();
 			
-			//map the position on the map
-			odometry_track_step(&ot);
-		
-			// update position on the map
-			robot_x = wtom(ot.result.x);
-			robot_y = wtom(ot.result.y); 
-			
-			wb_display_set_color(display,0xFF0000);
-			wb_display_draw_rectangle(display,robot_x, display_height-robot_y-1,1,1);
-			/////////////////////////
-			
-			int ps_offset[NUM_DIST_SENS] = {0,0,0,0,0,0,0,0};
-			int i;
-			// for each sensor if the value is above threshold we declare the
-			// corresponding cell as occuM_PIed
-			wb_display_image_paste(display,background,0,0);
-			wb_display_set_color(display,0x000000);
-			for (i = 0; i < NUM_DIST_SENS; i++) {
-				if (wb_distance_sensor_get_value(ps[i]) > OCCUPANCE_DIST) {
-					occuM_PIed_cell(robot_x, robot_y, ot.result.theta + angle_offset[i]);
-				}
-			}
-			wb_display_image_delete(display,background);
-			background = wb_display_image_copy(display,0,0,display_width,display_height);
-			
-			///////////////////////////////////////////////////////////
 			//get wheel encoders
 			point_dEncPos = get_encoder_positions();
 			
@@ -525,10 +266,6 @@ double* get_encoder_positions(){
 	return dEncPos;
 }
 
-/**
-Function to compute the robots current odometry data
-this includes the x and y placement as well as the rotation theta
-*/
 double* compute_odometry_data(){
 	static double dOdometryData[3];
 	double *point_dEncPos;
