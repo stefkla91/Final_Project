@@ -8,8 +8,8 @@ WorldInfo {
   basicTimeStep 16
 }
 Viewpoint {
-  orientation 0.998972 0.0397005 -0.0218786 5.00022
-  position 0.0211828 2.33349 0.379675
+  orientation 0.998781 0.0463814 -0.0168786 4.99979
+  position 0.0978543 0.993334 -0.0195766
 }
 Background {
   skyColor [
@@ -30,26 +30,6 @@ EPuck {
       pixelSize 3
     }
   ]
-}
-DEF BALL Solid {
-  translation 0.281215 0.1 0.248203
-  children [
-    Shape {
-      appearance Appearance {
-        texture ImageTexture {
-          url [
-            "textures/bricks.png"
-          ]
-        }
-      }
-      geometry DEF BALL_GEOMETRY Sphere {
-        radius 0.05
-      }
-    }
-  ]
-  boundingObject USE BALL_GEOMETRY
-  physics Physics {
-  }
 }
 DEF WALL_1 Solid {
   translation 0 0.05 0.5

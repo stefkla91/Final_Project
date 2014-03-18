@@ -5,8 +5,9 @@
  * Author:        Stefan Klaus
  * Modifications: V 0.1
  */
- 
- 
+
+//#include "odometry.h"
+
 
 /* Stops the robot */
 void stop_robot();
@@ -32,4 +33,6 @@ void measure_clockWise(double dSpeed, double dDistance);
 void measure_CounterClockWise(double dSpeed, double dDistance);
 /* set the status of the LEDs */
 void set_leds(int iActive);
-
+/* normalises the angle and stops the robot from moving the strong to one side */
+void controll_angle();
+ 

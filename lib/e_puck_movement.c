@@ -15,6 +15,8 @@
 #include <webots/led.h>
 #include <math.h>
 #include "e_puck_movement.h"
+#include "map_building.h"
+#include "odometry.h"
 
 #ifndef M_PI
 	#define M_PI 3.1415926535897932384626433832795L
@@ -30,6 +32,12 @@
 #define MIN_DIST 20.0f //minimum distance before slowing down
 #define MIN_SPEED 10.0f //speed when slowing down
 #define NUMTOURNAMENTS 1 //5
+#define RTOD(r) ((r) * 180 / M_PI)
+#define ANGLE_TOLERANCE 5
+#define EAST 0 
+#define NORTH 90
+#define WEST 180
+#define SOUTH 270
 
 double dCurSpeed[2] = {0.0f, 0.0f}; // global buffer to store the current speed values. orig:dMSpeed
 double dPrevEncPos[2] = {0.0f, 0.0f}; // global buffer to save the previous encoder postions.
@@ -53,58 +61,13 @@ void UMBmark(double dSpeed, double dDistance); //calibration
 void measure_clockWise(double dSpeed, double dDistance);
 void measure_CounterClockWise(double dSpeed, double dDistance);
 
+// braitenberg weights for wall following
+float weights_left[8] = {-1,-1,-1,0.5,-0.5,0.5,1,2};
+float weights_right[8] = {1,0.8,1,-0.5,0.5,-1,-1.6,-2};
+
 // LEDs:
 void set_leds(int iActive);
-/*
-int main(int argc, char *argv[]){
-	int i;
-	
-	//define variables
-	double dSpeed = 200.0f;
-	double dDistance = 0.20f;
-	
-	//init Webots
-	wb_robot_init();
-	//emable and initialize the wheel encoders
-	wb_differential_wheels_enable_encoders(TIME_STEP*4);
-    wb_differential_wheels_set_encoders(0.0f, 0.0f);
-	
-	// initialize the LEDs ...
-	led[0] = wb_robot_get_device("led0");
-	led[1] = wb_robot_get_device("led2");
-	led[2] = wb_robot_get_device("led6");
 
-	//while (wb_robot_step(TIME_STEP) != -1) {
-	stop_robot(); // precaution ...
-
-	// start the UMBmark method ...
-	UMBmark(dSpeed, dDistance);
-	// deactivate the LEDs - show that the process is finished now ...
-	set_leds(0);
-	//}
-	for (i=0;i<6;i++){
-		move_forward(4,0.25);
-		turn_left(4);
-		move_forward(4,0.25);
-		turn_left(4);
-		move_forward(4,0.25);
-		turn_left(4);
-		move_forward(4,0.25);
-		turn_left(4);
-		move_forward(4,0.25);
-		turn_right(4);
-		move_forward(4,0.25);
-		turn_right(4);
-		move_forward(4,0.25);
-		turn_right(4);
-		move_forward(4,0.25);
-		turn_right(4);
-	}
-	
-	//clean up
-	wb_robot_cleanup();
-	return 0;	
-}*/
  /**
  Function to stop the robot
  */
@@ -139,9 +102,11 @@ void move_forward(double dSped, double dDis){
 		//compute odometry data
 		point_dOdometryData = compute_odometry_data();
 		
-		//set speed
-		set_motor_speed(dSpeed, dSpeed);
 		
+		//set speed
+		set_motor_speed(dSpeed, dSpeed); 
+		
+		//step tolereance test
 		while((point_dEncPos[0] < dStopPosLeft) && (point_dEncPos[1] < dStopPosRight)){
 			//get odometry data
 			point_dOdometryData = compute_odometry_data();
@@ -394,5 +359,48 @@ void set_leds(int iActive){
 	int i;
 	for(i = 0; i < 3;i++){
 		wb_led_set(led[1], iActive);
+	}
+}
+
+ /**
+Controll the movement angle
+*/
+void controll_angle(struct odometryTrackStruct *ot){
+	int rotation;
+	int dSpeed = 100.0f;
+	int corAngle = 5.0f;
+	
+	if(RTOD(ot->result.theta) < 0){
+		rotation = RTOD(ot->result.theta) + 360;
+	}else{
+		rotation = RTOD(ot->result.theta); 
+	}
+	
+	//check movement to the right(east)
+	if(EAST < rotation + ANGLE_TOLERANCE){
+		turn_angle(-corAngle, dSpeed);
+	}else if(EAST > rotation - ANGLE_TOLERANCE){
+		turn_angle(corAngle, dSpeed);
+	}
+	
+	//check movement to the north
+	if(NORTH < rotation + ANGLE_TOLERANCE){
+		turn_angle(-corAngle, dSpeed);
+	}else if(NORTH > rotation - ANGLE_TOLERANCE){
+		turn_angle(corAngle, dSpeed);
+	}
+	
+	//movement to the west
+	if(WEST < rotation + ANGLE_TOLERANCE){
+		turn_angle(-corAngle, dSpeed);
+	}else if(WEST > rotation - ANGLE_TOLERANCE){
+		turn_angle(corAngle, dSpeed);
+	}
+	
+	//movement to the south
+	if(SOUTH < rotation + ANGLE_TOLERANCE){
+		turn_angle(-corAngle, dSpeed);
+	}else if(SOUTH > rotation - ANGLE_TOLERANCE){
+		turn_angle(corAngle, dSpeed);
 	}
 }

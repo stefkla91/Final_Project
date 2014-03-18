@@ -5,7 +5,6 @@
  * Author:        Stefan Klaus
  * Modifications: V 0.1
  */
- #include "e_puck_movement.h"
  
  struct odometryTrackStruct {
 	struct {

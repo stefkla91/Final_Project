@@ -37,6 +37,12 @@
 #define PS_LEFT_45 6
 #define PS_LEFT_10 7
 
+//states for the FSM
+#define FORWARD 0
+#define TURNRIGHT 1
+#define TURNLEFT 2
+#define UTURN 3 
+
 /* Definitions */
 //Leds
 WbDeviceTag led[3];
@@ -53,7 +59,7 @@ int map[MAP_SIZE][MAP_SIZE];
 
 //robots initial positions on the map 
 int robot_x = MAP_SIZE / 2;
-int robot_y = MAP_SIZE / 2; 
+int robot_y = MAP_SIZE / 2;  
 
 //Distance sensors and corresponding arrays
 WbDeviceTag ps[NUM_DIST_SENS];
@@ -68,7 +74,10 @@ float angle_offset[NUM_DIST_SENS] = {0.2793, 0.7854, 1.5708, 2.618, -2.618, -1.5
 int new_encoder;
 
 //odometry struct
-struct odometryTrackStruct ot;
+//struct odometryTrackStruct ot;
+
+//starting state for the switch statement
+int state = FORWARD;
 
 
 /**
@@ -175,18 +184,20 @@ void reset(){
 	led[2] = wb_robot_get_device("led6");
 }
 
-void run(){
+void run(struct odometryTrackStruct * ot){
 	int i;
-	int robot_x = MAP_SIZE / 2;
-	int robot_y = MAP_SIZE / 2;
+	int ps_offset[NUM_DIST_SENS] = {35,35,35,35,35,35,35,35};
 	
-	double dSpeed = 200.0f;
-	double dDistance = 0.05f;
+	double dSpeed = 300.0f;
+	double dDistance = 0.02f;
+	
+	robot_x = wtom(ot->result.x);
+	robot_y = wtom(ot->result.y);
 	
 	// obstacle will contain a boolean information about a collision
 	for(i=0;i<NUM_DIST_SENS;i++){
 		ps_value[i] = (int)wb_distance_sensor_get_value(ps[i]);
-		obstacle[i] = ps_value[i] > THRESHOLD_DIST;
+		obstacle[i] = ps_value[i] - ps_offset[i] > THRESHOLD_DIST;
 	} 
 	
 	//define boolean for sensor states for cleaner implementation
@@ -200,27 +211,81 @@ void run(){
 	bool ob_left = 
 	obstacle[PS_LEFT_90];
 	
-	while(ob_front != 1){
-		move_forward(dSpeed, dDistance);
-		
-		// update position on the map
-		robot_x = wtom(ot.result.x);
-		robot_y = wtom(ot.result.y);
-		
-		for(i = 0;i < NUM_DIST_SENS;i++){
-			if(wb_distance_sensor_get_value(ps[i]) > OCCUPANCE_DIST){
-				occupied_cell(robot_x, robot_y, ot.result.theta + angle_offset[i]);
-			}
+
+	//move_forward(dSpeed, dDistance);
+	
+	//mark cells as occupied
+	wb_display_image_paste(display,background,0,0);
+	wb_display_set_color(display,0x000000);
+	for(i = 0;i < NUM_DIST_SENS;i++){
+		if(wb_distance_sensor_get_value(ps[i]) > OCCUPANCE_DIST){
+			occupied_cell(robot_x, robot_y, ot->result.theta + angle_offset[i]);
 		}
-		/* if(ob_front && ob_left){
-			turn_right(dSpeed);
-		}else if(ob_front && ob_right){
-			turn_left(dSpeed);
-		} */
-	};
-	if(ob_front && ob_left){
-		turn_right(dSpeed);
-	}else if(ob_front && ob_right){
-		turn_left(dSpeed);
 	}
+	wb_display_image_delete(display,background);
+	background = wb_display_image_copy(display,0,0,display_width,display_height);
+	
+	switch(state){
+		case FORWARD:
+			move_forward(dSpeed, dDistance);
+			//controll_angle(&ot);
+			 if(ob_front && ob_left){
+				state = TURNRIGHT;
+				}
+			else if(ob_front && ob_right){
+				state = TURNLEFT;
+				}
+			else if(ob_front){
+				//state = UTURN;
+				turn_right(dSpeed);
+				} 
+			break;			
+		case TURNRIGHT:
+			turn_right(dSpeed);
+		//	controll_angle(&ot);
+			state = FORWARD;
+			break;
+		case TURNLEFT:
+			turn_left(dSpeed);
+			//controll_angle(&ot);
+			state = FORWARD;
+			break;
+		case UTURN:
+			if(ob_left){
+				turn_right(dSpeed);
+				move_forward(dSpeed, dDistance);
+				turn_right(dSpeed);
+				state = FORWARD;
+			}else if(ob_right){
+				turn_left(dSpeed);
+				move_forward(dSpeed, dDistance);
+				turn_left(dSpeed);
+				state = FORWARD;
+			}else{
+				turn_left(dSpeed);
+				move_forward(dSpeed, 0.1f);
+				turn_left(dSpeed);
+				state = FORWARD;
+			}
+			break;
+		 default:
+			state = FORWARD; 
+	}
+	wb_display_set_color(display,0xFF0000);
+    wb_display_draw_rectangle(display,robot_x, display_height-robot_y-1,1,1);
+}
+/**
+returns a pointer to an array of the current sensor values
+*/
+int *return_sensor_values(){
+	int i;
+	int ps_offset[NUM_DIST_SENS] = {35,35,35,35,35,35,35,35};
+	static int obstac[NUM_DIST_SENS];
+	
+	// obstacle will contain a boolean information about a collision
+	for(i=0;i<NUM_DIST_SENS;i++){
+		ps_value[i] = (int)wb_distance_sensor_get_value(ps[i]);
+		obstac[i] = ps_value[i] - ps_offset[i] > THRESHOLD_DIST;
+	} 
+	return obstac;
 }

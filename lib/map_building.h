@@ -10,3 +10,4 @@ void init_display();
 void occupied_cell(int x, int y, float theta);
 void reset();
 void run();
+int *return_sensor_values();
