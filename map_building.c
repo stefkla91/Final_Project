@@ -39,17 +39,9 @@
 
 //states for the FSM
 #define FORWARD 0
-#define STOP 1
-#define TURNRIGHT 2
-#define TURNLEFT 3
-#define UTURN 4
-
-#define RTOD(r) ((r) * 180 / M_PI)
-#define ANGLE_TOLERANCE 20
-#define EAST 0 
-#define NORTH 90
-#define WEST 180
-#define SOUTH 270
+#define TURNRIGHT 1
+#define TURNLEFT 2
+#define UTURN 3 
 
 /* Definitions */
 //Leds
@@ -81,35 +73,12 @@ float angle_offset[NUM_DIST_SENS] = {0.2793, 0.7854, 1.5708, 2.618, -2.618, -1.5
 //movement
 int new_encoder;
 
-//direction
-bool north,west,south,east;
-
 //odometry struct
 //struct odometryTrackStruct ot;
 
 //starting state for the switch statement
 int state = FORWARD;
 
-/**
-set booleans for the direction the robot is moving in
-*/
-void check_direction(double d){
-	int i = return_angle(d);
-	east = false;
-	north = false;
-	west = false;
-	south = false; 
-	
-	if(EAST < i + ANGLE_TOLERANCE || EAST > i - ANGLE_TOLERANCE){
-		east = true;
-	}else if(NORTH < i + ANGLE_TOLERANCE || NORTH > i - ANGLE_TOLERANCE){
-		north = true;
-	}else if(WEST < i + ANGLE_TOLERANCE || WEST > i - ANGLE_TOLERANCE){
-		west = true;
-	}else if(SOUTH < i + ANGLE_TOLERANCE || SOUTH > i - ANGLE_TOLERANCE){
-		south = true;
-	}
-}
 
 /**
  * Initiate the display with a white color
@@ -219,10 +188,8 @@ void run(struct odometryTrackStruct * ot){
 	int i;
 	int ps_offset[NUM_DIST_SENS] = {35,35,35,35,35,35,35,35};
 	
-	double dMovSpeed = 500.0f;
-	double dDistance = 0.01f;
-	double dTurnSpeed = 100.0f;
-	double dTurnDistance = 0.05f;	
+	double dSpeed = 300.0f;
+	double dDistance = 0.02f;
 	
 	robot_x = wtom(ot->result.x);
 	robot_y = wtom(ot->result.y);
@@ -260,63 +227,46 @@ void run(struct odometryTrackStruct * ot){
 	
 	switch(state){
 		case FORWARD:
-			move_forward(dMovSpeed, dDistance);
+			move_forward(dSpeed, dDistance);
 			//controll_angle(&ot);
-			 if(ob_front){
-				state = STOP;
-				}
-			break;			
-		case STOP:
-			stop_robot();
-			if(ob_front && ob_left){
+			 if(ob_front && ob_left){
 				state = TURNRIGHT;
 				}
 			else if(ob_front && ob_right){
 				state = TURNLEFT;
 				}
 			else if(ob_front){
-				check_direction(ot->result.theta);
-			//state = UTURN;
-				state = TURNRIGHT;
+				//state = UTURN;
+				turn_right(dSpeed);
 				} 
-			break;	
-			
+			break;			
 		case TURNRIGHT:
-			turn_right(dTurnSpeed);
+			turn_right(dSpeed);
 		//	controll_angle(&ot);
 			state = FORWARD;
 			break;
 		case TURNLEFT:
-			turn_left(dTurnSpeed);
+			turn_left(dSpeed);
 			//controll_angle(&ot);
 			state = FORWARD;
 			break;
 		case UTURN:
-			if(north){
-				turn_left(dTurnSpeed);
-				move_forward(dTurnSpeed, dTurnDistance);
-				turn_left(dTurnSpeed);
+			if(ob_left){
+				turn_right(dSpeed);
+				move_forward(dSpeed, dDistance);
+				turn_right(dSpeed);
 				state = FORWARD;
-			}else if(south){
-				turn_right(dTurnSpeed);
-				move_forward(dTurnSpeed, dTurnDistance);
-				turn_right(dTurnSpeed);
+			}else if(ob_right){
+				turn_left(dSpeed);
+				move_forward(dSpeed, dDistance);
+				turn_left(dSpeed);
 				state = FORWARD;
-			}else if(west){
-				turn_left(dTurnSpeed);
-				move_forward(dTurnSpeed, dTurnDistance);
-				turn_left(dTurnSpeed);
-				state = FORWARD;
-			}else if(east){
-				turn_right(dTurnSpeed);
-				move_forward(dTurnSpeed, dTurnDistance);
-				turn_right(dTurnSpeed);
+			}else{
+				turn_left(dSpeed);
+				move_forward(dSpeed, 0.1f);
+				turn_left(dSpeed);
 				state = FORWARD;
 			}
-			east = false;
-			north = false;
-			south = false;
-			west = false;
 			break;
 		 default:
 			state = FORWARD; 
@@ -338,17 +288,4 @@ int *return_sensor_values(){
 		obstac[i] = ps_value[i] - ps_offset[i] > THRESHOLD_DIST;
 	} 
 	return obstac;
-}
-
-/**
-returns the angle in which the robot is moving
-*/
-int return_angle(double rad){
-	int rotation;
-	if(RTOD(rad) < 0){
-		rotation = RTOD(rad) + 360;
-	}else{
-		rotation = RTOD(rad); 
-	}
-	return rotation;
 }

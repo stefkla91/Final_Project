@@ -20,14 +20,14 @@ DEF FLOOR CheckeredFloor {
 }
 EPuck {
   rotation 0 1 0 3.14159
-  controller "Main"
+  controller "mid_term_demo"
   camera_windowPosition 0.316163 0.205197
   camera_pixelSize 0
   turretSlot [
     Display {
       width 70
       height 70
-      pixelSize 3
+      pixelSize 2
     }
   ]
 }

@@ -11,3 +11,4 @@ void occupied_cell(int x, int y, float theta);
 void reset();
 void run();
 int *return_sensor_values();
+int return_angle();
