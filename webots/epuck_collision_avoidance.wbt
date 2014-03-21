@@ -8,8 +8,8 @@ WorldInfo {
   basicTimeStep 16
 }
 Viewpoint {
-  orientation 0.998781 0.0463814 -0.0168786 4.99979
-  position -0.253886 2.48361 0.521701
+  orientation 0.999172 0.0198307 -0.0355377 4.96114
+  position -0.24494 2.47525 0.427469
 }
 Background {
   skyColor [
@@ -20,7 +20,7 @@ DEF FLOOR CheckeredFloor {
 }
 EPuck {
   rotation 0 1 0 3.14159
-  controller "mid_term_demo"
+  controller "Main"
   camera_windowPosition 0.316163 0.205197
   camera_pixelSize 0
   turretSlot [

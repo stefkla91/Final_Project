@@ -12,6 +12,7 @@
 #include <webots/light_sensor.h>
 #include <math.h>
 #include <webots/display.h> 
+#include <stdio.h>
 
 #include "map_building.h"
 #include "e_puck_movement.h"
@@ -100,13 +101,13 @@ void check_direction(double d){
 	west = false;
 	south = false; 
 	
-	if(EAST < i + ANGLE_TOLERANCE || EAST > i - ANGLE_TOLERANCE){
+	if(EAST < i + ANGLE_TOLERANCE && EAST > i - ANGLE_TOLERANCE){
 		east = true;
-	}else if(NORTH < i + ANGLE_TOLERANCE || NORTH > i - ANGLE_TOLERANCE){
+	}else if(NORTH < i + ANGLE_TOLERANCE && NORTH > i - ANGLE_TOLERANCE){
 		north = true;
-	}else if(WEST < i + ANGLE_TOLERANCE || WEST > i - ANGLE_TOLERANCE){
+	}else if(WEST < i + ANGLE_TOLERANCE && WEST > i - ANGLE_TOLERANCE){
 		west = true;
-	}else if(SOUTH < i + ANGLE_TOLERANCE || SOUTH > i - ANGLE_TOLERANCE){
+	}else if(SOUTH < i + ANGLE_TOLERANCE && SOUTH > i - ANGLE_TOLERANCE){
 		south = true;
 	}
 }
@@ -216,13 +217,18 @@ void reset(){
 }
 
 void run(struct odometryTrackStruct * ot){
-	int i;
+	int i, it;
 	int ps_offset[NUM_DIST_SENS] = {35,35,35,35,35,35,35,35};
 	
 	double dMovSpeed = 500.0f;
 	double dDistance = 0.01f;
-	double dTurnSpeed = 100.0f;
+	double dTurnSpeed = 300.0f;
 	double dTurnDistance = 0.05f;	
+	
+	char no[] = "north";
+	char ea[] = "east";
+	char we[] = "west";
+	char so[] = "south";
 	
 	robot_x = wtom(ot->result.x);
 	robot_y = wtom(ot->result.y);
@@ -276,8 +282,8 @@ void run(struct odometryTrackStruct * ot){
 				}
 			else if(ob_front){
 				check_direction(ot->result.theta);
-			//state = UTURN;
-				state = TURNRIGHT;
+				state = UTURN;
+				//state = TURNRIGHT;
 				} 
 			break;	
 			
@@ -293,30 +299,42 @@ void run(struct odometryTrackStruct * ot){
 			break;
 		case UTURN:
 			if(north){
+				printf("%s\n", no);
 				turn_left(dTurnSpeed);
-				move_forward(dTurnSpeed, dTurnDistance);
+				for(it = 0;it < 5;it++){
+					move_forward(dTurnSpeed, dDistance);
+				}
 				turn_left(dTurnSpeed);
+				north = false;
 				state = FORWARD;
 			}else if(south){
+				printf("%s\n", so);
 				turn_right(dTurnSpeed);
-				move_forward(dTurnSpeed, dTurnDistance);
+				for(it = 0;it < 5;it++){
+					move_forward(dTurnSpeed, dDistance);
+				}
 				turn_right(dTurnSpeed);
+				south = false;
 				state = FORWARD;
 			}else if(west){
+				printf("%s\n", we);
 				turn_left(dTurnSpeed);
-				move_forward(dTurnSpeed, dTurnDistance);
+				for(it = 0;it < 5;it++){
+					move_forward(dTurnSpeed, dDistance);
+				}
 				turn_left(dTurnSpeed);
+				west = false;
 				state = FORWARD;
 			}else if(east){
+				printf("%s\n", ea);
 				turn_right(dTurnSpeed);
-				move_forward(dTurnSpeed, dTurnDistance);
+				for(it = 0;it < 5;it++){
+					move_forward(dTurnSpeed, dDistance);
+				}
 				turn_right(dTurnSpeed);
+				east = false;
 				state = FORWARD;
 			}
-			east = false;
-			north = false;
-			south = false;
-			west = false;
 			break;
 		 default:
 			state = FORWARD; 
@@ -344,11 +362,12 @@ int *return_sensor_values(){
 returns the angle in which the robot is moving
 */
 int return_angle(double rad){
-	int rotation;
+	double rotation;
 	if(RTOD(rad) < 0){
 		rotation = RTOD(rad) + 360;
 	}else{
 		rotation = RTOD(rad); 
 	}
+   printf("%f\n", rotation);
 	return rotation;
 }
