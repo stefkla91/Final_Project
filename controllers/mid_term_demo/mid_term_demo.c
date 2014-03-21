@@ -33,8 +33,8 @@ int main(int argc, char **argv)
 
 	//while (wb_robot_step(TIME_STEP*4) != -1) {
 		UMBmark(dSpeed, dDist);
-		move_forward(dSpeed, 0.3f);
-		turn_angle(180.0f, dSpeed);
+		/* move_forward(dSpeed, 0.3f);
+		turn_angle(180.0f, dSpeed); */
 	//}
 	wb_robot_cleanup();
 
