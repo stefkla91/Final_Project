@@ -191,12 +191,14 @@ void turn_angle(double dAngle, double dSpeed){
 		
 	} else { // turn left ...
 		dStopPosLeft = point_dEncPos[0] - dStepCount;
-		dStopPosRight = point_dEncPos[1] + dStepCount; 
+		dStopPosRight = point_dEncPos[1] + dStepCount;
+		
+		point_dOdometryData = compute_odometry_data();
 
 		// turn left the robot ...
 		set_motor_speed(-dSpeed, dSpeed);
 
-		while(  (point_dEncPos[0] > dStopPosLeft) &&(point_dEncPos[1] < dStopPosRight)  ) {
+		while((point_dEncPos[0] > dStopPosLeft) &&(point_dEncPos[1] < dStopPosRight)){
 
 			point_dOdometryData = compute_odometry_data();
 			point_dEncPos = get_encoder_positions();
