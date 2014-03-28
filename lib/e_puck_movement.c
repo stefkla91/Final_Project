@@ -364,45 +364,11 @@ void set_leds(int iActive){
 	}
 }
 
- /**
-Controll the movement angle
-*/
-void controll_angle(struct odometryTrackStruct *ot){
-	int rotation;
-	int dSpeed = 100.0f;
-	int corAngle = 5.0f;
+void check_rotation(double cur_rot, double want_rot){
+	double threshold = 20.0f;
+	double *point_dEncPos;
 	
-	if(RTOD(ot->result.theta) < 0){
-		rotation = RTOD(ot->result.theta) + 360;
-	}else{
-		rotation = RTOD(ot->result.theta); 
-	}
-	
-	//check movement to the right(east)
-	if(EAST < rotation + ANGLE_TOLERANCE){
-		turn_angle(-corAngle, dSpeed);
-	}else if(EAST > rotation - ANGLE_TOLERANCE){
-		turn_angle(corAngle, dSpeed);
-	}
-	
-	//check movement to the north
-	if(NORTH < rotation + ANGLE_TOLERANCE){
-		turn_angle(-corAngle, dSpeed);
-	}else if(NORTH > rotation - ANGLE_TOLERANCE){
-		turn_angle(corAngle, dSpeed);
-	}
-	
-	//movement to the west
-	if(WEST < rotation + ANGLE_TOLERANCE){
-		turn_angle(-corAngle, dSpeed);
-	}else if(WEST > rotation - ANGLE_TOLERANCE){
-		turn_angle(corAngle, dSpeed);
-	}
-	
-	//movement to the south
-	if(SOUTH < rotation + ANGLE_TOLERANCE){
-		turn_angle(-corAngle, dSpeed);
-	}else if(SOUTH > rotation - ANGLE_TOLERANCE){
-		turn_angle(corAngle, dSpeed);
-	}
+	if(cur_rot > want_rot + threshold){
+		
+	}	
 }
