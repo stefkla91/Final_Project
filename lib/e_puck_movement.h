@@ -35,4 +35,6 @@ void measure_CounterClockWise(double dSpeed, double dDistance);
 void set_leds(int iActive);
 /* normalises the angle and stops the robot from moving the strong to one side */
 void controll_angle();
+/* compares the current heading with the wanted heading and fixes any diversion which surpasses a threshold */
+void check_rotation(double cur_rot, double want_rot, double dSpeed);
  

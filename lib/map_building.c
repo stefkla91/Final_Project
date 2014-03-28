@@ -268,6 +268,17 @@ void run(struct odometryTrackStruct * ot){
 	
 	switch(state){
 		case FORWARD:
+			check_direction(ot->result.theta);
+			double cur_rot = return_angle(ot->result.theta);
+			if(north){
+				check_rotation(cur_rot, 90, dMovSpeed);
+			}else if(east){
+				check_rotation(cur_rot, 0, dMovSpeed);
+			}else if(south){
+				check_rotation(cur_rot, 270, dMovSpeed);
+			}else if(west){
+				check_rotation(cur_rot, 270, dMovSpeed);
+			}
 			move_forward(dMovSpeed, dDistance);
 			//controll_angle(&ot);
 			 if(ob_front){
