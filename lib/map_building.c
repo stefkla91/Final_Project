@@ -217,79 +217,20 @@ void reset(){
 }
 
 /**
-function which does the uturn
-*/
-void uturn(){
-int it;
-	char no[] = "north";
-	char ea[] = "east";
-	char we[] = "west";
-	char so[] = "south";
-	
-		double dMovSpeed = 500.0f;
-	double dDistance = 0.01f;
-	double dTurnSpeed = 300.0f;
-	double dTurnDistance = 0.05f;	
-	
-	if(north){
-		printf("%s\n", no);
-		turn_left(dTurnSpeed);
-		for(it = 0;it < 5;it++){
-			move_forward(dTurnSpeed, dDistance);
-		}
-		turn_left(dTurnSpeed);
-		north = false;
-		state = FORWARD;
-	}else if(south){
-		printf("%s\n", so);
-		turn_right(dTurnSpeed);
-		for(it = 0;it < 5;it++){
-			move_forward(dTurnSpeed, dDistance);
-		}
-		turn_right(dTurnSpeed);
-		south = false;
-		state = FORWARD;
-	}else if(west){
-		printf("%s\n", we);
-		turn_left(dTurnSpeed);
-		for(it = 0;it < 5;it++){
-			move_forward(dTurnSpeed, dDistance);
-		}
-		turn_left(dTurnSpeed);
-		west = false;
-		state = FORWARD;
-	}else if(east){
-		printf("%s\n", ea);
-		turn_right(dTurnSpeed);
-		for(it = 0;it < 5;it++){
-			move_forward(dTurnSpeed, dDistance);
-		}
-		turn_right(dTurnSpeed);
-		east = false;
-		state = FORWARD;
-	}
-}
-
-/**
 run function
 */
 void run(struct odometryTrackStruct * ot){
 	int i, it;
 	int ps_offset[NUM_DIST_SENS] = {35,35,35,35,35,35,35,35};
-	//double *point_encPos;
-	double curAngle;
 	
 	double dMovSpeed = 500.0f;
 	double dDistance = 0.01f;
 	double dTurnSpeed = 300.0f;
-	double dTurnDistance = 0.05f;	
 	
 	char no[] = "north";
 	char ea[] = "east";
 	char we[] = "west";
 	char so[] = "south";
-	
-	bool folwall = false; 
 	
 	robot_x = wtom(ot->result.x);
 	robot_y = wtom(ot->result.y);
@@ -337,38 +278,15 @@ void run(struct odometryTrackStruct * ot){
 			stop_robot();
 			check_direction(ot->result.theta);
 		 	if(ob_front && ob_left && north){
-				//folwall = true;
 				state = TURNRIGHT;
-				/* turn_right(dTurnSpeed);
-				folwall = true;
-				state = FORWARD; */
 				}
 			 else if(ob_front && ob_left){
-			/* 	east = true;
-				//reset the directions
-				north = false;
-				south = false;
-				west = false;
-				
-				folwall = false; */
 				state = UTURN;
 			} 
 			else if(ob_front && ob_right && east){
-				//folwall = true;
 				state = TURNLEFT;
-				/* turn_left(dTurnSpeed);
-				folwall = true; 
-				state = FORWARD; */
 			}
 			else if(ob_front && ob_right){
-				/* north = true;
-				
-				//rest the directions
-				east = false;
-				south = false; 
-				west = false; 
-				
-				folwall = false;  */
 				state = UTURN;
 			}
 			else if(ob_front){
@@ -389,11 +307,9 @@ void run(struct odometryTrackStruct * ot){
 			state = FORWARD;
 			break;
 		case UTURN:
-			curAngle = return_angle(ot->result.theta);
 			if(north){
 				printf("%s\n", no);
-			//	turn_left(dTurnSpeed);
-				turn_angle(curAngle - WEST, dMovSpeed);
+				turn_left(dTurnSpeed);
 				for(it = 0;it < 5;it++){
 					move_forward(dTurnSpeed, dDistance);
 					//mark cells as occupied
@@ -407,16 +323,12 @@ void run(struct odometryTrackStruct * ot){
 					/* wb_display_image_delete(display,background);
 					background = wb_display_image_copy(display,0,0,display_width,display_height); */
 				}
-				odometry_track_step(&ot);
-				curAngle = return_angle(ot->result.theta);
-				//turn_left(dTurnSpeed);
-				turn_angle(curAngle - SOUTH, dMovSpeed);
+				turn_left(dTurnSpeed);
 				north = false;
 				state = FORWARD;
 			}else if(south){
 				printf("%s\n", so);
 				turn_right(dTurnSpeed);
-				//turn_angle(curAngle - WEST, dMovSpeed);
 				for(it = 0;it < 5;it++){
 					move_forward(dTurnSpeed, dDistance);
 					//mark cells as occupied
@@ -430,16 +342,12 @@ void run(struct odometryTrackStruct * ot){
 					/* wb_display_image_delete(display,background);
 					background = wb_display_image_copy(display,0,0,display_width,display_height); */
 				}
-				turn_right(dTurnSpeed);
-			//	odometry_track_step(&ot);
-				//curAngle = return_angle(ot->result.theta);
-				//turn_angle(SOUTH - 180, dMovSpeed);
+				turn_right(dTurnSpeed);;
 				south = false;
 				state = FORWARD;
 			}else if(west){
 				printf("%s\n", we);
-			//	turn_left(dTurnSpeed);
-				turn_angle(curAngle - SOUTH, dMovSpeed);
+				turn_left(dTurnSpeed);
 				for(it = 0;it < 5;it++){
 					move_forward(dTurnSpeed, dDistance);
 					//mark cells as occupied
@@ -453,16 +361,12 @@ void run(struct odometryTrackStruct * ot){
 					/* wb_display_image_delete(display,background);
 					background = wb_display_image_copy(display,0,0,display_width,display_height); */
 				}
-				//turn_left(dTurnSpeed);
-				odometry_track_step(&ot);
-				curAngle = return_angle(ot->result.theta);
-				turn_angle(curAngle - EAST, dMovSpeed);
+				turn_left(dTurnSpeed);
 				west = false;
 				state = FORWARD;
 			}else if(east){
 				printf("%s\n", ea);
-				//turn_right(dTurnSpeed);
-				turn_angle(curAngle - SOUTH, dMovSpeed);
+				turn_right(dTurnSpeed);
 				for(it = 0;it < 5;it++){
 					move_forward(dTurnSpeed, dDistance);
 					//mark cells as occupied
@@ -476,10 +380,7 @@ void run(struct odometryTrackStruct * ot){
 				/* 	wb_display_image_delete(display,background);
 					background = wb_display_image_copy(display,0,0,display_width,display_height); */
 				}
-				//turn_right(dTurnSpeed);
-				odometry_track_step(&ot);
-				curAngle = return_angle(ot->result.theta);
-				turn_angle(curAngle - WEST, dMovSpeed); 
+				turn_right(dTurnSpeed);
 				east = false;
 				state = FORWARD;
 			}
