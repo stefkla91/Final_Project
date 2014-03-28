@@ -370,12 +370,12 @@ FUnction to compare the current heading to the wanted heading
 and fix the heading should it surpass a threshold
 */
 void check_rotation(double cur_rot, double want_rot, double dSpeed){
-	double threshold = 10.0;
+	double threshold = 3.0;
 	double diff;
 	
 	if(cur_rot > want_rot + threshold){
 		diff = cur_rot - want_rot;
-		turn_angle(-diff, dSpeed);
+		turn_angle(diff, dSpeed);
 	}else if(cur_rot < want_rot - threshold){
 		diff = want_rot - cur_rot;
 		turn_angle(diff, dSpeed);

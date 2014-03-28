@@ -272,12 +272,16 @@ void run(struct odometryTrackStruct * ot){
 			check_direction(ot->result.theta);
 			cur_rot = return_angle(ot->result.theta);
 		 	if(north){
+				printf("%s\n", no);
 				check_rotation(cur_rot, 90, dMovSpeed);
 			}else if(east){
+				printf("%s\n", ea);
 				check_rotation(cur_rot, 0, dMovSpeed);
 			}else if(south){
+				printf("%s\n", so);
 				check_rotation(cur_rot, 270, dMovSpeed);
 			}else if(west){
+				printf("%s\n", we);
 				check_rotation(cur_rot, 180, dMovSpeed);
 			} 
 			move_forward(dMovSpeed, dDistance);
