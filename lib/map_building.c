@@ -222,6 +222,7 @@ run function
 void run(struct odometryTrackStruct * ot){
 	int i, it;
 	int ps_offset[NUM_DIST_SENS] = {35,35,35,35,35,35,35,35};
+	double cur_rot;
 	
 	double dMovSpeed = 500.0f;
 	double dDistance = 0.01f;
@@ -269,16 +270,16 @@ void run(struct odometryTrackStruct * ot){
 	switch(state){
 		case FORWARD:
 			check_direction(ot->result.theta);
-			double cur_rot = return_angle(ot->result.theta);
-			if(north){
+			cur_rot = return_angle(ot->result.theta);
+		 	if(north){
 				check_rotation(cur_rot, 90, dMovSpeed);
 			}else if(east){
 				check_rotation(cur_rot, 0, dMovSpeed);
 			}else if(south){
 				check_rotation(cur_rot, 270, dMovSpeed);
 			}else if(west){
-				check_rotation(cur_rot, 270, dMovSpeed);
-			}
+				check_rotation(cur_rot, 180, dMovSpeed);
+			} 
 			move_forward(dMovSpeed, dDistance);
 			//controll_angle(&ot);
 			 if(ob_front){
@@ -335,7 +336,28 @@ void run(struct odometryTrackStruct * ot){
 					background = wb_display_image_copy(display,0,0,display_width,display_height); */
 				}
 				turn_left(dTurnSpeed);
+				/* check_rotation(cur_rot, 90, dMovSpeed); */
 				north = false;
+				state = FORWARD;
+			}else if(east){
+				printf("%s\n", ea);
+				turn_right(dTurnSpeed);
+				for(it = 0;it < 5;it++){
+					move_forward(dTurnSpeed, dDistance);
+					//mark cells as occupied
+					wb_display_image_paste(display,background,0,0);
+					wb_display_set_color(display,0x000000);
+					for(i = 0;i < NUM_DIST_SENS;i++){
+						if(wb_distance_sensor_get_value(ps[i]) > OCCUPANCE_DIST){
+							occupied_cell(robot_x, robot_y, ot->result.theta + angle_offset[i]);
+						}
+					}
+				/* 	wb_display_image_delete(display,background);
+					background = wb_display_image_copy(display,0,0,display_width,display_height); */
+				}
+				turn_right(dTurnSpeed);
+				/* check_rotation(cur_rot, 0, dMovSpeed); */
+				east = false;
 				state = FORWARD;
 			}else if(south){
 				printf("%s\n", so);
@@ -353,7 +375,9 @@ void run(struct odometryTrackStruct * ot){
 					/* wb_display_image_delete(display,background);
 					background = wb_display_image_copy(display,0,0,display_width,display_height); */
 				}
-				turn_right(dTurnSpeed);;
+				turn_right(dTurnSpeed);
+				/* cur_rot = return_angle(ot->result.theta);
+				check_rotation(cur_rot, 270, dMovSpeed); */
 				south = false;
 				state = FORWARD;
 			}else if(west){
@@ -373,26 +397,8 @@ void run(struct odometryTrackStruct * ot){
 					background = wb_display_image_copy(display,0,0,display_width,display_height); */
 				}
 				turn_left(dTurnSpeed);
+				/* check_rotation(cur_rot, 180, dMovSpeed); */
 				west = false;
-				state = FORWARD;
-			}else if(east){
-				printf("%s\n", ea);
-				turn_right(dTurnSpeed);
-				for(it = 0;it < 5;it++){
-					move_forward(dTurnSpeed, dDistance);
-					//mark cells as occupied
-					wb_display_image_paste(display,background,0,0);
-					wb_display_set_color(display,0x000000);
-					for(i = 0;i < NUM_DIST_SENS;i++){
-						if(wb_distance_sensor_get_value(ps[i]) > OCCUPANCE_DIST){
-							occupied_cell(robot_x, robot_y, ot->result.theta + angle_offset[i]);
-						}
-					}
-				/* 	wb_display_image_delete(display,background);
-					background = wb_display_image_copy(display,0,0,display_width,display_height); */
-				}
-				turn_right(dTurnSpeed);
-				east = false;
 				state = FORWARD;
 			}
 			break;
