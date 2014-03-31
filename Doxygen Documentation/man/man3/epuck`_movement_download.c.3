@@ -1,0 +1,126 @@
+.TH "C:/Users/Stefan/Documents/GitHub/Final_Project/epuck`_movement_download.c" 3 "Mon Mar 31 2014" "Version 0.2" "Major Project Documentation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+C:/Users/Stefan/Documents/GitHub/Final_Project/epuck`_movement_download.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <webots/robot\&.h>\fP
+.br
+\fC#include <webots/differential_wheels\&.h>\fP
+.br
+\fC#include <webots/distance_sensor\&.h>\fP
+.br
+\fC#include <webots/light_sensor\&.h>\fP
+.br
+\fC#include <webots/camera\&.h>\fP
+.br
+\fC#include <webots/accelerometer\&.h>\fP
+.br
+\fC#include <webots/led\&.h>\fP
+.br
+\fC#include <math\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBM_PI\fP   3\&.1415926535897932384626433832795L"
+.br
+.ti -1c
+.RI "#define \fBTIME_STEP\fP   8"
+.br
+.ti -1c
+.RI "#define \fBWHEEL_RADIUS\fP   0\&.0206625"
+.br
+.ti -1c
+.RI "#define \fBWHEELBASE\fP   0\&.052"
+.br
+.ti -1c
+.RI "#define \fBENCODER_RESOLUTION\fP   159\&.23"
+.br
+.ti -1c
+.RI "#define \fBREV_STEP\fP   1000"
+.br
+.ti -1c
+.RI "#define \fBSTEP_TOLERANCE\fP   6\&.0"
+.br
+.ti -1c
+.RI "#define \fBRANGE\fP   (1024 / 2)"
+.br
+.ti -1c
+.RI "#define \fBMIN_DIST\fP   20\&.0f"
+.br
+.ti -1c
+.RI "#define \fBMIN_SPEED\fP   10\&.0f"
+.br
+.ti -1c
+.RI "#define \fBNTOURNAMENTS\fP   1"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBmain\fP (int argc, char *argv[])"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "double \fBdMSpeed\fP [2] = {0\&.0f, 0\&.0f}"
+.br
+.ti -1c
+.RI "double \fBdPrevEncPos\fP [2] = {0\&.0f, 0\&.0f}"
+.br
+.ti -1c
+.RI "double * \fBp_dOdometryData\fP"
+.br
+.ti -1c
+.RI "WbDeviceTag \fBled\fP [3]"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define ENCODER_RESOLUTION   159\&.23"
+
+.SS "#define M_PI   3\&.1415926535897932384626433832795L"
+
+.SS "#define MIN_DIST   20\&.0f"
+
+.SS "#define MIN_SPEED   10\&.0f"
+
+.SS "#define NTOURNAMENTS   1"
+
+.SS "#define RANGE   (1024 / 2)"
+
+.SS "#define REV_STEP   1000"
+
+.SS "#define STEP_TOLERANCE   6\&.0"
+
+.SS "#define TIME_STEP   8"
+
+.SS "#define WHEEL_RADIUS   0\&.0206625"
+
+.SS "#define WHEELBASE   0\&.052"
+
+.SH "Function Documentation"
+.PP 
+.SS "int main (intargc, char *argv[])"
+
+.SH "Variable Documentation"
+.PP 
+.SS "double dMSpeed[2] = {0\&.0f, 0\&.0f}"
+
+.SS "double dPrevEncPos[2] = {0\&.0f, 0\&.0f}"
+
+.SS "WbDeviceTag led[3]"
+
+.SS "double* p_dOdometryData"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Major Project Documentation from the source code\&.

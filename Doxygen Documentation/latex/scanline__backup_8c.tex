@@ -1,0 +1,183 @@
+\section{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/scanline\-\_\-backup.c File Reference}
+\label{scanline__backup_8c}\index{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/scanline\-\_\-backup.\-c@{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/scanline\-\_\-backup.\-c}}
+{\ttfamily \#include $<$webots/robot.\-h$>$}\\*
+{\ttfamily \#include $<$webots/differential\-\_\-wheels.\-h$>$}\\*
+{\ttfamily \#include $<$webots/distance\-\_\-sensor.\-h$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf T\-I\-M\-E\-\_\-\-S\-T\-E\-P}~64
+\item 
+\#define {\bf L\-E\-F\-T}~0
+\item 
+\#define {\bf R\-I\-G\-H\-T}~1
+\item 
+\#define {\bf T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T}~100
+\item 
+\#define {\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}~8
+\item 
+\#define {\bf P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10}~0
+\item 
+\#define {\bf P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45}~1
+\item 
+\#define {\bf P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90}~2
+\item 
+\#define {\bf P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R}~3
+\item 
+\#define {\bf P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R}~4
+\item 
+\#define {\bf P\-S\-\_\-\-L\-E\-F\-T\-\_\-90}~5
+\item 
+\#define {\bf P\-S\-\_\-\-L\-E\-F\-T\-\_\-45}~6
+\item 
+\#define {\bf P\-S\-\_\-\-L\-E\-F\-T\-\_\-10}~7
+\item 
+\#define {\bf F\-O\-R\-W\-A\-R\-D}~0
+\item 
+\#define {\bf S\-T\-O\-P}~1
+\item 
+\#define {\bf U\-T\-U\-R\-N}~2
+\item 
+\#define {\bf T\-U\-R\-N\-R\-I\-G\-H\-T}~3
+\item 
+\#define {\bf T\-U\-R\-N\-L\-E\-F\-T}~4
+\item 
+\#define {\bf W\-H\-E\-E\-L\-\_\-\-R\-A\-D\-I\-U\-S}~0.\-02
+\item 
+\#define {\bf A\-X\-L\-E\-\_\-\-L\-E\-N\-G\-T\-H}~0.\-026
+\item 
+\#define {\bf E\-N\-C\-O\-D\-E\-R\-\_\-\-R\-E\-S\-O\-L\-U\-T\-I\-O\-N}~159.\-23
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf fsm} ()
+\item 
+int {\bf main} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Wb\-Device\-Tag {\bf ps} [{\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}]
+\item 
+int {\bf ps\-\_\-value} [{\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}] =\{0,0,0,0,0,0,0,0\}
+\item 
+int {\bf ps\-\_\-offset} [{\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}] = \{35,35,35,35,35,35,35,35\}
+\item 
+int {\bf obstacle} [{\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}]
+\item 
+int {\bf state} = {\bf F\-O\-R\-W\-A\-R\-D}
+\item 
+int {\bf speed} [2] = \{0,0\}
+\item 
+int {\bf fsm\-\_\-speed} [2] = \{0,0\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!A\-X\-L\-E\-\_\-\-L\-E\-N\-G\-T\-H@{A\-X\-L\-E\-\_\-\-L\-E\-N\-G\-T\-H}}
+\index{A\-X\-L\-E\-\_\-\-L\-E\-N\-G\-T\-H@{A\-X\-L\-E\-\_\-\-L\-E\-N\-G\-T\-H}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{A\-X\-L\-E\-\_\-\-L\-E\-N\-G\-T\-H}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\-X\-L\-E\-\_\-\-L\-E\-N\-G\-T\-H~0.\-026}\label{scanline__backup_8c_a2d44d567f7c31efdc6f3be215a523167}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!E\-N\-C\-O\-D\-E\-R\-\_\-\-R\-E\-S\-O\-L\-U\-T\-I\-O\-N@{E\-N\-C\-O\-D\-E\-R\-\_\-\-R\-E\-S\-O\-L\-U\-T\-I\-O\-N}}
+\index{E\-N\-C\-O\-D\-E\-R\-\_\-\-R\-E\-S\-O\-L\-U\-T\-I\-O\-N@{E\-N\-C\-O\-D\-E\-R\-\_\-\-R\-E\-S\-O\-L\-U\-T\-I\-O\-N}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{E\-N\-C\-O\-D\-E\-R\-\_\-\-R\-E\-S\-O\-L\-U\-T\-I\-O\-N}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\-N\-C\-O\-D\-E\-R\-\_\-\-R\-E\-S\-O\-L\-U\-T\-I\-O\-N~159.\-23}\label{scanline__backup_8c_a8cdc17f43c9f3850f60d04f98216fc13}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!F\-O\-R\-W\-A\-R\-D@{F\-O\-R\-W\-A\-R\-D}}
+\index{F\-O\-R\-W\-A\-R\-D@{F\-O\-R\-W\-A\-R\-D}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{F\-O\-R\-W\-A\-R\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-O\-R\-W\-A\-R\-D~0}\label{scanline__backup_8c_a6ddfdda7a062d10cff4a72b76b44aeb8}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!L\-E\-F\-T@{L\-E\-F\-T}}
+\index{L\-E\-F\-T@{L\-E\-F\-T}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{L\-E\-F\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\-E\-F\-T~0}\label{scanline__backup_8c_a437ef08681e7210d6678427030446a54}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S@{N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}}
+\index{N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S@{N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S~8}\label{scanline__backup_8c_a8c369921a7d778f700fa6a729d50a4db}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!P\-S\-\_\-\-L\-E\-F\-T\-\_\-10@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-10}}
+\index{P\-S\-\_\-\-L\-E\-F\-T\-\_\-10@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-10}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{P\-S\-\_\-\-L\-E\-F\-T\-\_\-10}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-L\-E\-F\-T\-\_\-10~7}\label{scanline__backup_8c_a32980ed08662d1fdc3549b1fc745f4ed}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!P\-S\-\_\-\-L\-E\-F\-T\-\_\-45@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-45}}
+\index{P\-S\-\_\-\-L\-E\-F\-T\-\_\-45@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-45}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{P\-S\-\_\-\-L\-E\-F\-T\-\_\-45}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-L\-E\-F\-T\-\_\-45~6}\label{scanline__backup_8c_a52580588b31ee6250038534e27a35c62}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!P\-S\-\_\-\-L\-E\-F\-T\-\_\-90@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-90}}
+\index{P\-S\-\_\-\-L\-E\-F\-T\-\_\-90@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-90}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{P\-S\-\_\-\-L\-E\-F\-T\-\_\-90}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-L\-E\-F\-T\-\_\-90~5}\label{scanline__backup_8c_a4793a42bd07955a19d8e5a7694dde889}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R}}
+\index{P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R~4}\label{scanline__backup_8c_a2434ac72358eb5efe4b43b27dea9fb38}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10}}
+\index{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10~0}\label{scanline__backup_8c_aee9f2e2ea0cc13c0ddb875534c8c08f1}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45}}
+\index{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45~1}\label{scanline__backup_8c_a6f2631a255c296b6df8913539e03bbe2}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90}}
+\index{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90~2}\label{scanline__backup_8c_a5be98e86f76540dfb90dbbcd19022c90}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R}}
+\index{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R~3}\label{scanline__backup_8c_ad205d07f73416f4c26268dc2ece98267}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!R\-I\-G\-H\-T@{R\-I\-G\-H\-T}}
+\index{R\-I\-G\-H\-T@{R\-I\-G\-H\-T}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{R\-I\-G\-H\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\-I\-G\-H\-T~1}\label{scanline__backup_8c_a80fb826a684cf3f0d306b22aa100ddac}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!S\-T\-O\-P@{S\-T\-O\-P}}
+\index{S\-T\-O\-P@{S\-T\-O\-P}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{S\-T\-O\-P}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-O\-P~1}\label{scanline__backup_8c_ae19b6bb2940d2fbe0a79852b070eeafd}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T@{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T}}
+\index{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T@{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T~100}\label{scanline__backup_8c_aa57c30c684854687626672a1cfd957fe}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!T\-I\-M\-E\-\_\-\-S\-T\-E\-P@{T\-I\-M\-E\-\_\-\-S\-T\-E\-P}}
+\index{T\-I\-M\-E\-\_\-\-S\-T\-E\-P@{T\-I\-M\-E\-\_\-\-S\-T\-E\-P}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{T\-I\-M\-E\-\_\-\-S\-T\-E\-P}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-I\-M\-E\-\_\-\-S\-T\-E\-P~64}\label{scanline__backup_8c_a65fd90f232757535f02c46a885e49012}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!T\-U\-R\-N\-L\-E\-F\-T@{T\-U\-R\-N\-L\-E\-F\-T}}
+\index{T\-U\-R\-N\-L\-E\-F\-T@{T\-U\-R\-N\-L\-E\-F\-T}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{T\-U\-R\-N\-L\-E\-F\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-U\-R\-N\-L\-E\-F\-T~4}\label{scanline__backup_8c_a9f917b4709b1fe9cb8d8f3d7a047e004}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!T\-U\-R\-N\-R\-I\-G\-H\-T@{T\-U\-R\-N\-R\-I\-G\-H\-T}}
+\index{T\-U\-R\-N\-R\-I\-G\-H\-T@{T\-U\-R\-N\-R\-I\-G\-H\-T}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{T\-U\-R\-N\-R\-I\-G\-H\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-U\-R\-N\-R\-I\-G\-H\-T~3}\label{scanline__backup_8c_a316758f4f11a036a0944a85052932578}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!U\-T\-U\-R\-N@{U\-T\-U\-R\-N}}
+\index{U\-T\-U\-R\-N@{U\-T\-U\-R\-N}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{U\-T\-U\-R\-N}]{\setlength{\rightskip}{0pt plus 5cm}\#define U\-T\-U\-R\-N~2}\label{scanline__backup_8c_ae7331b46ecf8d2b688cf4338e9014340}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!W\-H\-E\-E\-L\-\_\-\-R\-A\-D\-I\-U\-S@{W\-H\-E\-E\-L\-\_\-\-R\-A\-D\-I\-U\-S}}
+\index{W\-H\-E\-E\-L\-\_\-\-R\-A\-D\-I\-U\-S@{W\-H\-E\-E\-L\-\_\-\-R\-A\-D\-I\-U\-S}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{W\-H\-E\-E\-L\-\_\-\-R\-A\-D\-I\-U\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define W\-H\-E\-E\-L\-\_\-\-R\-A\-D\-I\-U\-S~0.\-02}\label{scanline__backup_8c_aaa6f04f6f0d7cf1008a53279acf49f07}
+
+
+\subsection{Function Documentation}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!fsm@{fsm}}
+\index{fsm@{fsm}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{fsm}]{\setlength{\rightskip}{0pt plus 5cm}void fsm (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{scanline__backup_8c_a270932dff1ab343bb350f7c6e02d7a43}
+Function which holds the F\-S\-M \index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!main@{main}}
+\index{main@{main}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{scanline__backup_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}
+Main method 
+
+\subsection{Variable Documentation}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!fsm\-\_\-speed@{fsm\-\_\-speed}}
+\index{fsm\-\_\-speed@{fsm\-\_\-speed}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{fsm\-\_\-speed}]{\setlength{\rightskip}{0pt plus 5cm}int fsm\-\_\-speed[2] = \{0,0\}}\label{scanline__backup_8c_af8301a31ea0e18981dca35e90d11655d}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!obstacle@{obstacle}}
+\index{obstacle@{obstacle}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{obstacle}]{\setlength{\rightskip}{0pt plus 5cm}int obstacle[{\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}]}\label{scanline__backup_8c_a4ec02f2a1ca0005f7551c18c3845df8b}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!ps@{ps}}
+\index{ps@{ps}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{ps}]{\setlength{\rightskip}{0pt plus 5cm}Wb\-Device\-Tag ps[{\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}]}\label{scanline__backup_8c_a474c5f292c061c0a11a224021a9a61de}
+Global Values \index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!ps\-\_\-offset@{ps\-\_\-offset}}
+\index{ps\-\_\-offset@{ps\-\_\-offset}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{ps\-\_\-offset}]{\setlength{\rightskip}{0pt plus 5cm}int ps\-\_\-offset[{\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}] = \{35,35,35,35,35,35,35,35\}}\label{scanline__backup_8c_ad75c4a281258d96c6b5ef15ed0ffeb9e}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!ps\-\_\-value@{ps\-\_\-value}}
+\index{ps\-\_\-value@{ps\-\_\-value}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{ps\-\_\-value}]{\setlength{\rightskip}{0pt plus 5cm}int ps\-\_\-value[{\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}] =\{0,0,0,0,0,0,0,0\}}\label{scanline__backup_8c_a942844b8c29e4d68af81e074242b5463}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!speed@{speed}}
+\index{speed@{speed}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{speed}]{\setlength{\rightskip}{0pt plus 5cm}int speed[2] = \{0,0\}}\label{scanline__backup_8c_a6640382813acafcec63ff8370a924f22}
+\index{scanline\-\_\-backup.\-c@{scanline\-\_\-backup.\-c}!state@{state}}
+\index{state@{state}!scanline_backup.c@{scanline\-\_\-backup.\-c}}
+\subsubsection[{state}]{\setlength{\rightskip}{0pt plus 5cm}int state = {\bf F\-O\-R\-W\-A\-R\-D}}\label{scanline__backup_8c_a89f234133d3efe315836311cbf21c64b}

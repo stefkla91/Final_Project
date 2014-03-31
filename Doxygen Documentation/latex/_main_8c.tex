@@ -1,0 +1,127 @@
+\section{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/controllers/\-Main/\-Main.c File Reference}
+\label{_main_8c}\index{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/controllers/\-Main/\-Main.\-c@{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/controllers/\-Main/\-Main.\-c}}
+{\ttfamily \#include $<$webots/robot.\-h$>$}\\*
+{\ttfamily \#include $<$webots/differential\-\_\-wheels.\-h$>$}\\*
+{\ttfamily \#include $<$webots/distance\-\_\-sensor.\-h$>$}\\*
+{\ttfamily \#include $<$webots/light\-\_\-sensor.\-h$>$}\\*
+{\ttfamily \#include $<$webots/camera.\-h$>$}\\*
+{\ttfamily \#include $<$webots/display.\-h$>$}\\*
+{\ttfamily \#include $<$webots/accelerometer.\-h$>$}\\*
+{\ttfamily \#include $<$webots/led.\-h$>$}\\*
+{\ttfamily \#include $<$math.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}../../lib/odometry.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../../lib/e\-\_\-puck\-\_\-movement.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../../lib/map\-\_\-building.\-h\char`\"{}}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf T\-I\-M\-E\-\_\-\-S\-T\-E\-P}~8
+\item 
+\#define {\bf M\-A\-P\-\_\-\-S\-I\-Z\-E}~70
+\item 
+\#define {\bf T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T}~100
+\item 
+\#define {\bf O\-C\-C\-U\-P\-A\-N\-C\-E\-\_\-\-D\-I\-S\-T}~150
+\item 
+\#define {\bf L\-E\-F\-T}~0
+\item 
+\#define {\bf R\-I\-G\-H\-T}~1
+\item 
+\#define {\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}~8
+\item 
+\#define {\bf P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10}~0
+\item 
+\#define {\bf P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45}~1
+\item 
+\#define {\bf P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90}~2
+\item 
+\#define {\bf P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R}~3
+\item 
+\#define {\bf P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R}~4
+\item 
+\#define {\bf P\-S\-\_\-\-L\-E\-F\-T\-\_\-90}~5
+\item 
+\#define {\bf P\-S\-\_\-\-L\-E\-F\-T\-\_\-45}~6
+\item 
+\#define {\bf P\-S\-\_\-\-L\-E\-F\-T\-\_\-10}~7
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Wb\-Device\-Tag {\bf led} [3]
+\item 
+struct {\bf odometry\-Track\-Struct} {\bf ot}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{Main.\-c@{Main.\-c}!L\-E\-F\-T@{L\-E\-F\-T}}
+\index{L\-E\-F\-T@{L\-E\-F\-T}!Main.c@{Main.\-c}}
+\subsubsection[{L\-E\-F\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\-E\-F\-T~0}\label{_main_8c_a437ef08681e7210d6678427030446a54}
+\index{Main.\-c@{Main.\-c}!M\-A\-P\-\_\-\-S\-I\-Z\-E@{M\-A\-P\-\_\-\-S\-I\-Z\-E}}
+\index{M\-A\-P\-\_\-\-S\-I\-Z\-E@{M\-A\-P\-\_\-\-S\-I\-Z\-E}!Main.c@{Main.\-c}}
+\subsubsection[{M\-A\-P\-\_\-\-S\-I\-Z\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\-A\-P\-\_\-\-S\-I\-Z\-E~70}\label{_main_8c_a0a82fd70402bbdc2259248e735fecbca}
+\index{Main.\-c@{Main.\-c}!N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S@{N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}}
+\index{N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S@{N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}!Main.c@{Main.\-c}}
+\subsubsection[{N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S~8}\label{_main_8c_a8c369921a7d778f700fa6a729d50a4db}
+\index{Main.\-c@{Main.\-c}!O\-C\-C\-U\-P\-A\-N\-C\-E\-\_\-\-D\-I\-S\-T@{O\-C\-C\-U\-P\-A\-N\-C\-E\-\_\-\-D\-I\-S\-T}}
+\index{O\-C\-C\-U\-P\-A\-N\-C\-E\-\_\-\-D\-I\-S\-T@{O\-C\-C\-U\-P\-A\-N\-C\-E\-\_\-\-D\-I\-S\-T}!Main.c@{Main.\-c}}
+\subsubsection[{O\-C\-C\-U\-P\-A\-N\-C\-E\-\_\-\-D\-I\-S\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\-C\-C\-U\-P\-A\-N\-C\-E\-\_\-\-D\-I\-S\-T~150}\label{_main_8c_a6fe92d7b1da90203a544b43e015febe1}
+\index{Main.\-c@{Main.\-c}!P\-S\-\_\-\-L\-E\-F\-T\-\_\-10@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-10}}
+\index{P\-S\-\_\-\-L\-E\-F\-T\-\_\-10@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-10}!Main.c@{Main.\-c}}
+\subsubsection[{P\-S\-\_\-\-L\-E\-F\-T\-\_\-10}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-L\-E\-F\-T\-\_\-10~7}\label{_main_8c_a32980ed08662d1fdc3549b1fc745f4ed}
+\index{Main.\-c@{Main.\-c}!P\-S\-\_\-\-L\-E\-F\-T\-\_\-45@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-45}}
+\index{P\-S\-\_\-\-L\-E\-F\-T\-\_\-45@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-45}!Main.c@{Main.\-c}}
+\subsubsection[{P\-S\-\_\-\-L\-E\-F\-T\-\_\-45}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-L\-E\-F\-T\-\_\-45~6}\label{_main_8c_a52580588b31ee6250038534e27a35c62}
+\index{Main.\-c@{Main.\-c}!P\-S\-\_\-\-L\-E\-F\-T\-\_\-90@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-90}}
+\index{P\-S\-\_\-\-L\-E\-F\-T\-\_\-90@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-90}!Main.c@{Main.\-c}}
+\subsubsection[{P\-S\-\_\-\-L\-E\-F\-T\-\_\-90}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-L\-E\-F\-T\-\_\-90~5}\label{_main_8c_a4793a42bd07955a19d8e5a7694dde889}
+\index{Main.\-c@{Main.\-c}!P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R}}
+\index{P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R}!Main.c@{Main.\-c}}
+\subsubsection[{P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R~4}\label{_main_8c_a2434ac72358eb5efe4b43b27dea9fb38}
+\index{Main.\-c@{Main.\-c}!P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10}}
+\index{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10}!Main.c@{Main.\-c}}
+\subsubsection[{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10~0}\label{_main_8c_aee9f2e2ea0cc13c0ddb875534c8c08f1}
+\index{Main.\-c@{Main.\-c}!P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45}}
+\index{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45}!Main.c@{Main.\-c}}
+\subsubsection[{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45~1}\label{_main_8c_a6f2631a255c296b6df8913539e03bbe2}
+\index{Main.\-c@{Main.\-c}!P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90}}
+\index{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90}!Main.c@{Main.\-c}}
+\subsubsection[{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90~2}\label{_main_8c_a5be98e86f76540dfb90dbbcd19022c90}
+\index{Main.\-c@{Main.\-c}!P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R}}
+\index{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R}!Main.c@{Main.\-c}}
+\subsubsection[{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R~3}\label{_main_8c_ad205d07f73416f4c26268dc2ece98267}
+\index{Main.\-c@{Main.\-c}!R\-I\-G\-H\-T@{R\-I\-G\-H\-T}}
+\index{R\-I\-G\-H\-T@{R\-I\-G\-H\-T}!Main.c@{Main.\-c}}
+\subsubsection[{R\-I\-G\-H\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\-I\-G\-H\-T~1}\label{_main_8c_a80fb826a684cf3f0d306b22aa100ddac}
+\index{Main.\-c@{Main.\-c}!T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T@{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T}}
+\index{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T@{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T}!Main.c@{Main.\-c}}
+\subsubsection[{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T~100}\label{_main_8c_aa57c30c684854687626672a1cfd957fe}
+\index{Main.\-c@{Main.\-c}!T\-I\-M\-E\-\_\-\-S\-T\-E\-P@{T\-I\-M\-E\-\_\-\-S\-T\-E\-P}}
+\index{T\-I\-M\-E\-\_\-\-S\-T\-E\-P@{T\-I\-M\-E\-\_\-\-S\-T\-E\-P}!Main.c@{Main.\-c}}
+\subsubsection[{T\-I\-M\-E\-\_\-\-S\-T\-E\-P}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-I\-M\-E\-\_\-\-S\-T\-E\-P~8}\label{_main_8c_a65fd90f232757535f02c46a885e49012}
+
+
+\subsection{Function Documentation}
+\index{Main.\-c@{Main.\-c}!main@{main}}
+\index{main@{main}!Main.c@{Main.\-c}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\label{_main_8c_a3c04138a5bfe5d72780bb7e82a18e627}
+
+
+\subsection{Variable Documentation}
+\index{Main.\-c@{Main.\-c}!led@{led}}
+\index{led@{led}!Main.c@{Main.\-c}}
+\subsubsection[{led}]{\setlength{\rightskip}{0pt plus 5cm}Wb\-Device\-Tag led[3]}\label{_main_8c_ac6de0cb33d79790826e4b1c971d697f1}
+\index{Main.\-c@{Main.\-c}!ot@{ot}}
+\index{ot@{ot}!Main.c@{Main.\-c}}
+\subsubsection[{ot}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf odometry\-Track\-Struct} ot}\label{_main_8c_a8ffe8a155701a233c11370bd93f2225d}

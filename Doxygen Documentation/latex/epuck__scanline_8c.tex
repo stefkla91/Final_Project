@@ -1,0 +1,195 @@
+\section{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/controllers/epuck\-\_\-scanline/epuck\-\_\-scanline.c File Reference}
+\label{epuck__scanline_8c}\index{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/controllers/epuck\-\_\-scanline/epuck\-\_\-scanline.\-c@{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/controllers/epuck\-\_\-scanline/epuck\-\_\-scanline.\-c}}
+{\ttfamily \#include $<$webots/robot.\-h$>$}\\*
+{\ttfamily \#include $<$webots/distance\-\_\-sensor.\-h$>$}\\*
+{\ttfamily \#include $<$webots/differential\-\_\-wheels.\-h$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$time.\-h$>$}\\*
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T}~300
+\item 
+\#define {\bf T\-I\-M\-E\-\_\-\-S\-T\-E\-P}~32
+\item 
+\#define {\bf S\-I\-M\-U\-L\-A\-T\-I\-O\-N}~0
+\item 
+\#define {\bf R\-E\-A\-L\-I\-T\-Y}~2
+\item 
+\#define {\bf L\-E\-F\-T}~0
+\item 
+\#define {\bf R\-I\-G\-H\-T}~1
+\item 
+\#define {\bf N\-B\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}~8
+\item 
+\#define {\bf P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10}~0
+\item 
+\#define {\bf P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45}~1
+\item 
+\#define {\bf P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90}~2
+\item 
+\#define {\bf P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R}~3
+\item 
+\#define {\bf P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R}~4
+\item 
+\#define {\bf P\-S\-\_\-\-L\-E\-F\-T\-\_\-90}~5
+\item 
+\#define {\bf P\-S\-\_\-\-L\-E\-F\-T\-\_\-45}~6
+\item 
+\#define {\bf P\-S\-\_\-\-L\-E\-F\-T\-\_\-10}~7
+\item 
+\#define {\bf W\-H\-E\-E\-L\-\_\-\-R\-A\-D\-I\-U\-S}~0.\-02
+\item 
+\#define {\bf A\-X\-L\-E\-\_\-\-L\-E\-N\-G\-T\-H}~0.\-026
+\item 
+\#define {\bf E\-N\-C\-O\-D\-E\-R\-\_\-\-R\-E\-S\-O\-L\-U\-T\-I\-O\-N}~159.\-23
+\item 
+\#define {\bf F\-O\-R\-W\-A\-R\-D}~0
+\item 
+\#define {\bf S\-T\-O\-P}~1
+\item 
+\#define {\bf U\-T\-U\-R\-N}~2
+\item 
+\#define {\bf T\-U\-R\-N\-R\-I\-G\-H\-T}~3
+\item 
+\#define {\bf T\-U\-R\-N\-L\-E\-F\-T}~4
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf main} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Wb\-Device\-Tag {\bf ps} [{\bf N\-B\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}]
+\item 
+int {\bf ps\-\_\-value} [{\bf N\-B\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}] =\{0,0,0,0,0,0,0,0\}
+\item 
+int {\bf ps\-\_\-offset\-\_\-sim} [{\bf N\-B\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}] = \{35,35,35,35,35,35,35,35\}
+\item 
+int {\bf ps\-\_\-offset\-\_\-real} [{\bf N\-B\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}] = \{375,158,423,682,447,594,142,360\}
+\item 
+int {\bf obstacle} [{\bf N\-B\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}]
+\item 
+int {\bf speed} [2] = \{0,0\}
+\item 
+int {\bf state} = {\bf F\-O\-R\-W\-A\-R\-D}
+\item 
+int {\bf n} =0
+\item 
+int {\bf old\-\_\-encoder} =0
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!A\-X\-L\-E\-\_\-\-L\-E\-N\-G\-T\-H@{A\-X\-L\-E\-\_\-\-L\-E\-N\-G\-T\-H}}
+\index{A\-X\-L\-E\-\_\-\-L\-E\-N\-G\-T\-H@{A\-X\-L\-E\-\_\-\-L\-E\-N\-G\-T\-H}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{A\-X\-L\-E\-\_\-\-L\-E\-N\-G\-T\-H}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\-X\-L\-E\-\_\-\-L\-E\-N\-G\-T\-H~0.\-026}\label{epuck__scanline_8c_a2d44d567f7c31efdc6f3be215a523167}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!E\-N\-C\-O\-D\-E\-R\-\_\-\-R\-E\-S\-O\-L\-U\-T\-I\-O\-N@{E\-N\-C\-O\-D\-E\-R\-\_\-\-R\-E\-S\-O\-L\-U\-T\-I\-O\-N}}
+\index{E\-N\-C\-O\-D\-E\-R\-\_\-\-R\-E\-S\-O\-L\-U\-T\-I\-O\-N@{E\-N\-C\-O\-D\-E\-R\-\_\-\-R\-E\-S\-O\-L\-U\-T\-I\-O\-N}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{E\-N\-C\-O\-D\-E\-R\-\_\-\-R\-E\-S\-O\-L\-U\-T\-I\-O\-N}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\-N\-C\-O\-D\-E\-R\-\_\-\-R\-E\-S\-O\-L\-U\-T\-I\-O\-N~159.\-23}\label{epuck__scanline_8c_a8cdc17f43c9f3850f60d04f98216fc13}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!F\-O\-R\-W\-A\-R\-D@{F\-O\-R\-W\-A\-R\-D}}
+\index{F\-O\-R\-W\-A\-R\-D@{F\-O\-R\-W\-A\-R\-D}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{F\-O\-R\-W\-A\-R\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-O\-R\-W\-A\-R\-D~0}\label{epuck__scanline_8c_a6ddfdda7a062d10cff4a72b76b44aeb8}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!L\-E\-F\-T@{L\-E\-F\-T}}
+\index{L\-E\-F\-T@{L\-E\-F\-T}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{L\-E\-F\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\-E\-F\-T~0}\label{epuck__scanline_8c_a437ef08681e7210d6678427030446a54}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!N\-B\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S@{N\-B\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}}
+\index{N\-B\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S@{N\-B\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{N\-B\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\-B\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S~8}\label{epuck__scanline_8c_adf8f50a35120ecfcbdea630c22f43240}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!P\-S\-\_\-\-L\-E\-F\-T\-\_\-10@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-10}}
+\index{P\-S\-\_\-\-L\-E\-F\-T\-\_\-10@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-10}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{P\-S\-\_\-\-L\-E\-F\-T\-\_\-10}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-L\-E\-F\-T\-\_\-10~7}\label{epuck__scanline_8c_a32980ed08662d1fdc3549b1fc745f4ed}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!P\-S\-\_\-\-L\-E\-F\-T\-\_\-45@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-45}}
+\index{P\-S\-\_\-\-L\-E\-F\-T\-\_\-45@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-45}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{P\-S\-\_\-\-L\-E\-F\-T\-\_\-45}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-L\-E\-F\-T\-\_\-45~6}\label{epuck__scanline_8c_a52580588b31ee6250038534e27a35c62}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!P\-S\-\_\-\-L\-E\-F\-T\-\_\-90@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-90}}
+\index{P\-S\-\_\-\-L\-E\-F\-T\-\_\-90@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-90}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{P\-S\-\_\-\-L\-E\-F\-T\-\_\-90}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-L\-E\-F\-T\-\_\-90~5}\label{epuck__scanline_8c_a4793a42bd07955a19d8e5a7694dde889}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R}}
+\index{P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R~4}\label{epuck__scanline_8c_a2434ac72358eb5efe4b43b27dea9fb38}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10}}
+\index{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10~0}\label{epuck__scanline_8c_aee9f2e2ea0cc13c0ddb875534c8c08f1}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45}}
+\index{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45~1}\label{epuck__scanline_8c_a6f2631a255c296b6df8913539e03bbe2}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90}}
+\index{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90~2}\label{epuck__scanline_8c_a5be98e86f76540dfb90dbbcd19022c90}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R}}
+\index{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R~3}\label{epuck__scanline_8c_ad205d07f73416f4c26268dc2ece98267}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!R\-E\-A\-L\-I\-T\-Y@{R\-E\-A\-L\-I\-T\-Y}}
+\index{R\-E\-A\-L\-I\-T\-Y@{R\-E\-A\-L\-I\-T\-Y}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{R\-E\-A\-L\-I\-T\-Y}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\-E\-A\-L\-I\-T\-Y~2}\label{epuck__scanline_8c_ab5d32fac17d9512fa151ab62d5d968cc}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!R\-I\-G\-H\-T@{R\-I\-G\-H\-T}}
+\index{R\-I\-G\-H\-T@{R\-I\-G\-H\-T}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{R\-I\-G\-H\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\-I\-G\-H\-T~1}\label{epuck__scanline_8c_a80fb826a684cf3f0d306b22aa100ddac}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!S\-I\-M\-U\-L\-A\-T\-I\-O\-N@{S\-I\-M\-U\-L\-A\-T\-I\-O\-N}}
+\index{S\-I\-M\-U\-L\-A\-T\-I\-O\-N@{S\-I\-M\-U\-L\-A\-T\-I\-O\-N}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{S\-I\-M\-U\-L\-A\-T\-I\-O\-N}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-I\-M\-U\-L\-A\-T\-I\-O\-N~0}\label{epuck__scanline_8c_afd29c78cd36d8946cf1202e8e684f7a5}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!S\-T\-O\-P@{S\-T\-O\-P}}
+\index{S\-T\-O\-P@{S\-T\-O\-P}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{S\-T\-O\-P}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-O\-P~1}\label{epuck__scanline_8c_ae19b6bb2940d2fbe0a79852b070eeafd}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T@{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T}}
+\index{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T@{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T~300}\label{epuck__scanline_8c_aa57c30c684854687626672a1cfd957fe}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!T\-I\-M\-E\-\_\-\-S\-T\-E\-P@{T\-I\-M\-E\-\_\-\-S\-T\-E\-P}}
+\index{T\-I\-M\-E\-\_\-\-S\-T\-E\-P@{T\-I\-M\-E\-\_\-\-S\-T\-E\-P}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{T\-I\-M\-E\-\_\-\-S\-T\-E\-P}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-I\-M\-E\-\_\-\-S\-T\-E\-P~32}\label{epuck__scanline_8c_a65fd90f232757535f02c46a885e49012}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!T\-U\-R\-N\-L\-E\-F\-T@{T\-U\-R\-N\-L\-E\-F\-T}}
+\index{T\-U\-R\-N\-L\-E\-F\-T@{T\-U\-R\-N\-L\-E\-F\-T}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{T\-U\-R\-N\-L\-E\-F\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-U\-R\-N\-L\-E\-F\-T~4}\label{epuck__scanline_8c_a9f917b4709b1fe9cb8d8f3d7a047e004}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!T\-U\-R\-N\-R\-I\-G\-H\-T@{T\-U\-R\-N\-R\-I\-G\-H\-T}}
+\index{T\-U\-R\-N\-R\-I\-G\-H\-T@{T\-U\-R\-N\-R\-I\-G\-H\-T}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{T\-U\-R\-N\-R\-I\-G\-H\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-U\-R\-N\-R\-I\-G\-H\-T~3}\label{epuck__scanline_8c_a316758f4f11a036a0944a85052932578}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!U\-T\-U\-R\-N@{U\-T\-U\-R\-N}}
+\index{U\-T\-U\-R\-N@{U\-T\-U\-R\-N}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{U\-T\-U\-R\-N}]{\setlength{\rightskip}{0pt plus 5cm}\#define U\-T\-U\-R\-N~2}\label{epuck__scanline_8c_ae7331b46ecf8d2b688cf4338e9014340}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!W\-H\-E\-E\-L\-\_\-\-R\-A\-D\-I\-U\-S@{W\-H\-E\-E\-L\-\_\-\-R\-A\-D\-I\-U\-S}}
+\index{W\-H\-E\-E\-L\-\_\-\-R\-A\-D\-I\-U\-S@{W\-H\-E\-E\-L\-\_\-\-R\-A\-D\-I\-U\-S}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{W\-H\-E\-E\-L\-\_\-\-R\-A\-D\-I\-U\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define W\-H\-E\-E\-L\-\_\-\-R\-A\-D\-I\-U\-S~0.\-02}\label{epuck__scanline_8c_aaa6f04f6f0d7cf1008a53279acf49f07}
+
+
+\subsection{Function Documentation}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!main@{main}}
+\index{main@{main}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{epuck__scanline_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}
+
+
+\subsection{Variable Documentation}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!n@{n}}
+\index{n@{n}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{n}]{\setlength{\rightskip}{0pt plus 5cm}int n =0}\label{epuck__scanline_8c_a76f11d9a0a47b94f72c2d0e77fb32240}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!obstacle@{obstacle}}
+\index{obstacle@{obstacle}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{obstacle}]{\setlength{\rightskip}{0pt plus 5cm}int obstacle[{\bf N\-B\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}]}\label{epuck__scanline_8c_ac41223231ad6432cfaeafb9dc43eb76c}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!old\-\_\-encoder@{old\-\_\-encoder}}
+\index{old\-\_\-encoder@{old\-\_\-encoder}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{old\-\_\-encoder}]{\setlength{\rightskip}{0pt plus 5cm}int old\-\_\-encoder =0}\label{epuck__scanline_8c_ad895f661059c1ee14c32a9d018ee3a29}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!ps@{ps}}
+\index{ps@{ps}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{ps}]{\setlength{\rightskip}{0pt plus 5cm}Wb\-Device\-Tag ps}\label{epuck__scanline_8c_a2a2ed3ba083f183a540c14c6b0a52f09}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!ps\-\_\-offset\-\_\-real@{ps\-\_\-offset\-\_\-real}}
+\index{ps\-\_\-offset\-\_\-real@{ps\-\_\-offset\-\_\-real}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{ps\-\_\-offset\-\_\-real}]{\setlength{\rightskip}{0pt plus 5cm}int ps\-\_\-offset\-\_\-real[{\bf N\-B\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}] = \{375,158,423,682,447,594,142,360\}}\label{epuck__scanline_8c_ac214a6a176db0f989b18d5e36f2c6b6c}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!ps\-\_\-offset\-\_\-sim@{ps\-\_\-offset\-\_\-sim}}
+\index{ps\-\_\-offset\-\_\-sim@{ps\-\_\-offset\-\_\-sim}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{ps\-\_\-offset\-\_\-sim}]{\setlength{\rightskip}{0pt plus 5cm}int ps\-\_\-offset\-\_\-sim[{\bf N\-B\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}] = \{35,35,35,35,35,35,35,35\}}\label{epuck__scanline_8c_ae74f85e3ab86582faa67b6021a1fc7a7}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!ps\-\_\-value@{ps\-\_\-value}}
+\index{ps\-\_\-value@{ps\-\_\-value}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{ps\-\_\-value}]{\setlength{\rightskip}{0pt plus 5cm}int ps\-\_\-value[{\bf N\-B\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}] =\{0,0,0,0,0,0,0,0\}}\label{epuck__scanline_8c_a899e228093b3c2778033abc4d7be364f}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!speed@{speed}}
+\index{speed@{speed}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{speed}]{\setlength{\rightskip}{0pt plus 5cm}int speed[2] = \{0,0\}}\label{epuck__scanline_8c_a6640382813acafcec63ff8370a924f22}
+\index{epuck\-\_\-scanline.\-c@{epuck\-\_\-scanline.\-c}!state@{state}}
+\index{state@{state}!epuck_scanline.c@{epuck\-\_\-scanline.\-c}}
+\subsubsection[{state}]{\setlength{\rightskip}{0pt plus 5cm}int state = {\bf F\-O\-R\-W\-A\-R\-D}}\label{epuck__scanline_8c_a89f234133d3efe315836311cbf21c64b}

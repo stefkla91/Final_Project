@@ -1,0 +1,144 @@
+.TH "C:/Users/Stefan/Documents/GitHub/Final_Project/controllers/Main/Main.c" 3 "Mon Mar 31 2014" "Version 0.2" "Major Project Documentation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+C:/Users/Stefan/Documents/GitHub/Final_Project/controllers/Main/Main.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <webots/robot\&.h>\fP
+.br
+\fC#include <webots/differential_wheels\&.h>\fP
+.br
+\fC#include <webots/distance_sensor\&.h>\fP
+.br
+\fC#include <webots/light_sensor\&.h>\fP
+.br
+\fC#include <webots/camera\&.h>\fP
+.br
+\fC#include <webots/display\&.h>\fP
+.br
+\fC#include <webots/accelerometer\&.h>\fP
+.br
+\fC#include <webots/led\&.h>\fP
+.br
+\fC#include <math\&.h>\fP
+.br
+\fC#include '\&.\&./\&.\&./lib/odometry\&.h'\fP
+.br
+\fC#include '\&.\&./\&.\&./lib/e_puck_movement\&.h'\fP
+.br
+\fC#include '\&.\&./\&.\&./lib/map_building\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBTIME_STEP\fP   8"
+.br
+.ti -1c
+.RI "#define \fBMAP_SIZE\fP   70"
+.br
+.ti -1c
+.RI "#define \fBTHRESHOLD_DIST\fP   100"
+.br
+.ti -1c
+.RI "#define \fBOCCUPANCE_DIST\fP   150"
+.br
+.ti -1c
+.RI "#define \fBLEFT\fP   0"
+.br
+.ti -1c
+.RI "#define \fBRIGHT\fP   1"
+.br
+.ti -1c
+.RI "#define \fBNUM_DIST_SENS\fP   8"
+.br
+.ti -1c
+.RI "#define \fBPS_RIGHT_10\fP   0"
+.br
+.ti -1c
+.RI "#define \fBPS_RIGHT_45\fP   1"
+.br
+.ti -1c
+.RI "#define \fBPS_RIGHT_90\fP   2"
+.br
+.ti -1c
+.RI "#define \fBPS_RIGHT_REAR\fP   3"
+.br
+.ti -1c
+.RI "#define \fBPS_LEFT_REAR\fP   4"
+.br
+.ti -1c
+.RI "#define \fBPS_LEFT_90\fP   5"
+.br
+.ti -1c
+.RI "#define \fBPS_LEFT_45\fP   6"
+.br
+.ti -1c
+.RI "#define \fBPS_LEFT_10\fP   7"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBmain\fP (int argc, char **argv)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "WbDeviceTag \fBled\fP [3]"
+.br
+.ti -1c
+.RI "struct \fBodometryTrackStruct\fP \fBot\fP"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define LEFT   0"
+
+.SS "#define MAP_SIZE   70"
+
+.SS "#define NUM_DIST_SENS   8"
+
+.SS "#define OCCUPANCE_DIST   150"
+
+.SS "#define PS_LEFT_10   7"
+
+.SS "#define PS_LEFT_45   6"
+
+.SS "#define PS_LEFT_90   5"
+
+.SS "#define PS_LEFT_REAR   4"
+
+.SS "#define PS_RIGHT_10   0"
+
+.SS "#define PS_RIGHT_45   1"
+
+.SS "#define PS_RIGHT_90   2"
+
+.SS "#define PS_RIGHT_REAR   3"
+
+.SS "#define RIGHT   1"
+
+.SS "#define THRESHOLD_DIST   100"
+
+.SS "#define TIME_STEP   8"
+
+.SH "Function Documentation"
+.PP 
+.SS "int main (intargc, char **argv)"
+
+.SH "Variable Documentation"
+.PP 
+.SS "WbDeviceTag led[3]"
+
+.SS "struct \fBodometryTrackStruct\fP ot"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Major Project Documentation from the source code\&.

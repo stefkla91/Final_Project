@@ -1,0 +1,91 @@
+.TH "C:/Users/Stefan/Documents/GitHub/Final_Project/odometry.c" 3 "Mon Mar 31 2014" "Version 0.2" "Major Project Documentation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+C:/Users/Stefan/Documents/GitHub/Final_Project/odometry.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <webots/differential_wheels\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <math\&.h>\fP
+.br
+\fC#include 'odometry\&.h'\fP
+.br
+\fC#include 'e_puck_movement\&.h'\fP
+.br
+\fC#include 'errno\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBM_PI\fP   3\&.1415926535897932384626433832795L"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBodometry_track_start\fP (struct \fBodometryTrackStruct\fP *\fBot\fP)"
+.br
+.ti -1c
+.RI "int \fBodometry_track_start_pos\fP (struct \fBodometryTrackStruct\fP *\fBot\fP, double *dEncPos)"
+.br
+.ti -1c
+.RI "void \fBodometry_track_step\fP (struct \fBodometryTrackStruct\fP *\fBot\fP)"
+.br
+.ti -1c
+.RI "void \fBodometry_track_step_pos\fP (struct \fBodometryTrackStruct\fP *\fBot\fP, double *dEncPos)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "float \fBincrements_per_tour\fP = 1000\&.0"
+.br
+.ti -1c
+.RI "float \fBwheel_radius\fP = 0\&.0207"
+.br
+.ti -1c
+.RI "float \fBscaling_factor\fP = 1"
+.br
+.ti -1c
+.RI "float \fBaxis_wheel_ratio\fP = 1\&.4134"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define M_PI   3\&.1415926535897932384626433832795L"
+
+.SH "Function Documentation"
+.PP 
+.SS "int odometry_track_start (struct \fBodometryTrackStruct\fP *ot)"
+Initializes the odometry algortihms 
+.SS "int odometry_track_start_pos (struct \fBodometryTrackStruct\fP *ot, double *dEncPos)"
+Start the odometry tracking Updates the info in the \fBodometryTrackStruct\fP for the first time 
+.SS "void odometry_track_step (struct \fBodometryTrackStruct\fP *ot)"
+
+.SS "void odometry_track_step_pos (struct \fBodometryTrackStruct\fP *ot, double *dEncPos)"
+
+.SH "Variable Documentation"
+.PP 
+.SS "float axis_wheel_ratio = 1\&.4134"
+
+.SS "float increments_per_tour = 1000\&.0"
+
+.SS "float scaling_factor = 1"
+
+.SS "float wheel_radius = 0\&.0207"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Major Project Documentation from the source code\&.
