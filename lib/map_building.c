@@ -341,6 +341,7 @@ void run(struct odometryTrackStruct * ot){
 					}
 					/* wb_display_image_delete(display,background);
 					background = wb_display_image_copy(display,0,0,display_width,display_height); */
+					odometry_track_step(ot);
 				}
 				/* odometry_track_step(ot);
 				cur_rot = return_angle(ot->result.theta);
@@ -368,10 +369,7 @@ void run(struct odometryTrackStruct * ot){
 					}
 				/* 	wb_display_image_delete(display,background);
 					background = wb_display_image_copy(display,0,0,display_width,display_height); */
-					if((ob_front && ob_right) || (ob_front && ob_left)){
-						state = STOP;
-						break;
-					}
+					odometry_track_step(ot);
 				}
 				/* odometry_track_step(ot);
 				cur_rot = return_angle(ot->result.theta);
@@ -396,13 +394,11 @@ void run(struct odometryTrackStruct * ot){
 						if(wb_distance_sensor_get_value(ps[i]) > OCCUPANCE_DIST){
 							occupied_cell(robot_x, robot_y, ot->result.theta + angle_offset[i]);
 						}
+						
 					}
 					/* wb_display_image_delete(display,background);
 					background = wb_display_image_copy(display,0,0,display_width,display_height); */
-					if((ob_front && ob_right) || (ob_front && ob_left)){
-						state = STOP;
-						break;
-					}
+					odometry_track_step(ot);
 				}
 				/* odometry_track_step(ot);
 				cur_rot = return_angle(ot->result.theta);
@@ -431,10 +427,7 @@ void run(struct odometryTrackStruct * ot){
 					}
 					/* wb_display_image_delete(display,background);
 					background = wb_display_image_copy(display,0,0,display_width,display_height); */
-					if((ob_front && ob_right) || (ob_front && ob_left)){
-						state = STOP;
-						break;
-					}
+					odometry_track_step(ot);
 				}
 				/* odometry_track_step(ot);
 				cur_rot = return_angle(ot->result.theta);
