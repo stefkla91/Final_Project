@@ -341,7 +341,6 @@ void run(struct odometryTrackStruct * ot){
 					}
 					/* wb_display_image_delete(display,background);
 					background = wb_display_image_copy(display,0,0,display_width,display_height); */
-					odometry_track_step(ot);
 				}
 				/* odometry_track_step(ot);
 				cur_rot = return_angle(ot->result.theta);
@@ -369,7 +368,6 @@ void run(struct odometryTrackStruct * ot){
 					}
 				/* 	wb_display_image_delete(display,background);
 					background = wb_display_image_copy(display,0,0,display_width,display_height); */
-					odometry_track_step(ot);
 				}
 				/* odometry_track_step(ot);
 				cur_rot = return_angle(ot->result.theta);
@@ -398,7 +396,6 @@ void run(struct odometryTrackStruct * ot){
 					}
 					/* wb_display_image_delete(display,background);
 					background = wb_display_image_copy(display,0,0,display_width,display_height); */
-					odometry_track_step(ot);
 				}
 				/* odometry_track_step(ot);
 				cur_rot = return_angle(ot->result.theta);
@@ -427,7 +424,6 @@ void run(struct odometryTrackStruct * ot){
 					}
 					/* wb_display_image_delete(display,background);
 					background = wb_display_image_copy(display,0,0,display_width,display_height); */
-					odometry_track_step(ot);
 				}
 				/* odometry_track_step(ot);
 				cur_rot = return_angle(ot->result.theta);
