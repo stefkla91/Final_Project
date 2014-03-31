@@ -326,6 +326,10 @@ void run(struct odometryTrackStruct * ot){
 				printf("%s\n", no);
 				turn_left(dSpeed);
 				for(it = 0;it < 5;it++){
+					if((ob_front && ob_right) || (ob_front && ob_left)){
+						state = STOP;
+						break;
+					}
 					move_forward(dSpeed, dDistance);
 					//mark cells as occupied
 					wb_display_image_paste(display,background,0,0);
@@ -337,10 +341,6 @@ void run(struct odometryTrackStruct * ot){
 					}
 					/* wb_display_image_delete(display,background);
 					background = wb_display_image_copy(display,0,0,display_width,display_height); */
-					if((ob_front && ob_right) || (ob_front && ob_left)){
-						state = STOP;
-						break;
-					}
 				}
 				/* odometry_track_step(ot);
 				cur_rot = return_angle(ot->result.theta);
@@ -353,6 +353,10 @@ void run(struct odometryTrackStruct * ot){
 				printf("%s\n", ea);
 				turn_right(dSpeed);
 				for(it = 0;it < 5;it++){
+					if((ob_front && ob_right) || (ob_front && ob_left)){
+						state = STOP;
+						break;
+					}
 					move_forward(dSpeed, dDistance);
 					//mark cells as occupied
 					wb_display_image_paste(display,background,0,0);
@@ -380,6 +384,10 @@ void run(struct odometryTrackStruct * ot){
 				printf("%s\n", so);
 				turn_right(dSpeed);
 				for(it = 0;it < 5;it++){
+					if((ob_front && ob_right) || (ob_front && ob_left)){
+						state = STOP;
+						break;
+					}
 					move_forward(dSpeed, dDistance);
 					//mark cells as occupied
 					wb_display_image_paste(display,background,0,0);
@@ -408,6 +416,10 @@ void run(struct odometryTrackStruct * ot){
 				printf("%s\n", we);
 				turn_left(dSpeed);
 				for(it = 0;it < 5;it++){
+					if((ob_front && ob_right) || (ob_front && ob_left)){
+						state = STOP;
+						break;
+					}
 					move_forward(dSpeed, dDistance);
 					//mark cells as occupied
 					wb_display_image_paste(display,background,0,0);
