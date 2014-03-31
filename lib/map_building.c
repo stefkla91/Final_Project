@@ -339,7 +339,10 @@ void run(struct odometryTrackStruct * ot){
 					/* wb_display_image_delete(display,background);
 					background = wb_display_image_copy(display,0,0,display_width,display_height); */
 				}
-				turn_left(dTurnSpeed);
+				odometry_track_step(ot);
+				cur_rot = return_angle(ot->result.theta);
+				turn_angle(cur_rot - 270, dTurnSpeed);
+				//turn_left(dTurnSpeed);
 				/* check_rotation(cur_rot, 90, dMovSpeed); */
 				north = false;
 				state = FORWARD;
@@ -359,7 +362,10 @@ void run(struct odometryTrackStruct * ot){
 				/* 	wb_display_image_delete(display,background);
 					background = wb_display_image_copy(display,0,0,display_width,display_height); */
 				}
-				turn_right(dTurnSpeed);
+				odometry_track_step(ot);
+				cur_rot = return_angle(ot->result.theta);
+				turn_angle(cur_rot - 180, dTurnSpeed);
+				//turn_right(dTurnSpeed);
 				/* check_rotation(cur_rot, 0, dMovSpeed); */
 				east = false;
 				state = FORWARD;
@@ -379,7 +385,10 @@ void run(struct odometryTrackStruct * ot){
 					/* wb_display_image_delete(display,background);
 					background = wb_display_image_copy(display,0,0,display_width,display_height); */
 				}
-				turn_right(dTurnSpeed);
+				odometry_track_step(ot);
+				cur_rot = return_angle(ot->result.theta);
+				turn_angle(cur_rot - 90, dTurnSpeed);
+				//turn_right(dTurnSpeed);
 				/* cur_rot = return_angle(ot->result.theta);
 				check_rotation(cur_rot, 270, dMovSpeed); */
 				south = false;
@@ -400,7 +409,10 @@ void run(struct odometryTrackStruct * ot){
 					/* wb_display_image_delete(display,background);
 					background = wb_display_image_copy(display,0,0,display_width,display_height); */
 				}
-				turn_left(dTurnSpeed);
+				odometry_track_step(ot);
+				cur_rot = return_angle(ot->result.theta);
+				turn_angle(cur_rot - 360, dTurnSpeed);
+				//turn_left(dTurnSpeed);
 				/* check_rotation(cur_rot, 180, dMovSpeed); */
 				west = false;
 				state = FORWARD;
