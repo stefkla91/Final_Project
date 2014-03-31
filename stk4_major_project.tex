@@ -430,6 +430,17 @@ void turn_angle(double dAngle, double dSpeed){
 	wb_robot_step(TIME_STEP);
 }
 \end{lstlisting}
+
+\subsection{Localisation using Odometry}
+After the studying the optometry functions provided and implementing the movement algorithms, it was time to implement the localisation using odometry calculations.\\
+The odometry functions I implemented are used for localisation the robot inside the environment and finding it heading. The functions only require the starting point and localisation of the robot, and are then apple to calculate the movement and rotation of the robot with every movement done, within a certain degree of accuracy. The uncertainty in accuracy is based on the friction which get simulated inside the simulator. \\
+These functions are large similar to the ones provided with the Webots\textsuperscript{\texttrademark} interface, however some minor changes has been done. \\
+Similar to the way I have described the movement algorithms I am going to describe the major functions as well as post the code for each function.\\
+
+\subsubsection{Initialising the odometry algorithms}
+To initialize the odometry algorithms, 2 functions are used. \\
+The first function, \textit{odometry\_track\_start} takes a \textit{odometrtyTrackStruct}, which is defined in the class which call the function, as parameter. It well then 
+
 \nocite{*}
 \newpage
 \bibliography{stk4_major_project}

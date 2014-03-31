@@ -24,6 +24,9 @@ float wheel_radius = 0.0207;
 float scaling_factor = 1;
 float axis_wheel_ratio = 1.4134;
 
+/**
+Initializes the odometry algortihms
+*/
 int odometry_track_start(struct odometryTrackStruct * ot){
 	double* point_dEncPos;
 	point_dEncPos = get_encoder_positions();
