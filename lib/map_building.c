@@ -339,14 +339,16 @@ void run(struct odometryTrackStruct * ot){
 							occupied_cell(robot_x, robot_y, ot->result.theta + angle_offset[i]);
 						}
 					}
-					/* wb_display_image_delete(display,background);
-					background = wb_display_image_copy(display,0,0,display_width,display_height); */
+					wb_display_image_delete(display,background);
+					background = wb_display_image_copy(display,0,0,display_width,display_height); 
 				}
-				/* odometry_track_step(ot);
-				cur_rot = return_angle(ot->result.theta);
-				turn_angle(cur_rot - 270, dTurnSpeed); */
+				/* odometry_track_step(ot); */
+				/* cur_rot = return_angle(ot->result.theta);
+				turn_angle(cur_rot - 270, dSpeed);   */
 				turn_left(dSpeed);
-				/* check_rotation(cur_rot, 90, dMovSpeed); */
+				odometry_track_step(ot);
+				/* cur_rot = return_angle(ot->result.theta);
+				check_rotation(cur_rot, 270, dSpeed);  */
 				north = false;
 				state = FORWARD;
 			}else if(east){
@@ -366,14 +368,16 @@ void run(struct odometryTrackStruct * ot){
 							occupied_cell(robot_x, robot_y, ot->result.theta + angle_offset[i]);
 						}
 					}
-				/* 	wb_display_image_delete(display,background);
-					background = wb_display_image_copy(display,0,0,display_width,display_height); */
+				 	wb_display_image_delete(display,background);
+					background = wb_display_image_copy(display,0,0,display_width,display_height); 
 				}
-				/* odometry_track_step(ot);
-				cur_rot = return_angle(ot->result.theta);
-				turn_angle(cur_rot - 180, dTurnSpeed); */
+				/* odometry_track_step(ot); */
+				/* cur_rot = return_angle(ot->result.theta);
+				turn_angle(cur_rot - 180, dSpeed);  */
 				turn_right(dSpeed);
-				/* check_rotation(cur_rot, 0, dMovSpeed); */
+				odometry_track_step(ot);
+				/* cur_rot = return_angle(ot->result.theta);
+				check_rotation(cur_rot, 180, dSpeed);  */
 				east = false;
 				state = FORWARD;
 			}else if(south){
@@ -394,15 +398,16 @@ void run(struct odometryTrackStruct * ot){
 						}
 						
 					}
-					/* wb_display_image_delete(display,background);
-					background = wb_display_image_copy(display,0,0,display_width,display_height); */
+					 wb_display_image_delete(display,background);
+					background = wb_display_image_copy(display,0,0,display_width,display_height); 
 				}
-				/* odometry_track_step(ot);
-				cur_rot = return_angle(ot->result.theta);
-				turn_angle(cur_rot - 90, dTurnSpeed); */
+				/* odometry_track_step(ot); */
+				/*cur_rot = return_angle(ot->result.theta);
+				turn_angle(cur_rot - 90, dSpeed); */
 				turn_right(dSpeed);
+				odometry_track_step(ot);
 				/* cur_rot = return_angle(ot->result.theta);
-				check_rotation(cur_rot, 270, dMovSpeed); */
+				check_rotation(cur_rot, 90, dSpeed); */ 
 				south = false;
 				state = FORWARD;
 			}else if(west){
@@ -422,14 +427,16 @@ void run(struct odometryTrackStruct * ot){
 							occupied_cell(robot_x, robot_y, ot->result.theta + angle_offset[i]);
 						}
 					}
-					/* wb_display_image_delete(display,background);
-					background = wb_display_image_copy(display,0,0,display_width,display_height); */
+					wb_display_image_delete(display,background);
+					background = wb_display_image_copy(display,0,0,display_width,display_height);
 				}
-				/* odometry_track_step(ot);
-				cur_rot = return_angle(ot->result.theta);
-				turn_angle(cur_rot - 360, dTurnSpeed); */
+				/* odometry_track_step(ot); */
+				/* cur_rot = return_angle(ot->result.theta);
+				turn_angle(cur_rot - 360, dSpeed); */
 				turn_left(dSpeed);
-				/* check_rotation(cur_rot, 180, dMovSpeed); */
+				odometry_track_step(ot);
+				/* cur_rot = return_angle(ot->result.theta);
+				check_rotation(cur_rot, 360, dSpeed);  */
 				west = false;
 				state = FORWARD;
 			}
