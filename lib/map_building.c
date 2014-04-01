@@ -291,6 +291,7 @@ void run(struct odometryTrackStruct * ot){
 			break;			
 		case STOP:
 			stop_robot();
+			odometry_track_step(ot);
 			check_direction(ot->result.theta);
 		 	if(ob_front && ob_left && north){
 				state = TURNRIGHT;
@@ -327,6 +328,7 @@ void run(struct odometryTrackStruct * ot){
 				turn_left(dSpeed);
 				for(it = 0;it < 5;it++){
 					if((ob_front && ob_right) || (ob_front && ob_left)){
+						// odometry_track_step(ot);
 						state = STOP;
 						break;
 					}
@@ -356,6 +358,7 @@ void run(struct odometryTrackStruct * ot){
 				turn_right(dSpeed);
 				for(it = 0;it < 5;it++){
 					if((ob_front && ob_right) || (ob_front && ob_left)){
+						// odometry_track_step(ot);
 						state = STOP;
 						break;
 					}
@@ -385,6 +388,7 @@ void run(struct odometryTrackStruct * ot){
 				turn_right(dSpeed);
 				for(it = 0;it < 5;it++){
 					if((ob_front && ob_right) || (ob_front && ob_left)){
+						// odometry_track_step(ot);
 						state = STOP;
 						break;
 					}

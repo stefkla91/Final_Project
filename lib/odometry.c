@@ -63,17 +63,21 @@ void odometry_track_step_pos(struct odometryTrackStruct * ot, double* dEncPos){
 	float delta_left, delta_right, delta_theta, theta2;
 	float delta_x, delta_y;
 	
+	//calculate the difference in position between the previous and current encoder positions. 
 	delta_pos_left = dEncPos[0] - ot->state.pos_left_prev;
 	delta_pos_right = dEncPos[1] - ot->state.pos_right_prev;
 	
+	//calculate the rotation based on the displacement of the stepper motors 
 	delta_left = delta_pos_left * ot->configuration.wheel_conversion;
 	delta_right = delta_pos_right * ot->configuration.wheel_conversion;
 	delta_theta = (delta_right - delta_left) / ot->configuration.wheel_distance;
 	
+	// calculate the x and y displacement 
 	theta2 = ot->result.theta + delta_theta * 0.5;
 	delta_x = (delta_left + delta_right) * 0.5 *cosf(theta2);
 	delta_y = (delta_left + delta_right) * 0.5 * sinf(theta2);
 	
+	//update the x, y and theta of the struct
 	ot->result.x += delta_x;
 	ot->result.y += delta_y;
 	ot->result.theta += delta_theta;
@@ -85,6 +89,7 @@ void odometry_track_step_pos(struct odometryTrackStruct * ot, double* dEncPos){
 		ot->result.theta += 2*M_PI;
 	}
 	
+	//save current encoder positions to the global buffer 
 	ot->state.pos_left_prev = dEncPos[0];
 	ot->state.pos_right_prev = dEncPos[1];
 }
