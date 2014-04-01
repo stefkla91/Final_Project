@@ -114,7 +114,7 @@ The theory of what I am going to implement uses a defined maximum communication 
 \centering
 \includegraphics[width = 0.8\textwidth]{figures/comm_example.png} 
 \caption{An example of the communication link}
-\label{Picture 1}
+\label{Figure 1}
 \end{figure}
 
 Figure 1 shows one possible example of the communication link, where the lead robot/ or in some cases a stationary uplink point is in the center and the communication robots(in red) placed in such positions that their comm range overlaps the comm range of other robots and the lead robot. \\
@@ -133,7 +133,7 @@ A to small size could also make the corridor not distinctive enough from the res
 \centering
 \includegraphics[width=0.5\textwidth]{figures/environment_example.png} 
 \caption{Environment Design}
-\label{Picture 2}
+\label{Figure 2}
 \end{figure}
 
 \subsubsection{Mapping and Swarm Size}
@@ -154,9 +154,9 @@ While this reason is more controlled I am not sure which one will turn out to be
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.5\textwidth]{figures/scanline_example.png} 
+\includegraphics[width=0.5\textwidth]{figures/Trajectory_walk_by_scanning.png}\footnote{url{http://en.wikibooks.org/wiki/File:Trajectory\_walk\_by\_scanning.png}} 
 \caption{Movement pattern example}
-\label{Picture 3}
+\label{Figure 3}
 \end{figure}
 
 \section{Early Development}
@@ -520,6 +520,23 @@ void odometry_track_step_pos(struct odometryTrackStruct * ot, double* dEncPos){
 	ot->state.pos_right_prev = dEncPos[1];
 }
 \end{lstlisting}
+
+\subsection{Implementation}
+After these functions were created I tested them using simple test simulations I wrote.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 0.5\textwidth]{figures/movement_test.png} 
+\caption{Movement algorithm test pattern}
+\label{Figure 4}
+\end{figure}
+
+Figure 4 shows a simple movement pattern which I used to calibrate the minimum turn distances and tested that the \textit{move\_forward()} and \textit{turn\_angle()} methods worked as intended. \\
+How it works is the E-Puck starts on 1 corner of a square(here I used the floor of the simulator as it has chessboard representation) and move forwards to the other end of the square, turn 90 degrees and so on until it reaches it start point. It then turns around and follows the same pattern back to its original starting position. This tests allows me to notice odometry error in the rotations and forward movement, after a while it would turn/move to far or not far enough and thereby not reach it accurate start point. Noticing these errors allowed me to calibrate my the speed and distance where the algorithms will slow done the movement to minimize this error as much as possible, see section 3.2 for more information on this.\\[3ex]
+
+The accuracy of this test can be increased by using larger movement areas, I used changing 2x2, 4x4 and 3x3 square areas of the chessboard floor to check that my error was at minimal as possible. The test is based on the "University of Michigan Benchmark" or UMBmark\footnote{url{http://www.cs.columbia.edu/~allen/F13/NOTES/borenstein.pdf}}.
+
+
 
 
 
