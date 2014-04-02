@@ -19,6 +19,10 @@
 	#define M_PI 3.1415926535897932384626433832795L
 #endif
 
+#define WHEEL_RADIUS 0.0206625 // avg. wheel radius of the e-puck 1850.
+#define WHEELBASE 0.052
+#define ENCODER_RESOLUTION 159.23
+
 float increments_per_tour = 1000.0;
 float wheel_radius = 0.0207;
 float scaling_factor = 1;
@@ -91,5 +95,5 @@ void odometry_track_step_pos(struct odometryTrackStruct * ot, double* dEncPos){
 	
 	//save current encoder positions to the global buffer 
 	ot->state.pos_left_prev = dEncPos[0];
-	ot->state.pos_right_prev = dEncPos[1];
+	ot->state.pos_right_prev = dEncPos[1]; 
 }
