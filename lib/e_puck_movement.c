@@ -29,7 +29,7 @@
 #define INCREMENT_STEP 1000 //steps of the motor for a whole rotation orig REV_STEP
 #define STEP_TOLERANCE 6.0
 #define RANGE (1024 / 2)
-#define MIN_DIST 20.0f //minimum distance before slowing down
+#define MIN_DIST 20.0f //minimum distance before slowing down, 20,0 original
 #define MIN_SPEED 10.0f //speed when slowing down
 #define NUMTOURNAMENTS 1 //5
 #define RTOD(r) ((r) * 180 / M_PI)
@@ -370,7 +370,7 @@ FUnction to compare the current heading to the wanted heading
 and fix the heading should it surpass a threshold
 */
 void check_rotation(double cur_rot, double want_rot, double dSpeed){
-	double threshold = 2.0;
+	double threshold = 1.0; //2,0
 	double diff;
 	
 	if(cur_rot > want_rot + threshold){

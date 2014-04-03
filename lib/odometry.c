@@ -78,8 +78,8 @@ void odometry_track_step_pos(struct odometryTrackStruct * ot, double* dEncPos){
 	
 	// calculate the x and y displacement 
 	theta2 = ot->result.theta + delta_theta * 0.5;
-	delta_x = (delta_left + delta_right) * 0.5 *cosf(theta2);
-	delta_y = (delta_left + delta_right) * 0.5 * sinf(theta2);
+	delta_x = (delta_left + delta_right) * 0.5 *cosf(theta2); //cosf
+	delta_y = (delta_left + delta_right) * 0.5 * sinf(theta2);//sinf
 	
 	//update the x, y and theta of the struct
 	ot->result.x += delta_x;

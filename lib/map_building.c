@@ -225,7 +225,7 @@ void run(struct odometryTrackStruct * ot){
 	double cur_rot;
 	
 	double dSpeed = 500.0f;
-	double dDistance = 0.01f;
+	double dDistance = 0.01f; //0,01
 	
 	char no[] = "north";
 	char ea[] = "east";
@@ -273,18 +273,22 @@ void run(struct odometryTrackStruct * ot){
 		 	if(north){
 				printf("%s\n", no);
 				check_rotation(cur_rot, 90, dSpeed);
+				move_forward(dSpeed, dDistance);
 			}else if(east){
 				printf("%s\n", ea);
 				check_rotation(cur_rot, 0, dSpeed);
+				move_forward(dSpeed, dDistance);
 			}else if(south){
 				printf("%s\n", so);
 				check_rotation(cur_rot, 270, dSpeed);
+				move_forward(dSpeed, dDistance);
 			}else if(west){
 				printf("%s\n", we);
 				check_rotation(cur_rot, 180, dSpeed);
+				move_forward(dSpeed, dDistance);
 			} 
-			move_forward(dSpeed, dDistance);
-			//controll_angle(&ot);
+			//move_forward(dSpeed, dDistance);
+			//set_motor_speed(dSpeed, dSpeed);
 			 if(ob_front){
 				state = STOP;
 				}
@@ -392,7 +396,6 @@ void run(struct odometryTrackStruct * ot){
 						state = STOP;
 						break;
 					}
-					move_forward(dSpeed, dDistance);
 					//mark cells as occupied
 					wb_display_image_paste(display,background,0,0);
 					wb_display_set_color(display,0x000000);
@@ -404,6 +407,7 @@ void run(struct odometryTrackStruct * ot){
 					}
 					 wb_display_image_delete(display,background);
 					background = wb_display_image_copy(display,0,0,display_width,display_height); 
+					move_forward(dSpeed, dDistance);
 				}
 				/* odometry_track_step(ot); */
 				/*cur_rot = return_angle(ot->result.theta);
