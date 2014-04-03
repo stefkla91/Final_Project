@@ -12,7 +12,7 @@
 /* Stops the robot */
 void stop_robot();
 /* move the robot forward a given distance with the given distance */
-void move_forward(double dSpeed, double dDist);
+//void move_forward(double dSped, double dDis, struct odometryTrackStruct * ot);
 /* turn 90degrees to the left with the given speed */
 void turn_left(double dSpeed);
 /* turn 90degrees to the right with the given speed */

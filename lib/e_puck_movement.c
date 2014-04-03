@@ -47,7 +47,7 @@ WbDeviceTag led[3]; // LEDs.
 
 // motion control methods:
 void stop_robot();
-void move_forward(double dSpeed, double dDist);
+void move_forward(double dSped, double dDis, struct odometryTrackStruct * ot);
 void turn_left(double dSpeed);
 void turn_right(double dSpeed);
 void turn_angle(double dAngle, double dSpeed); 
@@ -82,7 +82,7 @@ void stop_robot() {
 /**
 Function to move the robot forward a given distance at a given speed
 */
-void move_forward(double dSped, double dDis){
+void move_forward(double dSped, double dDis, struct odometryTrackStruct * ot){
 	double dStepCount = 0.0f;
 	double dStopPosLeft = 0.0f;
 	double dStopPosRight = 0.0f;
@@ -103,6 +103,7 @@ void move_forward(double dSped, double dDis){
 		
 		//compute odometry data
 		point_dOdometryData = compute_odometry_data();
+		odometry_track_step(ot);
 		
 		
 		//set speed
@@ -112,7 +113,7 @@ void move_forward(double dSped, double dDis){
 		while((point_dEncPos[0] < dStopPosLeft) && (point_dEncPos[1] < dStopPosRight)){
 			//get odometry data
 			point_dOdometryData = compute_odometry_data();
-			
+			odometry_track_step(ot);
 			//get wheel encoders
 			point_dEncPos = get_encoder_positions();
 			
@@ -126,7 +127,7 @@ void move_forward(double dSped, double dDis){
 	
 	//update odometry data
 	point_dOdometryData = compute_odometry_data();
-	
+	odometry_track_step(ot);
 	wb_robot_step(TIME_STEP);
 }
 
@@ -295,7 +296,7 @@ double* compute_odometry_data(){
 /**
 University of Michigan Benchmark
 */
-void UMBmark(double dSpeed, double dDistance){
+/* void UMBmark(double dSpeed, double dDistance){
 	//activate leds to show calibration has started
 	set_leds(1);
 	
@@ -305,20 +306,20 @@ void UMBmark(double dSpeed, double dDistance){
 	measure_CounterClockWise(dSpeed, dDistance);
 	
 	stop_robot();
-}
+} */
 /**
 Function to measure the movement accuracy by driving
 a clockwise square.
 This is part of the UMBmark algorithm
 */
-void measure_clockWise(double dSpeed, double dDistance){
+/* void measure_clockWise(double dSpeed, double dDistance){
 	int i, j;
 	
 	for(i = 0;i < NUMTOURNAMENTS; i++){
 		//compute odometry data
 		point_dOdometryData = compute_odometry_data();
 		for(j = 0;j < 4;j++){
-			move_forward(dSpeed, dDistance);
+			move_forward(dSpeed, dDistance, ot);
 			turn_right(dSpeed);
 		}
 		wb_robot_step(TIME_STEP);
@@ -326,14 +327,14 @@ void measure_clockWise(double dSpeed, double dDistance){
 	
 	//actualize the odometry values
 	point_dOdometryData = compute_odometry_data();
-}
+} */
 
 /**
 Function to measure the movement accuracy by driving
 a counter-clockwise square.
 This is part of the UMBmark algorithm
 */
-void measure_CounterClockWise(double dSpeed, double dDistance){
+/* void measure_CounterClockWise(double dSpeed, double dDistance){
 	int i, j; 
 	
 	//get the odometry data
@@ -346,7 +347,7 @@ void measure_CounterClockWise(double dSpeed, double dDistance){
 		point_dOdometryData = compute_odometry_data();
 		
 		for(j = 0;j < 4; j++){
-			move_forward(dSpeed, dDistance);
+			move_forward(dSpeed, dDistance, ot);
 			turn_left(dSpeed);
 		}
 		wb_robot_step(TIME_STEP);
@@ -355,7 +356,7 @@ void measure_CounterClockWise(double dSpeed, double dDistance){
 	//actualize the odometry values
 	point_dOdometryData = compute_odometry_data();
 }
-
+ */
 /**
 set the status of the LEDs
 */
@@ -371,15 +372,17 @@ FUnction to compare the current heading to the wanted heading
 and fix the heading should it surpass a threshold
 */
 void check_rotation(double cur_rot, double want_rot, double dSpeed){
-	double threshold = 1.0f; //2,0
+	double threshold = 1; //2,0
 	double diff;
 	char text[] = "Correcting";
-	printf("%s\n", text);
+	
 	if(cur_rot > want_rot + threshold){
 		diff = cur_rot - want_rot;
+		printf("%s\n", text);
 		turn_angle(diff, dSpeed);
 	}else if(cur_rot < want_rot - threshold){
 		diff = want_rot - cur_rot;
+		printf("%s\n", text);
 		turn_angle(-diff, dSpeed);
 	}
 }
