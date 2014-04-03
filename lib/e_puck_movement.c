@@ -6,6 +6,7 @@
  * Modifications: V 0.3
  */
 
+#include <stdio.h>
 #include <webots/robot.h>
 #include <webots/differential_wheels.h>
 #include <webots/distance_sensor.h>
@@ -370,14 +371,15 @@ FUnction to compare the current heading to the wanted heading
 and fix the heading should it surpass a threshold
 */
 void check_rotation(double cur_rot, double want_rot, double dSpeed){
-	double threshold = 1.0; //2,0
+	double threshold = 1.0f; //2,0
 	double diff;
-	
+	char text[] = "Correcting";
+	printf("%s\n", text);
 	if(cur_rot > want_rot + threshold){
 		diff = cur_rot - want_rot;
 		turn_angle(diff, dSpeed);
 	}else if(cur_rot < want_rot - threshold){
 		diff = want_rot - cur_rot;
-		turn_angle(diff, dSpeed);
+		turn_angle(-diff, dSpeed);
 	}
 }
