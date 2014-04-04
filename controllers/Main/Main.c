@@ -23,6 +23,7 @@
 #include "../../lib/odometry.h"
 #include "../../lib/e_puck_movement.h"
 #include "../../lib/map_building.h"
+#include "../../lib/e_puck_distance_sensors.h"
 
 #define TIME_STEP 8
 #define MAP_SIZE 70

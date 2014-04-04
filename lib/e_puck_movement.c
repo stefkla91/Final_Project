@@ -1,4 +1,4 @@
-/*
+/**
  * File:          e_puck_movement.c
  * Date:          10.03.2014
  * Description:   

@@ -1,4 +1,4 @@
-/*
+/**
  * File:          e_puck_movement.h
  * Date:          10.03.2014
  * Description:   Header file for e_puck_movement.c
@@ -9,7 +9,7 @@
 //#include "odometry.h"
 
 
-/* Stops the robot */
+/** Stops the robot */
 void stop_robot();
 /* move the robot forward a given distance with the given distance */
 //void move_forward(double dSped, double dDis, struct odometryTrackStruct * ot);

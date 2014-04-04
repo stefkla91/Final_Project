@@ -17,6 +17,7 @@
 #include "map_building.h"
 #include "e_puck_movement.h"
 #include "odometry.h"
+#include "e_puck_distance_sensors.h"
 
 #define TIME_STEP 8
 #define MAP_SIZE 70
@@ -29,14 +30,14 @@
 #define RIGHT 1       // right side
 // 8 IR proximity sensors
 #define NUM_DIST_SENS 8
-#define PS_RIGHT_10 0
+/*#define PS_RIGHT_10 0
 #define PS_RIGHT_45 1
 #define PS_RIGHT_90 2
 #define PS_RIGHT_REAR 3
 #define PS_LEFT_REAR 4
 #define PS_LEFT_90 5
 #define PS_LEFT_45 6
-#define PS_LEFT_10 7
+#define PS_LEFT_10 7 */
 
 //states for the FSM
 #define FORWARD 0
@@ -57,7 +58,7 @@
 WbDeviceTag led[3];
 
 //Distance sensors and corresponding arrays
-WbDeviceTag ps[NUM_DIST_SENS];
+/* WbDeviceTag ps[NUM_DIST_SENS]; */
 
 //display and map 
 WbDeviceTag display;
@@ -71,8 +72,8 @@ int robot_x = MAP_SIZE / 2;
 int robot_y = MAP_SIZE / 2;  
 
 //Distance sensors and corresponding arrays
-WbDeviceTag ps[NUM_DIST_SENS];
-int ps_value[NUM_DIST_SENS]={0,0,0,0,0,0,0,0};
+/* WbDeviceTag ps[NUM_DIST_SENS];
+int ps_value[NUM_DIST_SENS]={0,0,0,0,0,0,0,0}; */
 int obstacle[NUM_DIST_SENS]={0,0,0,0,0,0,0,0};
 bool ob_front, ob_right, ob_left;
 
@@ -180,25 +181,13 @@ void occupied_cell(int x, int y, float theta){
 enables the needed sensor devices 
 */
 void reset(){
-	int it, i, j;
-
-	//get the distance sensors
-	char textPS[] = "ps0";
-	for (it = 0;it < NUM_DIST_SENS;it++){
-		ps[it] = wb_robot_get_device(textPS);
-		textPS[2]++;
-	}
-	init_display();
-
-	//enable the distance sensor and light sensor devices
-	for(i = 0;i < NUM_DIST_SENS;i++){
-		wb_distance_sensor_enable(ps[i], TIME_STEP);
-	}
-
-	/* //enable encoders
-	wb_differential_wheels_enable_encoders(TIME_STEP);
-	wb_differential_wheels_set_encoders(0,0); */
+	int i, j;
 	
+	//initialize the display
+	init_display();
+	//initialize the distance sensors
+	init_distance_sensors(TIME_STEP);
+
 	// map init to 0
 	for (i = 0; i < MAP_SIZE; i++) {
 		for (j = 0; j < MAP_SIZE; j++) {
@@ -223,6 +212,7 @@ void run(struct odometryTrackStruct * ot){
 	int i, it;
 	int ps_offset[NUM_DIST_SENS] = {35,35,35,35,35,35,35,35};
 	double cur_rot;
+	int *point_SensorData;
 	
 	double dSpeed = 500.0f;
 	double dDistance = 0.01f; //0,01
@@ -235,22 +225,21 @@ void run(struct odometryTrackStruct * ot){
 	robot_x = wtom(ot->result.x);
 	robot_y = wtom(ot->result.y);
 	
-	// obstacle will contain a boolean information about a collision
-	for(i=0;i<NUM_DIST_SENS;i++){
-		ps_value[i] = (int)wb_distance_sensor_get_value(ps[i]);
-		obstacle[i] = ps_value[i] - ps_offset[i] > THRESHOLD_DIST;
-	} 
 	
+	point_SensorData = get_sensor_data(NUM_DIST_SENS);
+	for(i = 0;i < NUM_DIST_SENS;i++){
+		obstacle[i] = point_SensorData[i] - ps_offset[i] > THRESHOLD_DIST;
+	}	
 	//define boolean for sensor states for cleaner implementation
 	bool ob_front = 
-	obstacle[PS_RIGHT_10] ||
-	obstacle[PS_LEFT_10];
+	obstacle[0] ||
+	obstacle[7];
 
 	bool ob_right = 
-	obstacle[PS_RIGHT_90];
+	obstacle[2];
 
 	bool ob_left = 
-	obstacle[PS_LEFT_90];
+	obstacle[5];
 	
 
 	//move_forward(dSpeed, dDistance);
@@ -259,7 +248,7 @@ void run(struct odometryTrackStruct * ot){
 	wb_display_image_paste(display,background,0,0);
 	wb_display_set_color(display,0x000000);
 	for(i = 0;i < NUM_DIST_SENS;i++){
-		if(wb_distance_sensor_get_value(ps[i]) > OCCUPANCE_DIST){
+		if(point_SensorData[i] > OCCUPANCE_DIST){
 			occupied_cell(robot_x, robot_y, ot->result.theta + angle_offset[i]);
 		}
 	}
@@ -341,7 +330,7 @@ void run(struct odometryTrackStruct * ot){
 					wb_display_image_paste(display,background,0,0);
 					wb_display_set_color(display,0x000000);
 					for(i = 0;i < NUM_DIST_SENS;i++){
-						if(wb_distance_sensor_get_value(ps[i]) > OCCUPANCE_DIST){
+						if(point_SensorData[i] > OCCUPANCE_DIST){
 							occupied_cell(robot_x, robot_y, ot->result.theta + angle_offset[i]);
 						}
 					}
@@ -371,7 +360,7 @@ void run(struct odometryTrackStruct * ot){
 					wb_display_image_paste(display,background,0,0);
 					wb_display_set_color(display,0x000000);
 					for(i = 0;i < NUM_DIST_SENS;i++){
-						if(wb_distance_sensor_get_value(ps[i]) > OCCUPANCE_DIST){
+						if(point_SensorData[i] > OCCUPANCE_DIST){
 							occupied_cell(robot_x, robot_y, ot->result.theta + angle_offset[i]);
 						}
 					}
@@ -400,7 +389,7 @@ void run(struct odometryTrackStruct * ot){
 					wb_display_image_paste(display,background,0,0);
 					wb_display_set_color(display,0x000000);
 					for(i = 0;i < NUM_DIST_SENS;i++){
-						if(wb_distance_sensor_get_value(ps[i]) > OCCUPANCE_DIST){
+						if(point_SensorData[i] > OCCUPANCE_DIST){
 							occupied_cell(robot_x, robot_y, ot->result.theta + angle_offset[i]);
 						}
 						
@@ -432,7 +421,7 @@ void run(struct odometryTrackStruct * ot){
 					wb_display_image_paste(display,background,0,0);
 					wb_display_set_color(display,0x000000);
 					for(i = 0;i < NUM_DIST_SENS;i++){
-						if(wb_distance_sensor_get_value(ps[i]) > OCCUPANCE_DIST){
+						if(point_SensorData[i] > OCCUPANCE_DIST){
 							occupied_cell(robot_x, robot_y, ot->result.theta + angle_offset[i]);
 						}
 					}
@@ -455,21 +444,6 @@ void run(struct odometryTrackStruct * ot){
 	}
 	wb_display_set_color(display,0xFF0000);
     wb_display_draw_rectangle(display,robot_x, display_height-robot_y-1,1,1);
-}
-/**
-returns a pointer to an array of the current sensor values
-*/
-int *return_sensor_values(){
-	int i;
-	int ps_offset[NUM_DIST_SENS] = {35,35,35,35,35,35,35,35};
-	static int obstac[NUM_DIST_SENS];
-	
-	// obstacle will contain a boolean information about a collision
-	for(i=0;i<NUM_DIST_SENS;i++){
-		ps_value[i] = (int)wb_distance_sensor_get_value(ps[i]);
-		obstac[i] = ps_value[i] - ps_offset[i] > THRESHOLD_DIST;
-	} 
-	return obstac;
 }
 
 /**
