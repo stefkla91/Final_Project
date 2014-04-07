@@ -138,7 +138,7 @@ void turn_left(double dSpeed){
 	/*turning 100 degrees actually turn the robot ~90 degrees.
 	most likely because the wheel radius I have found does not match the 
 	one in the simulator*/
-	turn_angle(-100.0f, dSpeed); 
+	turn_angle(-90.0f, dSpeed); 
 }
 /**
 Function to turn right
@@ -147,7 +147,7 @@ void turn_right(double dSpeed){
 	/*turning 100 degrees actually turn the robot ~90 degrees.
 	most likely because the wheel radius I have found does not match the 
 	one in the simulator*/
-	turn_angle(100.0f, dSpeed);
+	turn_angle(90.0f, dSpeed);
 }
 
 /**
