@@ -26,11 +26,11 @@ double* get_encoder_positions();
 /* return a double with the computated odometry information */
 double* compute_odometry_data();
 /* initialize the UMBenchmark algorithm */
-void UMBmark(double dSpeed, double dDistance); 
+//void UMBmark(double dSpeed, double dDistance); 
 /* clockwise part of the UMBenchmark */
-void measure_clockWise(double dSpeed, double dDistance);
+//void measure_clockWise(double dSpeed, double dDistance);
 /* counter clockwise part of the UMBenchmark */
-void measure_CounterClockWise(double dSpeed, double dDistance);
+//void measure_CounterClockWise(double dSpeed, double dDistance);
 /* set the status of the LEDs */
 void set_leds(int iActive);
 /* normalises the angle and stops the robot from moving the strong to one side */
