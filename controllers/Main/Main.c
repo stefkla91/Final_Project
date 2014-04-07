@@ -72,7 +72,7 @@ int main(int argc, char **argv){
 	ot.result.y = 0;//0.008;
 	ot.result.theta = 4.71238898;// in RAD = 270 degrees 
 
-	while (wb_robot_step(TIME_STEP*4) != -1) {
+	//while (wb_robot_step(TIME_STEP*4) != -1) {
 		/* move_forward(speed, distance);
 		turn_right(speed);
 		turn_left(speed); */
@@ -88,7 +88,7 @@ int main(int argc, char **argv){
 		robot_y = wtom(ot.result.y); 
 		wb_display_set_color(display,0xFF0000);
 		wb_display_draw_rectangle(display,robot_x, display_height-robot_y-1,1,1);  */
-	};
+	//};
 	wb_robot_cleanup();
 
 	return 0;
