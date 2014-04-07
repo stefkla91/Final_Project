@@ -21,7 +21,7 @@
 #define PS_LEFT_45 6
 #define PS_LEFT_10 7
 
-WbDeviceTag ps[NUM_DIST_SENS];
+WbDeviceTag distance_sensor[NUM_DIST_SENS];
 
 void init_distance_sensors(int timestep){
 	int i;
@@ -29,13 +29,13 @@ void init_distance_sensors(int timestep){
 	
 	//get the distance sensors
 	for (i = 0;i < NUM_DIST_SENS;i++){
-		ps[i] = wb_robot_get_device(textPS);
+		distance_sensor[i] = wb_robot_get_device(textPS);
 		textPS[2]++;
 	}
 	
 	//enable the distance sensor and light sensor devices
 	for(i = 0;i < NUM_DIST_SENS;i++){
-		wb_distance_sensor_enable(ps[i], timestep);
+		wb_distance_sensor_enable(distance_sensor[i], timestep);
 	}
 }
 
@@ -44,7 +44,7 @@ int* get_sensor_data(){
 	static int dSensorData[NUM_DIST_SENS] = {0,0,0,0,0,0,0,0};
 	
 	for(i=0;i<NUM_DIST_SENS;i++){
-		dSensorData[i] = (int)wb_distance_sensor_get_value(ps[i]);
+		dSensorData[i] = (int)wb_distance_sensor_get_value(distance_sensor[i]);
 	} 
 	return dSensorData;
 }

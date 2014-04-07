@@ -24,6 +24,10 @@ EPuck {
   camera_windowPosition 0.316163 0.205197
   camera_pixelSize 0
   turretSlot [
+    DistanceSensor {
+      name "distance_sensor"
+      type "laser "
+    }
     Display {
       width 70
       height 70
