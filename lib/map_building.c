@@ -1,4 +1,4 @@
-/*
+/**
  * File:          map_building.c
  * Date:          15.03.2014
  * Description:   

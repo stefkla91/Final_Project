@@ -1,4 +1,4 @@
-/*
+/**
  * File:          odometry.h
  * Date:          14.03.2014
  * Description:   

@@ -1,9 +1,9 @@
-/*
+/**
  * File:          Main.c
  * Date:          15.03.2014
  * Description:   
  * Author:        Stefan Klaus
- * Modifications: v0.1
+ * Modifications: V0.3
  */
 
 /*
@@ -53,7 +53,7 @@ int robot_y = MAP_SIZE / 2;
  */
 //odometry
 struct odometryTrackStruct ot;
-/*
+/**
  * This is the main program.
  * The arguments of the main function can be specified by the
  * "controllerArgs" field of the Robot node

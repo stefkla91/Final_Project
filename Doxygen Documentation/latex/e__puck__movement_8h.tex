@@ -5,8 +5,6 @@
 \item 
 void {\bf stop\-\_\-robot} ()
 \item 
-void {\bf move\-\_\-forward} (double d\-Speed, double d\-Dist)
-\item 
 void {\bf turn\-\_\-left} (double d\-Speed)
 \item 
 void {\bf turn\-\_\-right} (double d\-Speed)
@@ -18,12 +16,6 @@ void {\bf set\-\_\-motor\-\_\-speed} (double d\-Speed\-L, double d\-Speed\-R)
 double $\ast$ {\bf get\-\_\-encoder\-\_\-positions} ()
 \item 
 double $\ast$ {\bf compute\-\_\-odometry\-\_\-data} ()
-\item 
-void {\bf U\-M\-Bmark} (double d\-Speed, double d\-Distance)
-\item 
-void {\bf measure\-\_\-clock\-Wise} (double d\-Speed, double d\-Distance)
-\item 
-void {\bf measure\-\_\-\-Counter\-Clock\-Wise} (double d\-Speed, double d\-Distance)
 \item 
 void {\bf set\-\_\-leds} (int i\-Active)
 \item 
@@ -64,38 +56,14 @@ Function to compute the robots current odometry data this includes the x and y p
 {}
 \end{DoxyParamCaption}
 )}\label{e__puck__movement_8h_a752a375670e236acbdefe853a4640ccf}
-Function to get and return the current encoder position of the wheels \index{e\-\_\-puck\-\_\-movement.\-h@{e\-\_\-puck\-\_\-movement.\-h}!measure\-\_\-clock\-Wise@{measure\-\_\-clock\-Wise}}
-\index{measure\-\_\-clock\-Wise@{measure\-\_\-clock\-Wise}!e_puck_movement.h@{e\-\_\-puck\-\_\-movement.\-h}}
-\subsubsection[{measure\-\_\-clock\-Wise}]{\setlength{\rightskip}{0pt plus 5cm}void measure\-\_\-clock\-Wise (
-\begin{DoxyParamCaption}
-\item[{double}]{d\-Speed, }
-\item[{double}]{d\-Distance}
-\end{DoxyParamCaption}
-)}\label{e__puck__movement_8h_a1794409acbb4e595bf178ff041b4af63}
-Function to measure the movement accuracy by driving a clockwise square. This is part of the U\-M\-Bmark algorithm \index{e\-\_\-puck\-\_\-movement.\-h@{e\-\_\-puck\-\_\-movement.\-h}!measure\-\_\-\-Counter\-Clock\-Wise@{measure\-\_\-\-Counter\-Clock\-Wise}}
-\index{measure\-\_\-\-Counter\-Clock\-Wise@{measure\-\_\-\-Counter\-Clock\-Wise}!e_puck_movement.h@{e\-\_\-puck\-\_\-movement.\-h}}
-\subsubsection[{measure\-\_\-\-Counter\-Clock\-Wise}]{\setlength{\rightskip}{0pt plus 5cm}void measure\-\_\-\-Counter\-Clock\-Wise (
-\begin{DoxyParamCaption}
-\item[{double}]{d\-Speed, }
-\item[{double}]{d\-Distance}
-\end{DoxyParamCaption}
-)}\label{e__puck__movement_8h_a9c3ef8080725901a8f7c652b527627f8}
-Function to measure the movement accuracy by driving a counter-\/clockwise square. This is part of the U\-M\-Bmark algorithm \index{e\-\_\-puck\-\_\-movement.\-h@{e\-\_\-puck\-\_\-movement.\-h}!move\-\_\-forward@{move\-\_\-forward}}
-\index{move\-\_\-forward@{move\-\_\-forward}!e_puck_movement.h@{e\-\_\-puck\-\_\-movement.\-h}}
-\subsubsection[{move\-\_\-forward}]{\setlength{\rightskip}{0pt plus 5cm}void move\-\_\-forward (
-\begin{DoxyParamCaption}
-\item[{double}]{d\-Speed, }
-\item[{double}]{d\-Dist}
-\end{DoxyParamCaption}
-)}\label{e__puck__movement_8h_ae3f4f204ca5d26d2cf135fd94b423dc3}
-Function to move the robot forward a given distance at a given speed \index{e\-\_\-puck\-\_\-movement.\-h@{e\-\_\-puck\-\_\-movement.\-h}!set\-\_\-leds@{set\-\_\-leds}}
+Function to get and return the current encoder position of the wheels \index{e\-\_\-puck\-\_\-movement.\-h@{e\-\_\-puck\-\_\-movement.\-h}!set\-\_\-leds@{set\-\_\-leds}}
 \index{set\-\_\-leds@{set\-\_\-leds}!e_puck_movement.h@{e\-\_\-puck\-\_\-movement.\-h}}
 \subsubsection[{set\-\_\-leds}]{\setlength{\rightskip}{0pt plus 5cm}void set\-\_\-leds (
 \begin{DoxyParamCaption}
 \item[{int}]{i\-Active}
 \end{DoxyParamCaption}
 )}\label{e__puck__movement_8h_ae3574666f129d82ba027d505d18ce57c}
-set the status of the L\-E\-Ds \index{e\-\_\-puck\-\_\-movement.\-h@{e\-\_\-puck\-\_\-movement.\-h}!set\-\_\-motor\-\_\-speed@{set\-\_\-motor\-\_\-speed}}
+University of Michigan Benchmark Function to measure the movement accuracy by driving a clockwise square. This is part of the U\-M\-Bmark algorithm Function to measure the movement accuracy by driving a counter-\/clockwise square. This is part of the U\-M\-Bmark algorithm set the status of the L\-E\-Ds \index{e\-\_\-puck\-\_\-movement.\-h@{e\-\_\-puck\-\_\-movement.\-h}!set\-\_\-motor\-\_\-speed@{set\-\_\-motor\-\_\-speed}}
 \index{set\-\_\-motor\-\_\-speed@{set\-\_\-motor\-\_\-speed}!e_puck_movement.h@{e\-\_\-puck\-\_\-movement.\-h}}
 \subsubsection[{set\-\_\-motor\-\_\-speed}]{\setlength{\rightskip}{0pt plus 5cm}void set\-\_\-motor\-\_\-speed (
 \begin{DoxyParamCaption}
@@ -110,6 +78,8 @@ Function to set the motor speed of the robot \index{e\-\_\-puck\-\_\-movement.\-
 {}
 \end{DoxyParamCaption}
 )}\label{e__puck__movement_8h_ae06729b4d38e1378544b43f69e6d07b3}
+File\-: \doxyref{e\-\_\-puck\-\_\-movement.\-h}{p.}{e__puck__movement_8h} Date\-: 10.\-03.\-2014 Description\-: Header file for \doxyref{e\-\_\-puck\-\_\-movement.\-c}{p.}{e__puck__movement_8c} Author\-: Stefan Klaus Modifications\-: V 0.\-3\-Stops the robot
+
 Function to stop the robot \index{e\-\_\-puck\-\_\-movement.\-h@{e\-\_\-puck\-\_\-movement.\-h}!turn\-\_\-angle@{turn\-\_\-angle}}
 \index{turn\-\_\-angle@{turn\-\_\-angle}!e_puck_movement.h@{e\-\_\-puck\-\_\-movement.\-h}}
 \subsubsection[{turn\-\_\-angle}]{\setlength{\rightskip}{0pt plus 5cm}void turn\-\_\-angle (
@@ -132,12 +102,4 @@ Function to turn left \index{e\-\_\-puck\-\_\-movement.\-h@{e\-\_\-puck\-\_\-mov
 \item[{double}]{d\-Speed}
 \end{DoxyParamCaption}
 )}\label{e__puck__movement_8h_a8753cbe45ab440b5e87c9905b3242e5a}
-Function to turn right \index{e\-\_\-puck\-\_\-movement.\-h@{e\-\_\-puck\-\_\-movement.\-h}!U\-M\-Bmark@{U\-M\-Bmark}}
-\index{U\-M\-Bmark@{U\-M\-Bmark}!e_puck_movement.h@{e\-\_\-puck\-\_\-movement.\-h}}
-\subsubsection[{U\-M\-Bmark}]{\setlength{\rightskip}{0pt plus 5cm}void U\-M\-Bmark (
-\begin{DoxyParamCaption}
-\item[{double}]{d\-Speed, }
-\item[{double}]{d\-Distance}
-\end{DoxyParamCaption}
-)}\label{e__puck__movement_8h_a4b50afc137f18e7581989a13bba1cfe4}
-University of Michigan Benchmark 
+Function to turn right 

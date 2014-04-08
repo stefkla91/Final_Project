@@ -12,6 +12,12 @@
 \begin{DoxyCompactItemize}
 \item 
 \#define {\bf M\-\_\-\-P\-I}~3.\-1415926535897932384626433832795\-L
+\item 
+\#define {\bf W\-H\-E\-E\-L\-\_\-\-R\-A\-D\-I\-U\-S}~0.\-0206625
+\item 
+\#define {\bf W\-H\-E\-E\-L\-B\-A\-S\-E}~0.\-058
+\item 
+\#define {\bf E\-N\-C\-O\-D\-E\-R\-\_\-\-R\-E\-S\-O\-L\-U\-T\-I\-O\-N}~159.\-23
 \end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -38,9 +44,18 @@ float {\bf axis\-\_\-wheel\-\_\-ratio} = 1.\-4134
 
 
 \subsection{Macro Definition Documentation}
+\index{lib/odometry.\-c@{lib/odometry.\-c}!E\-N\-C\-O\-D\-E\-R\-\_\-\-R\-E\-S\-O\-L\-U\-T\-I\-O\-N@{E\-N\-C\-O\-D\-E\-R\-\_\-\-R\-E\-S\-O\-L\-U\-T\-I\-O\-N}}
+\index{E\-N\-C\-O\-D\-E\-R\-\_\-\-R\-E\-S\-O\-L\-U\-T\-I\-O\-N@{E\-N\-C\-O\-D\-E\-R\-\_\-\-R\-E\-S\-O\-L\-U\-T\-I\-O\-N}!lib/odometry.c@{lib/odometry.\-c}}
+\subsubsection[{E\-N\-C\-O\-D\-E\-R\-\_\-\-R\-E\-S\-O\-L\-U\-T\-I\-O\-N}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\-N\-C\-O\-D\-E\-R\-\_\-\-R\-E\-S\-O\-L\-U\-T\-I\-O\-N~159.\-23}\label{lib_2odometry_8c_a8cdc17f43c9f3850f60d04f98216fc13}
 \index{lib/odometry.\-c@{lib/odometry.\-c}!M\-\_\-\-P\-I@{M\-\_\-\-P\-I}}
 \index{M\-\_\-\-P\-I@{M\-\_\-\-P\-I}!lib/odometry.c@{lib/odometry.\-c}}
 \subsubsection[{M\-\_\-\-P\-I}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\-\_\-\-P\-I~3.\-1415926535897932384626433832795\-L}\label{lib_2odometry_8c_ae71449b1cc6e6250b91f539153a7a0d3}
+File\-: odometry.\-c Date\-: 14.\-03.\-2014 Description\-: Author\-: Stefan Klaus Modifications\-: V 0.\-3 \index{lib/odometry.\-c@{lib/odometry.\-c}!W\-H\-E\-E\-L\-\_\-\-R\-A\-D\-I\-U\-S@{W\-H\-E\-E\-L\-\_\-\-R\-A\-D\-I\-U\-S}}
+\index{W\-H\-E\-E\-L\-\_\-\-R\-A\-D\-I\-U\-S@{W\-H\-E\-E\-L\-\_\-\-R\-A\-D\-I\-U\-S}!lib/odometry.c@{lib/odometry.\-c}}
+\subsubsection[{W\-H\-E\-E\-L\-\_\-\-R\-A\-D\-I\-U\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define W\-H\-E\-E\-L\-\_\-\-R\-A\-D\-I\-U\-S~0.\-0206625}\label{lib_2odometry_8c_aaa6f04f6f0d7cf1008a53279acf49f07}
+\index{lib/odometry.\-c@{lib/odometry.\-c}!W\-H\-E\-E\-L\-B\-A\-S\-E@{W\-H\-E\-E\-L\-B\-A\-S\-E}}
+\index{W\-H\-E\-E\-L\-B\-A\-S\-E@{W\-H\-E\-E\-L\-B\-A\-S\-E}!lib/odometry.c@{lib/odometry.\-c}}
+\subsubsection[{W\-H\-E\-E\-L\-B\-A\-S\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define W\-H\-E\-E\-L\-B\-A\-S\-E~0.\-058}\label{lib_2odometry_8c_a6f28e51b0e2c5b06d505dae9c8cb9a62}
 
 
 \subsection{Function Documentation}
@@ -66,7 +81,7 @@ Start the odometry tracking Updates the info in the \doxyref{odometry\-Track\-St
 \item[{struct {\bf odometry\-Track\-Struct} $\ast$}]{ot}
 \end{DoxyParamCaption}
 )}\label{lib_2odometry_8c_a8e0e3af78ac4bcd98ada907e33173da0}
-\index{lib/odometry.\-c@{lib/odometry.\-c}!odometry\-\_\-track\-\_\-step\-\_\-pos@{odometry\-\_\-track\-\_\-step\-\_\-pos}}
+Updates an odometry data, fetches the encoder positions and initialize the odoemetry\-\_\-track\-\_\-step\-\_\-pos function \index{lib/odometry.\-c@{lib/odometry.\-c}!odometry\-\_\-track\-\_\-step\-\_\-pos@{odometry\-\_\-track\-\_\-step\-\_\-pos}}
 \index{odometry\-\_\-track\-\_\-step\-\_\-pos@{odometry\-\_\-track\-\_\-step\-\_\-pos}!lib/odometry.c@{lib/odometry.\-c}}
 \subsubsection[{odometry\-\_\-track\-\_\-step\-\_\-pos}]{\setlength{\rightskip}{0pt plus 5cm}void odometry\-\_\-track\-\_\-step\-\_\-pos (
 \begin{DoxyParamCaption}
@@ -74,7 +89,7 @@ Start the odometry tracking Updates the info in the \doxyref{odometry\-Track\-St
 \item[{double $\ast$}]{d\-Enc\-Pos}
 \end{DoxyParamCaption}
 )}\label{lib_2odometry_8c_abb8cba9a6eb2f23d6f53911a6668c1a0}
-
+Updates all odometry data for the struct. Calculates the X and Y positions and orientation. 
 
 \subsection{Variable Documentation}
 \index{lib/odometry.\-c@{lib/odometry.\-c}!axis\-\_\-wheel\-\_\-ratio@{axis\-\_\-wheel\-\_\-ratio}}

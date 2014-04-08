@@ -6,6 +6,7 @@
  * Modifications: V 0.1
  */
  
+ 
  void init_distance_sensors();
  
  int* get_sensor_data();

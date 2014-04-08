@@ -1,6 +1,8 @@
 var dir_783716f39f3be2b206cf8f00b0340903 =
 [
     [ "build", "dir_c6ef5321879b08a6f2fe15d0194cb741.html", "dir_c6ef5321879b08a6f2fe15d0194cb741" ],
+    [ "e_puck_distance_sensors.c", "e__puck__distance__sensors_8c.html", "e__puck__distance__sensors_8c" ],
+    [ "e_puck_distance_sensors.h", "e__puck__distance__sensors_8h.html", "e__puck__distance__sensors_8h" ],
     [ "e_puck_movement.c", "e__puck__movement_8c.html", "e__puck__movement_8c" ],
     [ "e_puck_movement.h", "e__puck__movement_8h.html", "e__puck__movement_8h" ],
     [ "map_building.c", "lib_2map__building_8c.html", "lib_2map__building_8c" ],

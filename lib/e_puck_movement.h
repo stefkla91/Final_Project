@@ -3,7 +3,7 @@
  * Date:          10.03.2014
  * Description:   Header file for e_puck_movement.c
  * Author:        Stefan Klaus
- * Modifications: V 0.1
+ * Modifications: V 0.3
  */
 
 //#include "odometry.h"

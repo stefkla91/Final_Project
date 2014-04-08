@@ -1,9 +1,9 @@
-/*
+/**
  * File:          odometry.c
  * Date:          14.03.2014
  * Description:   
  * Author:        Stefan Klaus
- * Modifications: V 0.1
+ * Modifications: V 0.3
  */
  
 #include <webots/differential_wheels.h>
@@ -55,6 +55,11 @@ int odometry_track_start_pos(struct odometryTrackStruct * ot, double* dEncPos){
 	return 1;
 }
 
+/**
+Updates an odometry data,
+fetches the encoder positions and initialize the 
+odoemetry_track_step_pos function
+*/
 void odometry_track_step(struct odometryTrackStruct * ot){
 	double* point_dEncPos;
 	
@@ -62,6 +67,10 @@ void odometry_track_step(struct odometryTrackStruct * ot){
 	odometry_track_step_pos(ot,	point_dEncPos);
 }
 
+/**
+Updates all odometry data for the struct.
+Calculates the X and Y positions and orientation. 
+*/
 void odometry_track_step_pos(struct odometryTrackStruct * ot, double* dEncPos){
 	int delta_pos_left, delta_pos_right;
 	float delta_left, delta_right, delta_theta, theta2;

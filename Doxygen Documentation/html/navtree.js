@@ -25,7 +25,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_main_8c.html",
-"lib_2odometry_8c.html"
+"lib_2map__building_8c.html#ae19b6bb2940d2fbe0a79852b070eeafd"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -3,7 +3,7 @@
  * Date:          04.04.2014
  * Description:   
  * Author:        Stefan Klaus
- * Modifications: V 0.1
+ * Modifications: V 0.2
  */
  
 #include <webots/robot.h>
@@ -23,6 +23,9 @@
 
 WbDeviceTag distance_sensor[NUM_DIST_SENS];
 
+/**
+Initializes and enables the distance sensors
+*/
 void init_distance_sensors(int timestep){
 	int i;
 	char textPS[] = "ps0";
@@ -39,6 +42,9 @@ void init_distance_sensors(int timestep){
 	}
 }
 
+/**
+Returns an array with all the current sensor values
+*/
 int* get_sensor_data(){
 	int i;
 	static int dSensorData[NUM_DIST_SENS] = {0,0,0,0,0,0,0,0};
