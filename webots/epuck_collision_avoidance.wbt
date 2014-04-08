@@ -8,8 +8,8 @@ WorldInfo {
   basicTimeStep 16
 }
 Viewpoint {
-  orientation 0.999172 0.0198307 -0.0355377 4.96114
-  position -0.24494 2.47525 0.427469
+  orientation 0.999411 0.0211392 -0.0270149 4.65136
+  position 0.366578 1.36711 -0.456505
 }
 Background {
   skyColor [
@@ -19,6 +19,7 @@ Background {
 DEF FLOOR CheckeredFloor {
 }
 EPuck {
+  translation 0.397078 4.59398e-15 -0.400403
   rotation 0 1 0 3.14159
   controller "Main"
   camera_windowPosition 0.316163 0.205197
