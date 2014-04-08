@@ -25,8 +25,9 @@
 
 #define TIME_STEP 8 
 #define WHEEL_RADIUS 0.0206625 // avg. wheel radius of the e-puck 1850.
-#define LEFT_DIAMETER 0.0404 //orig 0.0416
+#define LEFT_DIAMETER 0.0416 //orig 0.0416
 #define RIGHT_DIAMETER 0.0404 //orig 0.0404
+#define WHEEL_DIAMETER (LEFT_DIAMETER + RIGHT_DIAMETER)
 #define WHEELBASE 0.058 //orig 0.052
 #define ENCODER_RESOLUTION 159.23
 #define INCREMENT_STEP 1000 //steps of the motor for a whole rotation orig REV_STEP
@@ -93,7 +94,7 @@ void move_forward(double dSped, double dDis){ //, struct odometryTrackStruct * o
 	double dSpeed = dSped;
 	if((dDist > 0.0f) && (dSpeed > 0.0f)){
 		//calculate the number of steps
-		dStepCount = (INCREMENT_STEP/(M_PI * (LEFT_DIAMETER + RIGHT_DIAMETER ) / 2)) * dDist;
+		dStepCount = (INCREMENT_STEP/(M_PI * WHEEL_DIAMETER / 2)) * dDist;
 		
 		/*read the current encoder positions of both wheels and
 		calculate the encoder positions when the robot has to
@@ -167,7 +168,7 @@ void turn_angle(double dAngle, double dSpeed){
 		dFactor = fabs(360.0f/dAngle);
 		
 		//calculate the number of step counts for the rotations
-		dStepCount = (INCREMENT_STEP * WHEELBASE)/(dFactor * (LEFT_DIAMETER + RIGHT_DIAMETER ) / 2);
+		dStepCount = (INCREMENT_STEP * WHEELBASE)/(dFactor * WHEEL_DIAMETER / 2);
 		
 		point_dEncPos = get_encoder_positions();
 		

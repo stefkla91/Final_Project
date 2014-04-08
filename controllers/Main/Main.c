@@ -60,7 +60,7 @@ struct odometryTrackStruct ot;
  */
 int main(int argc, char **argv){
 	 double dSpeed = 300.0f;
-	double dDistance = 0.5f;  
+	double dDistance = 0.6f;  
 	
 	//initialize and reset all needed devices 
 	wb_robot_init();
