@@ -27,7 +27,7 @@
 #define WHEEL_RADIUS 0.0206625 // avg. wheel radius of the e-puck 1850.
 #define LEFT_DIAMETER 0.0416
 #define RIGHT_DIAMETER 0.0404
-#define WHEELBASE 0.052
+#define WHEELBASE 0.058 //orig 0.052
 #define ENCODER_RESOLUTION 159.23
 #define INCREMENT_STEP 1000 //steps of the motor for a whole rotation orig REV_STEP
 #define STEP_TOLERANCE 6.0

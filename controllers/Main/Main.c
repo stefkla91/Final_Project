@@ -60,7 +60,7 @@ struct odometryTrackStruct ot;
  */
 int main(int argc, char **argv){
 	double dSpeed = 300.0f;
-	double dDistance = 0.1f; 
+	double dDistance = 0.4f; 
 	
 	//initialize and reset all needed devices 
 	wb_robot_init();
@@ -72,23 +72,23 @@ int main(int argc, char **argv){
 	ot.result.y = 0;//0.008;
 	ot.result.theta = 4.71238898;// in RAD = 270 degrees 
 
-	//while (wb_robot_step(TIME_STEP*4) != -1) {
-		/* move_forward(speed, distance);
+	while (wb_robot_step(TIME_STEP*4) != -1) {
+	/*	move_forward(speed, distance);
 		turn_right(speed);
 		turn_left(speed); */
-	//	odometry_track_step(&ot);
+		odometry_track_step(&ot);
 	
-		//run(&ot);
-		UMBmark(dSpeed, dDistance);
+		run(&ot);
+		//UMBmark(dSpeed, dDistance);
 		
 		
 		
 		// update position on the map
-		/* robot_x = wtom(ot.result.x);
+		/*robot_x = wtom(ot.result.x);
 		robot_y = wtom(ot.result.y); 
 		wb_display_set_color(display,0xFF0000);
 		wb_display_draw_rectangle(display,robot_x, display_height-robot_y-1,1,1);  */
-	//};
+	};
 	wb_robot_cleanup();
 
 	return 0;
