@@ -59,8 +59,8 @@ struct odometryTrackStruct ot;
  * "controllerArgs" field of the Robot node
  */
 int main(int argc, char **argv){
-	double dSpeed = 300.0f;
-	double dDistance = 0.4f; 
+	/* double dSpeed = 300.0f;
+	double dDistance = 0.4f;  */
 	
 	//initialize and reset all needed devices 
 	wb_robot_init();

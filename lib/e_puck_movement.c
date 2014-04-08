@@ -61,9 +61,9 @@ void check_rotation(double cur_rot, double want_rot, double dSpeed);
 double* compute_odometry_data();
 
 // odometry UMBmark:
-void UMBmark(double dSpeed, double dDistance); //calibration 
+/* void UMBmark(double dSpeed, double dDistance); //calibration 
 void measure_clockWise(double dSpeed, double dDistance);
-void measure_CounterClockWise(double dSpeed, double dDistance);
+void measure_CounterClockWise(double dSpeed, double dDistance); */
 
 // braitenberg weights for wall following
 float weights_left[8] = {-1,-1,-1,0.5,-0.5,0.5,1,2};
@@ -377,6 +377,9 @@ void check_rotation(double cur_rot, double want_rot, double dSpeed){
 	double threshold = 1; //2,0
 	double diff;
 	char text[] = "Correcting";
+	if(cur_rot + 20 >= 360){
+		cur_rot -= 360; 
+	} 
 	
 	if(cur_rot > want_rot + threshold){
 		diff = cur_rot - want_rot;

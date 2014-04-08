@@ -102,6 +102,10 @@ void check_direction(double d){
 	west = false;
 	south = false; 
 	
+	if(i + ANGLE_TOLERANCE >= 360){
+		i -= 360; 
+	} 
+	
 	if(EAST < i + ANGLE_TOLERANCE && EAST > i - ANGLE_TOLERANCE){
 		east = true;
 	}else if(NORTH < i + ANGLE_TOLERANCE && NORTH > i - ANGLE_TOLERANCE){
@@ -431,9 +435,11 @@ void run(struct odometryTrackStruct * ot){
 				/* odometry_track_step(ot); */
 				/* cur_rot = return_angle(ot->result.theta);
 				turn_angle(cur_rot - 360, dSpeed); */
+			
 				turn_left(dSpeed);
 				odometry_track_step(ot);
-				/* cur_rot = return_angle(ot->result.theta);
+			
+			/* cur_rot = return_angle(ot->result.theta);
 				check_rotation(cur_rot, 360, dSpeed);  */
 				west = false;
 				state = FORWARD;
