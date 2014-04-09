@@ -21,10 +21,11 @@
 #include <math.h>
 
 #include "../../lib/odometry.h"
+#include "../../lib/reference_points.h"
 #include "../../lib/e_puck_movement.h"
 #include "../../lib/map_building.h"
 #include "../../lib/e_puck_distance_sensors.h"
-#include "../../lib/reference_points.h"
+
 
 #define TIME_STEP 8
 #define MAP_SIZE 70
@@ -77,7 +78,7 @@ int main(int argc, char **argv){
 	ref.upper_left.y = 0;
 	ref.upper_right.x = 0;
 	ref.upper_left.y = 0;
-	
+
 	ot.result.x = 0;// 0.008;
 	ot.result.y = 0;//0.008;
 	ot.result.theta = 4.71238898;// in RAD = 270 degrees 

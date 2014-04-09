@@ -104,27 +104,27 @@ void checkReferencePoints(struct odometryTrackStruct * ot, struct referencePos *
 	if(direction == 1){
 		if(((ref->upper_left.x <= dCurPosX + dThreshold) || (ref->upper_left.x >= dCurPosX - dThreshold)) && corner == 3){
 			ot->result.x = ref->upper_left.x;
-			ot->resutl.y = ref->upper_left.y;
+			ot->result.y = ref->upper_left.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1]; 
 			updateReferencePoints(ot, ref, corner);
 		}else if(((ref->upper_right.x <= dCurPosX + dThreshold )|| (ref->upper_right.x >= dCurPosX - dThreshold)) && corner == 4){
 			updateReferencePoints(ot,ref, corner);
 			ot->result.x = ref->upper_right.x;
-			ot->resutl.y = ref->upper_right.y;
+			ot->result.y = ref->upper_right.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1]; 
 		}
 	}else if(direction == 2){
 		if(((ref->upper_right.x <= dCurPosX + dThreshold) || (ref->upper_right.x >= dCurPosX - dThreshold)) && corner == 4){
 			ot->result.x = ref->upper_right.x;
-			ot->resutl.y = ref->upper_right.y;
+			ot->result.y = ref->upper_right.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1]; 
 			updateReferencePoints(ot,ref, corner);
 		}else if(((ref->lower_right.x <= dCurPosX + dThreshold) || (ref->lower_right.x >= dCurPosX - dThreshold)) && corner == 2){
 			ot->result.x = ref->lower_right.x;
-			ot->resutl.y = ref->lower_right.y;
+			ot->result.y = ref->lower_right.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1]; 
 			updateReferencePoints(ot,ref, corner);
@@ -132,13 +132,13 @@ void checkReferencePoints(struct odometryTrackStruct * ot, struct referencePos *
 	}else if(direction == 3){
 		if(((ref->lower_left.x <= dCurPosX + dThreshold) || (ref->lower_left.x >= dCurPosX - dThreshold)) && corner == 1){
 			ot->result.x = ref->lower_left.x;
-			ot->resutl.y = ref->lower_left.y;
+			ot->result.y = ref->lower_left.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1]; 
 			setReferencePoint(ref, corner);
 		}else if(((ref->lower_right.x <= dCurPosX + dThreshold) || (ref->lower_right.x >= dCurPosX - dThreshold)) && corner == 2){
 			ot->result.x = ref->lower_right.x;
-			ot->resutl.y = ref->lower_right.y;
+			ot->result.y = ref->lower_right.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1];
 			updateReferencePoints(ot,ref, corner); 
@@ -146,13 +146,13 @@ void checkReferencePoints(struct odometryTrackStruct * ot, struct referencePos *
 	}else if(direction == 4){
 		if(((ref->upper_left.x <= dCurPosX + dThreshold) || (ref->upper_left.x >= dCurPosX - dThreshold)) && corner == 3){
 			ot->result.x = ref->upper_left.x;
-			ot->resutl.y = ref->upper_left.y;
+			ot->result.y = ref->upper_left.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1]; 
 			updateReferencePoints(ot,ref, corner);
 		}else if(((ref->lower_right.x <= dCurPosX + dThreshold) || (ref->lower_right.x >= dCurPosX - dThreshold)) && corner == 1){
 			ot->result.x = ref->lower_right.x;
-			ot->resutl.y = ref->lower_right.y;
+			ot->result.y = ref->lower_right.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1]; 
 			updateReferencePoints(ot,ref, corner);

@@ -14,11 +14,12 @@
 #include <webots/display.h> 
 #include <stdio.h>
 
+#include "reference_points.h"
 #include "map_building.h"
 #include "e_puck_movement.h"
 #include "odometry.h"
 #include "e_puck_distance_sensors.h"
-#include "reference_points.h"
+
 
 #define TIME_STEP 8
 #define MAP_SIZE 70
