@@ -18,6 +18,7 @@
 #include "e_puck_movement.h"
 #include "odometry.h"
 #include "e_puck_distance_sensors.h"
+#include "reference_points.h"
 
 #define TIME_STEP 8
 #define MAP_SIZE 70
@@ -117,6 +118,7 @@ void check_direction(double d){
 	}
 }
 
+
 /**
  * Initiate the display with a white color
  */
@@ -210,78 +212,6 @@ void reset(){
 }
 
 /**
-Checks which refrence point to set.
-The parameters are a pointer to the struct odometrtTrackStruct and refrencePos 
-and an int which defines which corner it is. 
-The corner is defined in the run() function where this function will be called.
-1 = lower_left
-2 = lower_right
-3 = upper_left
-4 = upper_right
-*/
-void checkReferencePoints(struct odometryTrackStruct * ot, struct referencePos * ref, int corner){
-	double dThreshold = 10.0;
-	double dCurPosX = ot->result.x;
-	double dCurPosY = ot->result.y;
-	check_direction(ot->result.theta);
-
-
-	if(north){
-		if((ref->upper_left.x + dThreshold <= dCurPosX || ref->upper_left - dThreshold) >= dCurPosX && corner = 3){
-			setReferencePoint(&ref, corner);
-		}else if((ref->upper_right.x + dThreshold <= dCurPosX || ref->upper_right - dThreshold) >= dCurPosX && corner = 4){
-			setReferencePoint(&ref, corner);
-		}
-	}else if(east){
-		if((ref->upper_right.x + dThreshold <= dCurPosX || ref->upper_right - dThreshold) >= dCurPosX && corner = 3){
-			setReferencePoint(&ref, corner);
-		}else if((ref->lower_right.x + dThreshold <= dCurPosX || ref->lower_right - dThreshold) >= dCurPosX && corner = 2){
-			setReferencePoint(&ref, corner);
-		}
-	}else if(south){
-		if((ref->lower_left.x + dThreshold <= dCurPosX || ref->lower_left - dThreshold) >= dCurPosX && corner = 1){
-			setReferencePoint(&ref, corner);
-		}else if((ref->lower_right.x + dThreshold <= dCurPosX || ref->lower_right - dThreshold) >= dCurPosX && corner = 2){
-			setReferencePoint(&ref, corner);
-		}
-	}else if(west){
-		if((ref->upper_left.x + dThreshold <= dCurPosX || ref->upper_left - dThreshold) >= dCurPosX && corner = 3){
-			setReferencePoint(&ref, corner);
-		}else if((ref->lower_left.x + dThreshold <= dCurPosX || ref->lower_left - dThreshold) >= dCurPosX && corner = 1){
-			setReferencePoint(&ref, corner);
-		}
-	}
-}
-
-/**
-Sets the reference point in the referencePos struct.
-The parameters are a pointer to the referencePos struct and an int.
-The int specifies which corner will be set.
-1 = lower_left
-2 = lower_right
-3 = upper_left
-4 = upper_right
-*/
-void setReferencePoint(struct referencePos * ref, int corner){
-	double *point_dEncPos; 
-
-	point_dEncPos = get_encoder_positions();
-	if(corner == 1){
-		ref->lower_left.x = point_dEncPos[0];
-		ref->lower_left.y = point_dEncPos[1];
-	}else if(corner == 2){
-		ref->lower_right.x = point_dEncPos[0];
-		ref->lower_right.y = point_dEncPos[1];
-	}else if(corner == 3){
-		ref->upper_left.x = point_dEncPos[0];
-		ref->upper_left.y = point_dEncPos[1];
-	}else if(corner == 4){
-		ref->upper_right.x = point_dEncPos[0];
-		ref->upper_right.y = point_dEncPos[1];
-	}
-}
-
-/**
 run function
 */
 void run(struct odometryTrackStruct * ot, struct referencePos * ref){
@@ -367,12 +297,22 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 				}
 			 else if(ob_front && ob_left){
 				state = UTURN;
+				if(north){
+					checkReferencePoints(ot, ref, 3);
+				}else if (south || west){
+					checkReferencePoints(ot, ref, 1);
+				}
 			} 
 			else if(ob_front && ob_right && east){
 				state = TURNLEFT;
 			}
 			else if(ob_front && ob_right){
 				state = UTURN;
+				if(north){
+					checkReferencePoints(ot, ref, 4);
+				}else if (south || east){
+					checkReferencePoints(ot, ref, 2);
+				}
 			}
 			else if(ob_front){
 				check_direction(ot->result.theta);

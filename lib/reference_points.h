@@ -10,17 +10,17 @@
  	struct {
  		float x;
  		float y;
- 	}lower_left;
+ 	} lower_left;
  	struct {
  		float x;
  		float y;
- 	}lower_right;
+ 	} lower_right;
  	struct {
  		float x;
  		float y;
- 	}upper_left;
+ 	} upper_left;
  	struct {
 		float x;
  		float y;
- 	}upper_right;
+ 	} upper_right;
  };

@@ -69,14 +69,14 @@ int main(int argc, char **argv){
 	
 	odometry_track_start(&ot);
 
-	/*ref.lower_left.x = 0;
+	ref.lower_left.x = 0;
 	ref.lower_left.y = 0;
 	ref.lower_right.x = 0;
 	ref.lower_right.y = 0;
 	ref.upper_left.x = 0;
 	ref.upper_left.y = 0;
 	ref.upper_right.x = 0;
-	ref.upper_left.y = 0;*/
+	ref.upper_left.y = 0;
 	
 	ot.result.x = 0;// 0.008;
 	ot.result.y = 0;//0.008;
