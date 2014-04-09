@@ -26,7 +26,7 @@
 #define TIME_STEP 8 
 #define WHEEL_RADIUS 0.0206625 // avg. wheel radius of the e-puck 1850.
 #define LEFT_DIAMETER 0.0416 //orig 0.0416
-#define RIGHT_DIAMETER 0.0404 //orig 0.0404
+#define RIGHT_DIAMETER 0.0404//orig 0.0404
 #define WHEEL_DIAMETER (LEFT_DIAMETER + RIGHT_DIAMETER)
 #define WHEELBASE 0.058 //orig 0.052
 #define ENCODER_RESOLUTION 159.23
@@ -85,13 +85,12 @@ void stop_robot() {
 /**
 Function to move the robot forward a given distance at a given speed
 */
-void move_forward(double dSped, double dDis){ //, struct odometryTrackStruct * ot
+void move_forward(double dSpeed, double dDist){ //, struct odometryTrackStruct * ot
 	double dStepCount = 0.0f;
 	double dStopPosLeft = 0.0f;
 	double dStopPosRight = 0.0f;
 	double *point_dEncPos;	
-	double dDist = dDis;
-	double dSpeed = dSped;
+	
 	if((dDist > 0.0f) && (dSpeed > 0.0f)){
 		//calculate the number of steps
 		dStepCount = (INCREMENT_STEP/(M_PI * WHEEL_DIAMETER / 2)) * dDist;
