@@ -209,10 +209,48 @@ void reset(){
 	led[2] = wb_robot_get_device("led6");
 }
 
-void checkReferencePoints(struct odometryTrackStruct * ot, struct referencePos * ref){
-	double threshold = 20.0;
-	
+/**
+Checks which refrence point to set.
+The parameters are a pointer to the struct odometrtTrackStruct and refrencePos 
+and an int which defines which corner it is. 
+The corner is defined in the run() function where this function will be called.
+1 = lower_left
+2 = lower_right
+3 = upper_left
+4 = upper_right
+*/
+void checkReferencePoints(struct odometryTrackStruct * ot, struct referencePos * ref, int corner){
+	double dThreshold = 10.0;
+	double dCurPosX = ot->result.x;
+	double dCurPosY = ot->result.y;
+	check_direction(ot->result.theta);
 
+
+	if(north){
+		if((ref->upper_left.x + dThreshold <= dCurPosX || ref->upper_left - dThreshold) >= dCurPosX && corner = 3){
+			setReferencePoint(&ref, corner);
+		}else if((ref->upper_right.x + dThreshold <= dCurPosX || ref->upper_right - dThreshold) >= dCurPosX && corner = 4){
+			setReferencePoint(&ref, corner);
+		}
+	}else if(east){
+		if((ref->upper_right.x + dThreshold <= dCurPosX || ref->upper_right - dThreshold) >= dCurPosX && corner = 3){
+			setReferencePoint(&ref, corner);
+		}else if((ref->lower_right.x + dThreshold <= dCurPosX || ref->lower_right - dThreshold) >= dCurPosX && corner = 2){
+			setReferencePoint(&ref, corner);
+		}
+	}else if(south){
+		if((ref->lower_left.x + dThreshold <= dCurPosX || ref->lower_left - dThreshold) >= dCurPosX && corner = 1){
+			setReferencePoint(&ref, corner);
+		}else if((ref->lower_right.x + dThreshold <= dCurPosX || ref->lower_right - dThreshold) >= dCurPosX && corner = 2){
+			setReferencePoint(&ref, corner);
+		}
+	}else if(west){
+		if((ref->upper_left.x + dThreshold <= dCurPosX || ref->upper_left - dThreshold) >= dCurPosX && corner = 3){
+			setReferencePoint(&ref, corner);
+		}else if((ref->lower_left.x + dThreshold <= dCurPosX || ref->lower_left - dThreshold) >= dCurPosX && corner = 1){
+			setReferencePoint(&ref, corner);
+		}
+	}
 }
 
 /**
