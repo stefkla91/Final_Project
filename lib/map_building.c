@@ -299,29 +299,46 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 			break;			
 		case STOP:
 			stop_robot();
+			point_SensorData = get_sensor_data(NUM_DIST_SENS);
+			for(i = 0;i < NUM_DIST_SENS;i++){
+				obstacle[i] = point_SensorData[i] - ps_offset[i] > THRESHOLD_DIST;
+			}	
+			//define boolean for sensor states for cleaner implementation
+			bool ob_front = 
+			obstacle[0] ||
+			obstacle[7];
+
+			bool ob_right = 
+			obstacle[2];
+
+			bool ob_left = 
+			obstacle[5];
+
 			odometry_track_step(ot);
 			check_direction(ot->result.theta);
 		 	if(ob_front && ob_left && north){
+				checkReferencePoints(ot, ref, 3);
 				state = TURNRIGHT;
 				}
 			 else if(ob_front && ob_left){
-				state = UTURN;
 				if(north){
 					checkReferencePoints(ot, ref, 3);
 				}else if (south || west){
 					checkReferencePoints(ot, ref, 1);
 				}
+				state = UTURN;
 			} 
 			else if(ob_front && ob_right && east){
+				checkReferencePoints(ot, ref, 2);
 				state = TURNLEFT;
 			}
 			else if(ob_front && ob_right){
-				state = UTURN;
-				if(north){
+					if(north){
 					checkReferencePoints(ot, ref, 4);
-				}else if (south || east){
+					}else if (south || east){
 					checkReferencePoints(ot, ref, 2);
-				}
+					}
+				state = UTURN;
 			}
 			else if(ob_front){
 				check_direction(ot->result.theta);

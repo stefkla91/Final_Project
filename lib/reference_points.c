@@ -10,6 +10,8 @@
 #include "odometry.h"
 #include "e_puck_movement.h"
 #include "map_building.h"
+#include <stdio.h>
+
 
  /**
 Sets the reference point in the referencePos struct.
@@ -21,7 +23,7 @@ The int specifies which corner will be set.
 4 = upper_right
 */
 void setReferencePoint(struct odometryTrackStruct * ot, struct referencePos * ref, int corner){
-
+	printf("Setting Reference point for corner: %d\n", corner);
 	if(corner == 1){
 		ref->lower_left.x += ot->result.x;
 		ref->lower_left.y += ot->result.y;
@@ -48,7 +50,7 @@ The corner is defined in the run() function where this function will be called.
 4 = upper_right
 */
 void updateReferencePoints(struct odometryTrackStruct * ot, struct referencePos * ref, int corner){
-	double dThreshold = 10.0;
+	double dThreshold = 20.0;
 	double dCurPosX = ot->result.x;
 	int direction = check_direction(ot->result.theta);
 
@@ -90,7 +92,7 @@ The corner is defined in the run() function where this function will be called.
 4 = upper_right
 */
 void checkReferencePoints(struct odometryTrackStruct * ot, struct referencePos * ref, int corner){
-	double dThreshold = 10.0f;
+	double dThreshold = 20.0f;
 	double *point_dEncPos = get_encoder_positions(); 
 	double dCurPosX = ot->result.x;
 	int direction = check_direction(ot->result.theta);
