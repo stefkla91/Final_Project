@@ -184,36 +184,9 @@ void reset(){
 	led[2] = wb_robot_get_device("led6");
 }
 
-/**
-Sets the reference point in the referencePos struct.
-The parameters are a pointer to the referencePos struct and an int.
-The int specifies which corner will be set.
-1 = lower_left
-2 = lower_right
-3 = upper_left
-4 = upper_right
-*/
-void setReferencePoint(struct referencePos * ref, int corner){
-	double *point_dEncPos; 
-	double threshold = 20.0;
 
-	point_dEncPos = get_encoder_positions();
-	if(corner == 1){
-		ref->lower_left.x = point_dEncPos[0];
-		ref->lower_left.y = point_dEncPos[1];
-	}else if(corner == 2){
-		ref->lower_right.x = point_dEncPos[0];
-		ref->lower_right.y = point_dEncPos[1];
-	}else if(corner == 3){
-		ref->upper_left.x = point_dEncPos[0];
-		ref->upper_left.y = point_dEncPos[1];
-	}else if(corner == 4){
-		ref->upper_right.x = point_dEncPos[0];
-		ref->upper_right.y = point_dEncPos[1];
-	}
-}
 
-void run(struct odometryTrackStruct * ot, struct referencePos * ref){
+void run(struct odometryTrackStruct * ot){
 	int i;
 	int ps_offset[NUM_DIST_SENS] = {35,35,35,35,35,35,35,35};
 	
