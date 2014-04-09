@@ -96,6 +96,8 @@ void odometry_track_step_pos(struct odometryTrackStruct * ot, double* dEncPos){
 	ot->result.x += delta_x;
 	ot->result.y += delta_y;
 	ot->result.theta += delta_theta;
+
+	
 	
 	if(ot->result.theta > M_PI){
 		ot->result.theta -= 2*M_PI;
