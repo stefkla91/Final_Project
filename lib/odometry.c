@@ -20,13 +20,15 @@
 #endif
 
 #define WHEEL_RADIUS 0.0206625 // avg. wheel radius of the e-puck 1850.
+#define LEFT_DIAMETER 0.0416
+#define RIGHT_DIAMTER 0.0404
+#define WHEEL_DIAMETER (LEFT_DIAMETER + RIGHT_DIAMTER)
 #define WHEELBASE 0.058 //orig 0.052
 #define ENCODER_RESOLUTION 159.23
+#define INCREMENTS 1000.0
+#define SCALING_FACTOR 1 //orig 1, other test gave 0.766
 
-float increments_per_tour = 1000.0;
-float wheel_radius = 0.0207;
-float scaling_factor = 1;
-float axis_wheel_ratio = 1.4134;
+float axis_wheel_ratio = 1.415;
 
 /**
 Initializes the odometry algortihms
@@ -49,8 +51,8 @@ int odometry_track_start_pos(struct odometryTrackStruct * ot, double* dEncPos){
 	ot->state.pos_left_prev = dEncPos[0];
 	ot->state.pos_right_prev = dEncPos[1];
 	
-	ot->configuration.wheel_distance = axis_wheel_ratio * scaling_factor * (wheel_radius * 2);
-	ot->configuration.wheel_conversion= (wheel_radius * 2) * scaling_factor * M_PI / increments_per_tour;
+	ot->configuration.wheel_distance = axis_wheel_ratio * SCALING_FACTOR * (WHEEL_DIAMETER / 2);
+	ot->configuration.wheel_conversion= (WHEEL_DIAMETER / 2) * SCALING_FACTOR * M_PI / INCREMENTS;
 	
 	return 1;
 }

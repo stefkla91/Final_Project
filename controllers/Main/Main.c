@@ -47,10 +47,7 @@
 /* Definitions */
 //Leds
 WbDeviceTag led[3];
-//robots initial positions on the map 
-/* int robot_x = MAP_SIZE / 2;
-int robot_y = MAP_SIZE / 2; 
- */
+
 //odometry
 struct odometryTrackStruct ot;
 /**
@@ -60,7 +57,7 @@ struct odometryTrackStruct ot;
  */
 int main(int argc, char **argv){
 	 double dSpeed = 300.0f;
-	double dDistance = 0.4f;  
+	double dDistance = 0.3f;  
 	
 	//initialize and reset all needed devices 
 	wb_robot_init();
@@ -72,23 +69,12 @@ int main(int argc, char **argv){
 	ot.result.y = 0;//0.008;
 	ot.result.theta = 4.71238898;// in RAD = 270 degrees 
 
-//	while (wb_robot_step(TIME_STEP*4) != -1) {
-	/*	move_forward(speed, distance);
-		turn_right(speed);
-		turn_left(speed); */
-	//	odometry_track_step(&ot);
+	while (wb_robot_step(TIME_STEP*4) != -1) {
+		odometry_track_step(&ot);
 	
-//		run(&ot);
-		UMBmark(dSpeed, dDistance);
-		
-		
-		
-		// update position on the map
-		/*robot_x = wtom(ot.result.x);
-		robot_y = wtom(ot.result.y); 
-		wb_display_set_color(display,0xFF0000);
-		wb_display_draw_rectangle(display,robot_x, display_height-robot_y-1,1,1);  */
-//	};
+		run(&ot);
+	//	UMBmark(dSpeed, dDistance);
+	};
 	wb_robot_cleanup();
 
 	return 0;
