@@ -84,7 +84,17 @@ void updateReferencePoints(struct odometryTrackStruct * ot, struct referencePos 
 		}
 	}
 }
-
+/**
+This function checks the current robot position with the previous recorded reference position.
+If a relation is found, the current encoder position are updated with the saved encoder postions.
+The parameters are a pointer to the struct odometrtTrackStruct and refrencePos 
+and an int which defines which corner it is. 
+The corner is defined in the run() function where this function will be called.
+1 = lower_left
+2 = lower_right
+3 = upper_left
+4 = upper_right
+*/
 void checkReferencePoints(struct odometryTrackStruct * ot, struct referencePos * ref, int corner){
 	double dThreshold = 10.0f;
 	double *point_dEncPos = get_encoder_positions(); 
@@ -93,56 +103,56 @@ void checkReferencePoints(struct odometryTrackStruct * ot, struct referencePos *
 
 	if(direction == 1){
 		if(((ref->upper_left.x <= dCurPosX + dThreshold) || (ref->upper_left.x >= dCurPosX - dThreshold)) && corner == 3){
-			ot->result.x = point_dEncPos[0];
-			ot->resutl.y = point_dEncPos[1];
+			ot->result.x = ref->upper_left.x;
+			ot->resutl.y = ref->upper_left.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1]; 
 			updateReferencePoints(ot, ref, corner);
 		}else if(((ref->upper_right.x <= dCurPosX + dThreshold )|| (ref->upper_right.x >= dCurPosX - dThreshold)) && corner == 4){
 			updateReferencePoints(ot,ref, corner);
-			ot->result.x = point_dEncPos[0];
-			ot->resutl.y = point_dEncPos[1];
+			ot->result.x = ref->upper_right.x;
+			ot->resutl.y = ref->upper_right.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1]; 
 		}
 	}else if(direction == 2){
 		if(((ref->upper_right.x <= dCurPosX + dThreshold) || (ref->upper_right.x >= dCurPosX - dThreshold)) && corner == 4){
-			ot->result.x = point_dEncPos[0];
-			ot->resutl.y = point_dEncPos[1];
+			ot->result.x = ref->upper_right.x;
+			ot->resutl.y = ref->upper_right.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1]; 
 			updateReferencePoints(ot,ref, corner);
 		}else if(((ref->lower_right.x <= dCurPosX + dThreshold) || (ref->lower_right.x >= dCurPosX - dThreshold)) && corner == 2){
-			ot->result.x = point_dEncPos[0];
-			ot->resutl.y = point_dEncPos[1];
+			ot->result.x = ref->lower_right.x;
+			ot->resutl.y = ref->lower_right.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1]; 
 			updateReferencePoints(ot,ref, corner);
 		}
 	}else if(direction == 3){
 		if(((ref->lower_left.x <= dCurPosX + dThreshold) || (ref->lower_left.x >= dCurPosX - dThreshold)) && corner == 1){
-			ot->result.x = point_dEncPos[0];
-			ot->resutl.y = point_dEncPos[1];
+			ot->result.x = ref->lower_left.x;
+			ot->resutl.y = ref->lower_left.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1]; 
 			setReferencePoint(ref, corner);
 		}else if(((ref->lower_right.x <= dCurPosX + dThreshold) || (ref->lower_right.x >= dCurPosX - dThreshold)) && corner == 2){
-			ot->result.x = point_dEncPos[0];
-			ot->resutl.y = point_dEncPos[1];
+			ot->result.x = ref->lower_right.x;
+			ot->resutl.y = ref->lower_right.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1];
 			updateReferencePoints(ot,ref, corner); 
 		}
 	}else if(direction == 4){
 		if(((ref->upper_left.x <= dCurPosX + dThreshold) || (ref->upper_left.x >= dCurPosX - dThreshold)) && corner == 3){
-			ot->result.x = point_dEncPos[0];
-			ot->resutl.y = point_dEncPos[1];
+			ot->result.x = ref->upper_left.x;
+			ot->resutl.y = ref->upper_left.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1]; 
 			updateReferencePoints(ot,ref, corner);
 		}else if(((ref->lower_right.x <= dCurPosX + dThreshold) || (ref->lower_right.x >= dCurPosX - dThreshold)) && corner == 1){
-			ot->result.x = point_dEncPos[0];
-			ot->resutl.y = point_dEncPos[1];
+			ot->result.x = ref->lower_right.x;
+			ot->resutl.y = ref->lower_right.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1]; 
 			updateReferencePoints(ot,ref, corner);
