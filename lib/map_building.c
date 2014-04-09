@@ -231,7 +231,9 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 	
 	double dSpeed = 500.0f;
 	double dDistance = 0.01f; //0,01
-	
+
+	char thinking[] = "thinking";
+	char text[] = "stopping";
 	char no[] = "north";
 	char ea[] = "east";
 	char we[] = "west";
@@ -299,6 +301,7 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 			break;			
 		case STOP:
 			stop_robot();
+			printf("%s\n", text);
 			point_SensorData = get_sensor_data(NUM_DIST_SENS);
 			for(i = 0;i < NUM_DIST_SENS;i++){
 				obstacle[i] = point_SensorData[i] - ps_offset[i] > THRESHOLD_DIST;
@@ -362,15 +365,32 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 				printf("%s\n", no);
 				turn_left(dSpeed);
 				for(it = 0;it < 5;it++){
+					point_SensorData = get_sensor_data(NUM_DIST_SENS);
+					for(i = 0;i < NUM_DIST_SENS;i++){
+						obstacle[i] = point_SensorData[i] - ps_offset[i] > THRESHOLD_DIST;
+					}	
+					printf("%s\n", thinking);
+					//define boolean for sensor states for cleaner implementation
+					bool ob_front = 
+					obstacle[0] ||
+					obstacle[7];
+
+					bool ob_right = 
+					obstacle[2];
+
+					bool ob_left = 
+					obstacle[5];
+
 					if((ob_front && ob_right) || (ob_front && ob_left)){
 						// odometry_track_step(ot);
 						state = STOP;
-						break;
+						//break;
 					}
 					move_forward(dSpeed, dDistance, ot);
 					//mark cells as occupied
 					wb_display_image_paste(display,background,0,0);
 					wb_display_set_color(display,0x000000);
+					point_SensorData = get_sensor_data(NUM_DIST_SENS);
 					for(i = 0;i < NUM_DIST_SENS;i++){
 						if(point_SensorData[i] > OCCUPANCE_DIST){
 							occupied_cell(robot_x, robot_y, ot->result.theta + angle_offset[i]);
@@ -392,22 +412,40 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 				printf("%s\n", ea);
 				turn_right(dSpeed);
 				for(it = 0;it < 5;it++){
+					point_SensorData = get_sensor_data(NUM_DIST_SENS);
+					point_SensorData = get_sensor_data(NUM_DIST_SENS);
+					for(i = 0;i < NUM_DIST_SENS;i++){
+						obstacle[i] = point_SensorData[i] - ps_offset[i] > THRESHOLD_DIST;
+					}	
+					printf("%s\n", thinking);
+					//define boolean for sensor states for cleaner implementation
+					bool ob_front = 
+					obstacle[0] ||
+					obstacle[7];
+
+					bool ob_right = 
+					obstacle[2];
+
+					bool ob_left = 
+					obstacle[5];
 					if((ob_front && ob_right) || (ob_front && ob_left)){
 						// odometry_track_step(ot);
 						state = STOP;
 						break;
-					}
-					move_forward(dSpeed, dDistance, ot);
-					//mark cells as occupied
-					wb_display_image_paste(display,background,0,0);
-					wb_display_set_color(display,0x000000);
-					for(i = 0;i < NUM_DIST_SENS;i++){
-						if(point_SensorData[i] > OCCUPANCE_DIST){
-							occupied_cell(robot_x, robot_y, ot->result.theta + angle_offset[i]);
+					}else{
+						move_forward(dSpeed, dDistance, ot);
+						//mark cells as occupied
+						wb_display_image_paste(display,background,0,0);
+						wb_display_set_color(display,0x000000);
+						point_SensorData = get_sensor_data(NUM_DIST_SENS);
+						for(i = 0;i < NUM_DIST_SENS;i++){
+							if(point_SensorData[i] > OCCUPANCE_DIST){
+								occupied_cell(robot_x, robot_y, ot->result.theta + angle_offset[i]);
+							}
 						}
+					 	wb_display_image_delete(display,background);
+						background = wb_display_image_copy(display,0,0,display_width,display_height); 
 					}
-				 	wb_display_image_delete(display,background);
-					background = wb_display_image_copy(display,0,0,display_width,display_height); 
 				}
 				/* odometry_track_step(ot); */
 				/* cur_rot = return_angle(ot->result.theta);
@@ -422,24 +460,43 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 				printf("%s\n", so);
 				turn_right(dSpeed);
 				for(it = 0;it < 5;it++){
+					point_SensorData = get_sensor_data(NUM_DIST_SENS);
+					for(i = 0;i < NUM_DIST_SENS;i++){
+						obstacle[i] = point_SensorData[i] - ps_offset[i] > THRESHOLD_DIST;
+					}	
+					printf("%s\n", thinking);
+					//define boolean for sensor states for cleaner implementation
+				
+					bool ob_front = 
+					obstacle[0] ||
+					obstacle[7];
+
+					bool ob_right = 
+					obstacle[2];
+
+					bool ob_left = 
+					obstacle[5];
+					
 					if((ob_front && ob_right) || (ob_front && ob_left)){
-						// odometry_track_step(ot);
+						printf("%s\n", text);
 						state = STOP;
 						break;
-					}
-					//mark cells as occupied
-					wb_display_image_paste(display,background,0,0);
-					wb_display_set_color(display,0x000000);
-					for(i = 0;i < NUM_DIST_SENS;i++){
-						if(point_SensorData[i] > OCCUPANCE_DIST){
-							occupied_cell(robot_x, robot_y, ot->result.theta + angle_offset[i]);
+					}else{
+						//mark cells as occupied
+						wb_display_image_paste(display,background,0,0);
+						wb_display_set_color(display,0x000000);
+						point_SensorData = get_sensor_data(NUM_DIST_SENS);
+						for(i = 0;i < NUM_DIST_SENS;i++){
+							if(point_SensorData[i] > OCCUPANCE_DIST){
+								occupied_cell(robot_x, robot_y, ot->result.theta + angle_offset[i]);
+							}
+							
 						}
+						 wb_display_image_delete(display,background);
+						background = wb_display_image_copy(display,0,0,display_width,display_height); 
 						
+						move_forward(dSpeed, dDistance, ot);
 					}
-					 wb_display_image_delete(display,background);
-					background = wb_display_image_copy(display,0,0,display_width,display_height); 
-					
-					move_forward(dSpeed, dDistance, ot);
 				}
 				/* odometry_track_step(ot); */
 				/*cur_rot = return_angle(ot->result.theta);
@@ -454,7 +511,24 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 				printf("%s\n", we);
 				turn_left(dSpeed);
 				for(it = 0;it < 5;it++){
+					point_SensorData = get_sensor_data(NUM_DIST_SENS);
+					for(i = 0;i < NUM_DIST_SENS;i++){
+						obstacle[i] = point_SensorData[i] - ps_offset[i] > THRESHOLD_DIST;
+					}	
+					printf("%s\n", thinking);
+					//define boolean for sensor states for cleaner implementation
+					bool ob_front = 
+					obstacle[0] ||
+					obstacle[7];
+
+					bool ob_right = 
+					obstacle[2];
+
+					bool ob_left = 
+					obstacle[5];
+					
 					if((ob_front && ob_right) || (ob_front && ob_left)){
+						printf("%s\n", text);
 						state = STOP;
 						break;
 					}
@@ -462,6 +536,7 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 					//mark cells as occupied
 					wb_display_image_paste(display,background,0,0);
 					wb_display_set_color(display,0x000000);
+					point_SensorData = get_sensor_data(NUM_DIST_SENS);
 					for(i = 0;i < NUM_DIST_SENS;i++){
 						if(point_SensorData[i] > OCCUPANCE_DIST){
 							occupied_cell(robot_x, robot_y, ot->result.theta + angle_offset[i]);

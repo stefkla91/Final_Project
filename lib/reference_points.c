@@ -23,7 +23,8 @@ The int specifies which corner will be set.
 4 = upper_right
 */
 void setReferencePoint(struct odometryTrackStruct * ot, struct referencePos * ref, int corner){
-	printf("Setting Reference point for corner: %d\n", corner);
+	char text[] = "Saving";
+	printf("%s\n", text);
 	if(corner == 1){
 		ref->lower_left.x += ot->result.x;
 		ref->lower_left.y += ot->result.y;
