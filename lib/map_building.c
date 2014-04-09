@@ -95,8 +95,12 @@ int state = FORWARD;
 
 /**
 set booleans for the direction the robot is moving in
+1 = north
+2 = east
+3 = south
+4 = west
 */
-void check_direction(double d){
+int check_direction(double d){
 	int i = return_angle(d);
 	east = false;
 	north = false;
@@ -109,12 +113,16 @@ void check_direction(double d){
 	
 	if(EAST < i + ANGLE_TOLERANCE && EAST > i - ANGLE_TOLERANCE){
 		east = true;
+		return 1;
 	}else if(NORTH < i + ANGLE_TOLERANCE && NORTH > i - ANGLE_TOLERANCE){
 		north = true;
+		return 2;
 	}else if(WEST < i + ANGLE_TOLERANCE && WEST > i - ANGLE_TOLERANCE){
 		west = true;
+		return 3;
 	}else if(SOUTH < i + ANGLE_TOLERANCE && SOUTH > i - ANGLE_TOLERANCE){
 		south = true;
+		return 4; 
 	}
 }
 
