@@ -101,31 +101,31 @@ set booleans for the direction the robot is moving in
 3 = south
 4 = west
 */
-int check_direction(double d){
+void check_direction(double d){
 	int i = return_angle(d);
 	east = false;
 	north = false;
 	west = false;
 	south = false; 
-	int result = 0;
+	//int result = 0;
 	if(i + ANGLE_TOLERANCE >= 360){
 		i -= 360; 
 	} 
 	
 	if(EAST < i + ANGLE_TOLERANCE && EAST > i - ANGLE_TOLERANCE){
 		east = true;
-		result = 1;
+	//	result = 1;
 	}else if(NORTH < i + ANGLE_TOLERANCE && NORTH > i - ANGLE_TOLERANCE){
 		north = true;
-		result = 2;
+	//	result = 2;
 	}else if(WEST < i + ANGLE_TOLERANCE && WEST > i - ANGLE_TOLERANCE){
 		west = true;
-		result = 3;
+	//	result = 3;
 	}else if(SOUTH < i + ANGLE_TOLERANCE && SOUTH > i - ANGLE_TOLERANCE){
 		south = true;
-		result = 4; 
+	//	result = 4; 
 	}
-	return result;
+	//return result;
 }
 
 
@@ -521,6 +521,7 @@ int return_angle(double rad){
 	}else{
 		rotation = RTOD(rad); 
 	}
+
 	printf("%f\n", rotation);
 	return rotation;
 }

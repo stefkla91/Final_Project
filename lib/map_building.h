@@ -11,4 +11,4 @@ void occupied_cell(int x, int y, float theta);
 void reset();
 void run();
 int return_angle();
-int check_direction(double d);
+void check_direction(double d);
