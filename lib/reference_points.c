@@ -165,11 +165,11 @@ void checkReferencePoints(struct odometryTrackStruct * ot, struct referencePos *
 
 	if((ref->upper_left.x == 0.00 && ref->upper_left.y == 0.00) && corner == 3){
 		setReferencePoint(ot, ref, corner);
-	}else if((ref->upper_right.x == 0.00 && ref->upper_right.y == 0.00)&& corner == 3){
+	}else if((ref->upper_right.x == 0.00 && ref->upper_right.y == 0.00)&& corner == 4){
 		setReferencePoint(ot, ref, corner);
-	}else if((ref->lower_left.x == 0.00 && ref->lower_left.y == 0.00)&& corner == 3){
+	}else if((ref->lower_left.x == 0.00 && ref->lower_left.y == 0.00)&& corner == 1){
 		setReferencePoint(ot, ref, corner);
-	}else if((ref->lower_left.x == 0.00 && ref->lower_left.y == 0.00)&& corner == 3){
+	}else if((ref->lower_right.x == 0.00 && ref->lower_right.y == 0.00)&& corner == 2){
 		setReferencePoint(ot, ref, corner);
 	}
 
