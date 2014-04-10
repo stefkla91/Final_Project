@@ -302,6 +302,7 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 		case FORWARD:
 			check_direction(ot->result.theta);
 			cur_rot = return_angle(ot->result.theta);
+			checkReferencePoints(ot, ref);
 		 	if(north){
 				printf("%s\n", no);
 				check_rotation(cur_rot, 90, dSpeed);
@@ -333,27 +334,27 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 			odometry_track_step(ot);
 			check_direction(ot->result.theta);
 		 	if(ob_front && ob_left && north){
-				checkReferencePoints(ot, ref, 3);
+				// checkReferencePoints(ot, ref);
 				state = TURNRIGHT;
 				}
 			 else if(ob_front && ob_left){
-				if(north){
-				checkReferencePoints(ot, ref, 3);
+			/*	if(north){
+				checkReferencePoints(ot, ref);
 				}else if (south || west){
-					checkReferencePoints(ot, ref, 1);
-				}
+					checkReferencePoints(ot, ref);
+				}*/
 				state = UTURN;
 			} 
 			else if(ob_front && ob_right && east){
-				checkReferencePoints(ot, ref, 2);
+			/*	checkReferencePoints(ot, ref);*/
 				state = TURNLEFT;
 			}
 			else if(ob_front && ob_right){
-					if(north){
-					checkReferencePoints(ot, ref, 4);
+				/*	if(north){
+					checkReferencePoints(ot, ref);
 					}else if (south || east){
 					checkReferencePoints(ot, ref, 2);
-					}
+					}*/
 				state = UTURN;
 			}
 			else if(ob_front){
@@ -378,6 +379,7 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 				printf("%s\n", no);
 				turn_left(dSpeed);
 				for(it = 0;it < 5;it++){
+					checkReferencePoints(ot, ref);
 					//checkObstacles();
 			/*		point_SensorData = get_sensor_data(NUM_DIST_SENS);
 					for(i = 0;i < NUM_DIST_SENS;i++){
@@ -395,6 +397,7 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 					obstacle[5];*/
 					if((ob_front && ob_right) || (ob_front && ob_left)){
 						// odometry_track_step(ot);
+						checkReferencePoints(ot, ref);
 						state = STOP;
 						//break;
 					}
@@ -424,6 +427,7 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 				printf("%s\n", ea);
 				turn_right(dSpeed);
 				for(it = 0;it < 5;it++){
+					checkReferencePoints(ot, ref);
 					/*point_SensorData = get_sensor_data(NUM_DIST_SENS);
 
 					for(i = 0;i < NUM_DIST_SENS;i++){
@@ -442,6 +446,7 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 					//checkObstacles();
 					if((ob_front && ob_right) || (ob_front && ob_left)){
 						// odometry_track_step(ot);
+						checkReferencePoints(ot, ref);
 						state = STOP;
 						break;
 					}else{
@@ -472,6 +477,7 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 				printf("%s\n", so);
 				turn_right(dSpeed);
 				for(it = 0;it < 5;it++){
+					checkReferencePoints(ot, ref);
 					/*point_SensorData = get_sensor_data(NUM_DIST_SENS);
 					for(i = 0;i < NUM_DIST_SENS;i++){
 						obstacle[i] = point_SensorData[i] - ps_offset[i] > THRESHOLD_DIST;
@@ -490,6 +496,7 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 					
 					if((ob_front && ob_right) || (ob_front && ob_left)){
 						printf("%s\n", text);
+						checkReferencePoints(ot, ref);
 						state = STOP;
 						break;
 					}else{
@@ -522,6 +529,7 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 				printf("%s\n", we);
 				turn_left(dSpeed);
 				for(it = 0;it < 5;it++){
+					checkReferencePoints(ot, ref);
 					//checkObstacles();
 			/*		point_SensorData = get_sensor_data(NUM_DIST_SENS);
 					for(i = 0;i < NUM_DIST_SENS;i++){
@@ -539,6 +547,7 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 					obstacle[5];*/
 					
 					if((ob_front && ob_right) || (ob_front && ob_left)){
+
 						printf("%s\n", text);
 						state = STOP;
 						break;
