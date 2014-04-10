@@ -9,17 +9,20 @@
 #include <math.h>	
 #include "reference_points.h"
 #include "odometry.h"
+#include "e_puck_distance_sensors.h"
 #include "e_puck_movement.h"
 #include "map_building.h"
 #include <stdio.h>
 
 #define ANGLE_TOLERANCE 20
- #define EAST 0 
+#define EAST 0 
 #define NORTH 90
 #define WEST 180
 #define SOUTH 270
+#define NUM_DIST_SENS 8
+#define THRESHOLD_DIST 100
 //direction
-bool north,west,south,east;
+// bool north,west,south,east;
 
 /**
 set booleans for the direction the robot is moving in
@@ -28,31 +31,31 @@ set booleans for the direction the robot is moving in
 3 = south
 4 = west
 */
-void checkDirecrection(double d){
+int checkDirecrection(double d){
 	int i = return_angle(d);
-	east = false;
+	/*east = false;
 	north = false;
 	west = false;
-	south = false; 
-	//int result = 0;
+	south = false; */
+	int result = 0;
 	if(i + ANGLE_TOLERANCE >= 360){
 		i -= 360; 
 	} 
 	
 	if(EAST < i + ANGLE_TOLERANCE && EAST > i - ANGLE_TOLERANCE){
-		east = true;
-	//	result = 1;
+		// east = true;
+		result = 1;
 	}else if(NORTH < i + ANGLE_TOLERANCE && NORTH > i - ANGLE_TOLERANCE){
-		north = true;
-	//	result = 2;
+		// north = true;
+		result = 2;
 	}else if(WEST < i + ANGLE_TOLERANCE && WEST > i - ANGLE_TOLERANCE){
-		west = true;
-	//	result = 3;
+		// west = true;
+		result = 3;
 	}else if(SOUTH < i + ANGLE_TOLERANCE && SOUTH > i - ANGLE_TOLERANCE){
-		south = true;
-	//	result = 4; 
+		// south = true;
+		result = 4; 
 	}
-	//return result;
+	return result;
 }
  /**
 Sets the reference point in the referencePos struct.
@@ -94,11 +97,11 @@ The corner is defined in the run() function where this function will be called.
 void updateReferencePoints(struct odometryTrackStruct * ot, struct referencePos * ref, int corner){
 	double dThreshold = 20.0;
 	double dCurPosX = ot->result.x;
-	int direction;
-	//int direction = checkDirecrection(ot->result.theta);
-	checkDirecrection(ot->result.theta);
+	// int direction;
+	int direction = checkDirecrection(ot->result.theta);
+	// checkDirecrection(ot->result.theta);
 
-	if(north){
+	/*if(north){
 		direction = 1;
 	}else if(east){
 		direction = 2;
@@ -106,7 +109,7 @@ void updateReferencePoints(struct odometryTrackStruct * ot, struct referencePos 
 		direction = 3;
 	}else if(west){
 		direction = 4;
-	}
+	}*/
 
 	if(direction == 1){
 		if(((ref->upper_left.x <= dCurPosX + dThreshold) || (ref->upper_left.x >= dCurPosX - dThreshold)) && corner == 3){
@@ -145,15 +148,21 @@ The corner is defined in the run() function where this function will be called.
 3 = upper_left
 4 = upper_right
 */
-void checkReferencePoints(struct odometryTrackStruct * ot, struct referencePos * ref, int corner){
+void checkReferencePoints(struct odometryTrackStruct * ot, struct referencePos * ref){
 	double dThreshold = 20.0f;
+	int i;
 	double *point_dEncPos = get_encoder_positions(); 
 	double dCurPosX = ot->result.x;
-	int direction;
-	//int direction = checkDirecrection(ot->result.theta);
-	checkDirecrection(ot->result.theta);
+	int *point_SensorData;
+	int corner = 0;
+	int obstacle[NUM_DIST_SENS]={0,0,0,0,0,0,0,0};
+	int ps_offset[NUM_DIST_SENS] = {35,35,35,35,35,35,35,35};
+	// int direction;
+	int direction = checkDirecrection(ot->result.theta);
+	bool ob_front, ob_left, ob_right;
+	// checkDirecrection(ot->result.theta);
 
-	if(north){
+/*	if(north){
 		direction = 1;
 	}else if(east){
 		direction = 2;
@@ -162,18 +171,101 @@ void checkReferencePoints(struct odometryTrackStruct * ot, struct referencePos *
 	}else if(west){
 		direction = 4;
 	}
+*/
 
-	if((ref->upper_left.x == 0.00 && ref->upper_left.y == 0.00) && corner == 3){
-		setReferencePoint(ot, ref, corner);
-	}else if((ref->upper_right.x == 0.00 && ref->upper_right.y == 0.00)&& corner == 4){
-		setReferencePoint(ot, ref, corner);
-	}else if((ref->lower_left.x == 0.00 && ref->lower_left.y == 0.00)&& corner == 1){
-		setReferencePoint(ot, ref, corner);
-	}else if((ref->lower_right.x == 0.00 && ref->lower_right.y == 0.00)&& corner == 2){
-		setReferencePoint(ot, ref, corner);
+
+/*	get distance sensor data*/
+	point_SensorData = get_sensor_data(NUM_DIST_SENS);
+	for(i = 0;i < NUM_DIST_SENS;i++){
+		obstacle[i] = point_SensorData[i] - ps_offset[i] > THRESHOLD_DIST;
+	}	
+
+	ob_front  = 
+	obstacle[0] ||
+	obstacle[7];
+
+	ob_right = 
+	obstacle[2];
+
+	ob_left = 
+	obstacle[5];
+
+	/*find out what corner it is */
+	//north 
+	if(direction == 1){
+		if(ob_front && ob_left){
+			corner = 3;
+		}else if(ob_front && ob_right){
+			corner = 4;
+		}
 	}
 
-	if(direction == 1){
+	//east
+	if(direction == 2){
+		if(ob_front && ob_left){
+			corner = 4;
+		}else if(ob_front && ob_right){
+			corner = 2;
+		}
+	}
+
+	//south
+	if(direction == 3){
+		if(ob_front && ob_left){
+			corner = 2;
+		}else if(ob_front && ob_right){
+			corner = 1;
+		}
+	}
+
+	//west
+	if(direction == 4){
+		if(ob_front && ob_left){
+			corner = 1;
+		}else if(ob_front && ob_right){
+			corner = 3;
+		}
+	}
+
+	/*Check if the current corner is set to 0, if so force update*/
+	if(corner == 1){
+		if((ref->lower_left.x == 0.00) && (ref->lower_left.y == 0.00)){
+			setReferencePoint(ot, ref, corner);
+			return;
+		}
+	}else if(corner == 2){
+		if((ref->lower_right.x == 0.00) && (ref->lower_right.y == 0.00)){
+			setReferencePoint(ot, ref, corner);
+			return;
+		}
+	}else if(corner == 3){
+		if((ref->upper_left.x == 0.00) && (ref->upper_left.y == 0.00)){
+			setReferencePoint(ot, ref, corner);
+			return;
+		}
+	}else if(corner == 4){
+		if((ref->upper_right.x == 0.00) && (ref->upper_right.y == 0.00)){
+			setReferencePoint(ot, ref, corner);
+			return;
+		}
+	}
+
+	/*if((ref->upper_left.x == 0.00 && ref->upper_left.y == 0.00) && corner == 3){
+		setReferencePoint(ot, ref, corner);
+		return;
+	}else if((ref->upper_right.x == 0.00 && ref->upper_right.y == 0.00)&& corner == 4){
+		setReferencePoint(ot, ref, corner);
+		return;
+	}else if((ref->lower_left.x == 0.00 && ref->lower_left.y == 0.00)&& corner == 1){
+		setReferencePoint(ot, ref, corner);
+		return;
+	}else if((ref->lower_right.x == 0.00 && ref->lower_right.y == 0.00)&& corner == 2){
+		setReferencePoint(ot, ref, corner);
+		return;
+	}*/
+
+	/*If the corner is set updated the odometery information of the robot */
+	if(direction == 1){ //north 
 		if(((ref->upper_left.x <= dCurPosX + dThreshold) || (ref->upper_left.x >= dCurPosX - dThreshold)) && corner == 3){
 			ot->result.x = ref->upper_left.x;
 			ot->result.y = ref->upper_left.y;
@@ -187,7 +279,7 @@ void checkReferencePoints(struct odometryTrackStruct * ot, struct referencePos *
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1]; 
 		}
-	}else if(direction == 2){
+	}else if(direction == 2){//east 
 		if(((ref->upper_right.x <= dCurPosX + dThreshold) || (ref->upper_right.x >= dCurPosX - dThreshold)) && corner == 4){
 			ot->result.x = ref->upper_right.x;
 			ot->result.y = ref->upper_right.y;
@@ -201,7 +293,7 @@ void checkReferencePoints(struct odometryTrackStruct * ot, struct referencePos *
 			ot->state.pos_right_prev = point_dEncPos[1]; 
 			updateReferencePoints(ot,ref, corner);
 		}
-	}else if(direction == 3){
+	}else if(direction == 3){ //south
 		if(((ref->lower_left.x <= dCurPosX + dThreshold) || (ref->lower_left.x >= dCurPosX - dThreshold)) && corner == 1){
 			ot->result.x = ref->lower_left.x;
 			ot->result.y = ref->lower_left.y;
@@ -215,7 +307,7 @@ void checkReferencePoints(struct odometryTrackStruct * ot, struct referencePos *
 			ot->state.pos_right_prev = point_dEncPos[1];
 			updateReferencePoints(ot,ref, corner); 
 		}
-	}else if(direction == 4){
+	}else if(direction == 4){ //west
 		if(((ref->upper_left.x <= dCurPosX + dThreshold) || (ref->upper_left.x >= dCurPosX - dThreshold)) && corner == 3){
 			ot->result.x = ref->upper_left.x;
 			ot->result.y = ref->upper_left.y;

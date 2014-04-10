@@ -338,7 +338,6 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 				}
 			 else if(ob_front && ob_left){
 				if(north){
-
 				checkReferencePoints(ot, ref, 3);
 				}else if (south || west){
 					checkReferencePoints(ot, ref, 1);
@@ -346,18 +345,14 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 				state = UTURN;
 			} 
 			else if(ob_front && ob_right && east){
-
 				checkReferencePoints(ot, ref, 2);
-
 				state = TURNLEFT;
 			}
 			else if(ob_front && ob_right){
 					if(north){
-
 					checkReferencePoints(ot, ref, 4);
 					}else if (south || east){
 					checkReferencePoints(ot, ref, 2);
-
 					}
 				state = UTURN;
 			}
