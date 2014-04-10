@@ -21,9 +21,11 @@
 #include <math.h>
 
 #include "../../lib/odometry.h"
+#include "../../lib/reference_points.h"
 #include "../../lib/e_puck_movement.h"
 #include "../../lib/map_building.h"
 #include "../../lib/e_puck_distance_sensors.h"
+
 
 #define TIME_STEP 8
 #define MAP_SIZE 70
@@ -50,13 +52,16 @@ WbDeviceTag led[3];
 
 //odometry
 struct odometryTrackStruct ot;
+
+//references
+struct referencePos ref;
 /**
  * This is the main program.
  * The arguments of the main function can be specified by the
  * "controllerArgs" field of the Robot node
  */
 int main(int argc, char **argv){
-	 double dSpeed = 300.0f;
+ 	double dSpeed = 300.0f;
 	double dDistance = 0.3f;  
 	
 	//initialize and reset all needed devices 
@@ -64,7 +69,16 @@ int main(int argc, char **argv){
 	reset();
 	
 	odometry_track_start(&ot);
-	
+
+	ref.lower_left.x = 0;
+	ref.lower_left.y = 0;
+	ref.lower_right.x = 0;
+	ref.lower_right.y = 0;
+	ref.upper_left.x = 0;
+	ref.upper_left.y = 0;
+	ref.upper_right.x = 0;
+	ref.upper_left.y = 0;
+
 	ot.result.x = 0;// 0.008;
 	ot.result.y = 0;//0.008;
 	ot.result.theta = 4.71238898;// in RAD = 270 degrees 
@@ -72,7 +86,7 @@ int main(int argc, char **argv){
 	while (wb_robot_step(TIME_STEP*4) != -1) {
 		odometry_track_step(&ot);
 	
-		run(&ot);
+		run(&ot, &ref);
 	//	UMBmark(dSpeed, dDistance);
 	};
 	wb_robot_cleanup();
