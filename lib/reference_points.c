@@ -30,7 +30,7 @@ The int specifies which corner will be set.
 */
 void set_reference_point(struct odometryTrackStruct * ot, struct referencePos * ref, int corner){
 	char text[] = "Saving";
-	printf("%s\n", text);
+	printf("%s at corner: %d with cords: %f and %f\n", text, corner, ot->result.x, ot->result.y);
 	if(corner == 1){
 		ref->lower_left.x += ot->result.x;
 		ref->lower_left.y += ot->result.y;
@@ -153,13 +153,13 @@ void check_reference_points(struct odometryTrackStruct * ot, struct referencePos
 			ot->result.y = ref->upper_left.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1]; 
-			printf("%s\n", message);
+			printf("%s at corner: %d with cords: %f %f\n", message, corner, ref->upper_left.x, ref->upper_left.y);
 		}else if(((ref->upper_right.x <= dCurPosX + dThreshold )|| (ref->upper_right.x >= dCurPosX - dThreshold)) && corner == 4){
 			ot->result.x = ref->upper_right.x;
 			ot->result.y = ref->upper_right.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1]; 
-			printf("%s\n", message);
+			printf("%s at corner: %d with cords: %f %f\n", message, corner, ref->upper_right.x, ref->upper_right.y);
 		}
 	}else if(direction == 2){//east 
 		if(((ref->upper_right.x <= dCurPosX + dThreshold) || (ref->upper_right.x >= dCurPosX - dThreshold)) && corner == 4){
@@ -167,13 +167,13 @@ void check_reference_points(struct odometryTrackStruct * ot, struct referencePos
 			ot->result.y = ref->upper_right.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1]; 
-			printf("%s\n", message);
+			printf("%s at corner: %d with cords: %f %f\n", message, corner, ref->upper_right.x, ref->upper_right.y);
 		}else if(((ref->lower_right.x <= dCurPosX + dThreshold) || (ref->lower_right.x >= dCurPosX - dThreshold)) && corner == 2){
 			ot->result.x = ref->lower_right.x;
 			ot->result.y = ref->lower_right.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1]; 
-			printf("%s\n", message);
+			printf("%s at corner: %d with cords: %f %f\n", message, corner, ref->lower_right.x, ref->lower_right.y);
 		}
 	}else if(direction == 3){ //south
 		if(((ref->lower_left.x <= dCurPosX + dThreshold) || (ref->lower_left.x >= dCurPosX - dThreshold)) && corner == 1){
@@ -181,13 +181,13 @@ void check_reference_points(struct odometryTrackStruct * ot, struct referencePos
 			ot->result.y = ref->lower_left.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1]; 
-			printf("%s\n", message);
+			printf("%s at corner: %d with cords: %f %f\n", message, corner, ref->lower_left.x, ref->lower_left.y);
 		}else if(((ref->lower_right.x <= dCurPosX + dThreshold) || (ref->lower_right.x >= dCurPosX - dThreshold)) && corner == 2){
 			ot->result.x = ref->lower_right.x;
 			ot->result.y = ref->lower_right.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1];
-			printf("%s\n", message);
+			printf("%s at corner: %d with cords: %f %f\n", message, corner, ref->lower_right.x, ref->lower_right.y);
 		}
 	}else if(direction == 4){ //west
 		if(((ref->upper_left.x <= dCurPosX + dThreshold) || (ref->upper_left.x >= dCurPosX - dThreshold)) && corner == 3){
@@ -195,14 +195,14 @@ void check_reference_points(struct odometryTrackStruct * ot, struct referencePos
 			ot->result.y = ref->upper_left.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1]; 
-			printf("%s\n", message);
+			printf("%s at corner: %d with cords: %f %f\n", message, corner, ref->upper_left.x, ref->upper_left.y);
 		}else if(((ref->lower_right.x <= dCurPosX + dThreshold) || (ref->lower_right.x >= dCurPosX - dThreshold)) && corner == 1){
-			ot->result.x = ref->lower_right.x;
-			ot->result.y = ref->lower_right.y;
+			ot->result.x = ref->lower_left.x;
+			ot->result.y = ref->lower_left.y;
 			ot->state.pos_left_prev = point_dEncPos[0];
 			ot->state.pos_right_prev = point_dEncPos[1]; 
-			printf("%s\n", message);
+			printf("%s at corner: %d with cords: %f %f\n", message, corner, ref->lower_left.x, ref->lower_left.y);
+			printf("Ot is: %f and %f", ot->result.x, ot->result.y);
 		}
 	}
 }
-
