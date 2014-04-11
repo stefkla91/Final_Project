@@ -3,9 +3,11 @@
  * Date:          14.03.2014
  * Description:   
  * Author:        Stefan Klaus
- * Modifications: V 0.1
+ * Modifications: V 0.2
  */
- 
+
+#ifndef ODOMETRY_H
+#define ODOMETRY_H
  struct odometryTrackStruct {
 	struct {
 		float wheel_distance;
@@ -26,3 +28,5 @@ int odometry_track_start(struct odometryTrackStruct * ot);
 int odometry_track_start_pos(struct odometryTrackStruct * ot, double* dEncPos);
 void odometry_track_step(struct odometryTrackStruct * ot);
 void odometry_track_step_pos(struct odometryTrackStruct * ot, double* dEncPos);
+
+#endif

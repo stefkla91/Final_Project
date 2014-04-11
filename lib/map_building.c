@@ -3,7 +3,7 @@
  * Date:          15.03.2014
  * Description:   
  * Author:        Stefan Klaus
- * Modifications: v0.1
+ * Modifications: v0.4
  */
 
 #include <webots/robot.h>
@@ -14,6 +14,7 @@
 #include <webots/display.h> 
 #include <stdio.h>
 
+#include "functions.h"
 #include "reference_points.h"
 #include "map_building.h"
 #include "e_puck_movement.h"
@@ -48,13 +49,6 @@
 #define TURNLEFT 3
 #define UTURN 4
 
-#define RTOD(r) ((r) * 180 / M_PI)
-#define ANGLE_TOLERANCE 20
-#define EAST 0 
-#define NORTH 90
-#define WEST 180
-#define SOUTH 270
-
 /* Definitions */
 //Leds
 WbDeviceTag led[3];
@@ -85,49 +79,8 @@ float angle_offset[NUM_DIST_SENS] = {0.2793, 0.7854, 1.5708, 2.618, -2.618, -1.5
 //movement
 int new_encoder;
 
-//direction
-bool north,west,south,east;
-
-//odometry struct
-//struct odometryTrackStruct ot;
-
 //starting state for the switch statement
 int state = FORWARD;
-
-/**
-set booleans for the direction the robot is moving in
-1 = north
-2 = east
-3 = south
-4 = west
-*/
-void check_direction(double d){
-	int i = return_angle(d);
-	east = false;
-	north = false;
-	west = false;
-	south = false; 
-	//int result = 0;
-	if(i + ANGLE_TOLERANCE >= 360){
-		i -= 360; 
-	} 
-	
-	if(EAST < i + ANGLE_TOLERANCE && EAST > i - ANGLE_TOLERANCE){
-		east = true;
-	//	result = 1;
-	}else if(NORTH < i + ANGLE_TOLERANCE && NORTH > i - ANGLE_TOLERANCE){
-		north = true;
-	//	result = 2;
-	}else if(WEST < i + ANGLE_TOLERANCE && WEST > i - ANGLE_TOLERANCE){
-		west = true;
-	//	result = 3;
-	}else if(SOUTH < i + ANGLE_TOLERANCE && SOUTH > i - ANGLE_TOLERANCE){
-		south = true;
-	//	result = 4; 
-	}
-	//return result;
-}
-
 
 /**
  * Initiate the display with a white color
@@ -250,7 +203,7 @@ void checkObstacles(){
 run function
 */
 void run(struct odometryTrackStruct * ot, struct referencePos * ref){
-	int i, it;
+	int i = 0, it = 0, direction = 0;
 	double cur_rot;
 	int *point_SensorData;
 	int ps_offset[NUM_DIST_SENS] = {35,35,35,35,35,35,35,35};
@@ -300,22 +253,22 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 	
 	switch(state){
 		case FORWARD:
-			check_direction(ot->result.theta);
+			direction = check_direction(ot->result.theta);
 			cur_rot = return_angle(ot->result.theta);
-			checkReferencePoints(ot, ref);
-		 	if(north){
+			check_reference_points(ot, ref);
+		 	if(direction == 1){
 				printf("%s\n", no);
 				check_rotation(cur_rot, 90, dSpeed);
 				move_forward(dSpeed, dDistance, ot);
-			}else if(east){
+			}else if(direction == 2){
 				printf("%s\n", ea);
 				check_rotation(cur_rot, 0, dSpeed);
 				move_forward(dSpeed, dDistance, ot);
-			}else if(south){
+			}else if(direction == 3){
 				printf("%s\n", so);
 				check_rotation(cur_rot, 270, dSpeed);
 				move_forward(dSpeed, dDistance, ot);
-			}else if(west){
+			}else if(direction == 4){
 				printf("%s\n", we);
 				check_rotation(cur_rot, 180, dSpeed);
 				move_forward(dSpeed, dDistance, ot);
@@ -329,44 +282,29 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 		case STOP:
 			stop_robot();
 			printf("%s\n", text);
-		//	checkObstacles();
-
 			odometry_track_step(ot);
 			check_direction(ot->result.theta);
-		 	if(ob_front && ob_left && north){
-				// checkReferencePoints(ot, ref);
+		 	if(ob_front && ob_left && direction == 1){
 				state = TURNRIGHT;
 				}
 			 else if(ob_front && ob_left){
-			/*	if(north){
-				checkReferencePoints(ot, ref);
-				}else if (south || west){
-					checkReferencePoints(ot, ref);
-				}*/
 				state = UTURN;
 			} 
-			else if(ob_front && ob_right && east){
-			/*	checkReferencePoints(ot, ref);*/
+			else if(ob_front && ob_right && direction == 2){
 				state = TURNLEFT;
 			}
 			else if(ob_front && ob_right){
-				/*	if(north){
-					checkReferencePoints(ot, ref);
-					}else if (south || east){
-					checkReferencePoints(ot, ref, 2);
-					}*/
 				state = UTURN;
 			}
 			else if(ob_front){
-				check_direction(ot->result.theta);
+				direction = check_direction(ot->result.theta);
 				state = UTURN;
-				//state = TURNRIGHT;
 				}   
 			break;	
 			
 		case TURNRIGHT:
 			turn_right(dSpeed);
-		//	controll_angle(&ot);
+			//controll_angle(&ot);
 			state = FORWARD;
 			break;
 		case TURNLEFT:
@@ -377,12 +315,12 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 		case UTURN:
 			// robot_x = wtom(ot->result.x);
 			// robot_y = wtom(ot->result.y);
-			if(north){
+			if(direction == 1){
 				printf("%s\n", no);
 				turn_left(dSpeed);
 				for(it = 0;it < 5;it++){
 					printf("%s\n",thinking);
-					checkReferencePoints(ot, ref);
+					check_reference_points(ot, ref);
 					//checkObstacles();
 			/*		point_SensorData = get_sensor_data(NUM_DIST_SENS);
 					for(i = 0;i < NUM_DIST_SENS;i++){
@@ -400,7 +338,7 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 					obstacle[5];*/
 					if((ob_front && ob_right) || (ob_front && ob_left)){
 						// odometry_track_step(ot);
-						checkReferencePoints(ot, ref);
+						check_reference_points(ot, ref);
 						state = STOP;
 						//break;
 					}
@@ -424,14 +362,13 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 				odometry_track_step(ot);
 				/* cur_rot = return_angle(ot->result.theta);
 				check_rotation(cur_rot, 270, dSpeed);  */
-				north = false;
 				state = FORWARD;
-			}else if(east){
+			}else if(direction == 2){
 				printf("%s\n", ea);
 				turn_right(dSpeed);
 				for(it = 0;it < 5;it++){
 					printf("%s\n",thinking);
-					checkReferencePoints(ot, ref);
+					check_reference_points(ot, ref);
 				/*	point_SensorData = get_sensor_data(NUM_DIST_SENS);
 
 					for(i = 0;i < NUM_DIST_SENS;i++){
@@ -450,7 +387,7 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 					//checkObstacles();
 					if((ob_front && ob_right) || (ob_front && ob_left)){
 						// odometry_track_step(ot);
-						checkReferencePoints(ot, ref);
+						check_reference_points(ot, ref);
 						state = STOP;
 						break;
 					}else{
@@ -475,14 +412,13 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 				odometry_track_step(ot);
 				/* cur_rot = return_angle(ot->result.theta);
 				check_rotation(cur_rot, 180, dSpeed);  */
-				east = false;
 				state = FORWARD;
-			}else if(south){
+			}else if(direction == 3){
 				printf("%s\n", so);
 				turn_right(dSpeed);
 				for(it = 0;it < 5;it++){
 					printf("%s\n",thinking);
-					checkReferencePoints(ot, ref);
+					check_reference_points(ot, ref);
 				/*	point_SensorData = get_sensor_data(NUM_DIST_SENS);
 					for(i = 0;i < NUM_DIST_SENS;i++){
 						obstacle[i] = point_SensorData[i] - ps_offset[i] > THRESHOLD_DIST;
@@ -501,7 +437,7 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 					
 					if((ob_front && ob_right) || (ob_front && ob_left)){
 						printf("%s\n", text);
-						checkReferencePoints(ot, ref);
+						check_reference_points(ot, ref);
 						state = STOP;
 						break;
 					}else{
@@ -528,14 +464,13 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 				odometry_track_step(ot);
 				/* cur_rot = return_angle(ot->result.theta);
 				check_rotation(cur_rot, 90, dSpeed); */ 
-				south = false;
 				state = FORWARD;
-			}else if(west){
+			}else if(direction == 4){
 				printf("%s\n", we);
 				turn_left(dSpeed);
 				for(it = 0;it < 5;it++){
 					printf("%s\n",thinking);
-					checkReferencePoints(ot, ref);
+					check_reference_points(ot, ref);
 					//checkObstacles();
 			/*		point_SensorData = get_sensor_data(NUM_DIST_SENS);
 					for(i = 0;i < NUM_DIST_SENS;i++){
@@ -580,7 +515,6 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 			
 			/* cur_rot = return_angle(ot->result.theta);
 				check_rotation(cur_rot, 360, dSpeed);  */
-				west = false;
 				state = FORWARD;
 			}
 			break;
@@ -589,19 +523,4 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 	}
 	wb_display_set_color(display,0xFF0000);
     wb_display_draw_rectangle(display,robot_x, display_height-robot_y-1,1,1);
-}
-
-/**
-returns the angle in which the robot is moving
-*/
-int return_angle(double rad){
-	double rotation;
-	if(RTOD(rad) < 0){
-		rotation = RTOD(rad) + 360;
-	}else{
-		rotation = RTOD(rad); 
-	}
-
-	printf("%f\n", rotation);
-	return rotation;
 }

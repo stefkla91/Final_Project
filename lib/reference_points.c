@@ -7,6 +7,7 @@
  */
 #include <webots/robot.h>
 #include <math.h>	
+#include "functions.h"
 #include "reference_points.h"
 #include "odometry.h"
 #include "e_puck_distance_sensors.h"
@@ -14,47 +15,10 @@
 #include "map_building.h"
 #include <stdio.h>
 
-#define ANGLE_TOLERANCE 20
-#define EAST 0 
-#define NORTH 90
-#define WEST 180
-#define SOUTH 270
 #define NUM_DIST_SENS 8
 #define THRESHOLD_DIST 100
 
-/**
-set booleans for the direction the robot is moving in
-1 = north
-2 = east
-3 = south
-4 = west
-*/
-int checkDirecrection(double d){
-	int i = return_angle(d);
-	/*east = false;
-	north = false;
-	west = false;
-	south = false; */
-	int result = 0;
-	if(i + ANGLE_TOLERANCE >= 360){
-		i -= 360; 
-	} 
-	
-	if(EAST < i + ANGLE_TOLERANCE && EAST > i - ANGLE_TOLERANCE){
-		// east = true;
-		result = 1;
-	}else if(NORTH < i + ANGLE_TOLERANCE && NORTH > i - ANGLE_TOLERANCE){
-		// north = true;
-		result = 2;
-	}else if(WEST < i + ANGLE_TOLERANCE && WEST > i - ANGLE_TOLERANCE){
-		// west = true;
-		result = 3;
-	}else if(SOUTH < i + ANGLE_TOLERANCE && SOUTH > i - ANGLE_TOLERANCE){
-		// south = true;
-		result = 4; 
-	}
-	return result;
-}
+
  /**
 Sets the reference point in the referencePos struct.
 The parameters are a pointer to the referencePos struct and an int.
@@ -64,7 +28,7 @@ The int specifies which corner will be set.
 3 = upper_left
 4 = upper_right
 */
-void setReferencePoint(struct odometryTrackStruct * ot, struct referencePos * ref, int corner){
+void set_reference_point(struct odometryTrackStruct * ot, struct referencePos * ref, int corner){
 	char text[] = "Saving";
 	printf("%s\n", text);
 	if(corner == 1){
@@ -93,7 +57,7 @@ The corner is defined in the run() function where this function will be called.
 3 = upper_left
 4 = upper_right
 */
-void checkReferencePoints(struct odometryTrackStruct * ot, struct referencePos * ref){
+void check_reference_points(struct odometryTrackStruct * ot, struct referencePos * ref){
 	double dThreshold = 20.0f;
 	int i;
 	double *point_dEncPos = get_encoder_positions(); 
@@ -102,7 +66,7 @@ void checkReferencePoints(struct odometryTrackStruct * ot, struct referencePos *
 	int corner = 0;
 	int obstacle[NUM_DIST_SENS]={0,0,0,0,0,0,0,0};
 	int ps_offset[NUM_DIST_SENS] = {35,35,35,35,35,35,35,35};
-	int direction = checkDirecrection(ot->result.theta);
+	int direction = check_direction(ot->result.theta);
 	bool ob_front, ob_left, ob_right;
 	char message[] = "Resetting";
 
@@ -162,22 +126,22 @@ void checkReferencePoints(struct odometryTrackStruct * ot, struct referencePos *
 	/*Check if the current corner is set to 0, if so force update*/
 	if(corner == 1){
 		if((ref->lower_left.x == 0.00) && (ref->lower_left.y == 0.00)){
-			setReferencePoint(ot, ref, corner);
+			set_reference_point(ot, ref, corner);
 			return;
 		}
 	}else if(corner == 2){
 		if((ref->lower_right.x == 0.00) && (ref->lower_right.y == 0.00)){
-			setReferencePoint(ot, ref, corner);
+			set_reference_point(ot, ref, corner);
 			return;
 		}
 	}else if(corner == 3){
 		if((ref->upper_left.x == 0.00) && (ref->upper_left.y == 0.00)){
-			setReferencePoint(ot, ref, corner);
+			set_reference_point(ot, ref, corner);
 			return;
 		}
 	}else if(corner == 4){
 		if((ref->upper_right.x == 0.00) && (ref->upper_right.y == 0.00)){
-			setReferencePoint(ot, ref, corner);
+			set_reference_point(ot, ref, corner);
 			return;
 		}
 	}

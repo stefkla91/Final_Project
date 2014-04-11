@@ -20,6 +20,7 @@
 #include <webots/led.h>
 #include <math.h>
 
+#include "../../lib/functions.h"
 #include "../../lib/odometry.h"
 #include "../../lib/reference_points.h"
 #include "../../lib/e_puck_movement.h"
