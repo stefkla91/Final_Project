@@ -44,7 +44,7 @@
 ###
 ###-----------------------------------------------------------------------------
 
-C_SOURCES = e_puck_movement.c odometry.c reference_points.c map_building.c  e_puck_distance_sensors.c Main.c
+C_SOURCES = e_puck_movement.c odometry.c reference_points.c map_building.c e_puck_distance_sensors.c Main.c
 VPATH = ../../lib
 
 ### Do not modify: this includes Webots global Makefile.include
