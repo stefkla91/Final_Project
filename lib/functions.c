@@ -43,13 +43,13 @@ int check_direction(double d){
 		i -= 360; 
 	} 
 	
-	if(EAST < i + ANGLE_TOLERANCE && EAST > i - ANGLE_TOLERANCE){
+	if(NORTH < i + ANGLE_TOLERANCE && NORTH > i - ANGLE_TOLERANCE){
 		result = 1;
-	}else if(NORTH < i + ANGLE_TOLERANCE && NORTH > i - ANGLE_TOLERANCE){
+	}else if(EAST < i + ANGLE_TOLERANCE && EAST > i - ANGLE_TOLERANCE){
 		result = 2;
-	}else if(WEST < i + ANGLE_TOLERANCE && WEST > i - ANGLE_TOLERANCE){
-		result = 3;
 	}else if(SOUTH < i + ANGLE_TOLERANCE && SOUTH > i - ANGLE_TOLERANCE){
+		result = 3;
+	}else if(WEST < i + ANGLE_TOLERANCE && WEST > i - ANGLE_TOLERANCE){
 		result = 4; 
 	}
 	return result;
