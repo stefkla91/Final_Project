@@ -1,0 +1,296 @@
+\section{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/backup/map\-\_\-building.c File Reference}
+\label{backup_2map__building_8c}\index{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/backup/map\-\_\-building.\-c@{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/backup/map\-\_\-building.\-c}}
+{\ttfamily \#include $<$webots/robot.\-h$>$}\\*
+{\ttfamily \#include $<$webots/differential\-\_\-wheels.\-h$>$}\\*
+{\ttfamily \#include $<$webots/distance\-\_\-sensor.\-h$>$}\\*
+{\ttfamily \#include $<$webots/light\-\_\-sensor.\-h$>$}\\*
+{\ttfamily \#include $<$math.\-h$>$}\\*
+{\ttfamily \#include $<$webots/display.\-h$>$}\\*
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}reference\-\_\-points.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}map\-\_\-building.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}e\-\_\-puck\-\_\-movement.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}odometry.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}e\-\_\-puck\-\_\-distance\-\_\-sensors.\-h\char`\"{}}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf T\-I\-M\-E\-\_\-\-S\-T\-E\-P}~8
+\item 
+\#define {\bf M\-A\-P\-\_\-\-S\-I\-Z\-E}~70
+\item 
+\#define {\bf C\-E\-L\-L\-\_\-\-S\-I\-Z\-E}~0.\-015
+\item 
+\#define {\bf T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T}~100
+\item 
+\#define {\bf O\-C\-C\-U\-P\-A\-N\-C\-E\-\_\-\-D\-I\-S\-T}~150
+\item 
+\#define {\bf L\-E\-F\-T}~0
+\item 
+\#define {\bf R\-I\-G\-H\-T}~1
+\item 
+\#define {\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}~8
+\item 
+\#define {\bf F\-O\-R\-W\-A\-R\-D}~0
+\item 
+\#define {\bf S\-T\-O\-P}~1
+\item 
+\#define {\bf T\-U\-R\-N\-R\-I\-G\-H\-T}~2
+\item 
+\#define {\bf T\-U\-R\-N\-L\-E\-F\-T}~3
+\item 
+\#define {\bf U\-T\-U\-R\-N}~4
+\item 
+\#define {\bf R\-T\-O\-D}(r)~((r) $\ast$ 180 / {\bf M\-\_\-\-P\-I})
+\item 
+\#define {\bf A\-N\-G\-L\-E\-\_\-\-T\-O\-L\-E\-R\-A\-N\-C\-E}~20
+\item 
+\#define {\bf E\-A\-S\-T}~0
+\item 
+\#define {\bf N\-O\-R\-T\-H}~90
+\item 
+\#define {\bf W\-E\-S\-T}~180
+\item 
+\#define {\bf S\-O\-U\-T\-H}~270
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf check\-\_\-direction} (double d)
+\item 
+void {\bf init\-\_\-display} ()
+\item 
+void {\bf occupied\-\_\-cell} (int x, int y, float theta)
+\item 
+void {\bf reset} ()
+\item 
+void {\bf check\-Obstacles} ()
+\item 
+void {\bf run} (struct {\bf odometry\-Track\-Struct} $\ast${\bf ot}, struct {\bf reference\-Pos} $\ast${\bf ref})
+\item 
+int {\bf return\-\_\-angle} (double rad)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Wb\-Device\-Tag {\bf led} [3]
+\item 
+Wb\-Device\-Tag {\bf display}
+\item 
+Wb\-Image\-Ref {\bf background}
+\item 
+int {\bf display\-\_\-width}
+\item 
+int {\bf display\-\_\-height}
+\item 
+int {\bf map} [{\bf M\-A\-P\-\_\-\-S\-I\-Z\-E}][{\bf M\-A\-P\-\_\-\-S\-I\-Z\-E}]
+\item 
+int {\bf robot\-\_\-x} = {\bf M\-A\-P\-\_\-\-S\-I\-Z\-E} / 2
+\item 
+int {\bf robot\-\_\-y} = {\bf M\-A\-P\-\_\-\-S\-I\-Z\-E} / 2
+\item 
+int {\bf obstacle} [{\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}] =\{0,0,0,0,0,0,0,0\}
+\item 
+bool {\bf ob\-\_\-front}
+\item 
+bool {\bf ob\-\_\-right}
+\item 
+bool {\bf ob\-\_\-left}
+\item 
+float {\bf angle\-\_\-offset} [{\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}] = \{0.\-2793, 0.\-7854, 1.\-5708, 2.\-618, -\/2.\-618, -\/1.\-5708, -\/0.\-7854, -\/0.\-2793\}
+\item 
+int {\bf new\-\_\-encoder}
+\item 
+bool {\bf north}
+\item 
+bool {\bf west}
+\item 
+bool {\bf south}
+\item 
+bool {\bf east}
+\item 
+int {\bf state} = {\bf F\-O\-R\-W\-A\-R\-D}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!A\-N\-G\-L\-E\-\_\-\-T\-O\-L\-E\-R\-A\-N\-C\-E@{A\-N\-G\-L\-E\-\_\-\-T\-O\-L\-E\-R\-A\-N\-C\-E}}
+\index{A\-N\-G\-L\-E\-\_\-\-T\-O\-L\-E\-R\-A\-N\-C\-E@{A\-N\-G\-L\-E\-\_\-\-T\-O\-L\-E\-R\-A\-N\-C\-E}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{A\-N\-G\-L\-E\-\_\-\-T\-O\-L\-E\-R\-A\-N\-C\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\-N\-G\-L\-E\-\_\-\-T\-O\-L\-E\-R\-A\-N\-C\-E~20}\label{backup_2map__building_8c_a5835d2253221816d4f18e65f9796d3c6}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!C\-E\-L\-L\-\_\-\-S\-I\-Z\-E@{C\-E\-L\-L\-\_\-\-S\-I\-Z\-E}}
+\index{C\-E\-L\-L\-\_\-\-S\-I\-Z\-E@{C\-E\-L\-L\-\_\-\-S\-I\-Z\-E}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{C\-E\-L\-L\-\_\-\-S\-I\-Z\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\-E\-L\-L\-\_\-\-S\-I\-Z\-E~0.\-015}\label{backup_2map__building_8c_a7a4127f14f16563da90eb3c836bc404f}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!E\-A\-S\-T@{E\-A\-S\-T}}
+\index{E\-A\-S\-T@{E\-A\-S\-T}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{E\-A\-S\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\-A\-S\-T~0}\label{backup_2map__building_8c_a072a1ef1143314441742097b799be322}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!F\-O\-R\-W\-A\-R\-D@{F\-O\-R\-W\-A\-R\-D}}
+\index{F\-O\-R\-W\-A\-R\-D@{F\-O\-R\-W\-A\-R\-D}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{F\-O\-R\-W\-A\-R\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-O\-R\-W\-A\-R\-D~0}\label{backup_2map__building_8c_a6ddfdda7a062d10cff4a72b76b44aeb8}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!L\-E\-F\-T@{L\-E\-F\-T}}
+\index{L\-E\-F\-T@{L\-E\-F\-T}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{L\-E\-F\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\-E\-F\-T~0}\label{backup_2map__building_8c_a437ef08681e7210d6678427030446a54}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!M\-A\-P\-\_\-\-S\-I\-Z\-E@{M\-A\-P\-\_\-\-S\-I\-Z\-E}}
+\index{M\-A\-P\-\_\-\-S\-I\-Z\-E@{M\-A\-P\-\_\-\-S\-I\-Z\-E}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{M\-A\-P\-\_\-\-S\-I\-Z\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\-A\-P\-\_\-\-S\-I\-Z\-E~70}\label{backup_2map__building_8c_a0a82fd70402bbdc2259248e735fecbca}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!N\-O\-R\-T\-H@{N\-O\-R\-T\-H}}
+\index{N\-O\-R\-T\-H@{N\-O\-R\-T\-H}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{N\-O\-R\-T\-H}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\-O\-R\-T\-H~90}\label{backup_2map__building_8c_a1711232abf72723b5216c206e6bbb175}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S@{N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}}
+\index{N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S@{N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S~8}\label{backup_2map__building_8c_a8c369921a7d778f700fa6a729d50a4db}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!O\-C\-C\-U\-P\-A\-N\-C\-E\-\_\-\-D\-I\-S\-T@{O\-C\-C\-U\-P\-A\-N\-C\-E\-\_\-\-D\-I\-S\-T}}
+\index{O\-C\-C\-U\-P\-A\-N\-C\-E\-\_\-\-D\-I\-S\-T@{O\-C\-C\-U\-P\-A\-N\-C\-E\-\_\-\-D\-I\-S\-T}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{O\-C\-C\-U\-P\-A\-N\-C\-E\-\_\-\-D\-I\-S\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\-C\-C\-U\-P\-A\-N\-C\-E\-\_\-\-D\-I\-S\-T~150}\label{backup_2map__building_8c_a6fe92d7b1da90203a544b43e015febe1}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!R\-I\-G\-H\-T@{R\-I\-G\-H\-T}}
+\index{R\-I\-G\-H\-T@{R\-I\-G\-H\-T}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{R\-I\-G\-H\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\-I\-G\-H\-T~1}\label{backup_2map__building_8c_a80fb826a684cf3f0d306b22aa100ddac}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!R\-T\-O\-D@{R\-T\-O\-D}}
+\index{R\-T\-O\-D@{R\-T\-O\-D}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{R\-T\-O\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\-T\-O\-D(
+\begin{DoxyParamCaption}
+\item[{}]{r}
+\end{DoxyParamCaption}
+)~((r) $\ast$ 180 / {\bf M\-\_\-\-P\-I})}\label{backup_2map__building_8c_a4c5be81ecc7f1e104b65661b276d0157}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!S\-O\-U\-T\-H@{S\-O\-U\-T\-H}}
+\index{S\-O\-U\-T\-H@{S\-O\-U\-T\-H}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{S\-O\-U\-T\-H}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-O\-U\-T\-H~270}\label{backup_2map__building_8c_af3830320fe6287f717dca9669f417950}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!S\-T\-O\-P@{S\-T\-O\-P}}
+\index{S\-T\-O\-P@{S\-T\-O\-P}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{S\-T\-O\-P}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-O\-P~1}\label{backup_2map__building_8c_ae19b6bb2940d2fbe0a79852b070eeafd}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T@{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T}}
+\index{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T@{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T~100}\label{backup_2map__building_8c_aa57c30c684854687626672a1cfd957fe}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!T\-I\-M\-E\-\_\-\-S\-T\-E\-P@{T\-I\-M\-E\-\_\-\-S\-T\-E\-P}}
+\index{T\-I\-M\-E\-\_\-\-S\-T\-E\-P@{T\-I\-M\-E\-\_\-\-S\-T\-E\-P}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{T\-I\-M\-E\-\_\-\-S\-T\-E\-P}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-I\-M\-E\-\_\-\-S\-T\-E\-P~8}\label{backup_2map__building_8c_a65fd90f232757535f02c46a885e49012}
+File\-: map\-\_\-building.\-c Date\-: 15.\-03.\-2014 Description\-: Author\-: Stefan Klaus Modifications\-: v0.\-1 \index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!T\-U\-R\-N\-L\-E\-F\-T@{T\-U\-R\-N\-L\-E\-F\-T}}
+\index{T\-U\-R\-N\-L\-E\-F\-T@{T\-U\-R\-N\-L\-E\-F\-T}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{T\-U\-R\-N\-L\-E\-F\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-U\-R\-N\-L\-E\-F\-T~3}\label{backup_2map__building_8c_a9f917b4709b1fe9cb8d8f3d7a047e004}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!T\-U\-R\-N\-R\-I\-G\-H\-T@{T\-U\-R\-N\-R\-I\-G\-H\-T}}
+\index{T\-U\-R\-N\-R\-I\-G\-H\-T@{T\-U\-R\-N\-R\-I\-G\-H\-T}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{T\-U\-R\-N\-R\-I\-G\-H\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-U\-R\-N\-R\-I\-G\-H\-T~2}\label{backup_2map__building_8c_a316758f4f11a036a0944a85052932578}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!U\-T\-U\-R\-N@{U\-T\-U\-R\-N}}
+\index{U\-T\-U\-R\-N@{U\-T\-U\-R\-N}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{U\-T\-U\-R\-N}]{\setlength{\rightskip}{0pt plus 5cm}\#define U\-T\-U\-R\-N~4}\label{backup_2map__building_8c_ae7331b46ecf8d2b688cf4338e9014340}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!W\-E\-S\-T@{W\-E\-S\-T}}
+\index{W\-E\-S\-T@{W\-E\-S\-T}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{W\-E\-S\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define W\-E\-S\-T~180}\label{backup_2map__building_8c_a755da365a2f771fdb9e15af22fee7d74}
+
+
+\subsection{Function Documentation}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!check\-\_\-direction@{check\-\_\-direction}}
+\index{check\-\_\-direction@{check\-\_\-direction}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{check\-\_\-direction}]{\setlength{\rightskip}{0pt plus 5cm}int check\-\_\-direction (
+\begin{DoxyParamCaption}
+\item[{double}]{d}
+\end{DoxyParamCaption}
+)}\label{backup_2map__building_8c_a7202904cea878b67b1c27752467ad9ee}
+set booleans for the direction the robot is moving in 1 = north 2 = east 3 = south 4 = west
+
+Returns an int which represents the direction the robot is travelling in. The directions are specified which the start view of the simulator in mind meaning up = north, to the right = east, down = south and to the left = west. These directions are represented as follows\-:
+
+1 = north 2 = east 3 = south 4 = west \index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!check\-Obstacles@{check\-Obstacles}}
+\index{check\-Obstacles@{check\-Obstacles}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{check\-Obstacles}]{\setlength{\rightskip}{0pt plus 5cm}void check\-Obstacles (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{backup_2map__building_8c_aa1b6985443eef22ac94fc154c200afe0}
+Function to check for obstacles, sets the global boolean values Used the make the \doxyref{run()}{p.}{backup_2map__building_8c_a462cc4f07a4f870677d6c3a8dafef598} code cleaner \index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!init\-\_\-display@{init\-\_\-display}}
+\index{init\-\_\-display@{init\-\_\-display}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{init\-\_\-display}]{\setlength{\rightskip}{0pt plus 5cm}void init\-\_\-display (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{backup_2map__building_8c_ac079cd712ceeaf40cc0733b0f3a5d860}
+Initiate the display with a white color \index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!occupied\-\_\-cell@{occupied\-\_\-cell}}
+\index{occupied\-\_\-cell@{occupied\-\_\-cell}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{occupied\-\_\-cell}]{\setlength{\rightskip}{0pt plus 5cm}void occupied\-\_\-cell (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{float}]{theta}
+\end{DoxyParamCaption}
+)}\label{backup_2map__building_8c_a768822596fca2bc36884a625ef75e6eb}
+Set the coresponding cell to 1 (occu\-M\-\_\-\-P\-Ied) and display it \index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!reset@{reset}}
+\index{reset@{reset}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void reset (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{backup_2map__building_8c_ad20897c5c8bd47f5d4005989bead0e55}
+enables the needed sensor devices \index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!return\-\_\-angle@{return\-\_\-angle}}
+\index{return\-\_\-angle@{return\-\_\-angle}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{return\-\_\-angle}]{\setlength{\rightskip}{0pt plus 5cm}int return\-\_\-angle (
+\begin{DoxyParamCaption}
+\item[{double}]{rad}
+\end{DoxyParamCaption}
+)}\label{backup_2map__building_8c_a1e8bdbef15bafd2852fce8034069c5e4}
+returns the angle in which the robot is moving \index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!run@{run}}
+\index{run@{run}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{run}]{\setlength{\rightskip}{0pt plus 5cm}void run (
+\begin{DoxyParamCaption}
+\item[{struct {\bf odometry\-Track\-Struct} $\ast$}]{ot, }
+\item[{struct {\bf reference\-Pos} $\ast$}]{ref}
+\end{DoxyParamCaption}
+)}\label{backup_2map__building_8c_a462cc4f07a4f870677d6c3a8dafef598}
+run function 
+
+\subsection{Variable Documentation}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!angle\-\_\-offset@{angle\-\_\-offset}}
+\index{angle\-\_\-offset@{angle\-\_\-offset}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{angle\-\_\-offset}]{\setlength{\rightskip}{0pt plus 5cm}float angle\-\_\-offset[{\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}] = \{0.\-2793, 0.\-7854, 1.\-5708, 2.\-618, -\/2.\-618, -\/1.\-5708, -\/0.\-7854, -\/0.\-2793\}}\label{backup_2map__building_8c_a2ef552c6d94ffe018c8db60b5b416e8e}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!background@{background}}
+\index{background@{background}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{background}]{\setlength{\rightskip}{0pt plus 5cm}Wb\-Image\-Ref background}\label{backup_2map__building_8c_ad85a4bcb66868c7de4605ff6afff9c6f}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!display@{display}}
+\index{display@{display}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{display}]{\setlength{\rightskip}{0pt plus 5cm}Wb\-Device\-Tag display}\label{backup_2map__building_8c_af4cbc4c1caf40ca4ee35b856890c61ac}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!display\-\_\-height@{display\-\_\-height}}
+\index{display\-\_\-height@{display\-\_\-height}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{display\-\_\-height}]{\setlength{\rightskip}{0pt plus 5cm}int display\-\_\-height}\label{backup_2map__building_8c_a4d1396d7740006e1ac85a02d5a540767}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!display\-\_\-width@{display\-\_\-width}}
+\index{display\-\_\-width@{display\-\_\-width}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{display\-\_\-width}]{\setlength{\rightskip}{0pt plus 5cm}int display\-\_\-width}\label{backup_2map__building_8c_afedb05c4f9e44664c74f86a6aecc62bd}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!east@{east}}
+\index{east@{east}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{east}]{\setlength{\rightskip}{0pt plus 5cm}bool east}\label{backup_2map__building_8c_a7d9733ea6351dd454ec32e1ed4fb3aec}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!led@{led}}
+\index{led@{led}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{led}]{\setlength{\rightskip}{0pt plus 5cm}Wb\-Device\-Tag led[3]}\label{backup_2map__building_8c_ac6de0cb33d79790826e4b1c971d697f1}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!map@{map}}
+\index{map@{map}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{map}]{\setlength{\rightskip}{0pt plus 5cm}int map[{\bf M\-A\-P\-\_\-\-S\-I\-Z\-E}][{\bf M\-A\-P\-\_\-\-S\-I\-Z\-E}]}\label{backup_2map__building_8c_a2c889027b541f6f509221b034e4b163e}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!new\-\_\-encoder@{new\-\_\-encoder}}
+\index{new\-\_\-encoder@{new\-\_\-encoder}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{new\-\_\-encoder}]{\setlength{\rightskip}{0pt plus 5cm}int new\-\_\-encoder}\label{backup_2map__building_8c_a6bb4b6b07ac2dd14c2828276cecaa78c}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!north@{north}}
+\index{north@{north}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{north}]{\setlength{\rightskip}{0pt plus 5cm}bool north}\label{backup_2map__building_8c_a3840e3a5e453e024912122a97e895bc2}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!ob\-\_\-front@{ob\-\_\-front}}
+\index{ob\-\_\-front@{ob\-\_\-front}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{ob\-\_\-front}]{\setlength{\rightskip}{0pt plus 5cm}bool ob\-\_\-front}\label{backup_2map__building_8c_abb00c592dd0a4b488bbbbeb067e8f824}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!ob\-\_\-left@{ob\-\_\-left}}
+\index{ob\-\_\-left@{ob\-\_\-left}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{ob\-\_\-left}]{\setlength{\rightskip}{0pt plus 5cm}bool ob\-\_\-left}\label{backup_2map__building_8c_a887ad3d2bbdff7f9b8f324254bef2302}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!ob\-\_\-right@{ob\-\_\-right}}
+\index{ob\-\_\-right@{ob\-\_\-right}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{ob\-\_\-right}]{\setlength{\rightskip}{0pt plus 5cm}bool ob\-\_\-right}\label{backup_2map__building_8c_a59340b79fe3dc43e6fa3e3e8c48a2e4a}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!obstacle@{obstacle}}
+\index{obstacle@{obstacle}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{obstacle}]{\setlength{\rightskip}{0pt plus 5cm}int obstacle[{\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}] =\{0,0,0,0,0,0,0,0\}}\label{backup_2map__building_8c_a4ec02f2a1ca0005f7551c18c3845df8b}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!robot\-\_\-x@{robot\-\_\-x}}
+\index{robot\-\_\-x@{robot\-\_\-x}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{robot\-\_\-x}]{\setlength{\rightskip}{0pt plus 5cm}int robot\-\_\-x = {\bf M\-A\-P\-\_\-\-S\-I\-Z\-E} / 2}\label{backup_2map__building_8c_acebff8ec41b5f3d0a283cf41bcf648bf}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!robot\-\_\-y@{robot\-\_\-y}}
+\index{robot\-\_\-y@{robot\-\_\-y}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{robot\-\_\-y}]{\setlength{\rightskip}{0pt plus 5cm}int robot\-\_\-y = {\bf M\-A\-P\-\_\-\-S\-I\-Z\-E} / 2}\label{backup_2map__building_8c_aaf0e185ed55bcdbe56e4fef32cb88195}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!south@{south}}
+\index{south@{south}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{south}]{\setlength{\rightskip}{0pt plus 5cm}bool south}\label{backup_2map__building_8c_acc999200fcfe3e7d1e0cb1d1aacebb31}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!state@{state}}
+\index{state@{state}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{state}]{\setlength{\rightskip}{0pt plus 5cm}int state = {\bf F\-O\-R\-W\-A\-R\-D}}\label{backup_2map__building_8c_a89f234133d3efe315836311cbf21c64b}
+\index{backup/map\-\_\-building.\-c@{backup/map\-\_\-building.\-c}!west@{west}}
+\index{west@{west}!backup/map_building.c@{backup/map\-\_\-building.\-c}}
+\subsubsection[{west}]{\setlength{\rightskip}{0pt plus 5cm}bool west}\label{backup_2map__building_8c_a44a7114d09c63d9069c4b4e580824af9}

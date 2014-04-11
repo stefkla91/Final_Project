@@ -1,0 +1,40 @@
+\section{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/lib/reference\-\_\-points.h File Reference}
+\label{lib_2reference__points_8h}\index{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/lib/reference\-\_\-points.\-h@{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/lib/reference\-\_\-points.\-h}}
+{\ttfamily \#include \char`\"{}odometry.\-h\char`\"{}}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf reference\-Pos}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf set\-\_\-reference\-\_\-point} (struct {\bf odometry\-Track\-Struct} $\ast${\bf ot}, struct {\bf reference\-Pos} $\ast${\bf ref}, int corner)
+\item 
+void {\bf check\-\_\-reference\-\_\-points} (struct {\bf odometry\-Track\-Struct} $\ast${\bf ot}, struct {\bf reference\-Pos} $\ast${\bf ref})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{lib/reference\-\_\-points.\-h@{lib/reference\-\_\-points.\-h}!check\-\_\-reference\-\_\-points@{check\-\_\-reference\-\_\-points}}
+\index{check\-\_\-reference\-\_\-points@{check\-\_\-reference\-\_\-points}!lib/reference_points.h@{lib/reference\-\_\-points.\-h}}
+\subsubsection[{check\-\_\-reference\-\_\-points}]{\setlength{\rightskip}{0pt plus 5cm}void check\-\_\-reference\-\_\-points (
+\begin{DoxyParamCaption}
+\item[{struct {\bf odometry\-Track\-Struct} $\ast$}]{ot, }
+\item[{struct {\bf reference\-Pos} $\ast$}]{ref}
+\end{DoxyParamCaption}
+)}\label{lib_2reference__points_8h_ae295b0f6adff6c6ac5a6a122f7a200fa}
+Function to compare the current location with the location saved in the reference points Calls the set\-\_\-reference\-\_\-point function the first time a refernce point is found
+
+This function checks the current robot position with the previous recorded reference position. If a relation is found, the current encoder position are updated with the saved encoder postions. The parameters are a pointer to the struct odometrt\-Track\-Struct and refrence\-Pos and an int which defines which corner it is. The corner is defined in the \doxyref{run()}{p.}{backup_2map__building_8c_a462cc4f07a4f870677d6c3a8dafef598} function where this function will be called. 1 = lower\-\_\-left 2 = lower\-\_\-right 3 = upper\-\_\-left 4 = upper\-\_\-right \index{lib/reference\-\_\-points.\-h@{lib/reference\-\_\-points.\-h}!set\-\_\-reference\-\_\-point@{set\-\_\-reference\-\_\-point}}
+\index{set\-\_\-reference\-\_\-point@{set\-\_\-reference\-\_\-point}!lib/reference_points.h@{lib/reference\-\_\-points.\-h}}
+\subsubsection[{set\-\_\-reference\-\_\-point}]{\setlength{\rightskip}{0pt plus 5cm}void set\-\_\-reference\-\_\-point (
+\begin{DoxyParamCaption}
+\item[{struct {\bf odometry\-Track\-Struct} $\ast$}]{ot, }
+\item[{struct {\bf reference\-Pos} $\ast$}]{ref, }
+\item[{int}]{corner}
+\end{DoxyParamCaption}
+)}\label{lib_2reference__points_8h_a09641263303ea6b4783a7691c66eaa81}
+Function to set the reference point in the struct
+
+Sets the reference point in the \doxyref{reference\-Pos}{p.}{structreference_pos} struct. The parameters are a pointer to the \doxyref{reference\-Pos}{p.}{structreference_pos} struct and an int. The int specifies which corner will be set. 1 = lower\-\_\-left 2 = lower\-\_\-right 3 = upper\-\_\-left 4 = upper\-\_\-right 

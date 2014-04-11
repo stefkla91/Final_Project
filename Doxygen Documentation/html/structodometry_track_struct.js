@@ -1,10 +1,10 @@
 var structodometry_track_struct =
 [
-    [ "configuration", "structodometry_track_struct.html#a3c7220ac10396e0065bade70d53a9427", null ],
+    [ "configuration", "structodometry_track_struct.html#ae5dc4cc1ec189909e27b81c2cdc3f6da", null ],
     [ "pos_left_prev", "structodometry_track_struct.html#ad199df16f41ee2356b745f1c54745698", null ],
     [ "pos_right_prev", "structodometry_track_struct.html#ad4d8878574594f40d3fb8e8bc88130d2", null ],
-    [ "result", "structodometry_track_struct.html#a4c2d81eac0746705e1a3989b42d59c2f", null ],
-    [ "state", "structodometry_track_struct.html#ac74eb69497fef9d665c3bee991ed84e5", null ],
+    [ "result", "structodometry_track_struct.html#af0426b667c206b227fc18237fc8fb5de", null ],
+    [ "state", "structodometry_track_struct.html#a51829c69621edc26f5d3544be5eb59e0", null ],
     [ "theta", "structodometry_track_struct.html#aadfc5c227ca658a29a59a0ce6fc15792", null ],
     [ "wheel_conversion", "structodometry_track_struct.html#a7f57aa52f69f42207b64b0a6e5155ba0", null ],
     [ "wheel_distance", "structodometry_track_struct.html#a595a89c66991ab115a4bcbfbe810726d", null ],

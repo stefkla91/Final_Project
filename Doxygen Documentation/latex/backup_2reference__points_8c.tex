@@ -1,0 +1,114 @@
+\section{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/backup/reference\-\_\-points.c File Reference}
+\label{backup_2reference__points_8c}\index{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/backup/reference\-\_\-points.\-c@{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/backup/reference\-\_\-points.\-c}}
+{\ttfamily \#include $<$webots/robot.\-h$>$}\\*
+{\ttfamily \#include $<$math.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}reference\-\_\-points.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}odometry.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}e\-\_\-puck\-\_\-movement.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}map\-\_\-building.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf A\-N\-G\-L\-E\-\_\-\-T\-O\-L\-E\-R\-A\-N\-C\-E}~20
+\item 
+\#define {\bf E\-A\-S\-T}~0
+\item 
+\#define {\bf N\-O\-R\-T\-H}~90
+\item 
+\#define {\bf W\-E\-S\-T}~180
+\item 
+\#define {\bf S\-O\-U\-T\-H}~270
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf check\-Direcrection} (double d)
+\item 
+void {\bf set\-Reference\-Point} (struct {\bf odometry\-Track\-Struct} $\ast${\bf ot}, struct {\bf reference\-Pos} $\ast${\bf ref}, int corner)
+\item 
+void {\bf update\-Reference\-Points} (struct {\bf odometry\-Track\-Struct} $\ast${\bf ot}, struct {\bf reference\-Pos} $\ast${\bf ref}, int corner)
+\item 
+void {\bf check\-Reference\-Points} (struct {\bf odometry\-Track\-Struct} $\ast${\bf ot}, struct {\bf reference\-Pos} $\ast${\bf ref}, int corner)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bf north}
+\item 
+bool {\bf west}
+\item 
+bool {\bf south}
+\item 
+bool {\bf east}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{backup/reference\-\_\-points.\-c@{backup/reference\-\_\-points.\-c}!A\-N\-G\-L\-E\-\_\-\-T\-O\-L\-E\-R\-A\-N\-C\-E@{A\-N\-G\-L\-E\-\_\-\-T\-O\-L\-E\-R\-A\-N\-C\-E}}
+\index{A\-N\-G\-L\-E\-\_\-\-T\-O\-L\-E\-R\-A\-N\-C\-E@{A\-N\-G\-L\-E\-\_\-\-T\-O\-L\-E\-R\-A\-N\-C\-E}!backup/reference_points.c@{backup/reference\-\_\-points.\-c}}
+\subsubsection[{A\-N\-G\-L\-E\-\_\-\-T\-O\-L\-E\-R\-A\-N\-C\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\-N\-G\-L\-E\-\_\-\-T\-O\-L\-E\-R\-A\-N\-C\-E~20}\label{backup_2reference__points_8c_a5835d2253221816d4f18e65f9796d3c6}
+File\-: reference\-\_\-points.\-c Date\-: 14.\-03.\-2014 Description\-: Author\-: Stefan Klaus Modifications\-: V 0.\-1 \index{backup/reference\-\_\-points.\-c@{backup/reference\-\_\-points.\-c}!E\-A\-S\-T@{E\-A\-S\-T}}
+\index{E\-A\-S\-T@{E\-A\-S\-T}!backup/reference_points.c@{backup/reference\-\_\-points.\-c}}
+\subsubsection[{E\-A\-S\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\-A\-S\-T~0}\label{backup_2reference__points_8c_a072a1ef1143314441742097b799be322}
+\index{backup/reference\-\_\-points.\-c@{backup/reference\-\_\-points.\-c}!N\-O\-R\-T\-H@{N\-O\-R\-T\-H}}
+\index{N\-O\-R\-T\-H@{N\-O\-R\-T\-H}!backup/reference_points.c@{backup/reference\-\_\-points.\-c}}
+\subsubsection[{N\-O\-R\-T\-H}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\-O\-R\-T\-H~90}\label{backup_2reference__points_8c_a1711232abf72723b5216c206e6bbb175}
+\index{backup/reference\-\_\-points.\-c@{backup/reference\-\_\-points.\-c}!S\-O\-U\-T\-H@{S\-O\-U\-T\-H}}
+\index{S\-O\-U\-T\-H@{S\-O\-U\-T\-H}!backup/reference_points.c@{backup/reference\-\_\-points.\-c}}
+\subsubsection[{S\-O\-U\-T\-H}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-O\-U\-T\-H~270}\label{backup_2reference__points_8c_af3830320fe6287f717dca9669f417950}
+\index{backup/reference\-\_\-points.\-c@{backup/reference\-\_\-points.\-c}!W\-E\-S\-T@{W\-E\-S\-T}}
+\index{W\-E\-S\-T@{W\-E\-S\-T}!backup/reference_points.c@{backup/reference\-\_\-points.\-c}}
+\subsubsection[{W\-E\-S\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define W\-E\-S\-T~180}\label{backup_2reference__points_8c_a755da365a2f771fdb9e15af22fee7d74}
+
+
+\subsection{Function Documentation}
+\index{backup/reference\-\_\-points.\-c@{backup/reference\-\_\-points.\-c}!check\-Direcrection@{check\-Direcrection}}
+\index{check\-Direcrection@{check\-Direcrection}!backup/reference_points.c@{backup/reference\-\_\-points.\-c}}
+\subsubsection[{check\-Direcrection}]{\setlength{\rightskip}{0pt plus 5cm}void check\-Direcrection (
+\begin{DoxyParamCaption}
+\item[{double}]{d}
+\end{DoxyParamCaption}
+)}\label{backup_2reference__points_8c_a8a2f1e33e60e63e64644addfe7eee887}
+set booleans for the direction the robot is moving in 1 = north 2 = east 3 = south 4 = west \index{backup/reference\-\_\-points.\-c@{backup/reference\-\_\-points.\-c}!check\-Reference\-Points@{check\-Reference\-Points}}
+\index{check\-Reference\-Points@{check\-Reference\-Points}!backup/reference_points.c@{backup/reference\-\_\-points.\-c}}
+\subsubsection[{check\-Reference\-Points}]{\setlength{\rightskip}{0pt plus 5cm}void check\-Reference\-Points (
+\begin{DoxyParamCaption}
+\item[{struct {\bf odometry\-Track\-Struct} $\ast$}]{ot, }
+\item[{struct {\bf reference\-Pos} $\ast$}]{ref, }
+\item[{int}]{corner}
+\end{DoxyParamCaption}
+)}\label{backup_2reference__points_8c_ab3c48029e044794a640e56f5cab3cf6b}
+This function checks the current robot position with the previous recorded reference position. If a relation is found, the current encoder position are updated with the saved encoder postions. The parameters are a pointer to the struct odometrt\-Track\-Struct and refrence\-Pos and an int which defines which corner it is. The corner is defined in the \doxyref{run()}{p.}{backup_2map__building_8c_a462cc4f07a4f870677d6c3a8dafef598} function where this function will be called. 1 = lower\-\_\-left 2 = lower\-\_\-right 3 = upper\-\_\-left 4 = upper\-\_\-right \index{backup/reference\-\_\-points.\-c@{backup/reference\-\_\-points.\-c}!set\-Reference\-Point@{set\-Reference\-Point}}
+\index{set\-Reference\-Point@{set\-Reference\-Point}!backup/reference_points.c@{backup/reference\-\_\-points.\-c}}
+\subsubsection[{set\-Reference\-Point}]{\setlength{\rightskip}{0pt plus 5cm}void set\-Reference\-Point (
+\begin{DoxyParamCaption}
+\item[{struct {\bf odometry\-Track\-Struct} $\ast$}]{ot, }
+\item[{struct {\bf reference\-Pos} $\ast$}]{ref, }
+\item[{int}]{corner}
+\end{DoxyParamCaption}
+)}\label{backup_2reference__points_8c_ada63b40aa32c2c41d7286f13904fdbe5}
+Sets the reference point in the \doxyref{reference\-Pos}{p.}{structreference_pos} struct. The parameters are a pointer to the \doxyref{reference\-Pos}{p.}{structreference_pos} struct and an int. The int specifies which corner will be set. 1 = lower\-\_\-left 2 = lower\-\_\-right 3 = upper\-\_\-left 4 = upper\-\_\-right \index{backup/reference\-\_\-points.\-c@{backup/reference\-\_\-points.\-c}!update\-Reference\-Points@{update\-Reference\-Points}}
+\index{update\-Reference\-Points@{update\-Reference\-Points}!backup/reference_points.c@{backup/reference\-\_\-points.\-c}}
+\subsubsection[{update\-Reference\-Points}]{\setlength{\rightskip}{0pt plus 5cm}void update\-Reference\-Points (
+\begin{DoxyParamCaption}
+\item[{struct {\bf odometry\-Track\-Struct} $\ast$}]{ot, }
+\item[{struct {\bf reference\-Pos} $\ast$}]{ref, }
+\item[{int}]{corner}
+\end{DoxyParamCaption}
+)}\label{backup_2reference__points_8c_aeffbd7e431c4400ec90b50981e1e3512}
+Checks which refrence point to set. The parameters are a pointer to the struct odometrt\-Track\-Struct and refrence\-Pos and an int which defines which corner it is. The corner is defined in the \doxyref{run()}{p.}{backup_2map__building_8c_a462cc4f07a4f870677d6c3a8dafef598} function where this function will be called. 1 = lower\-\_\-left 2 = lower\-\_\-right 3 = upper\-\_\-left 4 = upper\-\_\-right 
+
+\subsection{Variable Documentation}
+\index{backup/reference\-\_\-points.\-c@{backup/reference\-\_\-points.\-c}!east@{east}}
+\index{east@{east}!backup/reference_points.c@{backup/reference\-\_\-points.\-c}}
+\subsubsection[{east}]{\setlength{\rightskip}{0pt plus 5cm}bool east}\label{backup_2reference__points_8c_a7d9733ea6351dd454ec32e1ed4fb3aec}
+\index{backup/reference\-\_\-points.\-c@{backup/reference\-\_\-points.\-c}!north@{north}}
+\index{north@{north}!backup/reference_points.c@{backup/reference\-\_\-points.\-c}}
+\subsubsection[{north}]{\setlength{\rightskip}{0pt plus 5cm}bool north}\label{backup_2reference__points_8c_a3840e3a5e453e024912122a97e895bc2}
+\index{backup/reference\-\_\-points.\-c@{backup/reference\-\_\-points.\-c}!south@{south}}
+\index{south@{south}!backup/reference_points.c@{backup/reference\-\_\-points.\-c}}
+\subsubsection[{south}]{\setlength{\rightskip}{0pt plus 5cm}bool south}\label{backup_2reference__points_8c_acc999200fcfe3e7d1e0cb1d1aacebb31}
+\index{backup/reference\-\_\-points.\-c@{backup/reference\-\_\-points.\-c}!west@{west}}
+\index{west@{west}!backup/reference_points.c@{backup/reference\-\_\-points.\-c}}
+\subsubsection[{west}]{\setlength{\rightskip}{0pt plus 5cm}bool west}\label{backup_2reference__points_8c_a44a7114d09c63d9069c4b4e580824af9}

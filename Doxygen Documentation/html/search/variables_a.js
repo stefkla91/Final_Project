@@ -1,9 +1,12 @@
 var searchData=
 [
-  ['ob_5ffront',['ob_front',['../lib_2map__building_8c.html#abb00c592dd0a4b488bbbbeb067e8f824',1,'ob_front():&#160;map_building.c'],['../map__building_8c.html#abb00c592dd0a4b488bbbbeb067e8f824',1,'ob_front():&#160;map_building.c']]],
-  ['ob_5fleft',['ob_left',['../lib_2map__building_8c.html#a887ad3d2bbdff7f9b8f324254bef2302',1,'ob_left():&#160;map_building.c'],['../map__building_8c.html#a887ad3d2bbdff7f9b8f324254bef2302',1,'ob_left():&#160;map_building.c']]],
-  ['ob_5fright',['ob_right',['../lib_2map__building_8c.html#a59340b79fe3dc43e6fa3e3e8c48a2e4a',1,'ob_right():&#160;map_building.c'],['../map__building_8c.html#a59340b79fe3dc43e6fa3e3e8c48a2e4a',1,'ob_right():&#160;map_building.c']]],
-  ['obstacle',['obstacle',['../epuck__scanline_8c.html#ac41223231ad6432cfaeafb9dc43eb76c',1,'obstacle():&#160;epuck_scanline.c'],['../lib_2map__building_8c.html#a4ec02f2a1ca0005f7551c18c3845df8b',1,'obstacle():&#160;map_building.c'],['../map__building_8c.html#a4ec02f2a1ca0005f7551c18c3845df8b',1,'obstacle():&#160;map_building.c'],['../scanline__backup_8c.html#a4ec02f2a1ca0005f7551c18c3845df8b',1,'obstacle():&#160;scanline_backup.c']]],
-  ['old_5fencoder',['old_encoder',['../epuck__scanline_8c.html#ad895f661059c1ee14c32a9d018ee3a29',1,'epuck_scanline.c']]],
-  ['ot',['ot',['../_main_8c.html#a8ffe8a155701a233c11370bd93f2225d',1,'Main.c']]]
+  ['p_5fdodometrydata',['p_dOdometryData',['../epuck`__movement__download_8c.html#ac1ff185811ac89dbce4d2f8c23ce706e',1,'epuck`_movement_download.c']]],
+  ['point_5fdodometrydata',['point_dOdometryData',['../backup_2e__puck__movement_8c.html#a8e86ce9921634121371354230eb12415',1,'point_dOdometryData():&#160;e_puck_movement.c'],['../lib_2e__puck__movement_8c.html#a8e86ce9921634121371354230eb12415',1,'point_dOdometryData():&#160;e_puck_movement.c']]],
+  ['pos_5fleft_5fprev',['pos_left_prev',['../structodometry_track_struct.html#ad199df16f41ee2356b745f1c54745698',1,'odometryTrackStruct']]],
+  ['pos_5fright_5fprev',['pos_right_prev',['../structodometry_track_struct.html#ad4d8878574594f40d3fb8e8bc88130d2',1,'odometryTrackStruct']]],
+  ['ps',['ps',['../epuck__scanline_8c.html#ae7c12de70e9b902d4e0807687e48d3f3',1,'ps():&#160;epuck_scanline.c'],['../scanline__backup_8c.html#a474c5f292c061c0a11a224021a9a61de',1,'ps():&#160;scanline_backup.c']]],
+  ['ps_5foffset',['ps_offset',['../scanline__backup_8c.html#ad75c4a281258d96c6b5ef15ed0ffeb9e',1,'scanline_backup.c']]],
+  ['ps_5foffset_5freal',['ps_offset_real',['../epuck__scanline_8c.html#ac214a6a176db0f989b18d5e36f2c6b6c',1,'epuck_scanline.c']]],
+  ['ps_5foffset_5fsim',['ps_offset_sim',['../epuck__scanline_8c.html#ae74f85e3ab86582faa67b6021a1fc7a7',1,'epuck_scanline.c']]],
+  ['ps_5fvalue',['ps_value',['../epuck__scanline_8c.html#a899e228093b3c2778033abc4d7be364f',1,'ps_value():&#160;epuck_scanline.c'],['../scanline__backup_8c.html#a942844b8c29e4d68af81e074242b5463',1,'ps_value():&#160;scanline_backup.c']]]
 ];

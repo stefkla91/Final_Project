@@ -9,7 +9,9 @@
 {\ttfamily \#include $<$webots/accelerometer.\-h$>$}\\*
 {\ttfamily \#include $<$webots/led.\-h$>$}\\*
 {\ttfamily \#include $<$math.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}../../lib/functions.\-h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}../../lib/odometry.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../../lib/reference\-\_\-points.\-h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}../../lib/e\-\_\-puck\-\_\-movement.\-h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}../../lib/map\-\_\-building.\-h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}../../lib/e\-\_\-puck\-\_\-distance\-\_\-sensors.\-h\char`\"{}}\\*
@@ -57,6 +59,8 @@ int {\bf main} (int argc, char $\ast$$\ast$argv)
 Wb\-Device\-Tag {\bf led} [3]
 \item 
 struct {\bf odometry\-Track\-Struct} {\bf ot}
+\item 
+struct {\bf reference\-Pos} {\bf ref}
 \end{DoxyCompactItemize}
 
 
@@ -126,3 +130,6 @@ This is the main program. The arguments of the main function can be specified by
 \index{Main.\-c@{Main.\-c}!ot@{ot}}
 \index{ot@{ot}!Main.c@{Main.\-c}}
 \subsubsection[{ot}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf odometry\-Track\-Struct} ot}\label{_main_8c_a8ffe8a155701a233c11370bd93f2225d}
+\index{Main.\-c@{Main.\-c}!ref@{ref}}
+\index{ref@{ref}!Main.c@{Main.\-c}}
+\subsubsection[{ref}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf reference\-Pos} ref}\label{_main_8c_a8136ed9afc84601aa3b8c6cd76f95fce}
