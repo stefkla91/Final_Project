@@ -37,7 +37,7 @@ These directions are represented as follows:
 */
 int check_direction(double d){
 	int i = return_angle(d);
-	int result = 0;
+	int result;
 
 	if(i + ANGLE_TOLERANCE >= 360){
 		i -= 360; 

@@ -203,7 +203,8 @@ void checkObstacles(){
 run function
 */
 void run(struct odometryTrackStruct * ot, struct referencePos * ref){
-	int i = 0, it = 0, direction = 0;
+	int i, it;
+	int  direction;
 	double cur_rot;
 	int *point_SensorData;
 	int ps_offset[NUM_DIST_SENS] = {35,35,35,35,35,35,35,35};
@@ -283,7 +284,7 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 			stop_robot();
 			printf("%s\n", text);
 			odometry_track_step(ot);
-			check_direction(ot->result.theta);
+			direction = check_direction(ot->result.theta);
 		 	if(ob_front && ob_left && direction == 1){
 				state = TURNRIGHT;
 				}
@@ -297,7 +298,6 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 				state = UTURN;
 			}
 			else if(ob_front){
-				direction = check_direction(ot->result.theta);
 				state = UTURN;
 				}   
 			break;	
@@ -313,6 +313,8 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 			state = FORWARD;
 			break;
 		case UTURN:
+			direction = check_direction(ot->result.theta);
+			printf("%d\n",direction );
 			// robot_x = wtom(ot->result.x);
 			// robot_y = wtom(ot->result.y);
 			if(direction == 1){
