@@ -3,6 +3,98 @@
 	{
 		"selected_items":
 		[
+			[
+				"lower_",
+				"lower_right"
+			],
+			[
+				"upp",
+				"upper_left"
+			],
+			[
+				"check",
+				"check_reference_points"
+			],
+			[
+				"ret",
+				"return_angle"
+			],
+			[
+				"chec",
+				"checkReferencePoints"
+			],
+			[
+				"ob",
+				"ob_right"
+			],
+			[
+				"N",
+				"NUM_DIST_SENS"
+			],
+			[
+				"odo",
+				"odometryTrackStruct"
+			],
+			[
+				"odometr",
+				"odometryTrackStruct"
+			],
+			[
+				"odome",
+				"odometry_track_step"
+			],
+			[
+				"set",
+				"setReferencePoint"
+			],
+			[
+				"up",
+				"updateReferencePoints"
+			],
+			[
+				"the",
+				"theta"
+			],
+			[
+				"referenc",
+				"reference_points"
+			],
+			[
+				"refere",
+				"referencePos"
+			],
+			[
+				"str",
+				"odometryTrackStruct"
+			],
+			[
+				"lower",
+				"lower_right"
+			],
+			[
+				"dT",
+				"dTEstPostx"
+			],
+			[
+				"che",
+				"checkReferencePoints"
+			],
+			[
+				"refe",
+				"referencePos"
+			],
+			[
+				"lo",
+				"lower_left"
+			],
+			[
+				"point",
+				"point_dEncPos"
+			],
+			[
+				"upper",
+				"upper_left"
+			]
 		]
 	},
 	"buffers":
@@ -11,32 +103,40 @@
 			"file": "controllers/Main/Main.c",
 			"settings":
 			{
-				"buffer_size": 2197,
+				"buffer_size": 2084,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "lib/e_puck_movement.c",
+			"file": "lib/map_building.c",
 			"settings":
 			{
-				"buffer_size": 10816,
+				"buffer_size": 10863,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "map_building.c",
+			"file": "lib/functions.c",
 			"settings":
 			{
-				"buffer_size": 6832,
-				"line_ending": "Unix"
+				"buffer_size": 1562,
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "odometry.c",
+			"file": "lib/reference_points.c",
 			"settings":
 			{
-				"buffer_size": 2410,
-				"line_ending": "Unix"
+				"buffer_size": 7189,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "lib/reference_points.h",
+			"settings":
+			{
+				"buffer_size": 883,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -80,10 +180,24 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Stefan/Documents/GitHub/Final_Project/lib/display.c",
+		"/C/Users/Stefan/Documents/GitHub/Final_Project/lib/display.h",
+		"/C/Users/Stefan/Documents/GitHub/Final_Project/controllers/Main/Makefile",
+		"/C/Users/Stefan/Documents/GitHub/Final_Project/lib/odometry.c",
+		"/C/Users/Stefan/Documents/GitHub/Final_Project/lib/e_puck_movement.c",
+		"/C/Users/Stefan/Documents/GitHub/Final_Project/lib/reference_points.h",
+		"/C/Users/Stefan/Documents/GitHub/Final_Project/lib/odometry.h",
+		"/C/Users/Stefan/Documents/GitHub/Final_Project/lib/functions.h",
+		"/C/Users/Stefan/Documents/GitHub/Final_Project/lib/e_puck_movement.h",
+		"/C/Users/Stefan/Documents/GitHub/Final_Project/lib/map_building.h",
+		"/C/Users/Stefan/Documents/GitHub/Final_Project/lib/e_puck_distance_sensors.c",
+		"/C/Users/Stefan/Documents/GitHub/Final_Project/lib/Makefile",
+		"/C/Users/Stefan/Documents/GitHub/Final_Project/map_building.c",
+		"/C/Users/Stefan/Documents/GitHub/Final_Project/odometry.c"
 	],
 	"find":
 	{
-		"height": 0.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -97,6 +211,66 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"display",
+			"right",
+			"left",
+			"upper",
+			"upper_left",
+			"upper",
+			"upper_left",
+			"left",
+			"message",
+			"%s\\n",
+			"printf(\"%s\\n\", message)",
+			"SOUTH",
+			"WEST",
+			"checkReferencePoints",
+			"setReferencePoint",
+			"left",
+			"checkDirecrection",
+			"check_direction",
+			"0",
+			"return ",
+			"10.0f",
+			"upper",
+			"left",
+			"point_dEncPos[1];",
+			"point_dEncPos[0];",
+			"resutl",
+			"checkReferencePoints",
+			"ref",
+			"setReferencePoint",
+			"check_direction",
+			"upper",
+			"upper_right",
+			"right",
+			"left",
+			"ref->upper_right",
+			"dRefPosX ",
+			"of",
+			"ref->upper_right.x",
+			"ref->upper_left",
+			"ref->lower_left.x",
+			"ref->upper_left.x",
+			"ref->upper_left",
+			"dTEstPostx",
+			"point_dEncPos",
+			"get_encoder_positions",
+			"upper_right",
+			"upper",
+			"left",
+			"threshold",
+			"left",
+			"lower",
+			"WHEEL_RADIUS",
+			"scaling_factor",
+			"wheel_radius",
+			"WHEEL_RADIUS",
+			"wheel_radius",
+			"WHEEL_RADIUS",
+			"increments_per_tour",
+			", struct odometryTrackStruct * ot",
+			"M_PI"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -114,7 +288,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -122,15 +296,15 @@
 					"file": "controllers/Main/Main.c",
 					"settings":
 					{
-						"buffer_size": 2197,
+						"buffer_size": 2084,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2197,
-								2197
+								1427,
+								1427
 							]
 						],
 						"settings":
@@ -243,25 +417,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 672.0,
+						"translation.y": 864.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "lib/e_puck_movement.c",
+					"file": "lib/map_building.c",
 					"settings":
 					{
-						"buffer_size": 10816,
+						"buffer_size": 10863,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6174,
-								6174
+								1203,
+								1203
 							]
 						],
 						"settings":
@@ -374,58 +548,394 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2646.0,
+						"translation.y": 2773.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "map_building.c",
+					"file": "lib/functions.c",
 					"settings":
 					{
-						"buffer_size": 6832,
+						"buffer_size": 1562,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								241,
+								241
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/C++/C.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 504.0,
+						"translation.y": 291.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "odometry.c",
+					"file": "lib/reference_points.c",
 					"settings":
 					{
-						"buffer_size": 2410,
+						"buffer_size": 7189,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								6919,
+								6919
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/C++/C.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "lib/reference_points.h",
+					"settings":
+					{
+						"buffer_size": 883,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								221,
+								170
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/C++/C++.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -467,6 +977,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 118.0
+	},
 	"output.git":
 	{
 		"height": 94.0
@@ -481,6 +995,50 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"make",
+				"controllers/Main/Makefile"
+			],
+			[
+				"lib/refere",
+				"lib/reference_points.h"
+			],
+			[
+				"reere",
+				"lib/reference_points.h"
+			],
+			[
+				"ep",
+				"lib/e_puck_movement.h"
+			],
+			[
+				"map",
+				"lib/map_building.h"
+			],
+			[
+				"dista",
+				"lib/e_puck_distance_sensors.c"
+			],
+			[
+				"makefi",
+				"controllers/Main/Makefile"
+			],
+			[
+				"lib/map_",
+				"lib/map_building.h"
+			],
+			[
+				"refere",
+				"lib/reference_points.c"
+			],
+			[
+				"map_build",
+				"lib/map_building.c"
+			],
+			[
+				"odometry.h",
+				"lib/odometry.h"
+			],
 			[
 				"odome",
 				"odometry.c"
@@ -512,6 +1070,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 340.0,
 	"status_bar_visible": true
 }

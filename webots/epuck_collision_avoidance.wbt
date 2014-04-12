@@ -8,8 +8,8 @@ WorldInfo {
   basicTimeStep 16
 }
 Viewpoint {
-  orientation 0.999418 0.0258513 -0.0222489 4.66112
-  position 0.0213511 2.37155 0.00993335
+  orientation 0.998955 0.00436983 -0.0455032 4.79165
+  position -0.0453758 2.49135 0.181589
 }
 Background {
   skyColor [
@@ -73,6 +73,21 @@ DEF WALL_4 Solid {
     USE Wall_Shape
   ]
   boundingObject USE WALLS
+}
+Solid {
+  translation -0.003562 4.54519e-15 -0.318567
+  rotation 0 1 0 1.5708
+  children [
+    Shape {
+      appearance USE WALL_APPEARANCE
+      geometry Box {
+        size 0.05 0.2 0.5
+      }
+    }
+  ]
+  boundingObject Box {
+    size 0.05 0.2 0.5
+  }
 }
 DirectionalLight {
   ambientIntensity 0.5

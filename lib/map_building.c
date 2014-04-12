@@ -33,14 +33,6 @@
 #define RIGHT 1       // right side
 // 8 IR proximity sensors
 #define NUM_DIST_SENS 8
-/*#define PS_RIGHT_10 0
-#define PS_RIGHT_45 1
-#define PS_RIGHT_90 2
-#define PS_RIGHT_REAR 3
-#define PS_LEFT_REAR 4
-#define PS_LEFT_90 5
-#define PS_LEFT_45 6
-#define PS_LEFT_10 7 */
 
 //states for the FSM
 #define FORWARD 0
@@ -52,9 +44,6 @@
 /* Definitions */
 //Leds
 WbDeviceTag led[3];
-
-//Distance sensors and corresponding arrays
-/* WbDeviceTag ps[NUM_DIST_SENS]; */
 
 //display and map 
 WbDeviceTag display;
@@ -68,8 +57,6 @@ int robot_x = MAP_SIZE / 2;
 int robot_y = MAP_SIZE / 2;  
 
 //Distance sensors and corresponding arrays
-/* WbDeviceTag ps[NUM_DIST_SENS];
-int ps_value[NUM_DIST_SENS]={0,0,0,0,0,0,0,0}; */
 int obstacle[NUM_DIST_SENS]={0,0,0,0,0,0,0,0};
 bool ob_front, ob_right, ob_left;
 
@@ -221,9 +208,6 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 	robot_x = wtom(ot->result.x);
 	robot_y = wtom(ot->result.y);
 	
-	/*point_SensorData = get_sensor_data(NUM_DIST_SENS);
-	checkObstacles();*/
-	
 	point_SensorData = get_sensor_data(NUM_DIST_SENS);
 	for(i = 0;i < NUM_DIST_SENS;i++){
 		obstacle[i] = point_SensorData[i] - ps_offset[i] > THRESHOLD_DIST;
@@ -238,8 +222,6 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 
 	ob_left = 
 	obstacle[5];
-
-	//move_forward(dSpeed, dDistance);
 	
 	//mark cells as occupied
 	wb_display_image_paste(display,background,0,0);
@@ -274,8 +256,6 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 				check_rotation(cur_rot, 180, dSpeed);
 				move_forward(dSpeed, dDistance, ot);
 			} 
-			//move_forward(dSpeed, dDistance);
-			//set_motor_speed(dSpeed, dSpeed);
 			 if(ob_front){
 				state = STOP;
 				}
@@ -304,45 +284,26 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 			
 		case TURNRIGHT:
 			turn_right(dSpeed);
-			//controll_angle(&ot);
 			state = FORWARD;
 			break;
 		case TURNLEFT:
 			turn_left(dSpeed);
-			//controll_angle(&ot);
 			state = FORWARD;
 			break;
 		case UTURN:
 			direction = check_direction(ot->result.theta);
 			printf("%d\n",direction );
-			// robot_x = wtom(ot->result.x);
-			// robot_y = wtom(ot->result.y);
 			if(direction == 1){
 				printf("%s\n", no);
 				turn_left(dSpeed);
 				for(it = 0;it < 5;it++){
 					printf("%s\n",thinking);
 					check_reference_points(ot, ref);
-					//checkObstacles();
-			/*		point_SensorData = get_sensor_data(NUM_DIST_SENS);
-					for(i = 0;i < NUM_DIST_SENS;i++){
-						obstacle[i] = point_SensorData[i] - ps_offset[i] > THRESHOLD_DIST;
-					}	
-					//define boolean for sensor states for cleaner implementation
-					ob_front  = 
-					obstacle[0] ||
-					obstacle[7];
 
-					ob_right = 
-					obstacle[2];
-
-					ob_left = 
-					obstacle[5];*/
 					if((ob_front && ob_right) || (ob_front && ob_left)){
-						// odometry_track_step(ot);
 						check_reference_points(ot, ref);
 						state = STOP;
-						//break;
+						break;
 					}
 					move_forward(dSpeed, dDistance, ot);
 					//mark cells as occupied
@@ -357,13 +318,9 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 					wb_display_image_delete(display,background);
 					background = wb_display_image_copy(display,0,0,display_width,display_height); 
 				}
-				/* odometry_track_step(ot); */
-				/* cur_rot = return_angle(ot->result.theta);
-				turn_angle(cur_rot - 270, dSpeed);   */
+
 				turn_left(dSpeed);
 				odometry_track_step(ot);
-				/* cur_rot = return_angle(ot->result.theta);
-				check_rotation(cur_rot, 270, dSpeed);  */
 				state = FORWARD;
 			}else if(direction == 2){
 				printf("%s\n", ea);
@@ -371,24 +328,7 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 				for(it = 0;it < 5;it++){
 					printf("%s\n",thinking);
 					check_reference_points(ot, ref);
-				/*	point_SensorData = get_sensor_data(NUM_DIST_SENS);
-
-					for(i = 0;i < NUM_DIST_SENS;i++){
-						obstacle[i] = point_SensorData[i] - ps_offset[i] > THRESHOLD_DIST;
-					}	
-					//define boolean for sensor states for cleaner implementation
-					ob_front  = 
-					obstacle[0] ||
-					obstacle[7];
-
-					ob_right = 
-					obstacle[2];
-
-					ob_left = 
-					obstacle[5];*/
-					//checkObstacles();
 					if((ob_front && ob_right) || (ob_front && ob_left)){
-						// odometry_track_step(ot);
 						check_reference_points(ot, ref);
 						state = STOP;
 						break;
@@ -407,36 +347,15 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 						background = wb_display_image_copy(display,0,0,display_width,display_height); 
 					}
 				}
-				/* odometry_track_step(ot); */
-				/* cur_rot = return_angle(ot->result.theta);
-				turn_angle(cur_rot - 180, dSpeed);  */
 				turn_right(dSpeed);
 				odometry_track_step(ot);
-				/* cur_rot = return_angle(ot->result.theta);
-				check_rotation(cur_rot, 180, dSpeed);  */
 				state = FORWARD;
 			}else if(direction == 3){
 				printf("%s\n", so);
 				turn_right(dSpeed);
 				for(it = 0;it < 5;it++){
 					printf("%s\n",thinking);
-					check_reference_points(ot, ref);
-				/*	point_SensorData = get_sensor_data(NUM_DIST_SENS);
-					for(i = 0;i < NUM_DIST_SENS;i++){
-						obstacle[i] = point_SensorData[i] - ps_offset[i] > THRESHOLD_DIST;
-					}	
-					//define boolean for sensor states for cleaner implementation
-					ob_front  = 
-					obstacle[0] ||
-					obstacle[7];
-
-					ob_right = 
-					obstacle[2];
-
-					ob_left = 
-					obstacle[5];*/
-				//	checkObstacles();
-					
+					check_reference_points(ot, ref);					
 					if((ob_front && ob_right) || (ob_front && ob_left)){
 						printf("%s\n", text);
 						check_reference_points(ot, ref);
@@ -459,36 +378,16 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 						move_forward(dSpeed, dDistance, ot);
 					}
 				}
-				/* odometry_track_step(ot); */
-				/*cur_rot = return_angle(ot->result.theta);
-				turn_angle(cur_rot - 90, dSpeed); */
+
 				turn_right(dSpeed);
 				odometry_track_step(ot);
-				/* cur_rot = return_angle(ot->result.theta);
-				check_rotation(cur_rot, 90, dSpeed); */ 
 				state = FORWARD;
 			}else if(direction == 4){
 				printf("%s\n", we);
 				turn_left(dSpeed);
 				for(it = 0;it < 5;it++){
 					printf("%s\n",thinking);
-					check_reference_points(ot, ref);
-					//checkObstacles();
-			/*		point_SensorData = get_sensor_data(NUM_DIST_SENS);
-					for(i = 0;i < NUM_DIST_SENS;i++){
-						obstacle[i] = point_SensorData[i] - ps_offset[i] > THRESHOLD_DIST;
-					}	
-					//define boolean for sensor states for cleaner implementation
-					ob_front  = 
-					obstacle[0] ||
-					obstacle[7];
-
-					ob_right = 
-					obstacle[2];
-
-					ob_left = 
-					obstacle[5];*/
-					
+					check_reference_points(ot, ref);					
 					if((ob_front && ob_right) || (ob_front && ob_left)){
 
 						printf("%s\n", text);
@@ -508,15 +407,9 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 					wb_display_image_delete(display,background);
 					background = wb_display_image_copy(display,0,0,display_width,display_height);
 				}
-				/* odometry_track_step(ot); */
-				/* cur_rot = return_angle(ot->result.theta);
-				turn_angle(cur_rot - 360, dSpeed); */
 			
 				turn_left(dSpeed);
 				odometry_track_step(ot);
-			
-			/* cur_rot = return_angle(ot->result.theta);
-				check_rotation(cur_rot, 360, dSpeed);  */
 				state = FORWARD;
 			}
 			break;

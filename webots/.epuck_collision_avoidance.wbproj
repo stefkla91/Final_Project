@@ -6,4 +6,4 @@ minimizedPerspectives:
 maximizedDockId: -1
 centralWidgetVisible: 1
 orthographicViewHeight: 1
-textFiles: 0 "controllers/Main/Main.c" "lib/e_puck_movement.c" "lib/map_building.c" "lib/odometry.c"
+textFiles: 0 "controllers/Main/Main.c" "lib/e_puck_movement.c" "lib/odometry.c"
