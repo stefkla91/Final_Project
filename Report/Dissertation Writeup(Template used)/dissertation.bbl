@@ -1,0 +1,156 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{#1}
+\csname url@rmstyle\endcsname
+\providecommand{\newblock}{\relax}
+\providecommand{\bibinfo}[2]{#2}
+\providecommand\BIBentrySTDinterwordspacing{\spaceskip=0pt\relax}
+\providecommand\BIBentryALTinterwordstretchfactor{4}
+\providecommand\BIBentryALTinterwordspacing{\spaceskip=\fontdimen2\font plus
+\BIBentryALTinterwordstretchfactor\fontdimen3\font minus
+  \fontdimen4\font\relax}
+\providecommand\BIBforeignlanguage[2]{{%
+\expandafter\ifx\csname l@#1\endcsname\relax
+\typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
+\typeout{** loaded for the language `#1'. Using the pattern for}%
+\typeout{** the default language instead.}%
+\else
+\language=\csname l@#1\endcsname
+\fi
+#2}}
+
+\bibitem{Abolhasan2004Review}
+\BIBentryALTinterwordspacing
+M.~Abolhasan, T.~Wysocki, and E.~Dutkiewicz, ``{A review of routing protocols
+  for mobile ad hoc networks},'' \emph{Ad Hoc Networks}, vol.~2, no.~1, pp.
+  1--22, Jan. 2004. [Online]. Available:
+  \url{http://dx.doi.org/10.1016/s1570-8705(03)00043-x}
+\BIBentrySTDinterwordspacing
+
+
+\bibitem{Batalin2003Coverage}
+\BIBentryALTinterwordspacing
+M.~Batalin and G.~Sukhatme, ``{Coverage, Exploration, and Deployment by a
+  Mobile Robot and Communication Network},'' in \emph{Information Processing in
+  Sensor Networks}, ser. Lecture Notes in Computer Science, F.~Zhao and
+  L.~Guibas, Eds.\hskip 1em plus 0.5em minus 0.4em\relax Springer Berlin
+  Heidelberg, 2003, vol. 2634, pp. 376--391. [Online]. Available:
+  \url{http://dx.doi.org/10.1007/3-540-36978-3\_25}
+\BIBentrySTDinterwordspacing
+
+
+\bibitem{Burgard2000Collaborative}
+\BIBentryALTinterwordspacing
+W.~Burgard, M.~Moors, D.~Fox, R.~Simmons, and S.~Thrun, ``{Collaborative
+  multi-robot exploration},'' in \emph{Robotics and Automation, 2000.
+  Proceedings. ICRA \&\#039;00. IEEE International Conference on},
+  vol.~1.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2000, pp. 476--481
+  vol.1. [Online]. Available: \url{http://dx.doi.org/10.1109/robot.2000.844100}
+\BIBentrySTDinterwordspacing
+
+
+\bibitem{Dissanayake2001Solution}
+\BIBentryALTinterwordspacing
+M.~W. M.~G. Dissanayake, P.~Newman, S.~Clark, H.~F. Durrant-Whyte, and
+  M.~Csorba, ``{A solution to the simultaneous localization and map building
+  (SLAM) problem},'' \emph{Robotics and Automation, IEEE Transactions on},
+  vol.~17, no.~3, pp. 229--241, June 2001. [Online]. Available:
+  \url{http://dx.doi.org/10.1109/70.938381}
+\BIBentrySTDinterwordspacing
+
+
+\bibitem{Fox1999Markov}
+\BIBentryALTinterwordspacing
+D.~Fox, W.~Burgard, and S.~Thrun, ``{Markov Localization for Mobile Robots in
+  Dynamic Environments},'' in \emph{Journal of Artificial Intelligence
+  Research}, vol.~11, 1999, pp. 391--427. [Online]. Available:
+  \url{http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.34.372}
+\BIBentrySTDinterwordspacing
+
+
+\bibitem{Mei2006Deployment}
+\BIBentryALTinterwordspacing
+Y.~Mei, Y.-H. Lu, Y.~C. Hu, and C.~S.~G. Lee, ``{Deployment of mobile robots
+  with energy and timing constraints},'' \emph{Robotics, IEEE Transactions on},
+  vol.~22, no.~3, pp. 507--522, June 2006. [Online]. Available:
+  \url{http://dx.doi.org/10.1109/tro.2006.875494}
+\BIBentrySTDinterwordspacing
+
+
+\bibitem{Poduri2004Constrained}
+\BIBentryALTinterwordspacing
+S.~Poduri and G.~Sukhatme, ``{Constrained coverage for mobile sensor
+  networks},'' in \emph{Robotics and Automation, 2004. Proceedings. ICRA
+  \&\#039;04. 2004 IEEE International Conference on}, vol.~1.\hskip 1em plus
+  0.5em minus 0.4em\relax IEEE, Apr. 2004, pp. 165--171 Vol.1. [Online].
+  Available: \url{http://dx.doi.org/10.1109/robot.2004.1307146}
+\BIBentrySTDinterwordspacing
+
+
+\bibitem{Reynolds1987Flocks}
+\BIBentryALTinterwordspacing
+C.~W. Reynolds, ``{Flocks, Herds and Schools: A Distributed Behavioral
+  Model},'' in \emph{Proceedings of the 14th Annual Conference on Computer
+  Graphics and Interactive Techniques}, ser. SIGGRAPH '87, vol.~21,
+  no.~4.\hskip 1em plus 0.5em minus 0.4em\relax New York, NY, USA: ACM, July
+  1987, pp. 25--34. [Online]. Available:
+  \url{http://dx.doi.org/10.1145/37401.37406}
+\BIBentrySTDinterwordspacing
+
+
+\bibitem{Singh1993Map}
+\BIBentryALTinterwordspacing
+K.~Singh and K.~Fujimura, ``{Map making by cooperating mobile robots},'' in
+  \emph{Robotics and Automation, 1993. Proceedings., 1993 IEEE International
+  Conference on}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, May 1993, pp.
+  254--259 vol.2. [Online]. Available:
+  \url{http://dx.doi.org/10.1109/robot.1993.292155}
+\BIBentrySTDinterwordspacing
+
+
+\bibitem{Thrun2000Realtime}
+\BIBentryALTinterwordspacing
+S.~Thrun, W.~Burgard, and D.~Fox, ``{A real-time algorithm for mobile robot
+  mapping with applications to multi-robot and 3D mapping},'' in \emph{Robotics
+  and Automation, 2000. Proceedings. ICRA \&\#039;00. IEEE International
+  Conference on}, vol.~1.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2000,
+  pp. 321--328 vol.1. [Online]. Available:
+  \url{http://dx.doi.org/10.1109/robot.2000.844077}
+\BIBentrySTDinterwordspacing
+
+
+\bibitem{Thrun2001Learning}
+\BIBentryALTinterwordspacing
+S.~Thrun, ``{Learning Occupancy Grids with Forward Models},'' in \emph{In
+  Proceedings of the Conference on Intelligent Robots and Systems
+  (IROS\^{a}2001}, 2001, pp. 1676--1681. [Online]. Available:
+  \url{http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.19.6014}
+\BIBentrySTDinterwordspacing
+
+
+\bibitem{Thrun1998Probabilistic}
+\BIBentryALTinterwordspacing
+S.~Thrun, W.~Burgard, D.~Fox, H.~Hexmoor, and M.~Mataric, ``{A Probabilistic
+  Approach to Concurrent Mapping and Localization for Mobile Robots},'' in
+  \emph{Machine Learning}, 1998, pp. 29--53. [Online]. Available:
+  \url{http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.18.1128}
+\BIBentrySTDinterwordspacing
+
+
+\bibitem{Thrun2001Robust}
+\BIBentryALTinterwordspacing
+S.~Thrun, D.~Fox, W.~Burgard, and F.~Dellaert, ``{Robust Monte Carlo
+  Localization for Mobile Robots},'' 2001. [Online]. Available:
+  \url{http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.18.8488}
+\BIBentrySTDinterwordspacing
+
+
+\bibitem{Yang2014Adaptive}
+\BIBentryALTinterwordspacing
+H.-X. Yang and M.~Tang, ``{Adaptive routing strategy on networks of mobile
+  nodes},'' \emph{Physica A: Statistical Mechanics and its Applications}, vol.
+  402, pp. 1--7, May 2014. [Online]. Available:
+  \url{http://dx.doi.org/10.1016/j.physa.2014.01.063}
+\BIBentrySTDinterwordspacing
+
+
+\end{thebibliography}
