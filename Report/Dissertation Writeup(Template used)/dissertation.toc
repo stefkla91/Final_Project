@@ -1,13 +1,14 @@
 \contentsline {chapter}{\numberline {1}Background \& Objectives}{1}
 \contentsline {subsection}{\numberline {1.0.1}SLAM - Simultaneous Localization And Mapping}{1}
 \contentsline {subsection}{\numberline {1.0.2}Deployment}{2}
-\contentsline {subsection}{\numberline {1.0.3}Communication}{2}
-\contentsline {section}{\numberline {1.1}Analysis}{4}
-\contentsline {section}{\numberline {1.2}Process}{4}
-\contentsline {chapter}{\numberline {2}Design}{5}
-\contentsline {section}{\numberline {2.1}Environment Design}{5}
+\contentsline {section}{\numberline {1.1}Analysis}{2}
+\contentsline {section}{\numberline {1.2}Process}{2}
+\contentsline {chapter}{\numberline {2}Design}{4}
+\contentsline {section}{\numberline {2.1}Environment Design}{4}
 \contentsline {section}{\numberline {2.2}Mapping and Swarm Size}{5}
 \contentsline {section}{\numberline {2.3}Deployment}{5}
+\contentsline {subsection}{\numberline {2.3.1}Considered Deployment algorithms}{5}
+\contentsline {subsection}{\numberline {2.3.2}Adopted design}{5}
 \contentsline {chapter}{\numberline {3}Implementation}{7}
 \contentsline {section}{\numberline {3.1}Early Development}{7}
 \contentsline {subsection}{\numberline {3.1.1}Webots Tutorials}{7}
@@ -16,25 +17,26 @@
 \contentsline {subsection}{\numberline {3.2.1}Advanced tutorials}{9}
 \contentsline {section}{\numberline {3.3}Movement}{9}
 \contentsline {subsection}{\numberline {3.3.1}Moving Forward}{9}
-\contentsline {subsection}{\numberline {3.3.2}Turn a given angle}{11}
-\contentsline {section}{\numberline {3.4}Localisation using Odometry}{14}
-\contentsline {subsection}{\numberline {3.4.1}Initialising the Odometry algorithms}{14}
-\contentsline {subsection}{\numberline {3.4.2}Updating the Odometry values}{15}
-\contentsline {subsection}{\numberline {3.4.3}Implementation}{16}
-\contentsline {chapter}{\numberline {4}Testing}{18}
-\contentsline {section}{\numberline {4.1}Overall Approach to Testing}{18}
-\contentsline {section}{\numberline {4.2}Automated Testing}{18}
-\contentsline {subsection}{\numberline {4.2.1}Unit Tests}{18}
-\contentsline {subsection}{\numberline {4.2.2}User Interface Testing}{18}
-\contentsline {subsection}{\numberline {4.2.3}Stress Testing}{18}
-\contentsline {subsection}{\numberline {4.2.4}Other types of testing}{18}
-\contentsline {section}{\numberline {4.3}Integration Testing}{18}
-\contentsline {section}{\numberline {4.4}User Testing}{18}
-\contentsline {chapter}{\numberline {5}Future Plans}{19}
-\contentsline {section}{\numberline {5.1}Communication}{19}
-\contentsline {chapter}{\numberline {6}Evaluation}{21}
-\contentsline {chapter}{Appendices}{22}
-\contentsline {chapter}{\numberline {A}Third-Party Code and Libraries}{23}
-\contentsline {chapter}{\numberline {B}Code samples}{24}
-\contentsline {section}{\numberline {2.1}Random Number Generator}{24}
-\contentsline {chapter}{Annotated Bibliography}{27}
+\contentsline {subsection}{\numberline {3.3.2}Turn a given angle}{10}
+\contentsline {section}{\numberline {3.4}Localisation using Odometry}{12}
+\contentsline {subsection}{\numberline {3.4.1}Initialising the Odometry algorithms}{13}
+\contentsline {subsection}{\numberline {3.4.2}Updating the Odometry values}{14}
+\contentsline {subsection}{\numberline {3.4.3}Implementation}{15}
+\contentsline {chapter}{\numberline {4}Testing}{16}
+\contentsline {section}{\numberline {4.1}Overall Approach to Testing}{16}
+\contentsline {section}{\numberline {4.2}Automated Testing}{16}
+\contentsline {subsection}{\numberline {4.2.1}Unit Tests}{16}
+\contentsline {subsection}{\numberline {4.2.2}User Interface Testing}{16}
+\contentsline {subsection}{\numberline {4.2.3}Stress Testing}{16}
+\contentsline {subsection}{\numberline {4.2.4}Other types of testing}{16}
+\contentsline {section}{\numberline {4.3}Integration Testing}{16}
+\contentsline {section}{\numberline {4.4}User Testing}{16}
+\contentsline {chapter}{\numberline {5}Future Plans}{17}
+\contentsline {section}{\numberline {5.1}Communication}{17}
+\contentsline {chapter}{\numberline {6}Evaluation}{19}
+\contentsline {chapter}{Appendices}{20}
+\contentsline {chapter}{\numberline {A}Third-Party Code and Libraries}{21}
+\contentsline {chapter}{\numberline {B}Code samples}{22}
+\contentsline {section}{\numberline {2.1}Moving forward a given distance}{22}
+\contentsline {section}{\numberline {2.2}Turning a given Angle}{23}
+\contentsline {chapter}{Annotated Bibliography}{26}

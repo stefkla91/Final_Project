@@ -124,6 +124,14 @@
 			}
 		},
 		{
+			"file": "Report/Major Writeup/stk4_major_project.tex",
+			"settings":
+			{
+				"buffer_size": 42736,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "lib/reference_points.c",
 			"settings":
 			{
@@ -288,7 +296,6 @@
 	"groups":
 	[
 		{
-			"selected": 1,
 			"sheets":
 			[
 				{
@@ -548,7 +555,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2773.0,
+						"translation.y": 3223.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -675,7 +682,8 @@
 							},
 							"codeintel_tooltips": "popup",
 							"sublime_auto_complete": true,
-							"syntax": "Packages/C++/C.tmLanguage"
+							"syntax": "Packages/C++/C.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 291.0,
@@ -685,6 +693,34 @@
 				},
 				{
 					"buffer": 3,
+					"file": "Report/Major Writeup/stk4_major_project.tex",
+					"settings":
+					{
+						"buffer_size": 42736,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1009,
+								478
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
 					"file": "lib/reference_points.c",
 					"settings":
 					{
@@ -805,7 +841,8 @@
 							},
 							"codeintel_tooltips": "popup",
 							"sublime_auto_complete": true,
-							"syntax": "Packages/C++/C.tmLanguage"
+							"syntax": "Packages/C++/C.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -814,7 +851,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "lib/reference_points.h",
 					"settings":
 					{

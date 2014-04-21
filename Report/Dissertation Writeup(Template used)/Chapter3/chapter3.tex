@@ -40,6 +40,7 @@ This approach is based on a set of different functions, much smaller and more re
 I will also post the code to each of the major functions as it will help with describing them. 
 
 \subsection{Moving Forward}
+The code for this function can be found in Appendix B, section 2.1.\\
 The \textit{move\_forward }function takes 2 doubles as parameters, 1 being the speed with which the robot is ordered to move and the distance it should move.\\
 The function first checks that neither of the parameters are 0 and then calculates the number of steps each motor has to drive(1 step being 1 step of the stepper motor) to reach its target position.
 This calculation is done by dividing the number of steps needed for a full wheel rotation, 1000 in this case, by the product of $\pi$ times the wheel radius times 2 and multiplication this result with the distance defined in the parameter of the function. The steps needed for a full rotation have been taken from the E-Puck documentation and have been confirmed during on of the odometry tutorials. \\
@@ -51,77 +52,11 @@ This is controlled by comparing the current encoder positions with the calculate
 Once the robot reached a pre-defined minimum distance of 20 encoder steps it will slow down the movement to a minimum speed of 10 steps per second. This is down to prevent the robot from overshooting the target area should it move with to much speed. The optimal minimum distance and speed has been found experimentally, and both values give good results and also prevent the robot from undershooting.
 Once it has reached it target location it will stop the robot, and force the simulator to take a simulation step, effectively moving onward to the next command.\\[3ex]
 
-This function allows me to move forward and stop after the predefined distance within a minimal error space, which will always exist given the friction simulated inside the simulator. This method required a lot of testing in order to get right as first versions did not include the control statement which slowed down the robot after a minimum difference between the encoders and the target encoder value has been reached. So the robot used to overshoot the target. \\
+This function allows the robot to move forward and stop after the predefined distance within a minimal error space, which will always exist given the friction simulated inside the simulator. This method required a lot of testing in order to get right as first versions did not include the control statement which slowed down the robot after a minimum difference between the encoders and the target encoder value has been reached. So the robot used to overshoot the target. \\
 After the control statement was implemented it still required some testing and calibration of the minimum difference and speed values in order to avoid over and undershooting. However the found values work well and the movement error has been reduced to minimum.\\
 
-\begin{lstlisting}
-/**
-Function to turn the robot a given angle with a given speed
-*/
-void turn_angle(double dAngle, double dSpeed){
-	double dFactor = 0.0f;
-	double dStepCount = 0.0f;
-	double dStopPosLeft = 0.0f;
-	double dStopPosRight = 0.0f;
-	double *point_dEncPos;
-	
-	if((dAngle != 0.0f) && (dSpeed > 0.0f)){
-		//calculate turn factor
-		dFactor = fabs(360.0f/dAngle);
-		
-		//calculate the number of step counts for the rotations
-		dStepCount = (INCREMENT_STEP * WHEELBASE)/(dFactor * WHEEL_RADIUS * 2.0f);
-		
-		point_dEncPos = get_encoder_positions();
-		
-		//turn right
-		if(dAngle > 0){
-			//calculate the target encoder positions
-			dStopPosLeft = point_dEncPos[0] + dStepCount;
-			dStopPosRight = point_dEncPos[1] - dStepCount;
-			
-			point_dOdometryData = compute_odometry_data();
-			
-			set_motor_speed(dSpeed, -dSpeed);
-			
-			while((point_dEncPos[0] < dStopPosLeft) && (point_dEncPos[1] > dStopPosRight)){
-				//get odometry data
-				point_dOdometryData = compute_odometry_data();
-				
-				//get wheel encoders
-				point_dEncPos = get_encoder_positions();
-				
-				//slow down the closer the robot come to the destination, reduces the error
-				if(fabs(dStopPosLeft - point_dEncPos[0]) <= MIN_DIST){
-					set_motor_speed(MIN_SPEED, -MIN_SPEED);
-				}
-			}	
-		
-	} else { // turn left ...
-		dStopPosLeft = point_dEncPos[0] - dStepCount;
-		dStopPosRight = point_dEncPos[1] + dStepCount; 
-
-		// turn left the robot ...
-		set_motor_speed(-dSpeed, dSpeed);
-
-		while(  (point_dEncPos[0] > dStopPosLeft) &&(point_dEncPos[1] < dStopPosRight)  ) {
-
-			point_dOdometryData = compute_odometry_data();
-			point_dEncPos = get_encoder_positions();
-			if( fabs(dStopPosLeft - point_dEncPos[0]) <= MIN_DIST ){
-				set_motor_speed(-MIN_SPEED, MIN_SPEED); }
-			}
-		}
-	}
-	stop_robot();
-	
-	//update odometry data
-	point_dOdometryData = compute_odometry_data();
-	wb_robot_step(TIME_STEP);
-}
-\end{lstlisting}
-
 \subsection{Turn a given angle}
+The code for this function can be found in Appendix B, section 2.2.\\
 The turn\_angle function takes 2 doubles as parameters, one being the angle the robot will turn to the other the speed with which the robot will turn.\\
 First the factor by which the robot will turn is calculated by dividing 360, the value of a full rotation, with the defined angle.
 Once the factor has been calculated it will then the number of steps the motor have to do until the target position is reached. This is done by dividing the product of the steps needed for a full wheel rotation, 1000, and the size of the wheelbase by the product of the calculated turning factor and 2 times the wheel radius. It will then use a function to return the current motor encoder positions. This function simply uses the Webots\textsuperscript{\texttrademark}  API and returns the values. \\[3ex]

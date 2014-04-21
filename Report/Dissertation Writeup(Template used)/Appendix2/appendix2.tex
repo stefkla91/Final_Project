@@ -1,94 +1,151 @@
 \chapter{Code samples}
 
-\section{Random Number Generator}
+\section{Moving forward a given distance}
+This function moved the robot a given distance with a given speed.\\
+The robot will slow down to a minimum speed on a minimum difference to the wanted position.\\
+This method will update the global odometry information.
+\begin{lstlisting}
+#define WHEELBASE 0.058 
+#define INCREMENT_STEP 1000 //how many steps the motor takes for a full wheel rotation
+#define MIN_DIST 20.0f //minimum difference to the new heading
+#define MIN_SPEED 10.0f //speed when slowing down
 
-The Bayes Durham Shuffle ensures that the psuedo random numbers used in the simulation are further shuffled, ensuring minimal correlation between subsequent random outputs \cite{NumericalRecipes}.
+#ifndef M_PI
+	#define M_PI 3.1415926535897932384626433832795L
+#endif
 
-\begin{verbatim}
- #define IM1 2147483563
- #define IM2 2147483399
- #define AM (1.0/IM1)
- #define IMM1 (IM1-1)
- #define IA1 40014
- #define IA2 40692 
- #define IQ1 53668
- #define IQ2 52774
- #define IR1 12211
- #define IR2 3791
- #define NTAB 32
- #define NDIV (1+IMM1/NTAB)
- #define EPS 1.2e-7
- #define RNMX (1.0 - EPS)
- 
- double ran2(long *idum)
- {
-   /*---------------------------------------------------*/
-   /* Minimum Standard Random Number Generator          */
-   /* Taken from Numerical recipies in C                */
-   /* Based on Park and Miller with Bays Durham Shuffle */
-   /* Coupled Schrage methods for extra periodicity     */
-   /* Always call with negative number to initialise    */
-   /*---------------------------------------------------*/	
- 
-   int j;
-   long k;
-   static long idum2=123456789;
-   static long iy=0;
-   static long iv[NTAB];
-   double temp;
- 
-   if (*idum <=0)
-   {
-     if (-(*idum) < 1)
-     {
-       *idum = 1;
-     }else
-     {
-       *idum = -(*idum);
-     }
-     idum2=(*idum);
-     for (j=NTAB+7;j>=0;j--)
-     {
-       k = (*idum)/IQ1;
-       *idum = IA1 *(*idum-k*IQ1) - IR1*k;
-       if (*idum < 0)
-       {
-         *idum += IM1;
-       }
-       if (j < NTAB)
-       {
-         iv[j] = *idum;
-       }
-     }
-     iy = iv[0];	
-   }
-   k = (*idum)/IQ1;
-   *idum = IA1*(*idum-k*IQ1) - IR1*k;
-   if (*idum < 0)
-   {
-     *idum += IM1;
-   }
-   k = (idum2)/IQ2;
-   idum2 = IA2*(idum2-k*IQ2) - IR2*k;
-   if (idum2 < 0)
-   {
-     idum2 += IM2;
-   }
-   j = iy/NDIV;
-   iy=iv[j] - idum2;
-   iv[j] = *idum;
-   if (iy < 1)
-   {
-     iy += IMM1;
-   }
-   if ((temp=AM*iy) > RNMX)
-   {
-     return RNMX;
-   }else
-   {
-     return temp;	
-   }
- }
- 
-\end{verbatim}
+/**
+Function to move the robot forward a given distance at a given speed
+*/
+void move_forward(double dSpeed, double dDist, struct odometryTrackStruct * ot){ 
+	double dStepCount = 0.0f;
+	double dStopPosLeft = 0.0f;
+	double dStopPosRight = 0.0f;
+	double *point_dEncPos;	
+	
+	if((dDist > 0.0f) && (dSpeed > 0.0f)){
+		//calculate the number of steps
+		dStepCount = (INCREMENT_STEP/(M_PI * WHEEL_DIAMETER / 2)) * dDist;
+		
+		/*read the current encoder positions of both wheels and
+		calculate the encoder positions when the robot has to
+		stop at the given distance ... */
+		point_dEncPos = get_encoder_positions();
+		
+		dStopPosLeft = point_dEncPos[0] + dStepCount;
+		dStopPosRight = point_dEncPos[1] + dStepCount;
+		
+		//compute odometry data
+		point_dOdometryData = compute_odometry_data();
+		odometry_track_step(ot);
+		
+		
+		//set speed
+		set_motor_speed(dSpeed, dSpeed); 
+		
+		//step tolereance test
+		while((point_dEncPos[0] < dStopPosLeft) && (point_dEncPos[1] < dStopPosRight)){
+			//get odometry data
+			point_dOdometryData = compute_odometry_data();
+			odometry_track_step(ot);
+			//get wheel encoders
+			point_dEncPos = get_encoder_positions();
+			
+			//slow down the closer the robot come to the destination, reduces the error
+			if(fabs(dStopPosLeft - point_dEncPos[0]) <= MIN_DIST){
+				set_motor_speed(MIN_SPEED, MIN_SPEED);
+			}
+		}
+	}
+	stop_robot();
+	
+	//update odometry data
+	point_dOdometryData = compute_odometry_data();
+	odometry_track_step(ot);
+	wb_robot_step(TIME_STEP);
+}
+\end{lstlisting}
+
+\section{Turning a given Angle}
+This function turns the robot a given amount of degrees with a given amount of speed.\\
+The robot will slow down to a minimum speed on a minimum threshold to the wanted heading. 
+
+\begin{lstlisting}
+#define LEFT_DIAMETER 0.0416
+#define RIGHT_DIAMETER 0.0404
+#define WHEEL_DIAMETER (LEFT_DIAMETER + RIGHT_DIAMETER)
+#define WHEELBASE 0.058 
+#define INCREMENT_STEP 1000 //how many steps the motor takes for a full wheel rotation
+#define MIN_DIST 20.0f //minimum difference to the new heading
+#define MIN_SPEED 10.0f //speed when slowing down
+
+/**
+Function to turn the robot a given angle with a given speed
+*/
+void turn_angle(double dAngle, double dSpeed){
+	double dFactor = 0.0f;
+	double dStepCount = 0.0f;
+	double dStopPosLeft = 0.0f;
+	double dStopPosRight = 0.0f;
+	double *point_dEncPos;
+	
+	if((dAngle != 0.0f) && (dSpeed > 0.0f)){
+		//calculate turn factor
+		dFactor = fabs(360.0f/dAngle);
+		
+		//calculate the number of step counts for the rotations
+		dStepCount = (INCREMENT_STEP * WHEELBASE)/(dFactor * WHEEL_DIAMETER / 2);
+		
+		point_dEncPos = get_encoder_positions();
+		
+		//turn right
+		if(dAngle > 0){
+			//calculate the target encoder positions
+			dStopPosLeft = point_dEncPos[0] + dStepCount;
+			dStopPosRight = point_dEncPos[1] - dStepCount;
+			
+			point_dOdometryData = compute_odometry_data();
+			
+			set_motor_speed(dSpeed, -dSpeed);
+			
+			while((point_dEncPos[0] < dStopPosLeft) && (point_dEncPos[1] > dStopPosRight)){
+				//get odometry data
+				point_dOdometryData = compute_odometry_data();
+				
+				//get wheel encoders
+				point_dEncPos = get_encoder_positions();
+				
+				//slow down the closer the robot come to the destination, reduces the error
+				if(fabs(dStopPosLeft - point_dEncPos[0]) <= MIN_DIST){
+					set_motor_speed(MIN_SPEED, -MIN_SPEED);
+				}
+			}	
+		
+	} else { // turn left ...
+		dStopPosLeft = point_dEncPos[0] - dStepCount;
+		dStopPosRight = point_dEncPos[1] + dStepCount;
+		
+		point_dOdometryData = compute_odometry_data();
+
+		// turn left the robot ...
+		set_motor_speed(-dSpeed, dSpeed);
+
+		while((point_dEncPos[0] > dStopPosLeft) &&(point_dEncPos[1] < dStopPosRight)){
+
+			point_dOdometryData = compute_odometry_data();
+			point_dEncPos = get_encoder_positions();
+			if( fabs(dStopPosLeft - point_dEncPos[0]) <= MIN_DIST ){
+				set_motor_speed(-MIN_SPEED, MIN_SPEED); }
+			}
+		}
+	}
+	stop_robot();
+	
+	//update odometry data
+	point_dOdometryData = compute_odometry_data();
+	wb_robot_step(TIME_STEP);
+}
+\end{lstlisting}
+
+
 

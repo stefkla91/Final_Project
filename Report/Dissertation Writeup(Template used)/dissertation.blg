@@ -15,7 +15,6 @@ The style file: IEEEannot.bst
 Database file #1: References/stefkla.bib
 Warning--I didn't find a database entry for "apache_poi"
 Warning--I didn't find a database entry for "apache_license"
-Warning--I didn't find a database entry for "NumericalRecipes"
 -- IEEEtranS.bst version 1.11 (2003/04/02) by Michael Shell.
 -- http://www.ctan.org/tex-archive/macros/latex/contrib/supported/IEEEtran/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
@@ -23,4 +22,4 @@ Warning--I didn't find a database entry for "NumericalRecipes"
 Warning--empty journal in Thrun2001Robust
 
 Done.
-(There were 4 warnings)
+(There were 3 warnings)
