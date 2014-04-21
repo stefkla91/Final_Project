@@ -28,10 +28,37 @@
 \usepackage{cite}
 %\usepackage{natbib}
 
+\usepackage{listings} %for code
+\usepackage{color} %for code
+
+% defines how code will be shown
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+% still code
+\lstset{frame=tb,
+  language=C, %Java
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3
+}
+\graphicspath{{./figures/}}
+
 % Use the following to selectively exclude chapters
 %\includeonly{cover,abstract,acknowledge,declare,chapter1,chapter2}
 
 \begin{document}
+
 
 % all of the include directives below refer to tex files
 % so \include{cover} includes cover.tex - to change the content,
@@ -75,7 +102,9 @@
 \include{Chapter2/chapter2}
 \include{Chapter3/chapter3}
 \include{Chapter4/chapter4}
+\include{Chapter6/chapter6}
 \include{Chapter5/chapter5}
+
 % add any additional chapters here
 
 \setemptyheader
@@ -118,13 +147,13 @@
 
 % the following line is included so that the bibliography is also shown in the table of contents. There is the possibility that this is added to the previous page for the bibliography. To address this, a newline is added so that it appears on the first page for the bibliography. 
 \addcontentsline{toc}{chapter}{Annotated Bibliography} % Adds References to contents page
-
 %
 % example of including an annotated bibliography. The current style is an author date one. If you want to change, comment out the line and uncomment the subsequent line. You should also modify the packages included at the top (see the notes earlier in the file) and then trash your aux files and re-run. 
 %\bibliographystyle{authordate2annot}
 \bibliographystyle{IEEEannot}
 \renewcommand{\bibname}{Annotated Bibliography} 
 \bibliography{References/stefkla} % References file
+
 
 
 \end{document}
