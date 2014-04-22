@@ -1,9 +1,12 @@
 \chapter{Code samples}
+\label{code_samples}
 
 \section{Moving forward a given distance}
+\label{moving_forward_code}
 This function moved the robot a given distance with a given speed.\\
 The robot will slow down to a minimum speed on a minimum difference to the wanted position.\\
-This method will update the global odometry information.
+This method will update the global odometry information.\\
+Description can be found in chapter \ref{Implementation} at section \ref{moving_forward_description} at page \pageref{moving_forward_description}.
 \begin{lstlisting}
 #define WHEELBASE 0.058 
 #define INCREMENT_STEP 1000 //how many steps the motor takes for a full wheel rotation
@@ -67,8 +70,10 @@ void move_forward(double dSpeed, double dDist, struct odometryTrackStruct * ot){
 \end{lstlisting}
 
 \section{Turning a given Angle}
+\label{turning_amgle_code}
 This function turns the robot a given amount of degrees with a given amount of speed.\\
-The robot will slow down to a minimum speed on a minimum threshold to the wanted heading. 
+The robot will slow down to a minimum speed on a minimum threshold to the wanted heading.\\
+Description can be found in chapter \ref{Implementation} at section \ref{turn_angle_description} at page \pageref{turn_angle_description}. 
 
 \begin{lstlisting}
 #define LEFT_DIAMETER 0.0416
@@ -147,5 +152,135 @@ void turn_angle(double dAngle, double dSpeed){
 }
 \end{lstlisting}
 
+\section{Odometry Struct}
+\label{odometry_struct_code}
+This section shows the global odometry struct, which is used and updated throughout the program. 
+\begin{lstlisting}
+ struct odometryTrackStruct {
+	struct {
+		float wheel_distance;
+		float wheel_conversion;
+	} configuration;
+	struct {
+		int pos_left_prev;
+		int pos_right_prev;
+	} state;
+	struct {
+		float x;
+		float y;
+		float theta;
+	} result;
+};
+\end{lstlisting}
+
+\section{Initializing odometry struct}
+\label{odometry_init_code}
+These functions are used to initialize the odometry struct and set its attributes.
+Further description of this can be found in chapter \ref{Implementation} at section \ref{odometry_init_description} at page \pageref{odometry_init_description}.
+\begin{lstlisting}
+#define LEFT_DIAMETER 0.0416
+#define RIGHT_DIAMETER 0.0404
+#define WHEEL_DIAMETER (LEFT_DIAMETER + RIGHT_DIAMETER)
+#define WHEELBASE 0.058 
+#define INCREMENTS 1000.0 //how many steps the motor takes for a full wheel rotation
+#define SCALING_FACTOR 1 
+
+#ifndef M_PI
+	#define M_PI 3.1415926535897932384626433832795L
+#endif
+
+/**
+Initializes the odometry algortihms
+*/
+int odometry_track_start(struct odometryTrackStruct * ot){
+	double* point_dEncPos;
+	point_dEncPos = get_encoder_positions();
+	return(odometry_track_start_pos(ot, point_dEncPos));
+}
+
+/**
+Start the odometry tracking
+Updates the info in the odometryTrackStruct for the first time
+*/
+int odometry_track_start_pos(struct odometryTrackStruct * ot, double* dEncPos){
+	ot->result.x = 0;
+	ot->result.y = 0;
+	ot->result.theta = 0;
+	
+	ot->state.pos_left_prev = dEncPos[0];
+	ot->state.pos_right_prev = dEncPos[1];
+	
+	ot->configuration.wheel_distance = axis_wheel_ratio * SCALING_FACTOR * (WHEEL_DIAMETER / 2);
+	ot->configuration.wheel_conversion= (WHEEL_DIAMETER / 2) * SCALING_FACTOR * M_PI / INCREMENTS;
+	
+	return 1;
+}
+\end{lstlisting}
+
+\section{Odometry step}
+\label{odometry_update_code}
+These functions are used to update the the odometry struct.
+Further explanations of these functions can be found in chapter \ref{Implementation} at section \ref{odometry_update_description} at page \pageref{odometry_update_description}.
+\begin{lstlisting}
+#ifndef M_PI
+	#define M_PI 3.1415926535897932384626433832795L
+#endif
+
+/**
+Updates an odometry data,
+fetches the encoder positions and initialize the 
+odoemetry_track_step_pos function
+*/
+void odometry_track_step(struct odometryTrackStruct * ot){
+	double* point_dEncPos;
+	
+	point_dEncPos = get_encoder_positions();
+	odometry_track_step_pos(ot,	point_dEncPos);
+}
+
+/**
+Updates all odometry data for the struct.
+Calculates the X and Y positions and orientation. 
+*/
+void odometry_track_step_pos(struct odometryTrackStruct * ot, double* dEncPos){
+	int delta_pos_left, delta_pos_right;
+	float delta_left, delta_right, delta_theta, theta2;
+	float delta_x, delta_y;
+	
+	//calculate the difference in position between the previous and current encoder positions. 
+	delta_pos_left = dEncPos[0] - ot->state.pos_left_prev;
+	delta_pos_right = dEncPos[1] - ot->state.pos_right_prev;
+	
+	//calculate the rotation based on the displacement of the stepper motors 
+	delta_left = delta_pos_left * ot->configuration.wheel_conversion;
+	delta_right = delta_pos_right * ot->configuration.wheel_conversion;
+	delta_theta = (delta_right - delta_left) / ot->configuration.wheel_distance;
+	
+	// calculate the x and y displacement 
+	theta2 = ot->result.theta + delta_theta * 0.5;
+	delta_x = (delta_left + delta_right) * 0.5 *cosf(theta2); 
+	delta_y = (delta_left + delta_right) * 0.5 * sinf(theta2);
+	
+	//update the x, y and theta of the struct
+	ot->result.x += delta_x;
+	ot->result.y += delta_y;
+	ot->result.theta += delta_theta;
+
+	if(ot->result.theta >=361){
+		odometry_track_step(ot);
+	}
+	
+	if(ot->result.theta > M_PI){
+		ot->result.theta -= 2*M_PI;
+	}
+	if(ot->result.theta < -M_PI){
+		ot->result.theta += 2*M_PI;
+	}
+	
+	//save current encoder positions to the global buffer 
+	ot->state.pos_left_prev = dEncPos[0];
+	ot->state.pos_right_prev = dEncPos[1]; 
+}
+\end{lstlisting}
 
 

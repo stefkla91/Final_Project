@@ -1,49 +1,52 @@
 \chapter{Implementation}
+\label{Implementation}
 
 \section{Early Development}
-After the first weeks where background reading were done and designing a plan for the final program, I started working with the Webots\textsuperscript{\texttrademark} simulator. \\ More information about the different stages can be found in the following sub-sections. 
+After the first weeks where background reading were done and designing a plan for the final program, work using the Webots\textsuperscript{\texttrademark} simulator was started. \\ More information about the different stages can be found in the following sub-sections. 
 
 \subsection{Webots Tutorials}
-In the beginning I was following different tutorials and demo  programs included in the Webots installation. 
-This helped me to see how the simulator works, what it can do and what possibilities the Webots API gives me. \\
-The tutorials I used were provided by the Webots wikibooks site \footnote{\url{http://en.wikibooks.org/wiki/Cyberbotics\%27_Robot_Curriculum}}.\\
-Starting off with simple tutorials and movement and sensor reading I was soon able to implement simple programs which were based on simple forwards movement with obstacle avoidance functions, based on the proximity sensor values. 
-After I had done some of the more "advanced"(in comparison to what I had done to this point) tutorials which involved e.g.: reading the robot encoders   I took a look at example programs of more advanced types of movement as well as SLAM examples. \\
+In the beginning different tutorials and demo following  programs included in the Webots installation were followed. 
+This helped to see how the simulator works, what it can do and what possibilities the Webots API gives an developer. \\
+The tutorials used were provided by the Webots wikibooks site \footnote{\url{http://en.wikibooks.org/wiki/Cyberbotics\%27_Robot_Curriculum}}.\\
+Starting off with simple tutorials and movement and sensor reading the developer was soon able to implement simple programs which were based on simple forwards movement with obstacle avoidance functions, based on the proximity sensor values. 
+After some of the more "advanced"(in comparison to what had been done to this point) tutorials which involved e.g.: reading the robot encoders look at example programs of more advanced types of movement as well as SLAM examples were taken. \\
 
 \subsection{First Program Iterations}
-Taking my experience of the tutorials I moved on to actually implementing the first prototype of my program. \\
-The first prototype was still heavily based on a Webots example program called "Intermediate Lawn Mower" which involved a simple movement pattern based on a basic finite state machine(FSM). \\ My first attempt was based recreating the FSM to get the same basic movement capabilities as the the program it was based upon and than changing it to achieve the level of movement control I needed. \\[3ex]
+After that the experience of the tutorials was taken and it was started on to actually implementation the first prototype of the program. \\
+The first prototype was still heavily based on a Webots example program called "Intermediate Lawn Mower" which involved a simple movement pattern based on a basic finite state machine(FSM). \\ 
+The first attempt was based recreating the FSM to get the same basic movement capabilities as the the program it was based upon and than changing it to achieve the level of movement control which was needed. \\[3ex]
 
-In the following iteration I were trying to implement the functionality of moving a given distance based on resetting the stepper motors encoders and moving the robot until it reaches a given encoder value. I quickly realised that this would not work with the way the FSM was currently implemented so I decided to move the functionality of the FSM, which was currently based on a simple switch statement, to a set of separate functions. The idea was that this would give me the freedom I needed to be able to call a method, i.e. \textit{move\_forward()},  and keep it running until a predefined encoder value has been reached. \\
-However this did not work based on the overall way my program was designed at this point. It was designed around an switch statement which based its decisions on the proximity sensors of the E-Puck and then setting the movement speed for the robot motors. As it was based on this calling separate functions to move and turn did not work, which resolved in problems around my current idea of using the stepper motor encoders. \\[3ex] 
+In the following iteration it was tried to implement the functionality of moving a given distance based on resetting the stepper motors encoders and moving the robot until it reaches a given encoder value. It was quickly realised that this would not work with the way the FSM was currently implemented so it was decided to move the functionality of the FSM, which was currently based on a simple switch statement, to a set of separate functions. The idea was that this would give the freedom needed to be able to call a method, i.e. \textit{move\_forward()},  and keep it running until a predefined encoder value has been reached. \\
+However this did not work based on the overall way the program was designed at this point. It was designed around an switch statement which based its decisions on the proximity sensors of the E-Puck and then setting the movement speed for the robot motors. As it was based on this calling separate functions to move and turn did not work, which resolved in problems around the current idea of using the stepper motor encoders. \\[3ex] 
 
-As I needed to be able to move a certain distance in order to effectively implement the rectangular movement pattern, I tried various approaches which were all based around the FSM. 
-I realised soon that I was not getting anywhere which this way of thinking so I decided to come back to this problem later and went to another problem, turning a given number of degrees. \\
+As it was needed to be able to move a certain distance in order to effectively implement the rectangular movement pattern, various approaches which were all based around the FSM were tried. 
+It was realised soon that this was not getting anywhere which this way of thinking so it decided to come back to this problem later and went to another problem: turning a given number of degrees. \\
 As the simulator simulates friction between the robot wheels and the environment the turning function, as it was in it current state, was far to inaccurate to be usable. \\
 It was based on a very basic odometry calculation, taking the encoder values and calculating the turning distance based on the wheel diameter and axle length of the robot. While this is not a bad approach it had no procedures of slowing down the movement as it got closer to the target state so overshooting the wanted position or rotating far to less if the motor speed would have been set to low. \\
-I tried countering the problem by alternating the values it used for the odometry calculations, and while I was able to come close a solution it was far from accurate. Another problem with this solution was that it only worked for ~90 degree rotations based on the modified values, meaning all rotations to another point were impossible without modifying the values to fit the target bearing. Which was counter productive as it would be best to have 1 function able to turn the robot to any wanted bearing. \\
+It was tried to counter the problem by alternating the values it used for the odometry calculations, and while it came close to a solution it was far from accurate. Another problem with this solution was that it only worked for ~90 degree rotations based on the modified values, meaning all rotations to another point were impossible without modifying the values to fit the target heading. Which was counter productive as it would be best to have 1 function able to orientate the robot to any wanted heading. \\
 
 \section{Mid stage Development}
-After the problems I encountered during my first program iterations, I quickly realised that my way of thinking and understanding of the API was flawed. A lot of the problems I encountered were the result of insufficient programming skills for what I was trying to do combined with bad understanding of how odometry worked, and how I could use it to control the robot.\\
-Seeing these kinds of problems I decided to take a step back as I am clearly "moving in circles" and encountering the same kind of problems over and over again with my current approach. \\
-I decided to take once more a look at the provided example programs and to study their odometry functions in order to gain some new insight into odometry calculations, and find a new approach based on that.
+After the problems which were encountered during the first program iterations, it quickly realised that this way of thinking and understanding of the API was flawed. A lot of the problems which were encountered were the result of insufficient programming skills for what  was tried to do combined with bad understanding of how odometry worked, and how this could be used it to control the robot.\\
+Seeing these kinds of problems it was decided to take a step back as the thought process for the program design was clearly "moving in circles" and encountering the same kind of problems over and over again with the current approach. \\
+It was decided to take once more a look at the provided example programs and to study their odometry functions in order to gain some new insight into odometry calculations, and find a new approach based on that.
 
 \subsection{Advanced tutorials}
-The example programs provided together with the simulator are categorised after the estimate level of knowledge needed to complete them. Theses categories are: Beginner, Novice, Intermediate and Advanced. I already looked at the advanced programs before as they feature a couple of examples on odometry and slam, however I did not understand it well enough at the time.\\
-Looking closer at the odometry functions provided I managed to understand a bit better how the advanced programs worked and how they calculated the movement of the robot. \\[3ex]
+The example programs provided together with the simulator are categorised after the estimate level of knowledge needed to complete them. Theses categories are: Beginner, Novice, Intermediate and Advanced. The advanced programs were already looked at before as they feature a couple of examples on odometry and slam, however they were not understood  well enough at the time.\\ 
+Looking closer at the odometry functions provided it was managed to understand a bit better how the advanced programs worked and how they calculated the movement of the robot. \\[3ex]
 
-I also took a look at the code and notes I took during my Robotics module on the second year, while the API worked different for the Player/Stage environment the idea behind rotation and movement was still the same and had only to be applied using the Webots API.
+A look was also taken at the code and notes which were taken during the Robotics module on the second year, while the API worked different for the Player/Stage environment the idea behind rotation and movement was still the same and had only to be applied using the Webots API.
 
 \section{Movement}
-After I have studied the odometry functions of the provided programs I decided to start a new approach to fix the movement of the robot.\\
-This approach is based on a set of different functions, much smaller and more refined than my previous approach. This approach took a while to implement and test but the results were rather satisfactory. In this section I am going to describe the different aspects of my movement solution and describe how the most important functions work.\\
-I will also post the code to each of the major functions as it will help with describing them. 
+After having studied the odometry functions of the provided programs it was decided to start a new approach to fix the movement of the robot.\\
+This approach is based on a set of different functions, much smaller and more refined than my previous approach. This approach took a while to implement and test but the results were rather satisfactory. This section is going to describe the different aspects of the movement solution and describe how the most important functions work.\\
+The code of the major functions will be added as appendices, the site numbers will be added to each subsection.
 
 \subsection{Moving Forward}
-The code for this function can be found in Appendix B, section 2.1.\\
-The \textit{move\_forward }function takes 2 doubles as parameters, 1 being the speed with which the robot is ordered to move and the distance it should move.\\
+\label{moving_forward_description}
+The code for this function can be found in Appendix B, section \ref{moving_forward_code} at page \pageref{moving_forward_code}.\\
+The \textit{move\_forward }function takes 2 doubles as parameters, 1 being the speed with which the robot is ordered to move and the distance it should move. The last parameter is a link to the global odometry struct, this struct is used to update the odometry values.\\
 The function first checks that neither of the parameters are 0 and then calculates the number of steps each motor has to drive(1 step being 1 step of the stepper motor) to reach its target position.
-This calculation is done by dividing the number of steps needed for a full wheel rotation, 1000 in this case, by the product of $\pi$ times the wheel radius times 2 and multiplication this result with the distance defined in the parameter of the function. The steps needed for a full rotation have been taken from the E-Puck documentation and have been confirmed during on of the odometry tutorials. \\
+This calculation is done by dividing the number of steps needed for a full wheel rotation, 1000 in this case, by the product of $\pi$ times the wheel diameter times 2 and multiplication this result with the distance defined in the parameter of the function. The steps needed for a full rotation have been taken from the E-Puck documentation and have been confirmed during on of the odometry tutorials. \\
 It will then read the current encoder positions and calculate the stop position for each motor by the sum of the encoder values for each motor and the previously calculated encoder steps needed to reach the target area. 
 It will then set the motor speed based on the speed defined in the parameters.\\[3ex]
 
@@ -56,7 +59,8 @@ This function allows the robot to move forward and stop after the predefined dis
 After the control statement was implemented it still required some testing and calibration of the minimum difference and speed values in order to avoid over and undershooting. However the found values work well and the movement error has been reduced to minimum.\\
 
 \subsection{Turn a given angle}
-The code for this function can be found in Appendix B, section 2.2.\\
+\label{turn_angle_description}
+The code for this function can be found in Appendix B, section \ref{turning_angle_code} at page \pageref{turning_angle_code}.\\
 The turn\_angle function takes 2 doubles as parameters, one being the angle the robot will turn to the other the speed with which the robot will turn.\\
 First the factor by which the robot will turn is calculated by dividing 360, the value of a full rotation, with the defined angle.
 Once the factor has been calculated it will then the number of steps the motor have to do until the target position is reached. This is done by dividing the product of the steps needed for a full wheel rotation, 1000, and the size of the wheelbase by the product of the calculated turning factor and 2 times the wheel radius. It will then use a function to return the current motor encoder positions. This function simply uses the Webots\textsuperscript{\texttrademark}  API and returns the values. \\[3ex]
@@ -76,110 +80,25 @@ It will then force to the simulator to take a simulator step, effectively moving
 This functions allows me to define the turn the robot by so many degrees as I need and it will turn there within an minimal error space. This error space exist because the simulator simulates friction between the robot wheels and the environment so 100\% accurate movement will never happen.\\
 There also existed the problem of over/undershooting with the turning however the values found during tests of the \textit{move\_forward} function turned out to also work well for the turning function. However one problem remains, since there never is going to be a perfect rotation the error value will add up over time, resulting in less and less accurate turns, overshooting the target rotation is going to be a real problem. I have at this point not yet a solution for this problem, however the function works well and is a great improvement to how it turning was implemented in previous iterations of the program.
 
-\begin{lstlisting}
-/**
-Function to turn the robot a given angle with a given speed
-*/
-void turn_angle(double dAngle, double dSpeed){
-	double dFactor = 0.0f;
-	double dStepCount = 0.0f;
-	double dStopPosLeft = 0.0f;
-	double dStopPosRight = 0.0f;
-	double *point_dEncPos;
-	
-	if((dAngle != 0.0f) && (dSpeed > 0.0f)){
-		//calculate turn factor
-		dFactor = fabs(360.0f/dAngle);
-		
-		//calculate the number of step counts for the rotations
-		dStepCount = (INCREMENT_STEP * WHEELBASE)/(dFactor * WHEEL_RADIUS * 2.0f);
-		
-		point_dEncPos = get_encoder_positions();
-		
-		//turn right
-		if(dAngle > 0){
-			//calculate the target encoder positions
-			dStopPosLeft = point_dEncPos[0] + dStepCount;
-			dStopPosRight = point_dEncPos[1] - dStepCount;
-			
-			point_dOdometryData = compute_odometry_data();
-			
-			set_motor_speed(dSpeed, -dSpeed);
-			
-			while((point_dEncPos[0] < dStopPosLeft) && (point_dEncPos[1] > dStopPosRight)){
-				//get odometry data
-				point_dOdometryData = compute_odometry_data();
-				
-				//get wheel encoders
-				point_dEncPos = get_encoder_positions();
-				
-				//slow down the closer the robot come to the destination, reduces the error
-				if(fabs(dStopPosLeft - point_dEncPos[0]) <= MIN_DIST){
-					set_motor_speed(MIN_SPEED, -MIN_SPEED);
-				}
-			}	
-		
-	} else { // turn left ...
-		dStopPosLeft = point_dEncPos[0] - dStepCount;
-		dStopPosRight = point_dEncPos[1] + dStepCount;
-		
-		point_dOdometryData = compute_odometry_data();
-
-		// turn left the robot ...
-		set_motor_speed(-dSpeed, dSpeed);
-
-		while((point_dEncPos[0] > dStopPosLeft) &&(point_dEncPos[1] < dStopPosRight)){
-
-			point_dOdometryData = compute_odometry_data();
-			point_dEncPos = get_encoder_positions();
-			if( fabs(dStopPosLeft - point_dEncPos[0]) <= MIN_DIST ){
-				set_motor_speed(-MIN_SPEED, MIN_SPEED); }
-			}
-		}
-	}
-	stop_robot();
-	
-	//update odometry data
-	point_dOdometryData = compute_odometry_data();
-	wb_robot_step(TIME_STEP);
-}
-\end{lstlisting}
-
 \section{Localisation using Odometry}
 After the studying the optometry functions provided and implementing the movement algorithms, it was time to implement the localisation using odometry calculations.\\
-The odometry functions I implemented are used for localisation the robot inside the environment and finding it heading. The functions only require the starting point and localisation of the robot, and are then apple to calculate the movement and rotation of the robot with every movement done, within a certain degree of accuracy. The uncertainty in accuracy is based on the friction which get simulated inside the simulator. \\
-These functions are large similar to the ones provided with the Webots\textsuperscript{\texttrademark} interface, however some minor changes has been done. \\
-Similar to the way I have described the movement algorithms I am going to describe the major functions as well as post the code for each function.\\
+The odometry functions which were implemented are used for localisation the robot inside the environment and finding it heading. The functions only require the starting point and localisation of the robot, and are then able to calculate the movement and rotation of the robot with every movement done, within a certain degree of accuracy. The uncertainty in accuracy is based on the friction which get simulated inside the simulator. \\
+These functions are largely similar to the ones provided with the Webots\textsuperscript{\texttrademark} interface, however some minor changes has been done. \\
+Similar to the way in which the movement algorithms have been described the odometry functions are going to be described. 
 
 \subsection{Initialising the Odometry algorithms}
+\label{odometry_init_description}
+The code for this function can be found in Appendix B, section \ref{odometry_init_code} at page \pageref{odometry_init_code}.\\
+The code for the odometry struct can be found in Appendix B, section \ref{odometry_struct_code} at page \pageref{odometry_struct_code}.\\
 To initialize the odometry algorithms, 2 functions are used. \\
-The first function, \textit{odometry\_track\_start} takes a \textit{odometrtyTrackStruct}, which is defined in the class which calls the function, as parameter. It will then acquire the encoder positions of the robot and call the next function, \textit{odometry\_track\_start\_pos} which set's the starting values, including the encoder positions inside the odometry struct.\\
-\begin{lstlisting}
-struct odometryTrackStruct {
-	struct {
-		float wheel_distance;
-		float wheel_conversion;
-	} configuration;
-	struct {
-		int pos_left_prev;
-		int pos_right_prev;
-	} state;
-	struct {
-		float x;
-		float y;
-		float theta;
-	} result;
-};
- 
-int odometry_track_start(struct odometryTrackStruct * ot);
-int odometry_track_start_pos(struct odometryTrackStruct * ot, double* dEncPos);
-void odometry_track_step(struct odometryTrackStruct * ot);
-void odometry_track_step_pos(struct odometryTrackStruct * ot, double* dEncPos);
-\end{lstlisting}
+The first function, \textit{odometry\_track\_start} takes a \textit{odometrtyTrackStruct}, which is defined in the class which calls the function, as parameter. It will then acquire the encoder positions of the robot and call the next function, \textit{odometry\_track\_start\_pos} which set's the starting values, including the encoder positions inside the odometry struct.\\[3ex]
+
 
 Also the distance travel when a wheel turns and the wheel conversion are calculated, used for this are parameters acquired during calibrations done in the Webots \textsuperscript{\texttrademark} example programs(the values are the same as it is the same virtual robot model) and the E-Puck documentation. 
 
 \subsection{Updating the Odometry values}
+\label{odometry_update_description}
+The code for this function can be found in Appendix B, section \ref{odometry_update_code} at page \pageref{odometry_update_code}.\\
 To update the odometry values of the struct the function \textit{odometry\_track\_step} is called.
 When this function is called inside another function a number of things happen.\\
 The current encoder positions for the stepper motors are fetched, 
@@ -190,63 +109,18 @@ The result of this is used to calculated the wheel movement of the left and righ
 The next step is to calculate the new X and Y coordinates of the robot, based on the sum of done left and right wheel movement  and math calculations using the robots rotation. 
 At the end the calculated X and Y coordinates as well as the rotation value are used to update to struct. And the current encoder positions are saved inside the buffer for later calculations. 
 
-\begin{lstlisting}
-void odometry_track_step(struct odometryTrackStruct * ot){
-	double* point_dEncPos;
-	
-	point_dEncPos = get_encoder_positions();
-	odometry_track_step_pos(ot,	point_dEncPos);
-}
-
-void odometry_track_step_pos(struct odometryTrackStruct * ot, double* dEncPos){
-	int delta_pos_left, delta_pos_right;
-	float delta_left, delta_right, delta_theta, theta2;
-	float delta_x, delta_y;
-	
-	//calculate the difference in position between the previous and current encoder positions. 
-	delta_pos_left = dEncPos[0] - ot->state.pos_left_prev;
-	delta_pos_right = dEncPos[1] - ot->state.pos_right_prev;
-	
-	//calculate the rotation based on the displacement of the stepper motors 
-	delta_left = delta_pos_left * ot->configuration.wheel_conversion;
-	delta_right = delta_pos_right * ot->configuration.wheel_conversion;
-	delta_theta = (delta_right - delta_left) / ot->configuration.wheel_distance;
-	
-	// calculate the x and y displacement 
-	theta2 = ot->result.theta + delta_theta * 0.5;
-	delta_x = (delta_left + delta_right) * 0.5 *cosf(theta2);
-	delta_y = (delta_left + delta_right) * 0.5 * sinf(theta2);
-	
-	//update the x, y and theta of the struct
-	ot->result.x += delta_x;
-	ot->result.y += delta_y;
-	ot->result.theta += delta_theta;
-	
-	if(ot->result.theta > M_PI){
-		ot->result.theta -= 2*M_PI;
-	}
-	if(ot->result.theta < -M_PI){
-		ot->result.theta += 2*M_PI;
-	}
-	
-	//save current encoder positions to the global buffer 
-	ot->state.pos_left_prev = dEncPos[0];
-	ot->state.pos_right_prev = dEncPos[1];
-}
-\end{lstlisting}
-
-\subsection{Implementation}
-After these functions were created I tested them using simple test simulations I wrote.\\
+\subsection{Calibration}
+After these functions were created they were calibrated using following processes .\\
 
 \begin{figure}[h]
 \centering
 \includegraphics[width = 0.5\textwidth]{../../figures/movement_test.png} 
 \caption{Movement algorithm test pattern}
-\label{Figure 4}
+\label{movement_test}
 \end{figure}
 
-Figure 4 shows a simple movement pattern which I used to calibrate the minimum turn distances and tested that the \textit{move\_forward()} and \textit{turn\_angle()} methods worked as intended. \\
-How it works is the E-Puck starts on 1 corner of a square(here I used the floor of the simulator as it has chessboard representation) and move forwards to the other end of the square, turn 90 degrees and so on until it reaches it start point. It then turns around and follows the same pattern back to its original starting position. This tests allows me to notice odometry error in the rotations and forward movement, after a while it would turn/move to far or not far enough and thereby not reach it accurate start point. Noticing these errors allowed me to calibrate my the speed and distance where the algorithms will slow done the movement to minimize this error as much as possible, see section 3.2 for more information on this.\\[3ex]
+Figure \ref{movement_test} shows a simple movement pattern which was used to calibrate the minimum turn distances and tested that the \textit{move\_forward()} and \textit{turn\_angle()} methods worked as intended. \\
+How it works is the E-Puck starts on 1 corner of a square(here the floor of the simulator was used as it has chessboard representation) and move forwards to the other end of the square, turn 90 degrees and so on until it reaches it start point. It then turns around and follows the same pattern back to its original starting position. This tests allows the notice of odometry error in the rotations and forward movement, after a while it would turn/move to far or not far enough and thereby not reach it accurate start point. Noticing these errors allowed for calibration of the speed and distance where the algorithms will slow done the movement to minimize this error as much as possible, see section \ref{moving_forward_description} and \ref{turn_angle_description} respectively for more information on this.\\[3ex]
+The test is based on the "University of Michigan Benchmark" or UMBmark\footnote{url{http://www.cs.columbia.edu/~allen/F13/NOTES/borenstein.pdf}}.
 
-The accuracy of this test can be increased by using larger movement areas, I used changing 2x2, 4x4 and 3x3 square areas of the chessboard floor to check that my error was at minimal as possible. The test is based on the "University of Michigan Benchmark" or UMBmark\footnote{url{http://www.cs.columbia.edu/~allen/F13/NOTES/borenstein.pdf}}.
 

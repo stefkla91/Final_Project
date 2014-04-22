@@ -2,7 +2,10 @@
 \contentsline {subsection}{\numberline {1.0.1}SLAM - Simultaneous Localization And Mapping}{1}
 \contentsline {subsection}{\numberline {1.0.2}Deployment}{2}
 \contentsline {section}{\numberline {1.1}Analysis}{2}
-\contentsline {section}{\numberline {1.2}Process}{2}
+\contentsline {subsection}{\numberline {1.1.1}Deployment pattern}{2}
+\contentsline {subsection}{\numberline {1.1.2}Localisation}{2}
+\contentsline {subsection}{\numberline {1.1.3}Mapping}{3}
+\contentsline {section}{\numberline {1.2}Process}{3}
 \contentsline {chapter}{\numberline {2}Design}{4}
 \contentsline {section}{\numberline {2.1}Environment Design}{4}
 \contentsline {section}{\numberline {2.2}Mapping and Swarm Size}{5}
@@ -18,25 +21,28 @@
 \contentsline {section}{\numberline {3.3}Movement}{9}
 \contentsline {subsection}{\numberline {3.3.1}Moving Forward}{9}
 \contentsline {subsection}{\numberline {3.3.2}Turn a given angle}{10}
-\contentsline {section}{\numberline {3.4}Localisation using Odometry}{12}
-\contentsline {subsection}{\numberline {3.4.1}Initialising the Odometry algorithms}{13}
-\contentsline {subsection}{\numberline {3.4.2}Updating the Odometry values}{14}
-\contentsline {subsection}{\numberline {3.4.3}Implementation}{15}
-\contentsline {chapter}{\numberline {4}Testing}{16}
-\contentsline {section}{\numberline {4.1}Overall Approach to Testing}{16}
-\contentsline {section}{\numberline {4.2}Automated Testing}{16}
-\contentsline {subsection}{\numberline {4.2.1}Unit Tests}{16}
-\contentsline {subsection}{\numberline {4.2.2}User Interface Testing}{16}
-\contentsline {subsection}{\numberline {4.2.3}Stress Testing}{16}
-\contentsline {subsection}{\numberline {4.2.4}Other types of testing}{16}
-\contentsline {section}{\numberline {4.3}Integration Testing}{16}
-\contentsline {section}{\numberline {4.4}User Testing}{16}
-\contentsline {chapter}{\numberline {5}Future Plans}{17}
-\contentsline {section}{\numberline {5.1}Communication}{17}
-\contentsline {chapter}{\numberline {6}Evaluation}{19}
-\contentsline {chapter}{Appendices}{20}
-\contentsline {chapter}{\numberline {A}Third-Party Code and Libraries}{21}
-\contentsline {chapter}{\numberline {B}Code samples}{22}
-\contentsline {section}{\numberline {2.1}Moving forward a given distance}{22}
-\contentsline {section}{\numberline {2.2}Turning a given Angle}{23}
-\contentsline {chapter}{Annotated Bibliography}{26}
+\contentsline {section}{\numberline {3.4}Localisation using Odometry}{11}
+\contentsline {subsection}{\numberline {3.4.1}Initialising the Odometry algorithms}{12}
+\contentsline {subsection}{\numberline {3.4.2}Updating the Odometry values}{12}
+\contentsline {subsection}{\numberline {3.4.3}Calibration}{12}
+\contentsline {chapter}{\numberline {4}Testing}{14}
+\contentsline {section}{\numberline {4.1}Overall Approach to Testing}{14}
+\contentsline {section}{\numberline {4.2}Automated Testing}{14}
+\contentsline {subsection}{\numberline {4.2.1}Unit Tests}{14}
+\contentsline {subsection}{\numberline {4.2.2}User Interface Testing}{14}
+\contentsline {subsection}{\numberline {4.2.3}Stress Testing}{14}
+\contentsline {subsection}{\numberline {4.2.4}Other types of testing}{14}
+\contentsline {section}{\numberline {4.3}Integration Testing}{14}
+\contentsline {section}{\numberline {4.4}User Testing}{14}
+\contentsline {chapter}{\numberline {5}Future Plans}{15}
+\contentsline {section}{\numberline {5.1}Communication}{15}
+\contentsline {chapter}{\numberline {6}Evaluation}{17}
+\contentsline {chapter}{Appendices}{18}
+\contentsline {chapter}{\numberline {A}Third-Party Code and Libraries}{19}
+\contentsline {chapter}{\numberline {B}Code samples}{20}
+\contentsline {section}{\numberline {2.1}Moving forward a given distance}{20}
+\contentsline {section}{\numberline {2.2}Turning a given Angle}{21}
+\contentsline {section}{\numberline {2.3}Odometry Struct}{23}
+\contentsline {section}{\numberline {2.4}Initializing odometry struct}{23}
+\contentsline {section}{\numberline {2.5}Odometry step}{24}
+\contentsline {chapter}{Annotated Bibliography}{27}
