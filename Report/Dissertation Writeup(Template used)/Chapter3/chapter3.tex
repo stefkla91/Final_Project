@@ -1,3 +1,5 @@
+\begin{flushleft}
+
 \chapter{Implementation}
 \label{Implementation}
 
@@ -109,7 +111,7 @@ The result of this is used to calculated the wheel movement of the left and righ
 The next step is to calculate the new X and Y coordinates of the robot, based on the sum of done left and right wheel movement  and math calculations using the robots rotation. 
 At the end the calculated X and Y coordinates as well as the rotation value are used to update to struct. And the current encoder positions are saved inside the buffer for later calculations. 
 
-\subsection{Calibration}
+\subsection{Minimum speed and distance calibration}
 After these functions were created they were calibrated using following processes .\\
 
 \begin{figure}[h]
@@ -121,6 +123,316 @@ After these functions were created they were calibrated using following processe
 
 Figure \ref{movement_test} shows a simple movement pattern which was used to calibrate the minimum turn distances and tested that the \textit{move\_forward()} and \textit{turn\_angle()} methods worked as intended. \\
 How it works is the E-Puck starts on 1 corner of a square(here the floor of the simulator was used as it has chessboard representation) and move forwards to the other end of the square, turn 90 degrees and so on until it reaches it start point. It then turns around and follows the same pattern back to its original starting position. This tests allows the notice of odometry error in the rotations and forward movement, after a while it would turn/move to far or not far enough and thereby not reach it accurate start point. Noticing these errors allowed for calibration of the speed and distance where the algorithms will slow done the movement to minimize this error as much as possible, see section \ref{moving_forward_description} and \ref{turn_angle_description} respectively for more information on this.\\[3ex]
-The test is based on the "University of Michigan Benchmark" or UMBmark\footnote{url{http://www.cs.columbia.edu/~allen/F13/NOTES/borenstein.pdf}}.
+The test is based on the "University of Michigan Benchmark" or UMBmark\footnote{\url{http://www.cs.columbia.edu/~allen/F13/NOTES/borenstein.pdf}}.\\[3ex]
+
+The problem with this calibration at the time was rather than using this approach to calibrate the effective wheelbase and the wheel radius at the time of this calibration the angles to turn were changed.\\
+This led to rather than updating the wheelbase from  the original 0.052(which has been done in a later stage of the project. \textbf{Note: the code which can be found in Appendix B uses the updated wheelbase}.\\
+Using the non-updated wheelbase it was required to change specify an angle of 100$^{\circ}$ to move 90$^{\circ}$ effectively.
+
+\section{First results}
+After the calibration process of the previous section a new program iteration was started, using the new movement and localisation algorithm in order to test the mapping and continue implementing it. \\[3ex]
+
+This first implementation was not using the deployment pattern but rather simply following the walls, this was done so that the mapping could be tested. Rather than having an advanced wall following algorithm at this stage a simple collision avoidance algorithm was used which turned the robot by 90$^\circ$ when ever an obstacle is reached. 
+
+\subsection{Early mapping methods and results}
+
+\begin{lstlisting}[caption={Proximity sensor reading}]
+//distance sensors array definitions
+int ps_value[NUM_DIST_SENS]={0,0,0,0,0,0,0,0};
+int obstacle[NUM_DIST_SENS]={0,0,0,0,0,0,0,0};
+int ps_offset[NUM_DIST_SENS] = {35,35,35,35,35,35,35,35};
+
+// obstacle will contain a boolean information about a collision
+for(i=0;i<NUM_DIST_SENS;i++){
+	ps_value[i] = (int)wb_distance_sensor_get_value(ps[i]);
+	obstacle[i] = ps_value[i] - ps_offset[i] > THRESHOLD_DIST;
+}
+
+//define boolean for sensor states for cleaner implementation
+bool ob_front =
+	obstacle[PS_RIGHT_10] ||
+	obstacle[PS_LEFT_10];
+
+bool ob_right =
+	obstacle[PS_RIGHT_90];
+
+bool ob_left =
+	obstacle[PS_LEFT_90];
+\end{lstlisting}
+
+The code above shows the code used at this stage of the project to detect obstacles, and set boolean values if an obstacle is detected in the direction of the  obstacle. As the test environment for this part of the project is a simple square area the turning of 90$^{\circ}$ is sufficient and no other control was needed at this stage to test the mapping. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 0.5\textwidth]{../../figures/e_puck_sensor_placement.png} 
+\caption[E-Puck sensor placement]{E-Puck sensor placement\footnotemark}
+\label{sensor_placement}
+\end{figure}
+
+Figure\footnotetext{Figure \ref{sensor_placement} is taken from: \url{http://www.cyberbotics.com/cdrom/common/doc/webots/guide/section8.1.html}}  \ref{sensor_placement} show the sensor placement on the E-Puck robot. Its is worth noticing that for sake of simplicity and better work flow the sensors have been renamed in the code. The new naming scheme does show which side of the robot the sensor is placed and its placement in degrees, relevant to the forward facing center of the robot. As an example the sensor ps0 in figure \ref{sensor_placement} is named PS\_RIGHT\_10 in the code since it is placed on the right side of the robot with an orientation of 10$^{\circ}$ relevant to the center.
+Compared to this sensor ps5 is PS\_LEFT\_90.   \\[3ex]
+
+The mapping algorithm used a similar approach to the obstacle detection algorithm. \\
+One of the problems which were noticed at this stage was the problem of the noise simulated inside the simulator, this leads to the mapping algorithm needing a high threshold in order to map only actual obstacles, and not random noise spikes.  This however leads to the problem of the robot needing to almost be in direct contact with the obstacles in order to map them. For the mapping at this stage this was not a problem however this strongly influenced movement pattern decisions at a later stage in the implementation process, more about that in a later section.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 0.5\textwidth]{../../figures/early_map.jpg} 
+\caption{Early mapping result}
+\label{early_mapping_result}
+\end{figure}
+
+Figure \ref{early_mapping_result} shows clearly the strongest problems with this solution so far as well as demonstrates the need to have a good solution for  the main aspects of this project, localisation and deployment.\\
+As it can clearly be seen in the figure, the localisation and movement approach were far from perfect at this stage in the project. 
+While the program generates a closed  map the mapping is strongly skewed to the left side. This error was strongly based on odometry errors during turning caused by sup-optimal calibrated robot values as well as friction between the wheels and the floor.\\
+At the time to movement algorithm did not update the odometry struct, and the struct were only updated once every loop iteration. \\
+This was the stage of the project at the time of the mid-project demo.
 
 
+\subsection{Direction control based on heading}
+The approach done to fix the odometry error at this stage was done by specifying directions in which the robot is moving as north, east, south and west. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 0.5\textwidth]{../../figures/direction_and_angles} 
+\caption{Directions and their corresponding Angles}
+\label{directions_and_angles}
+\end{figure}
+
+Figure \ref{directions_and_angles} does show the directions used and the corresponding angles. The directions were represented in the code by using boolean values. \\
+In order to get the direction controlled movement working a number of functions needed to be created.  
+
+\begin{lstlisting}[caption={Converting Radians to degrees}]
+
+#ifndef M_PI
+	#define M_PI 3.1415926535897932384626433832795L
+#endif
+
+#define RTOD(r) ((r) * 180 / M_PI)
+
+/**
+returns the angle in which the robot is moving
+*/
+int return_angle(double rad){
+	double rotation;
+
+	if(RTOD(rad) < 0){
+		rotation = RTOD(rad) + 360;
+	}else{
+		rotation = RTOD(rad);
+	}
+	printf("%f\n", rotation);
+	return rotation;
+}
+\end{lstlisting}
+
+This function converts radians, which are used by the simulator to degrees, this was done to make it easier to work with.
+The next function uses this to check in which direction the robot is moving and set a boolean value representing a direction to true.
+
+\begin{lstlisting}[caption={Early check of the movement direction}]
+#define ANGLE_TOLERANCE 20
+#define EAST 0
+#define NORTH 90
+#define WEST 180
+#define SOUTH 270
+
+//direction definitions
+bool north,west,south,east;
+
+/**
+set booleans for the direction the robot is moving in
+*/
+void check_direction(double d){
+	int i = return_angle(d);
+	east = false;
+	north = false;
+	west = false;
+	south = false;
+
+	if(EAST < i + ANGLE_TOLERANCE || EAST > i - ANGLE_TOLERANCE){
+		east = true;
+	}else if(NORTH < i + ANGLE_TOLERANCE || NORTH > i - ANGLE_TOLERANCE){
+		north = true;
+	}else if(WEST < i + ANGLE_TOLERANCE || WEST > i - ANGLE_TOLERANCE){
+		west = true;
+	}else if(SOUTH < i + ANGLE_TOLERANCE || SOUTH > i - ANGLE_TOLERANCE){
+		south = true;
+	}
+}
+\end{lstlisting}
+
+At this moment the deployment pattern described in chapter \ref{Design}  was also implemented. \\
+This was done by checking which direction the robot is facing when an obstacle is found in front of the robot. At this point a couple of procedures were designed for what to do for each direction. Effectively the robot is performing u-turns when ever an obstacle is found directly in front of it. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 0.5\textwidth]{../../figures/direction_uturn_pattern} 
+\caption{Directions and their corresponding U-Turn pattern}
+\label{directions_uturn_pattern}
+\end{figure}
+
+The u-turn patterns shown in figure \ref{directions_uturn_pattern} effectively led the robot to move from right to left and from the top downward, there wasn't any particular reason for this, other than an uniformed pattern was needed. \\ 
+The next piece of code is a snipped from the deployment loop at that time in the project. It uses the previous shown \textit{check\_direction()} as well as the \textit{controll\_angle()} method which will be shown at a later point.\\
+The control angle function is used to compare the current heading with the heading specified by the general direction the robot is moving in(north/east/south/west). 
+As the code snipped shows at this point the the odometry struct is still not updated during the deployment loop, and the heading is only checked and corrected in the FORWARD state of the loop. 
+The \textit{turn\_right()} and \textit{turn\_left()} functions turn the robot 90$^{\circ}$.
+
+\begin{lstlisting}[caption={Early Control loop snipped}]
+double dMovSpeed = 500.0f;
+double dDistance = 0.01f;
+double dTurnSpeed = 100.0f;
+double dTurnDistance = 0.05f;	
+
+switch(state){
+	case FORWARD:
+		move_forward(dMovSpeed, dDistance);
+		controll_angle(&ot);
+		if(ob_front){
+			state = STOP;
+		}
+		break;	
+	case STOP:
+		stop_robot();
+
+		if(ob_front && ob_left){
+			state = TURNRIGHT;
+		}
+		else if(ob_front && ob_right){
+			state = TURNLEFT;
+		}
+	else if(ob_front){
+		check_direction(ot->result.theta);
+		state = TURNRIGHT;
+	}
+	break;	
+
+	case TURNRIGHT:
+		turn_right(dTurnSpeed);
+		state = FORWARD;
+		break;
+	case TURNLEFT:
+		turn_left(dTurnSpeed);
+		state = FORWARD;
+		break;
+	case UTURN:
+		if(north){
+			turn_left(dTurnSpeed);
+			move_forward(dTurnSpeed, dTurnDistance);
+			turn_left(dTurnSpeed);
+			state = FORWARD;
+		}else if(south){
+			turn_right(dTurnSpeed);
+			move_forward(dTurnSpeed, dTurnDistance);
+			turn_right(dTurnSpeed);
+			state = FORWARD;
+		}else if(west){
+			turn_left(dTurnSpeed);
+			move_forward(dTurnSpeed, dTurnDistance);
+			turn_left(dTurnSpeed);
+			state = FORWARD;
+		}else if(east){
+			turn_right(dTurnSpeed);
+			move_forward(dTurnSpeed, dTurnDistance);
+			turn_right(dTurnSpeed);
+			state = FORWARD;
+		}
+		east = false;
+		north = false;
+		south = false;
+		west = false;
+		break;
+	default:
+		state = FORWARD;
+}
+\end{lstlisting}
+
+It is worth mentioning that this approach went through a number of modifications before this state was reached. The previous modifications were done to check to optimal placement of the \textit{controll\_angle()} function. It was found to be unproductive to have the check after every turn, as it did not matter on the small distances the robot was moving in the u-turn process. \\
+
+\begin{lstlisting}[caption={Early heading correction algorithm}]
+ /**
+Controll the movement angle
+*/
+void controll_angle(struct odometryTrackStruct *ot){
+	int rotation;
+	int dSpeed = 100.0f;
+	int corAngle = 5.0f;
+
+	if(RTOD(ot->result.theta) < 0){
+		rotation = RTOD(ot->result.theta) + 360;
+	}else{
+		rotation = RTOD(ot->result.theta);
+	}
+
+	//check movement to the right(east)
+	if(EAST < rotation + ANGLE_TOLERANCE){
+		turn_angle(-corAngle, dSpeed);
+	}else if(EAST > rotation - ANGLE_TOLERANCE){
+		turn_angle(corAngle, dSpeed);
+	}
+
+	//check movement to the north
+	if(NORTH < rotation + ANGLE_TOLERANCE){
+		turn_angle(-corAngle, dSpeed);
+	}else if(NORTH > rotation - ANGLE_TOLERANCE){
+		turn_angle(corAngle, dSpeed);
+	}
+
+	//movement to the west
+	if(WEST < rotation + ANGLE_TOLERANCE){
+		turn_angle(-corAngle, dSpeed);
+	}else if(WEST > rotation - ANGLE_TOLERANCE){
+		turn_angle(corAngle, dSpeed);
+	}
+
+	//movement to the south
+	if(SOUTH < rotation + ANGLE_TOLERANCE){
+		turn_angle(-corAngle, dSpeed);
+	}else if(SOUTH > rotation - ANGLE_TOLERANCE){
+		turn_angle(corAngle, dSpeed);
+	}
+}
+\end{lstlisting}
+The code above is an early version of the algorithm which checks and corrects the heading the robot is moving in. This algorithm was used to correct the odometry error caused by the friction in the environment and the, at this stage, sub-optimal calibrated robot attributes. \\
+It worked by comparing the heading the robot is heading in with the wanted heading and correcting any errors. The algorithm at this stage has some short comings such as it is not possible to turn the robot more accurate than with a 5$^{\circ}$ threshold. If the threshold was reduced to less than  5$^{\circ}$, the robot would constantly overturn. \\[3ex]
+
+At this time it was assumed that this inaccuracy was caused by the friction simulated inside the simulator, and that this movement was as accurate as it was going to be. \\
+The odometry error at this stage did improve thanks to the \textit{control\_angle()} functions, the start of the mapping was much less skewed than the previous approach, which result can be seen in function \ref{early_mapping_result} at page \pageref{early_mapping_result}. \\[3ex]
+
+However the constant odometry error did accumulated over time, so that the location displacement became to big to able to map the environment effectively. \\
+In order to try to fix the localisation error, different approaches were taken, which will be described in the following sections. 
+
+\section{Deployment algorithm refactoring and improvement}
+Before other approaches were tried it was decided that the deployment algorithm needed to refactored to make the code cleaner and easier. \\
+The following piece of code is a snipped taken from one of the algorithm:
+
+\begin{lstlisting}[caption={Deployment algorithm refactoring}]
+double dMovSpeed = 500.0f;
+double dDistance = 0.01f;
+
+case UTURN:
+	if(north){
+		printf("%s\n", no);
+		turn_left(dTurnSpeed);
+		for(it = 0;it < 5;it++){
+			move_forward(dSpeed, dDistance);
+		}
+		turn_left(dTurnSpeed);
+		north = false;
+		state = FORWARD;
+	}else if(south)[...]
+\end{lstlisting}
+
+As the above snipped shows the unneeded variables of \textit{dTurnSpeed} and \textit{dTurnDistance} were removed as it was decided that the algorithm, for simplicities sake, use a single value type which can easily be changed. In order to get the same amount of movement during the u-turn phase a simple \textit{for loop} is used. The same modifications as are shown in the code snipped have been done to the rest of the u-turn \textit{case}. \\
+
+\section{Selective wall following approach}
+The deployment pattern as it was at this stage of the project had some major mapping errors. FIXME(find screenshots of this).\\
+This approach used a boolean value which was set to true when the robot turns to follow the \textit{north} and \textit{east} wall, figure \ref{directions_and_angles} on page \pageref{directions_and_angles} shows  which walls are meant.\\
+The reason behind this is to have the functionality to force the robot into the \textit{East to West} or the \textit{North to South} movement pattern respectively. 
+ 
+
+
+
+
+
+
+\end{flushleft}

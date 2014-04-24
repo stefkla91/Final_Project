@@ -1,48 +1,53 @@
-\contentsline {chapter}{\numberline {1}Background \& Objectives}{1}
-\contentsline {subsection}{\numberline {1.0.1}SLAM - Simultaneous Localization And Mapping}{1}
-\contentsline {subsection}{\numberline {1.0.2}Deployment}{2}
-\contentsline {section}{\numberline {1.1}Analysis}{2}
-\contentsline {subsection}{\numberline {1.1.1}Deployment pattern}{2}
-\contentsline {subsection}{\numberline {1.1.2}Localisation}{2}
-\contentsline {subsection}{\numberline {1.1.3}Mapping}{3}
-\contentsline {section}{\numberline {1.2}Process}{3}
-\contentsline {chapter}{\numberline {2}Design}{4}
-\contentsline {section}{\numberline {2.1}Environment Design}{4}
-\contentsline {section}{\numberline {2.2}Mapping and Swarm Size}{5}
-\contentsline {section}{\numberline {2.3}Deployment}{5}
-\contentsline {subsection}{\numberline {2.3.1}Considered Deployment algorithms}{5}
-\contentsline {subsection}{\numberline {2.3.2}Adopted design}{5}
-\contentsline {chapter}{\numberline {3}Implementation}{7}
-\contentsline {section}{\numberline {3.1}Early Development}{7}
-\contentsline {subsection}{\numberline {3.1.1}Webots Tutorials}{7}
-\contentsline {subsection}{\numberline {3.1.2}First Program Iterations}{7}
-\contentsline {section}{\numberline {3.2}Mid stage Development}{8}
-\contentsline {subsection}{\numberline {3.2.1}Advanced tutorials}{9}
-\contentsline {section}{\numberline {3.3}Movement}{9}
-\contentsline {subsection}{\numberline {3.3.1}Moving Forward}{9}
-\contentsline {subsection}{\numberline {3.3.2}Turn a given angle}{10}
-\contentsline {section}{\numberline {3.4}Localisation using Odometry}{11}
-\contentsline {subsection}{\numberline {3.4.1}Initialising the Odometry algorithms}{12}
-\contentsline {subsection}{\numberline {3.4.2}Updating the Odometry values}{12}
-\contentsline {subsection}{\numberline {3.4.3}Calibration}{12}
-\contentsline {chapter}{\numberline {4}Testing}{14}
-\contentsline {section}{\numberline {4.1}Overall Approach to Testing}{14}
-\contentsline {section}{\numberline {4.2}Automated Testing}{14}
-\contentsline {subsection}{\numberline {4.2.1}Unit Tests}{14}
-\contentsline {subsection}{\numberline {4.2.2}User Interface Testing}{14}
-\contentsline {subsection}{\numberline {4.2.3}Stress Testing}{14}
-\contentsline {subsection}{\numberline {4.2.4}Other types of testing}{14}
-\contentsline {section}{\numberline {4.3}Integration Testing}{14}
-\contentsline {section}{\numberline {4.4}User Testing}{14}
-\contentsline {chapter}{\numberline {5}Future Plans}{15}
-\contentsline {section}{\numberline {5.1}Communication}{15}
-\contentsline {chapter}{\numberline {6}Evaluation}{17}
-\contentsline {chapter}{Appendices}{18}
-\contentsline {chapter}{\numberline {A}Third-Party Code and Libraries}{19}
-\contentsline {chapter}{\numberline {B}Code samples}{20}
-\contentsline {section}{\numberline {2.1}Moving forward a given distance}{20}
-\contentsline {section}{\numberline {2.2}Turning a given Angle}{21}
-\contentsline {section}{\numberline {2.3}Odometry Struct}{23}
-\contentsline {section}{\numberline {2.4}Initializing odometry struct}{23}
-\contentsline {section}{\numberline {2.5}Odometry step}{24}
-\contentsline {chapter}{Annotated Bibliography}{27}
+\contentsline {chapter}{\numberline {1}Background \& Objectives}{2}
+\contentsline {subsection}{\numberline {1.0.1}SLAM - Simultaneous Localization And Mapping}{2}
+\contentsline {subsection}{\numberline {1.0.2}Deployment}{3}
+\contentsline {section}{\numberline {1.1}Analysis}{3}
+\contentsline {subsection}{\numberline {1.1.1}Deployment pattern}{3}
+\contentsline {subsection}{\numberline {1.1.2}Localisation}{3}
+\contentsline {subsection}{\numberline {1.1.3}Mapping}{4}
+\contentsline {section}{\numberline {1.2}Process}{4}
+\contentsline {chapter}{\numberline {2}Design}{6}
+\contentsline {section}{\numberline {2.1}Environment Design}{6}
+\contentsline {section}{\numberline {2.2}Mapping and Swarm Size}{7}
+\contentsline {section}{\numberline {2.3}Deployment}{7}
+\contentsline {subsection}{\numberline {2.3.1}Considered Deployment algorithms}{7}
+\contentsline {subsection}{\numberline {2.3.2}Adopted design}{8}
+\contentsline {chapter}{\numberline {3}Implementation}{10}
+\contentsline {section}{\numberline {3.1}Early Development}{10}
+\contentsline {subsection}{\numberline {3.1.1}Webots Tutorials}{10}
+\contentsline {subsection}{\numberline {3.1.2}First Program Iterations}{10}
+\contentsline {section}{\numberline {3.2}Mid stage Development}{11}
+\contentsline {subsection}{\numberline {3.2.1}Advanced tutorials}{12}
+\contentsline {section}{\numberline {3.3}Movement}{12}
+\contentsline {subsection}{\numberline {3.3.1}Moving Forward}{12}
+\contentsline {subsection}{\numberline {3.3.2}Turn a given angle}{13}
+\contentsline {section}{\numberline {3.4}Localisation using Odometry}{14}
+\contentsline {subsection}{\numberline {3.4.1}Initialising the Odometry algorithms}{14}
+\contentsline {subsection}{\numberline {3.4.2}Updating the Odometry values}{15}
+\contentsline {subsection}{\numberline {3.4.3}Minimum speed and distance calibration}{15}
+\contentsline {section}{\numberline {3.5}First results}{16}
+\contentsline {subsection}{\numberline {3.5.1}Early mapping methods and results}{16}
+\contentsline {subsection}{\numberline {3.5.2}Direction control based on heading}{18}
+\contentsline {section}{\numberline {3.6}Deployment algorithm refactoring and improvement}{23}
+\contentsline {section}{\numberline {3.7}Selective wall following approach}{24}
+\contentsline {chapter}{\numberline {4}Testing}{25}
+\contentsline {section}{\numberline {4.1}Overall Approach to Testing}{25}
+\contentsline {section}{\numberline {4.2}Automated Testing}{25}
+\contentsline {subsection}{\numberline {4.2.1}Unit Tests}{25}
+\contentsline {subsection}{\numberline {4.2.2}User Interface Testing}{25}
+\contentsline {subsection}{\numberline {4.2.3}Stress Testing}{25}
+\contentsline {subsection}{\numberline {4.2.4}Other types of testing}{25}
+\contentsline {section}{\numberline {4.3}Integration Testing}{25}
+\contentsline {section}{\numberline {4.4}User Testing}{25}
+\contentsline {chapter}{\numberline {5}Future Plans}{26}
+\contentsline {section}{\numberline {5.1}Communication}{26}
+\contentsline {chapter}{\numberline {6}Evaluation}{28}
+\contentsline {chapter}{Appendices}{29}
+\contentsline {chapter}{\numberline {A}Third-Party Code and Libraries}{30}
+\contentsline {chapter}{\numberline {B}Code samples}{31}
+\contentsline {section}{\numberline {2.1}Moving forward a given distance}{31}
+\contentsline {section}{\numberline {2.2}Turning a given Angle}{32}
+\contentsline {section}{\numberline {2.3}Odometry Struct}{34}
+\contentsline {section}{\numberline {2.4}Initializing odometry struct}{34}
+\contentsline {section}{\numberline {2.5}Odometry step}{35}
+\contentsline {chapter}{Annotated Bibliography}{38}

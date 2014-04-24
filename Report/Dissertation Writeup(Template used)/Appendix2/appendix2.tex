@@ -7,7 +7,7 @@ This function moved the robot a given distance with a given speed.\\
 The robot will slow down to a minimum speed on a minimum difference to the wanted position.\\
 This method will update the global odometry information.\\
 Description can be found in chapter \ref{Implementation} at section \ref{moving_forward_description} at page \pageref{moving_forward_description}.
-\begin{lstlisting}
+\begin{lstlisting}[caption = {Moving forward}]
 #define WHEELBASE 0.058 
 #define INCREMENT_STEP 1000 //how many steps the motor takes for a full wheel rotation
 #define MIN_DIST 20.0f //minimum difference to the new heading
@@ -75,7 +75,7 @@ This function turns the robot a given amount of degrees with a given amount of s
 The robot will slow down to a minimum speed on a minimum threshold to the wanted heading.\\
 Description can be found in chapter \ref{Implementation} at section \ref{turn_angle_description} at page \pageref{turn_angle_description}. 
 
-\begin{lstlisting}
+\begin{lstlisting}[caption = {Turning an angle}]
 #define LEFT_DIAMETER 0.0416
 #define RIGHT_DIAMETER 0.0404
 #define WHEEL_DIAMETER (LEFT_DIAMETER + RIGHT_DIAMETER)
@@ -155,7 +155,7 @@ void turn_angle(double dAngle, double dSpeed){
 \section{Odometry Struct}
 \label{odometry_struct_code}
 This section shows the global odometry struct, which is used and updated throughout the program. 
-\begin{lstlisting}
+\begin{lstlisting}[caption = {Odometry struct}]
  struct odometryTrackStruct {
 	struct {
 		float wheel_distance;
@@ -177,7 +177,7 @@ This section shows the global odometry struct, which is used and updated through
 \label{odometry_init_code}
 These functions are used to initialize the odometry struct and set its attributes.
 Further description of this can be found in chapter \ref{Implementation} at section \ref{odometry_init_description} at page \pageref{odometry_init_description}.
-\begin{lstlisting}
+\begin{lstlisting}[caption = {Initializing odometry struct}]
 #define LEFT_DIAMETER 0.0416
 #define RIGHT_DIAMETER 0.0404
 #define WHEEL_DIAMETER (LEFT_DIAMETER + RIGHT_DIAMETER)
@@ -221,7 +221,7 @@ int odometry_track_start_pos(struct odometryTrackStruct * ot, double* dEncPos){
 \label{odometry_update_code}
 These functions are used to update the the odometry struct.
 Further explanations of these functions can be found in chapter \ref{Implementation} at section \ref{odometry_update_description} at page \pageref{odometry_update_description}.
-\begin{lstlisting}
+\begin{lstlisting}[caption = {Updating odometry struct}]
 #ifndef M_PI
 	#define M_PI 3.1415926535897932384626433832795L
 #endif
