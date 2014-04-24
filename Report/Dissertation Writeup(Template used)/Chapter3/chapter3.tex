@@ -399,15 +399,25 @@ At this time it was assumed that this inaccuracy was caused by the friction simu
 The odometry error at this stage did improve thanks to the \textit{control\_angle()} functions, the start of the mapping was much less skewed than the previous approach, which result can be seen in function \ref{early_mapping_result} at page \pageref{early_mapping_result}. \\[3ex]
 
 However the constant odometry error did accumulated over time, so that the location displacement became to big to able to map the environment effectively. \\
-In order to try to fix the localisation error, different approaches were taken, which will be described in the following sections. 
+In order to try to fix the localisation error, a couple of approaches were done in order to reduce said error. Before those approaches were done some refactoring and code improvement was done.
 
-\section{Deployment algorithm refactoring and improvement}
+\section{Refactoring and improvement}
+In this section the refactoring and code improvements which were done at this stage of the project is described. \\
+Some of the refactorings I have not addressed in this section are the movement of functions to other source files.
+While it clearly is good practise to create functions at the right place in the first place, a lot of prototype functions were created in the main source files for sake of simplicity during the first functions test. These functions were later moved to other source files were they are more appropriate, and to keep the overall source file size done. 
+
+\subsection{Deployment algorithm refactoring}
 Before other approaches were tried it was decided that the deployment algorithm needed to refactored to make the code cleaner and easier. \\
 The following piece of code is a snipped taken from one of the algorithm:
 
 \begin{lstlisting}[caption={Deployment algorithm refactoring}]
-double dMovSpeed = 500.0f;
+double dSpeed = 500.0f;
 double dDistance = 0.01f;
+
+char no[] = "north";
+char ea[] = "east";
+char we[] = "west";
+char so[] = "south";
 
 case UTURN:
 	if(north){
@@ -423,11 +433,98 @@ case UTURN:
 \end{lstlisting}
 
 As the above snipped shows the unneeded variables of \textit{dTurnSpeed} and \textit{dTurnDistance} were removed as it was decided that the algorithm, for simplicities sake, use a single value type which can easily be changed. In order to get the same amount of movement during the u-turn phase a simple \textit{for loop} is used. The same modifications as are shown in the code snipped have been done to the rest of the u-turn \textit{case}. \\
+In order to improve the code further, printout statements were added to the u-turn routine as well as to the \textit{return\_angle()} function.
+This needed to be done as the webots simulator does not have a debugger, so printouts were used to track to results of the algorithms.
 
-\section{Selective wall following approach}
-The deployment pattern as it was at this stage of the project had some major mapping errors. FIXME(find screenshots of this).\\
-This approach used a boolean value which was set to true when the robot turns to follow the \textit{north} and \textit{east} wall, figure \ref{directions_and_angles} on page \pageref{directions_and_angles} shows  which walls are meant.\\
-The reason behind this is to have the functionality to force the robot into the \textit{East to West} or the \textit{North to South} movement pattern respectively. 
+\subsection{Deployment algorithm improvement}
+The previous u-turn method did not support mapping obstacles while the u-turn was performed. As this is not optimal behavior the u-turn pattern was altered again, to support the mapping methods. 
+
+\begin{lstlisting}[caption={U-turn improved with obstacle detection and mapping}]
+#define NUM_DIST_SENS 8 //number of distance sensors 
+#define OCCUPANCE_DIST 150 //obstacle mapping threshold
+double dSpeed = 500.0f;
+double dDistance = 0.01f;
+
+static int wtom(float x){
+	return (int)(MAP_SIZE / 2 + x / CELL_SIZE);
+}
+
+robot_x = wtom(ot->result.x);
+robot_y = wtom(ot->result.y);
+
+char no[] = "north";
+char ea[] = "east";
+char we[] = "west";
+char so[] = "south";
+
+case UTURN:
+	if(north){
+		printf("%s\n", no);
+		turn_left(dSpeed);
+		for(it = 0;it < 5;it++){
+			move_forward(dSpeed, dDistance);
+			
+			//mark cells as occupied
+			wb_display_image_paste(display,background,0,0);
+			wb_display_set_color(display,0x000000);
+			for(i = 0;i < NUM_DIST_SENS;i++){
+				if(wb_distance_sensor_get_value(ps[i]) > OCCUPANCE_DIST){
+					occupied_cell(robot_x, robot_y, ot->result.theta + angle_offset[i]);
+				}
+			}
+			wb_display_image_delete(display,background);
+			background = wb_display_image_copy(display,
+				0,0,display_width,display_height); 
+		}
+		turn_left(dSpeed);
+		north = false;
+		state = FORWARD;
+	}else if(south){[...]
+\end{lstlisting}
+
+The above code shows how the obstacle detection and mapping were added to the u-turn \textit{case}. 
+This map's the obstacles to the sides of the E-Puck while the robot moves along the side of it and proceeds to the next turn. While this mapping is not good, as it is very "spotty" FIXME(Find and add screenshot of this). However it provides a good outline of the environment and obstacles. \\
+
+\section{Mapping}
+In this section the mapping algorithm are shown and described. \\
+The mapping algorithms are one of the key algorithms of the project, however based on code from the Webots\textsuperscript{\texttrademark} demo programs It is based on a occupancy map, which is a simple 2D map. The function used to mark a \textit{cell} of the occupancy map.\\
+The code for this function can be found in Appendix A, section \ref{occupied_cell} on page \pageref{occupied_cell}.
+The parameters for the function represent the X and Y coordinates as well as the rotation of the robot. These values are received from the odometry struct. 
+The functions uses the Webots\textsuperscript{\texttrademark}  API to draw the cell in form of a 1x1 pixel rectangle on the display. 
+
+\begin{lstlisting}[caption={obstacle detection and mapping}]
+#define NUM_DIST_SENS 8 //number of distance sensors 
+#define OCCUPANCE_DIST 150 //obstacle mapping threshold
+
+static int wtom(float x){
+	return (int)(MAP_SIZE / 2 + x / CELL_SIZE);
+}
+
+
+robot_x = wtom(ot->result.x);
+robot_y = wtom(ot->result.y);
+
+wb_display_image_paste(display,background,0,0);
+wb_display_set_color(display,0x000000);
+for(i = 0;i < NUM_DIST_SENS;i++){
+	if(wb_distance_sensor_get_value(ps[i]) > OCCUPANCE_DIST){
+		occupied_cell(robot_x, robot_y, ot->result.theta + angle_offset[i]);
+	}
+}
+wb_display_image_delete(display,background);
+background = wb_display_image_copy(display,0,0,display_width,display_height); 
+\end{lstlisting}
+
+The code above shows for loop which checks the value reported by each 1 of the 8 distance sensors and compare this value to the defined threshold. If the value is larger than the threshold the cell will be marked. 
+
+
+
+
+
+
+
+
+
  
 
 

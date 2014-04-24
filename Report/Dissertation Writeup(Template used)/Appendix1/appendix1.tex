@@ -1,13 +1,57 @@
 \chapter{Third-Party Code and Libraries}
 
-If you have made use of any third party code or software libraries, i.e. any code that you have not designed and written yourself, then you must include this appendix. 
+\section{Mark a cell as occupied}
+\label{occupied_cell}
+This function marks a cell of the occupancy map, an simple 2D array, as marked. 
+It is part of a demo program provided with the webots installation.
+On a normal windows installation this file can be found here:\\
+\url{C:\Program Files\Webots\projects\samples\curriculum\controllers\advanced\_slam\_1.c}
 
-As has been said in lectures, it is acceptable and likely that you will make use of third-party code and software libraries. The key requirement is that we understand what is your original work and what work is based on that of other people. 
+\begin{lstlisting}[caption={Mark an cell as occupied}]
+#ifndef M_PI
+	#define M_PI 3.1415926535897932384626433832795L
+#endif
 
-Therefore, you need to clearly state what you have used and where the original material can be found. Also, if you have made any changes to the original versions, you must explain what you have changed. 
+/**
+ * Set the corresponding cell to 1 (occupied)
+ * and display it
+ */
+void occupied_cell(int x, int y, float theta){
 
-As an example, you might include a definition such as: 
+	// normalize angle
+	while (theta > M_PI) {
+		theta -= 2*M_PI;
+	}
+	while (theta < -M_PI) {
+		theta += 2*M_PI;
+	}
 
-Apache POI library Ð The project has been used to read and write Microsoft Excel files (XLS) as part of the interaction with the clientÕs existing system for processing data. Version 3.10-FINAL was used. The library is open source and it is available from the Apache Software Foundation 
-\cite{apache_poi}. The library is released using the Apache License 
-\cite{apache_license}. This library was used without modification. 
+	// front cell
+	if (-M_PI/6 <= theta && theta <= M_PI/6) {
+		if (y+1 < MAP_SIZE) {
+			map[x][y+1] = 1;
+			wb_display_draw_rectangle(display,x,display_height-y,1,1);
+		}
+	}
+	// right cell
+	if (M_PI/3 <= theta && theta <= 2*M_PI/3) {
+		if (x+1 < MAP_SIZE) {
+			map[x+1][y] = 1;
+			wb_display_draw_rectangle(display,x+1,display_height-1-y,1,1);
+		}
+	}
+	// left cell
+	if (-2*M_PI/3 <= theta && theta <= -M_PI/3) {
+		if (x-1 > 0) {
+			map[x-1][y] = 1;
+			wb_display_draw_rectangle(display,x-1,display_height-1-y,1,1);
+		}
+	}
+	// back cell
+	if (5*M_PI/6 <= theta || theta <= -5*M_PI/6) {
+		if (y-1 > 0) {
+			map[x][y-1] = 1;
+			wb_display_draw_rectangle(display,x,display_height-y-2,1,1);
+		}
+	
+\end{lstlisting}

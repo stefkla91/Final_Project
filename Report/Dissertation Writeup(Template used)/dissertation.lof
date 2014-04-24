@@ -1,16 +1,17 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Environment Design\relax }}{6}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Controlled movement Pattern\relax }}{7}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Environment Design\relax }}{4}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Controlled movement Pattern\relax }}{6}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Movement algorithm test pattern\relax }}{15}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces E-Puck sensor placement}}{17}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Early mapping result\relax }}{18}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Directions and their corresponding Angles\relax }}{18}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Directions and their corresponding U-Turn pattern\relax }}{20}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Movement algorithm test pattern\relax }}{13}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces E-Puck sensor placement}}{15}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Early mapping result\relax }}{16}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Directions and their corresponding Angles\relax }}{16}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Directions and their corresponding U-Turn pattern\relax }}{18}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {5.1}{\ignorespaces An example of the communication link\relax }}{27}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Sector based deployment pattern\relax }}{29}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

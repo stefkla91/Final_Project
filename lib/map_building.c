@@ -90,7 +90,7 @@ static int wtom(float x)
 }
 
 /**
- * Set the coresponding cell to 1 (occuM_PIed)
+ * Set the coresponding cell to 1 (occupied)
  * and display it
  */
 void occupied_cell(int x, int y, float theta){

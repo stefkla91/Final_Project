@@ -13,8 +13,6 @@ A level-1 auxiliary file: Appendix1/appendix1.aux
 A level-1 auxiliary file: Appendix2/appendix2.aux
 The style file: IEEEannot.bst
 Database file #1: References/stefkla.bib
-Warning--I didn't find a database entry for "apache_poi"
-Warning--I didn't find a database entry for "apache_license"
 -- IEEEtranS.bst version 1.11 (2003/04/02) by Michael Shell.
 -- http://www.ctan.org/tex-archive/macros/latex/contrib/supported/IEEEtran/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
@@ -22,4 +20,4 @@ Warning--I didn't find a database entry for "apache_license"
 Warning--empty journal in Thrun2001Robust
 
 Done.
-(There were 3 warnings)
+(There was 1 warning)
