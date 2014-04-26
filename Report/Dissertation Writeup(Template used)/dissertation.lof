@@ -8,12 +8,23 @@
 \contentsline {figure}{\numberline {3.3}{\ignorespaces Early mapping result\relax }}{16}
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Directions and their corresponding Angles\relax }}{16}
 \contentsline {figure}{\numberline {3.5}{\ignorespaces Directions and their corresponding U-Turn pattern\relax }}{18}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Dotted mapping during U-Turns\relax }}{23}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Room 1 empty test environment\relax }}{26}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Room 1 empty environment result\relax }}{26}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Room 1 map result with marked odometry dislocation\relax }}{27}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Room 1 map result with crowing odometry error\relax }}{28}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Room 1 map result with different odometry error\relax }}{28}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Measurements of room 1 with obstacle added to it\relax }}{29}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Room 1 with obstacle map result\relax }}{30}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Obstacle mapping shortcomings\relax }}{30}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Accumulated odometry error\relax }}{31}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Marked spots\relax }}{32}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces An example of the communication link needed for rooms\relax }}{27}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces An example of the communication link\relax }}{28}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Sector based deployment pattern\relax }}{29}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Example of an advanced environment\relax }}{31}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces An example of the communication link needed for rooms\relax }}{35}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces An example of the communication link\relax }}{36}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Sector based deployment pattern\relax }}{37}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Example of an advanced environment\relax }}{39}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

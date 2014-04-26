@@ -437,6 +437,7 @@ In order to improve the code further, printout statements were added to the u-tu
 This needed to be done as the webots simulator does not have a debugger, so printouts were used to track to results of the algorithms.
 
 \subsection{Deployment algorithm improvement}
+\label{deployment_improvement}
 The previous u-turn method did not support mapping obstacles while the u-turn was performed. As this is not optimal behavior the u-turn pattern was altered again, to support the mapping methods. 
 
 \begin{lstlisting}[caption={U-turn improved with obstacle detection and mapping}]
@@ -483,7 +484,16 @@ case UTURN:
 \end{lstlisting}
 
 The above code shows how the obstacle detection and mapping were added to the u-turn \textit{case}. 
-This map's the obstacles to the sides of the E-Puck while the robot moves along the side of it and proceeds to the next turn. While this mapping is not good, as it is very "spotty" FIXME(Find and add screenshot of this). However it provides a good outline of the environment and obstacles. \\
+This map's the obstacles to the sides of the E-Puck while the robot moves along the side of it and proceeds to the next turn. While this mapping is not good, as it is very "spotty".
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 0.5\textwidth]{../../figures/map_results/dotted_uturn_mapping.png} 
+\caption{Dotted mapping during U-Turns}
+\label{dotted_uturn}
+\end{figure}
+
+Figure \ref{dotted_uturn} shows the dotted mapping which is caused during u-turns. While it is in no form a good representation of the environment it provides an outline of obstacles. The problem with this is however that because of the u-turn pattern it is needed for the robot to traverse a long each obstacle / wall in order to map them correctly. 
 
 \section{Mapping}
 In this section the mapping algorithm are shown and described. \\

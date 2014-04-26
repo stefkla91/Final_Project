@@ -1,24 +1,153 @@
 \chapter{Testing}
 \label{Testing}
-
-Detailed descriptions of every test case are definitely not what is required here. What is important is to show that you adopted a sensible strategy that was, in principle, capable of testing the system adequately even if you did not have the time to test the system fully.
-
-Have you tested your system on ’real users’? For example, if your system is supposed to solve a problem for a business, then it would be appropriate to present your approach to involve the users in the testing process and to record the results that you obtained. Depending on the level of detail, it is likely that you would put any detailed results in an appendix.
-
-The following sections indicate some areas you might include. Other sections may be more appropriate to your project. 
+This chapter holds the overall testing results and test information about the final program. 
+During implementation the program was only ever run in a single environment, \textbf{room 1}.
+In this chapter the results of running the program in different environments are documented. The environments differ in shape and size as well as well as in obstacle population.
 
 \section{Overall Approach to Testing}
+As the program requires an simulator to be run in, it is not possible to test the program in any other way than to run it in an simulator and document the results. This factor makes also automatic unit testing impossible. During implementation the program was only ever tested in a single environment called \textbf{room 1}. All changes which were done to the code and problems which were documented in early chapters have been the result of the robots performance in this environment. \\[3ex]
 
-\section{Automated Testing}
+The reason the program was never tested in different environment during implementation was since the program was not complete enough, it was assumed that before the program can be tested in multiple environments a solution for a simple environment must exist.\\
+It is worth noting at this point that the project is \textbf{not} considered finished, however time restrictions do not allow for continued development.  
 
-\subsection{Unit Tests}
+\section{Test environment: Room 1}
 
-\subsection{User Interface Testing}
+Room 1 is the "original" environment in which the program was implemented. \\
+It is a simple, empty, room which size is 10x10 squares, figure \ref{room1_empty} shows this environment. In order to measure the environment size the chess board pattern which makes up the floor of the simulator environment is used to measure it. FIXME(enter size of a square in code)\\
 
-\subsection{Stress Testing}
+\begin{figure}[h]
+\centering
+\includegraphics[width = 0.5\textwidth]{../../figures/room1_empty.png} 
+\caption{Room 1 empty test environment}
+\label{room1_empty}
+\end{figure}
 
-\subsection{Other types of testing}
+\subsection{Obstacle free test}
 
-\section{Integration Testing}
+The results gathered in this test environment, as it is the simplest, as well as the environment in which the program was developed are by far the best in from of final result. \\
 
-\section{User Testing}
+\begin{figure}[h]
+\centering
+\includegraphics[width = 0.5\textwidth]{../../figures/map_results/result_room1_empty.png} 
+\caption{Room 1 empty environment result}
+\label{room1_empty_result}
+\end{figure}
+
+Figure \ref{room1_empty_result} shows the result of the environment after the map has been "closet". The resulting map clearly depictures the spotty nature of the U-turn mapping which is described in Chapter 3 subsection \ref{deployment_improvement} on page \pageref{deployment_improvement} . \\[3ex]
+
+The generated map shows that the program is able to generate straight and accurate mappings of an environment as long as the robot is able to reset its odometry values at some point during the run. More info of what can happen if the odometry is not reset can be found FIXME(enter section of page of describe accumulated odometry error). \\
+The reason of why the program performs this well in the test environment compared to other environment is that is able to reset its odometry values by passing \textbf{corner 1}, before it moves to the uncharted \textbf{corner 2}. More information about the corner approach can be found FIXME(link to section and page of corner approach describtion). \\
+That the accumulated odometry error was growing constantly during program runs can be seen at the placement of the spots of the u-turn routine, these spots are marked red in figure \ref{room1_empty_marked}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 0.5\textwidth]{../../figures/room1_result_marked.png} 
+\caption{Room 1 map result with marked odometry dislocation}
+\label{room1_empty_marked}
+\end{figure}
+
+If these spots are compared to the one at bottom and top site of the generated map, it can be clearly seen that the odometry location error was crowing, and became very noticeable after the map had been generated about 50\%.\\[3ex]
+
+However the odometry location error was reset as the robot reached \textbf{corner 1}, which X and Y coordinates were saved as the robot traversed said corner for the first time. \\
+This reset the odometry values of the odometry struct and made it possible to continuously map the environment with good results. \\ 
+FIXME(enter figure and page of the figure which shows  the location error).\\[3ex]
+
+However this test environment is not without shortcomings either. If the program is allowed to keep working and mapping the environment the odometry error is increasing again.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 0.5\textwidth]{../../figures/map_results/odometry_error_and_reset.png} 
+\caption{Room 1 map result with crowing odometry error}
+\label{room1_empty_reset}
+\end{figure}
+
+Figure \ref{room1_empty_reset} shows the accumulated odometry error after the environment has been traversed approximately 2 times. \\
+As can be seen in this figure the odometry location error keeps accumulating even though it has been reset a few times, at \textbf{corner 1} and \textbf{corner 4}. But the mapped line which can be seen on the lower left corner of the generated map indicates that the localisation error became to big so  that an area was map in the middle of the environment which clearly belongs to the left hand wall. 
+This however is also an working example of the reset function which has been implemented for the corners of the environment. As the location information of the odometry struct have been reset as the corner was reached. The reset can be seen as the robot depicted in the figure already did another pass along the left hand wall up and down, after being reset in the lower left corner. \\[3ex]
+
+This localisation error however is a rather random event, as different results from other runs suggest that the odometry error is strongly based on the random nature of the noise in the simulator. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 0.5\textwidth]{../../figures/map_results/simulator_noise_mapping.png} 
+\caption{Room 1 map result with different odometry error}
+\label{room1_simulator_noise}
+\end{figure}
+
+Figure \ref{room1_simulator_noise} shows the result of another test run, here the robot only had a small miss mapping issue in the upper-right corner of the map, which happened right after the map was closed. However this error was only in a small area, and was completely reset when it reached the lower-right corner of the environment. The test run depicted in this figure has progressed further than the test run shown in figure \ref{room1_empty_reset}, and it shows that the odometry localisation error did not happen again, in the same place.\\
+In other test runs the odometry localisation error did not happen until the robot started traversing the environment the 3rd time, however 90\% of times before it happened during the 2nd environment traverse, this suggest that the problem lies within the random nature of the simulator, however that this random nature is within boundaries. 
+
+\subsubsection{Conclusion for this test environment}
+While the mapping performs reasonably well within this test environment not all test runs are the same. The mappings differ minimal in places every simulation run, this happens because of the random nature of the simulator. \\
+While the mapping of the whole environment can be performed with reasonably similar results, the results start to differ a lot more when the robot traverses the environment a 2nd or 3rd time. The figures \ref{room1_empty_reset} and \ref{room1_simulator_noise} are the results of 2 different simulator runs which happened directly after another. Other times the 2nd simulator run returned no mapping error which was more noticeable than the common minor dis-localisation, but major errors as shown in these figures happened in later runs. The mapping error de-pictured in both documents that while the simulator random nature causes minimal map differenced every time, larger errors happen more seldom and more randomly. 
+
+\subsection{Environment with obstacles}
+This subsection shows and describes the results of another test environment. \\
+This environment is the same as described in the previous sub-section however this has an obstacles added to it.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 0.5\textwidth]{../../figures/room1_obstacle.png} 
+\caption{Measurements of room 1 with obstacle added to it}
+\label{room1_obstacle}
+\end{figure}
+
+Figure \ref{room1_obstacle} shows the measurements and location of the obstacles added to the environment, again all measurements are in \textit{squares}. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 0.5\textwidth]{../../figures/map_results/one_obstacle_save_error.png} 
+\caption{Room 1 with obstacle map result}
+\label{room1_obstacle_result}
+\end{figure}
+
+Figure \ref{room1_obstacle_result} shows the result for this environment.\\
+As it can clearly be seen, this figure de-pictures the major short comings of the final program. On the lower part of the generated map, it can clearly be seen where the major short coming of this solution, the odometry localisation error gets to big. \\
+Unlike to the \textbf{room 1} example without any obstacle, which is described in the previous section, this result depicts what happens when the robot is not able to reach a saved reference point(already traversed and saved corners), but rather continues mapping without being reset. \\[3ex]
+
+What has happened in this case is that the obstacle prevented the robot to traverse the whole width of the map, which altered the movement enough for the robot to reach the unsaved lower-right corner of the map before it reached an already saved reference point which would led to the localisation information being reset. \\
+This can cause a couple of problems. The biggest of them is, which can be clearly seen, that the localisation error gets to large for the map to be usable. The problem in this case is that the odometry information of the lower-right corner are saved, and every time the robot passes this corner the odometry information will be updated to the saved, wrong, information.\\[3ex]
+
+Besides this major error, it also shows the programs short comings in the mapping of obstacles which are placed in the middle of the room.  
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 0.5\textwidth]{../../figures/map_results/obstacle_mapping_error.png} 
+\caption{Obstacle mapping shortcomings}
+\label{obstacle_mapping_error}
+\end{figure}
+
+Figure \ref{obstacle_mapping_error} shows the problem when an obstacle in the middle of the room is being mapped with the current mapping approach. \\
+The upper-side of the obstacle is mapped reasonable well, however the the other sides are lacking. There are some spots on the right side of the obstacle which have been marked by during the U-Turn routine, however the lower-side of the obstacle shows the real short comings. When the mapping of the lower and the upper side of the obstacle are compared it gets clear that the main limitation with this approach is the usable mapping only happens when the robot traverse the obstacle which its side to it, so that it will be mapped. The spotty mapping points generated by the U-Turn routine are usable to outline the obstacle at best, however the specified movement pattern implemented in this project can prevent possible mapping of an obstacle should the obstacle be placed at a point which will not be passed by during the robot movements pattern. \\[3ex]
+
+Another problem is the odometry error in an environment like this. As has already be shown the localisation error gets to big and the altered movement pattern prevents the robot from resetting its localisation values, that is not without it getting reset to something wrong when it passes a long the reference point which has been saved with the wrong odometry data in the first place, in this case the lower-right corner. \\
+This however does not only cause errors for the outline of the environment but also for the obstacles, as in some simulation runs visible localisation difference on the spotty outline of an obstacle can be seen. \\[3ex]
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 0.5\textwidth]{../../figures/map_results/one_obstacle_odometry_error.png} 
+\caption{Accumulated odometry error}
+\label{one_obstacle_odometry_error}
+\end{figure}
+
+Figure \ref{one_obstacle_odometry_error} shows the map result at a later point during the environment traverse. The figure shows how much the localisation errors accumulate  over time when the robot is not able to reset its localisation values. \\
+It shows the already discussed localisation error for the lower side of the map, as well as the spotty outlining in the obstacle. However this map shows also that the localisation values have been reset in the corners which were passed before the localisation error became to big, as the spotty mappings on the lower side of the map show. While the entire lower wall of the environment is mapped at a wrong place, the localisation values have been reset in the upper right corner which causes the spotted, U-Turn based,  mappings a long the lower right hand side.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 0.5\textwidth]{../../figures/map_results/dotted_odometry_error.png} 
+\caption{Marked spots}
+\label{dotted_odomery_error}
+\end{figure}
+
+In figure \ref{dotted_odomery_error} these spots have been marked. The spots to the left hand side of the marked spots have been mapped after the robot had started, since it starts in the center of the map facing to the lower end of the environment. \\
+As the marked spots are approximately at the Y axes as the other markings, can be seen that the robot resets its localisation values to the correct values when it passes the upper-corner reference point. \\
+However this figure also depicts what the accumulated odometry errors cause to an already scanned side. On the left hand side of the figure it can easily be seen where the robot remapped the left hand wall of the environment.\\
+
+\subsubsection{Conclusion for this test environment}
+This test environment shows the short comings of this program, the fast movement pattern can cause problems when mapping obstacles as the robot will only ever move in the same movement pattern. This however can, and in most cases will, lead to an large accumulation of localisation error.\\
+It is apparent that the major problem of this program is that the odometry values need to be reset in given intervals in order to prevent an to large accumulation of errors. This is however, with the current solution, only possible when the robot manages to pass by an saved reference point before the localisation error either becomes to large, or another reference point is set with the wrong localisation information.\\[3ex]
+
+There are a couple of ways the problems which become apparent in this test environment could have been fixed. One possibility is to have a wall following algorithm which allows for the mapping of the outline of an obstacle before falling back into another movement pattern. \\
+This would prevent problem with the mapping of obstacle which has been discussed in the previous section. Another solution would be to set reference points more often, or have a way of localizing the robot besides having set reference points, possibilities for this would be GPS or long range scanners which are able to keep track of global reference points, which have been set previous to the run.\\
+There are a couple of possibilities which could have been implemented in order to make this mapping better, however the problems encountered during implementation have taken to much time to fix to be even able to map a single, empty, environment to be able to implement further algorithms after test runs had been done for environment with obstacles inside them.
