@@ -20,11 +20,18 @@
 \contentsline {figure}{\numberline {4.8}{\ignorespaces Obstacle mapping shortcomings\relax }}{30}
 \contentsline {figure}{\numberline {4.9}{\ignorespaces Accumulated odometry error\relax }}{31}
 \contentsline {figure}{\numberline {4.10}{\ignorespaces Marked spots\relax }}{32}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Room 2 measurements\relax }}{33}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Room 2 results\relax }}{34}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Room 2 shows that the localisation error depends on environment size\relax }}{34}
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Room 2 results at a later point\relax }}{35}
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Room 2 with obstacles measurements\relax }}{36}
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Room 2 with obstacles result\relax }}{37}
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Buggy software causes causes the robot to save wrong values\relax }}{37}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces An example of the communication link needed for rooms\relax }}{35}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces An example of the communication link\relax }}{36}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Sector based deployment pattern\relax }}{37}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Example of an advanced environment\relax }}{39}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces An example of the communication link needed for rooms\relax }}{39}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces An example of the communication link\relax }}{40}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Sector based deployment pattern\relax }}{41}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Example of an advanced environment\relax }}{43}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
