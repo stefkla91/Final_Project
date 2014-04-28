@@ -80,9 +80,9 @@ int main(int argc, char **argv){
 	ref.upper_right.x = 0;
 	ref.upper_left.y = 0;
 
-	ot.result.x = 0;// 0.008;
-	ot.result.y = 0;//0.008;
-	ot.result.theta = 4.71238898;// in RAD = 270 degrees 
+	ot.result.x =0;// 0.199997;// 0.00;
+	ot.result.y = 0;//0.00133553;//0.008;
+	ot.result.theta = 4.71238898;//4.71238898 in RAD = 270 degrees 
 
 	while (wb_robot_step(TIME_STEP*4) != -1) {
 		odometry_track_step(&ot);

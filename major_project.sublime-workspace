@@ -103,7 +103,7 @@
 			"file": "controllers/Main/Main.c",
 			"settings":
 			{
-				"buffer_size": 2084,
+				"buffer_size": 2117,
 				"line_ending": "Windows"
 			}
 		},
@@ -111,16 +111,8 @@
 			"file": "lib/map_building.c",
 			"settings":
 			{
-				"buffer_size": 10861,
+				"buffer_size": 10897,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Report/Major Writeup/stk4_major_project.tex",
-			"settings":
-			{
-				"buffer_size": 42736,
-				"line_ending": "Unix"
 			}
 		},
 		{
@@ -197,6 +189,7 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Stefan/Documents/GitHub/Final_Project/Report/Major Writeup/stk4_major_project.tex",
 		"/C/Users/Stefan/Documents/GitHub/Final_Project/lib/display.c",
 		"/C/Users/Stefan/Documents/GitHub/Final_Project/lib/display.h",
 		"/C/Users/Stefan/Documents/GitHub/Final_Project/controllers/Main/Makefile",
@@ -306,7 +299,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -314,15 +307,15 @@
 					"file": "controllers/Main/Main.c",
 					"settings":
 					{
-						"buffer_size": 2084,
+						"buffer_size": 2117,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1427,
-								1427
+								1917,
+								1907
 							]
 						],
 						"settings":
@@ -435,7 +428,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 864.0,
+						"translation.y": 918.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -445,15 +438,15 @@
 					"file": "lib/map_building.c",
 					"settings":
 					{
-						"buffer_size": 10861,
+						"buffer_size": 10897,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2140,
-								2140
+								1838,
+								1838
 							]
 						],
 						"settings":
@@ -566,41 +559,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1404.0,
+						"translation.y": 972.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "Report/Major Writeup/stk4_major_project.tex",
-					"settings":
-					{
-						"buffer_size": 42736,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								8661,
-								6119
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1728.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "lib/functions.c",
 					"settings":
 					{
@@ -731,7 +696,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 3,
 					"file": "lib/reference_points.c",
 					"settings":
 					{
@@ -862,7 +827,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 4,
 					"file": "lib/reference_points.h",
 					"settings":
 					{
@@ -992,7 +957,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 5,
 					"settings":
 					{
 						"buffer_size": 405,

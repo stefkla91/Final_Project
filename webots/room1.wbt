@@ -1,0 +1,96 @@
+#VRML_SIM V7.4.0 utf8
+WorldInfo {
+  info [
+    "Description"
+    "Author: first name last name <e-mail>"
+    "Date: DD MMM YYYY"
+  ]
+  basicTimeStep 16
+}
+Viewpoint {
+  orientation 0.588747 -0.54477 -0.597162 4.21207
+  position -0.409168 2.38367 -0.00678431
+}
+Background {
+  skyColor [
+    0.4 0.7 1
+  ]
+}
+DEF FLOOR CheckeredFloor {
+}
+EPuck {
+  rotation 0 1 0 4.71239
+  controller "Main"
+  camera_windowPosition 0.316163 0.205197
+  camera_pixelSize 0
+  turretSlot [
+    DistanceSensor {
+      name "distance_sensor"
+      type "laser "
+    }
+    Display {
+      width 70
+      height 70
+      pixelSize 2
+    }
+  ]
+}
+DEF WALL_1 Solid {
+  translation 0 0.05 0.5
+  children [
+    DEF Wall_Shape Shape {
+      appearance DEF WALL_APPEARANCE Appearance {
+        material Material {
+          diffuseColor 0 0.666667 1
+        }
+      }
+      geometry DEF WALLS Box {
+        size 1 0.1 0.01
+      }
+    }
+  ]
+  boundingObject USE WALLS
+}
+DEF WALL_2 Solid {
+  translation 0 0.05 -0.5
+  children [
+    USE Wall_Shape
+  ]
+  boundingObject USE WALLS
+}
+DEF WALL_3 Solid {
+  translation -0.498916 0.05 0.00513011
+  rotation 0 1 0 1.5708
+  children [
+    USE Wall_Shape
+  ]
+  boundingObject USE WALLS
+}
+DEF WALL_4 Solid {
+  translation 0.503447 0.05 -0.00513011
+  rotation 0 1 0 1.5708
+  children [
+    USE Wall_Shape
+  ]
+  boundingObject USE WALLS
+}
+Solid {
+  translation -0.31919 2.31965e-15 0.00639017
+  rotation 0 1 0 3.1416
+  children [
+    Shape {
+      appearance USE WALL_APPEARANCE
+      geometry Box {
+        size 0.05 0.2 0.5
+      }
+    }
+  ]
+  boundingObject Box {
+    size 0.05 0.2 0.5
+  }
+}
+DirectionalLight {
+  ambientIntensity 0.5
+  direction 1 -2 1
+  castShadows TRUE
+}

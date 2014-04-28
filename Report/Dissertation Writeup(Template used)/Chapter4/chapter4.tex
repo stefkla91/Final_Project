@@ -240,3 +240,59 @@ This robot then proceeds to move upwards along the left-hand side wall, however 
 
 \subsubsection{Conclusion of this test environment}
 This test clearly showcases another major bug within the program. Unfortunately not more information can be gather from the test runs as the simulator crashes every time at the same place. 
+
+\section{Room 3}
+This section holds the description and results of test of environment \textbf{room 3}. \\
+This test environment differs from the previous test environments as it is a more "complex" environment compared to the others. It is more complex as it is completely square, this is done to test the programs performance in a environment like this.\\
+This section was also not tested with obstacles inside it. The reason being that the previously gathered data shows that obstacle inside the room disturb the mapping and prevent a complete mapping.
+Figure \ref{room3_empty} shows the environment and its measurements. \\
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 0.5\textwidth]{../../figures/room3_empty} 
+\caption{Measurements of room 3}
+\label{room3_empty}
+\end{figure}
+
+Figure \ref{room3_result1} shows the map result after the robot traversed a part of the map. It can be seen that the robot mapped the outline of the right-hand wall, however it can be clearly seen that the localisation error accumulated to much which prevents an accurate mapping of the lower wall. \\
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 0.5\textwidth]{../../figures/map_results/room4_result1.png} 
+\caption{Result of the third room}
+\label{room3_result1}
+\end{figure}
+
+It resets the localisation values at the lower left corner, however then proceeds to reset the values to the equivalent of the upper-right corner immediately. The robot then starts to move back and forth along the lower wall, then proceeded to move up the left wall. \\
+It resets the localisation values again when the lower-left hand corner is reached for the second time, then moves upwards along the left wall, however the odometry struct now holds the wrong orientation values: the robot believes to move east(to the right).
+The robot then proceeded moving along the walls in the normal movement pattern, however with the localisation and orientation values all wrong the mapping was unusable, and the test was ended at this point. 
+
+\subsection{Conclusion of this test environment}
+This test environment did not produce a lot of new insight into the final program. While it documented the shortcomings of the reference point algorithm this is not new data, as previous test environments showed the same data. \\
+The partly created map with can be seen in figure \ref{room3_result1} indicated that the mapping process of the wall formation at the lower right side of the environment would have been lacking at best. This is based on the moving pattern where the robot moves given distances in the turns, should an wall or obstacle not be "luckily" lay to the side of this path chances are that the robot will not be able to map it, in best cast map the outline. \\
+
+\section{Conclusion}
+The test results inside this chapter give clear insight into the weak and strong sides of the program.\\
+Unfortunately there are more weak points. During the implementation phase of the project a couple of problems were encountered, problems with odometry, localisation and mapping. While these problems were countered and fixed the solution seamed good inside the implementation environment. This is the main reason why some of the programs shortcomings exist.\\[3ex]
+
+The algorithm which handles the reference points is based on prior knowledge which was gathered during test runs in the implementation phase. It was known prior to design of the algorithm in which direction the robot is moving and from what direction it will approach a corner of the environment. This approach works fine inside the \textbf{room 1} environment but \textbf{room 2} and \textbf{room 3} have shown that this approach failed if the robot should move in a slightly different path than to the one the algorithm was designed under. \\
+If the robot reaches a corner but its direction is different from the one specified in the algorithm, it will set or reset its localisation values to different corners than it should. This problem however could be fixed by adding more control statements to the algorithm, rather than simple approach which is implemented at this moment. \\[3ex]
+
+Another weak point of the program is the movement pattern, if obstacles are placed inside the environment their presence can disturb the movement pattern enough to cause severe odometry and localisation errors. It has been observed in the testing phase that an E-Puck has collided with the wall, but rather than to stop it continued driving, however skewed itself along the side of the obstacle changing it path and increasing the localisation error. While this can happen because of the absence of bumper sensors of the E-Puck robot platform and the placement of the distance sensors around the E-Puck's top side, it shows that this robot platform is not the best suited for map building.\\
+Another example is the mapping of\textbf{room 3 }which can be seen in figure \ref{room3_result1} and the obstacle mapping of \textbf{room 1} from figure \ref{obstacle_mapping_error}. These 2 figures show the problems with the current movement pattern on walls and obstacles. There is no direct way of fixing the movement pattern in this program. One approach could be to add a wall-following algorithm to whenever a new obstacle is detected, or in case a completely different approach, some of them were discussed in Chapter 1 and 2. \\[3ex]
+
+The biggest problem however is the localisation approach. \\
+The localisation error accumulated over time and needs to be reset at some points during the program run in order to prevent large mapping errors which can be seen in all test cases. One of the aims with this project was to be able to localise the robot without the need of GPS or Compass data or long range scanners which can keep track of global reference points at all times. However odometry calculations , which is what was used to locate the robot in this project, have limitations. In a non-perfect environment(an environment without friction or sensor noise) odometry calculations are always going to be an estimate at best, this was the biggest challenge of this project from the very beginning. Without functioning odometry algorithms it was not able to turn the robot an accurate amount of degrees or move it a given distance, even though these algorithms were successfully implemented they are not 100\% accurate, because of friction and sensor noise. \\[3ex]
+
+Without the ability to calculate how much the robot has moved or turned it was impossible to locate the robot accurately. 
+The localisation and movement algorithms in them self function perfectly, however since odometry calculations are really just estimated odometry and localisation errors accumulated over time. Functions were created to tackle these problems, algorithms which check the robots heading and ensure it is only ever deviating with a maximum threshold from their path, and to set reference points at points the robot is able to locate, the corners. However the algorithm which controls the heading is only ever accurate as long as the calculated orientation values are right, extreme odometry errors or collisions with walls/obstacles can lead to errors, as the robot posses no possibility to check the actual position and heading in the simulator\footnote{While it is possible to include API functions which return accurate localisation and rotation informations on the virtual robot such functions were never used as they would break the challenges and key points of this project.}.\\
+Even considering a case where the heading control algorithms work completely fine(in most cases they do) the localisation error still increases over time. The algorithm designed to set reference points and reset the robots localisation values helped with this problem, however the short comings of this algorithm has already been discussed. \\[3ex]
+
+The overall conclusion drawn on the localisation problem is that is possible to calculate a robot positions, to an extend. However the error will always become to big, and reference points set by the robot it self are unreliable.  While it is completely possible to use odometry calculations to tackle the localisation problem it is necessary to use predefined reference points or GPS and compass data. In order to use predefined reference points very strong and accurate sensors are required, which are not found for each robot platform, as well as the structure of the environment. GPS and compass data would make the localisation as accurate as possible. Of course GPS sensors have also a limited accuracy but the result will certainly be better than without GPS data. An possible approach could also be to combine GPS and odometry calculations to decrease the localisation error as much as possible. \\[3ex]
+
+To summarize the overall conclusion of this project it can be said that, while the program does not perform well or manage to generated accurate maps(unless it is \textbf{room 1}, it has certainly been a learning experience. It has shown the limitations of solely odometry based systems and have given some insight in how to minimize odometry errors, even though it is impossible to remove them completely. \\
+The program in itself has strong problems, the movement pattern is far from optimal, but ideas and insight on this was gathered as well. The test have shown the limitations of the implemented algorithms as soon as it was tested on more complex environment, but also provided informations on these shortcomings and ideas on these could be fixed in the future. 
+
+
+
+

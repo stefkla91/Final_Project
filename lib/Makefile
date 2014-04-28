@@ -43,7 +43,7 @@
 ### QT = core gui widgets network
 ###
 ###-----------------------------------------------------------------------------
-C_SOURCES = map_building.c reference_points.c e_puck_movement.c e_puck_distance_sensors.c odometry.c 
+C_SOURCES = functions.c map_building.c reference_points.c e_puck_movement.c e_puck_distance_sensors.c odometry.c 
 
 ### Do not modify: this includes Webots global Makefile.include
 space :=

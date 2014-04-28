@@ -44,19 +44,22 @@
 \contentsline {subsubsection}{\numberline {4.3.1.1}Conclusion of this test environment}{35}
 \contentsline {subsection}{\numberline {4.3.2}Environment with obstacles}{35}
 \contentsline {subsubsection}{\numberline {4.3.2.1}Conclusion of this test environment}{37}
-\contentsline {chapter}{\numberline {5}Future Plans}{38}
-\contentsline {section}{\numberline {5.1}Swarm robotics}{38}
-\contentsline {subsection}{\numberline {5.1.1}Swarm communication}{38}
-\contentsline {subsection}{\numberline {5.1.2}Swarm deployment}{40}
-\contentsline {section}{\numberline {5.2}Autonomous Swarm behaviour}{42}
-\contentsline {chapter}{\numberline {6}Evaluation}{44}
-\contentsline {chapter}{Appendices}{45}
-\contentsline {chapter}{\numberline {A}Third-Party Code and Libraries}{46}
-\contentsline {section}{\numberline {1.1}Mark a cell as occupied}{46}
-\contentsline {chapter}{\numberline {B}Code samples}{48}
-\contentsline {section}{\numberline {2.1}Moving forward a given distance}{48}
-\contentsline {section}{\numberline {2.2}Turning a given Angle}{49}
-\contentsline {section}{\numberline {2.3}Odometry Struct}{51}
-\contentsline {section}{\numberline {2.4}Initializing odometry struct}{51}
-\contentsline {section}{\numberline {2.5}Odometry step}{52}
-\contentsline {chapter}{Annotated Bibliography}{55}
+\contentsline {section}{\numberline {4.4}Room 3}{37}
+\contentsline {subsection}{\numberline {4.4.1}Conclusion of this test environment}{39}
+\contentsline {section}{\numberline {4.5}Conclusion}{39}
+\contentsline {chapter}{\numberline {5}Future Plans}{42}
+\contentsline {section}{\numberline {5.1}Swarm robotics}{42}
+\contentsline {subsection}{\numberline {5.1.1}Swarm communication}{42}
+\contentsline {subsection}{\numberline {5.1.2}Swarm deployment}{44}
+\contentsline {section}{\numberline {5.2}Autonomous Swarm behaviour}{46}
+\contentsline {chapter}{\numberline {6}Evaluation}{48}
+\contentsline {chapter}{Appendices}{49}
+\contentsline {chapter}{\numberline {A}Third-Party Code and Libraries}{50}
+\contentsline {section}{\numberline {1.1}Mark a cell as occupied}{50}
+\contentsline {chapter}{\numberline {B}Code samples}{52}
+\contentsline {section}{\numberline {2.1}Moving forward a given distance}{52}
+\contentsline {section}{\numberline {2.2}Turning a given Angle}{53}
+\contentsline {section}{\numberline {2.3}Odometry Struct}{55}
+\contentsline {section}{\numberline {2.4}Initializing odometry struct}{55}
+\contentsline {section}{\numberline {2.5}Odometry step}{56}
+\contentsline {chapter}{Annotated Bibliography}{59}

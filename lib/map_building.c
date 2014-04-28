@@ -71,6 +71,7 @@ int state = FORWARD;
 
 /**
  * Initiate the display with a white color
+ for all rooms but room 3 x & y = 0
  */
 void init_display(){
 	display = wb_robot_get_device("display");
