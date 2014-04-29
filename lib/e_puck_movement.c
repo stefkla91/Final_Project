@@ -370,22 +370,22 @@ void set_leds(int iActive){
 }
 
 /**
-FUnction to compare the current heading to the wanted heading
+Function to compare the current heading to the wanted heading
 and fix the heading should it surpass a threshold
 */
 void check_rotation(double cur_rot, double want_rot, double dSpeed){
-	double threshold = 1; //2,0
+	double dthreshold = 1; //2,0
 	double diff;
 	char text[] = "Correcting";
 	if(cur_rot + 20 >= 360){
 		cur_rot -= 360; 
 	} 
 	
-	if(cur_rot > want_rot + threshold){
+	if(cur_rot > want_rot + dthreshold){
 		diff = cur_rot - want_rot;
 		printf("%s\n", text);
 		turn_angle(diff, dSpeed);
-	}else if(cur_rot < want_rot - threshold){
+	}else if(cur_rot < want_rot - dthreshold){
 		diff = want_rot - cur_rot;
 		printf("%s\n", text);
 		turn_angle(-diff, dSpeed);

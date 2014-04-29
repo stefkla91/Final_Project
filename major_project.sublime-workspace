@@ -445,8 +445,8 @@
 						"selection":
 						[
 							[
-								1838,
-								1838
+								5802,
+								5802
 							]
 						],
 						"settings":
@@ -559,7 +559,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 972.0,
+						"translation.y": 4136.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -821,7 +821,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2538.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
