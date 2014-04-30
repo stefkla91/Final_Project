@@ -38,6 +38,15 @@ M.~Batalin and G.~Sukhatme, ``{Coverage, Exploration, and Deployment by a
 \BIBentrySTDinterwordspacing
 
 
+\bibitem{Borenstein1996Measurement}
+\BIBentryALTinterwordspacing
+J.~Borenstein and L.~Feng, ``{Measurement and correction of systematic odometry
+  errors in mobile robots},'' \emph{Robotics and Automation, IEEE Transactions
+  on}, vol.~12, no.~6, pp. 869--880, Dec. 1996. [Online]. Available:
+  \url{http://dx.doi.org/10.1109/70.544770}
+\BIBentrySTDinterwordspacing
+
+
 \bibitem{Burgard2000Collaborative}
 \BIBentryALTinterwordspacing
 W.~Burgard, M.~Moors, D.~Fox, R.~Simmons, and S.~Thrun, ``{Collaborative
