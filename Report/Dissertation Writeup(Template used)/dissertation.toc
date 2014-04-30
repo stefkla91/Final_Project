@@ -36,6 +36,7 @@
 \contentsline {section}{\numberline {3.9}New approach tried for the control loop}{25}
 \contentsline {subsection}{\numberline {3.9.1}Dynamic U-Turn approach}{25}
 \contentsline {subsection}{\numberline {3.9.2}Stop on corner detection}{26}
+\contentsline {subsection}{\numberline {3.9.3}Added odometry update function to the movement algorithm}{27}
 \contentsline {chapter}{\numberline {4}Testing}{28}
 \contentsline {section}{\numberline {4.1}Overall Approach to Testing}{28}
 \contentsline {section}{\numberline {4.2}Test environment: Room 1}{28}

@@ -13,5 +13,5 @@
 \contentsline {lstlisting}{\numberline {B.1}Moving forward}{55}
 \contentsline {lstlisting}{\numberline {B.2}Turning an angle}{56}
 \contentsline {lstlisting}{\numberline {B.3}Odometry struct}{58}
-\contentsline {lstlisting}{\numberline {B.4}Initializing odometry struct}{59}
+\contentsline {lstlisting}{\numberline {B.4}Initializing odometry struct}{58}
 \contentsline {lstlisting}{\numberline {B.5}Updating odometry struct}{59}

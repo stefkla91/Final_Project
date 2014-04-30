@@ -177,13 +177,13 @@ void turn_angle(double dAngle, double dSpeed){
 			dStopPosLeft = point_dEncPos[0] + dStepCount;
 			dStopPosRight = point_dEncPos[1] - dStepCount;
 			
-			point_dOdometryData = compute_odometry_data();
+			//point_dOdometryData = compute_odometry_data();
 			
 			set_motor_speed(dSpeed, -dSpeed);
 			
 			while((point_dEncPos[0] < dStopPosLeft) && (point_dEncPos[1] > dStopPosRight)){
 				//get odometry data
-				point_dOdometryData = compute_odometry_data();
+				//point_dOdometryData = compute_odometry_data();
 				
 				//get wheel encoders
 				point_dEncPos = get_encoder_positions();
@@ -198,14 +198,14 @@ void turn_angle(double dAngle, double dSpeed){
 		dStopPosLeft = point_dEncPos[0] - dStepCount;
 		dStopPosRight = point_dEncPos[1] + dStepCount;
 		
-		point_dOdometryData = compute_odometry_data();
+		//point_dOdometryData = compute_odometry_data();
 
 		// turn left the robot ...
 		set_motor_speed(-dSpeed, dSpeed);
 
 		while((point_dEncPos[0] > dStopPosLeft) &&(point_dEncPos[1] < dStopPosRight)){
 
-			point_dOdometryData = compute_odometry_data();
+			//point_dOdometryData = compute_odometry_data();
 			point_dEncPos = get_encoder_positions();
 			if( fabs(dStopPosLeft - point_dEncPos[0]) <= MIN_DIST ){
 				set_motor_speed(-MIN_SPEED, MIN_SPEED); }
@@ -215,7 +215,7 @@ void turn_angle(double dAngle, double dSpeed){
 	stop_robot();
 	
 	//update odometry data
-	point_dOdometryData = compute_odometry_data();
+	//point_dOdometryData = compute_odometry_data();
 	wb_robot_step(TIME_STEP);
 }
 

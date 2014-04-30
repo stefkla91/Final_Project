@@ -40,11 +40,12 @@ A look was also taken at the code and notes which were taken during the Robotics
 \section{Movement}
 After having studied the odometry functions of the provided programs it was decided to start a new approach to fix the movement of the robot.\\
 This approach is based on a set of different functions, much smaller and more refined than my previous approach. This approach took a while to implement and test but the results were rather satisfactory. This section is going to describe the different aspects of the movement solution and describe how the most important functions work.\\
-The code of the major functions will be added as appendices, the site numbers will be added to each subsection.
+The code of the major functions will be added as appendices, the site numbers will be added to each subsection. It is worth noting that the code displayed in the appendix is the final version of the code, and often updated in comparison to what they are at this stage in the development process. 
 
 \subsection{Moving Forward}
 \label{moving_forward_description}
 The code for this function can be found in Appendix B, section \ref{moving_forward_code} at page \pageref{moving_forward_code}.\\
+It is worth noting at that the code display in appendix B is the final version, the earlier versions of this code did not hold the odometry update function \textit{odometry\_track\_step()}.
 The \textit{move\_forward }function takes 2 doubles as parameters, 1 being the speed with which the robot is ordered to move and the distance it should move. The last parameter is a link to the global odometry struct, this struct is used to update the odometry values.\\
 The function first checks that neither of the parameters are 0 and then calculates the number of steps each motor has to drive(1 step being 1 step of the stepper motor) to reach its target position.
 This calculation is done by dividing the number of steps needed for a full wheel rotation, 1000 in this case, by the product of $\pi$ times the wheel diameter times 2 and multiplication this result with the distance defined in the parameter of the function. The steps needed for a full rotation have been taken from the E-Puck documentation and have been confirmed during on of the odometry tutorials. \\
@@ -68,14 +69,14 @@ Once the factor has been calculated it will then the number of steps the motor h
 
 If the rotation angle defined as the function parameter is positive the robot will turn to the right.\\
 When the robot is turning to the right it will calculated the stopping positions of the encoders by adding the calculated step count to the left motor encoder and subtracting it from the right encoder. This will lead to the wheels turning against each other and will result in the robot turning on the spot rather than only moving 1 wheel to turn which would result in a displacement of the robot. \\
-It will then update the global odometry buffer by calling the \textit{compute\_odometry\_data} function and set the the speed of the motors using the given function parameter value. The right motor will receive a negated value so that it will turn backwards. 
+And then set the the speed of the motors using the given function parameter value. The right motor will receive a negated value so that it will turn backwards. 
 It will then compare the left encoder positions and updated them all the time. Similar to how the forward movement function worked, it will detect when a given minimum difference between the current and target encoder values is reached and slow the robot down to a minimum speed. \\[3ex]
 
 If the rotation angle defined as the function parameter is negative the robot will turn to the left.\\
 The only difference between turning left rather than to the right is that the calculations, obviously, are reversed. Meaning to calculated the stop positions of the motor encoders it will subtract the calculated step count from the current left encoder value and add the step count the the right
 encoder value, same switch of negation has been done where the motor speeds are set.
 The calculations of how long to turn and when to slow down are identical to how they work when turning right, only difference being that the the operators to which check how long to turn are different.\\
-Once the target position has been reached, by either turning left or right, the robot stops and the global odometry buffer is updated. 
+Once the target position has been reached, by either turning left or right, the robot stops.
 It will then force to the simulator to take a simulator step, effectively moving on to the next command.\\[3ex]
 
 This functions allows me to define the turn the robot by so many degrees as I need and it will turn there within an minimal error space. This error space exist because the simulator simulates friction between the robot wheels and the environment so 100\% accurate movement will never happen.\\
@@ -609,8 +610,8 @@ To fix this problem corner detection was added to the algorithm.
 It is worth noting at this point that rather than only corner detection, general obstacle detection should have been added. However, as it described in chapter 4, the program was only ever tested in the same environment during development which let to many of the problems encountered in the tests. 
 The reason that only corner detection was added at this point was because it was known that the only obstacle which will be encountered in the U-turn routine are going to be corners, so no other type of obstacles was even considered.\\[3ex]
 
-In the first iteration of this approach is corner detection was added \textbf{bellow} the section of code which mark's cells as occupied.
- As this is not correct, which test runs quickly showed, the corner detection was moved \textbf{before} said section. \\
+In the first iteration of this approach is corner detection was added \textbf{bellow} the section of code which mark's cells as occupied. Test runs quickly showed that it works better \textbf{before} said section, so the corner detection was moved.\\
+The snipped shown in listing \ref{corner-uturn} is the final version with the corner detection above the cell marking section.
 
 \begin{lstlisting}[caption={Corner detection added to the U-turn routine}, label={corner-uturn}]
 if(north){
@@ -639,6 +640,22 @@ if(north){
 	state = FORWARD;
 }else if(east){[...]
 \end{lstlisting}
+
+\subsection{Added odometry update function to the movement algorithm}
+Until this stage the odometry values were only updated every control loop iteration. \\
+In order to increase the number of odometry updates, which needed to be done in order to make the localisation more accurate, the odometry update function needed to be called more often then just once every iteration.
+This was done in an approach to reduce the overall odometry error  by updating the \textit{odometry struct} more often, before odometry errors has a change to accumulate further. \\[3ex]
+
+In order to implement this the odometry updated function was added to the \textit{move\_forward()} function. 
+The code which can be found in Appendix B section \ref{moving_forward_code} on page \pageref{moving_forward_code} is the version of the code with the odometry update function added to it. \\
+While this updated function did not show any significant decrease of the localisation error, it was kept as updating the odometry functions as often as possible is helps decreasing the overall localisation error. 
+
+
+
+
+
+
+
 
 
 
