@@ -9,9 +9,10 @@
 \contentsline {lstlisting}{\numberline {3.9}Refactored heading control code}{24}
 \contentsline {lstlisting}{\numberline {3.10}Code snipped of the new approach}{25}
 \contentsline {lstlisting}{\numberline {3.11}Corner detection added to the U-turn routine}{26}
-\contentsline {lstlisting}{\numberline {A.1}Mark an cell as occupied}{56}
-\contentsline {lstlisting}{\numberline {B.1}Moving forward}{58}
-\contentsline {lstlisting}{\numberline {B.2}Turning an angle}{59}
-\contentsline {lstlisting}{\numberline {B.3}Odometry struct}{61}
-\contentsline {lstlisting}{\numberline {B.4}Initializing odometry struct}{61}
-\contentsline {lstlisting}{\numberline {B.5}Updating odometry struct}{62}
+\contentsline {lstlisting}{\numberline {3.12}The UMBmark experiment procedure}{30}
+\contentsline {lstlisting}{\numberline {A.1}Mark an cell as occupied}{59}
+\contentsline {lstlisting}{\numberline {B.1}Moving forward}{61}
+\contentsline {lstlisting}{\numberline {B.2}Turning an angle}{62}
+\contentsline {lstlisting}{\numberline {B.3}Odometry struct}{64}
+\contentsline {lstlisting}{\numberline {B.4}Initializing odometry struct}{64}
+\contentsline {lstlisting}{\numberline {B.5}Updating odometry struct}{65}

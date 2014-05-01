@@ -298,66 +298,50 @@ double* compute_odometry_data(){
 /**
 University of Michigan Benchmark
 */
-/*void UMBmark(double dSpeed, double dDistance){
-	//activate leds to show calibration has started
-	set_leds(1);
-	
-	//measure and calibrate the values of the odometry
+void UMBmark(double dSpeed, double dDistance){	
+	//move the robot clockwise and counterclockwise 
 	measure_clockWise(dSpeed, dDistance);
 	
 	measure_CounterClockWise(dSpeed, dDistance);
 	
 	stop_robot();
-} */
+} 
 /**
 Function to measure the movement accuracy by driving
 a clockwise square.
 This is part of the UMBmark algorithm
 */
-/*void measure_clockWise(double dSpeed, double dDistance){
+void measure_clockWise(double dSpeed, double dDistance){
 	int i, j;
 	
 	for(i = 0;i < NUMTOURNAMENTS; i++){
-		//compute odometry data
-		//point_dOdometryData = compute_odometry_data();
 		for(j = 0;j < 4;j++){
 			move_forward(dSpeed, dDistance);
 			turn_right(dSpeed);
 		}
 		wb_robot_step(TIME_STEP);
 	}
-	
-	//actualize the odometry values
-	//point_dOdometryData = compute_odometry_data();
-}  */
+}  
 
 /**
 Function to measure the movement accuracy by driving
 a counter-clockwise square.
 This is part of the UMBmark algorithm
 */
-/*void measure_CounterClockWise(double dSpeed, double dDistance){
+void measure_CounterClockWise(double dSpeed, double dDistance){
 	int i, j; 
-	
-	//get the odometry data
-//	point_dOdometryData = compute_odometry_data();
 	
 	//turn the robot right for moving the same square counter clock wise
 	turn_right(dSpeed);
 	
-	for(i = 0;i < NUMTOURNAMENTS;i++){
-		//point_dOdometryData = compute_odometry_data();
-		
+	for(i = 0;i < NUMTOURNAMENTS;i++){		
 		for(j = 0;j < 4; j++){
 			move_forward(dSpeed, dDistance);
 			turn_left(dSpeed);
 		}
 		wb_robot_step(TIME_STEP);
 	}
-	
-	//actualize the odometry values
-//	point_dOdometryData = compute_odometry_data();
-} */
+} 
 
 /**
 set the status of the LEDs

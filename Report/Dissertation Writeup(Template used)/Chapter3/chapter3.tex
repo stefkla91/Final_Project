@@ -720,14 +720,100 @@ Which is an significant amount of uncertainty.\\
 The paper by \textit{Borenstein et al.} describes the main danger about uncertainty of either the \textit{wheel diameters} or the \textit{wheelbase} as that modifying one of them can cause the other value to seem calibrated as well. This can be caused by using an \textit{unidirectional} square path as a benchmark test, which is what have been done in the beginning of this project, see \ref{mov_calibration} on page \pageref{mov_calibration} for more information. \\
 The danger with this approach is that it is easy to analyse the odometry error being caused by either the wheel diameters, a slightly curved movement path, or the wheelbase which would caused over or under turning. \\
 If only an unidirectional calibration approach is done either of these errors can be "fixed" by modifying either the wheel diameters or the wheelbase and the result would show a "correct" result.
-For example if the actual movement path is as displayed by the dotted line in figure \ref{sys_error}, the movement error could be "fixed" by modifying the wheelbase which would led to robot turn, say 93$^{\circ}$, which would cause the path to appear correct.\\
+For example if the actual movement path is as displayed by the dotted line in figure \ref{sys_error}, the movement error could be "fixed" by modifying the wheelbase which would led to robot turn, say 93$^{\circ}$, which would cause the path to appear correct. By doing that the path will look correct and thereby the robot calibrated, but in reality the robot overturns in order to compensate for the curved movement path.\\
 However this will lead to increased odometry errors as the robot will appear to turn accurately but the odometry error is in reality caused by the uncertainty about the wheel diameters which leads to a curved movement path. Of course this can also happen the other way around.\\
+
 
 \subsection{Bidirectional Square Path calibration: "UMBmark"}
 As the preceding section shown an \textit{unidirectional} square path is unsuitable for testing odometry performance as it can easily conceal 2 mutually compensating odometry errors.\\
 To overcome this problem, the paper introduces a \textit{bidirectional} square path experiment, called the \textit{University of Michigan Benchmark} or for short \textit{UMBmark}. 
+In this experiment the robot moves both clockwise and counter clockwise in a square path. This way it easily shows the concealed odometry error which is caused when the robot has been calibrated by only an unidirectional approach.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 0.5\textwidth]{../../figures/unidirectional_error} 
+\caption{The odometry error when the unidirectional path is performed in the opposite direction}
+\label{unidirectional_error}
+\end{figure}
+
+Figure \ref{unidirectional_error} shows the result of running a robot which has been "calibrated" with the \textit{unidirectional} approach in the opposite direction. It shows clearly the short comings of such "calibration" as it now overturns in addition to the curved movement path.\\[3ex]
+
+The paper describes methods which allow of accurate mathematical solutions to the given problems. But since the  Webots\textsuperscript{\texttrademark} simulator does not posses inbuilt tools to measure robot movement accurately no measurements can be taken to which would allow to follow this procedure.\\
+What has been done to calibrate the E-Puck robot is to implement the UMBmark functions inside the project and run them, altering the \textit{wheel diameter} and \textit{wheelbase} values over time and compare the results.\\
 
 
+\begin{lstlisting}[caption={The UMBmark experiment procedure}, label={UMBmark}]
+double dSpeed = 300.0f; //movement speed
+double dDistance = 0.5f;  //movement distance of 1 square. These distances have been changed over time
+
+/**
+University of Michigan Benchmark
+*/
+void UMBmark(double dSpeed, double dDistance){	
+	//move the robot clockwise and counterclockwise 
+	measure_clockWise(dSpeed, dDistance);
+	
+	measure_CounterClockWise(dSpeed, dDistance);
+	
+	stop_robot();
+} 
+/**
+Function to measure the movement accuracy by driving
+a clockwise square.
+This is part of the UMBmark algorithm
+*/
+void measure_clockWise(double dSpeed, double dDistance){
+	int i, j;
+	
+	for(i = 0;i < NUMTOURNAMENTS; i++){
+		for(j = 0;j < 4;j++){
+			move_forward(dSpeed, dDistance);
+			turn_right(dSpeed);
+		}
+		wb_robot_step(TIME_STEP);
+	}
+}  
+
+/**
+Function to measure the movement accuracy by driving
+a counter-clockwise square.
+This is part of the UMBmark algorithm
+*/
+void measure_CounterClockWise(double dSpeed, double dDistance){
+	int i, j; 
+	
+	//turn the robot right for moving the same square counter clock wise
+	turn_right(dSpeed);
+	
+	for(i = 0;i < NUMTOURNAMENTS;i++){		
+		for(j = 0;j < 4; j++){
+			move_forward(dSpeed, dDistance);
+			turn_left(dSpeed);
+		}
+		wb_robot_step(TIME_STEP);
+	}
+} 
+\end{lstlisting}
+
+Listing \ref{UMBmark} shows the code used for the UMBmark algorithm which is implemented inside the project. The start values are to move with a speed of \textit{300}, which is an acceptable speed as well as moving a distance of \textit{0.5}, which equals FIXME(check how many square this equals).\\
+As a reminder the start values for the wheel diameters are:\\
+$D_{R} = 0.0404 = 40.4mm$\\
+$D_{L} = 0.0416 = 41.6mm$\\
+Where $D_{R}$ represents the right wheel diameter and  $D_{L}$ the left wheel.\\
+The value of the wheelbase is:\\
+$0.052 = 52mm$\\ 
+
+Firstly the amount of degrees which the robot turns when the \textit{turn\_left()} and \textit{turn\_right()} methods has been set from 100$^{\circ}$ to 90$^{\circ}$. The simulation was then been run 10 time times per test iteration to assure that the robot movements are not caused by random effects.\\
+Between each iteration either of the wheel diameter and wheelbase values has either been decreased or increased in the simulation then been run for another 10 times. After each test iteration of 10 runs the value was either set back to its original value of the odometry error increased or if the error decreased the value was further changed. \\
+At a later point when the odometry error seamed resolved multiple values were changed, in order to assure that they are correct. \\
+The resulting result was that the wheel diameters are correct however the wheelbase value was updated from:\\
+$0.052 = 52mm$\\ 
+to:
+$0.058 = 58mm$\\ 
+As it is simple to check the current calibration for a curved movement error the robot was moved the whole length of the simulation range to confirm that the movement path is indeed straight and not curved, which it was. This was done to recheck that the result from the UMBmark calibration are correct. \\[3ex]
+
+The paper suggest using larger movement patterns, where available, in order to check to correctness of the calibration. As this was easily done in the simulator the square was increased from 1x1 floor square to 2x2 and then 4x4. The results were largely the same, however by a square size from 4x4 the robot did not move full 4 squares. This shows that the squares on the floor, which until now have been expected to be FIXME(Check these values) 0.5 in code or equal to FIXME(add size), are not exactly that value but something close to it. \\
+Because of the rest amount of time available was not big by the time of this calibration process the calibration results from 1x1 and 2x2 square paths have been deemed sufficient, rather than running multiple experiments trying to figure out the exact size of the squares. 
 
 
 
