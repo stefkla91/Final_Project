@@ -112,6 +112,7 @@ The next step is to calculate the new X and Y coordinates of the robot, based on
 At the end the calculated X and Y coordinates as well as the rotation value are used to update to struct. And the current encoder positions are saved inside the buffer for later calculations. 
 
 \subsection{Minimum speed and distance calibration}
+\label{mov_calibration}
 After these functions were created they were calibrated using following processes .\\
 
 \begin{figure}[h]
@@ -685,10 +686,29 @@ Unequal wheel diameters are created in reality because of inaccuracy of the prod
 For the duration of the entire development process up to this point, the values provided in these tutorials have been used. However in the beginning of the development process when the turning algorithm was implemented, a value of 100$^{\circ}$ was needed to turn 90$^{\circ}$.\\
 This was because of uncertainty about the wheelbase, this however was not realised until this point.\\[3ex]
 
-In order to describe what kind of errors uncertainty's about the wheel diameters and the wheelbase cause, the paper is going to be summarized. \\
-\textit{Unequal wheel diameters} 
- 
+In order to describe what kind of errors uncertainty's about the wheel diameters and the wheelbase cause, the paper is going to be summarized. \\[3ex]
 
+\textit{Unequal wheel diameters}:\\
+While unequal wheel diameters do not cause an orientation error while turning, they will cause an curved movement path rather than a straight path.\\
+The error can be denoted as :\\
+$E_{d} = D_{R} / D_{L}$\\
+Where $D_{R}$ are $D_{L}$ are the \textit{actual} wheel diameters. The \textit{nominal} ratio between the wheel diameters is of course 1.00\cite{Borenstein1996Measurement}.\\
+The values of the E-Puck wheels in the simulator are:\\
+$D_{R} = 0.0404 = 40.4mm$\\
+$D_{L} = 0.0416 = 41.6mm$\\
+These values have been taken from the Webots\textsuperscript{\texttrademark} tutorials and been confirmed in the later calibration process.\\
+
+\textit{Uncertainty about the Wheelbase}:\\
+The wheelbase is defined as the distance between the drive wheels of the robot. This wheelbase must be known in order to compute the correct amount of encoder steps each motor must take in order to turn a certain amount of degrees.
+Uncertainty about this wheelbase can cause inaccuracy while turning, but does not have any effect on straight movement.\\
+This error can be denoted as:\\
+$E_{b} = b_{actual} / b_{nominal}$\\
+Where $b$ is the wheelbase of the vehicle\cite{Borenstein1996Measurement}.\\
+The value of the wheelbase provided by the Webots\textsuperscript{\texttrademark} tutorials is:\\
+$0.052 = 52mm$\\
+However the calibration process which is shown later shows that actual wheelbase is:\\
+$0.058 = 58mm$\\
+Which is an significant amount of uncertainty.\\
 
 \begin{figure}[h]
 \centering
@@ -696,6 +716,19 @@ In order to describe what kind of errors uncertainty's about the wheel diameters
 \caption{The effect of systematic odometry errors}
 \label{sys_error}
 \end{figure}
+
+The paper by \textit{Borenstein et al.} describes the main danger about uncertainty of either the \textit{wheel diameters} or the \textit{wheelbase} as that modifying one of them can cause the other value to seem calibrated as well. This can be caused by using an \textit{unidirectional} square path as a benchmark test, which is what have been done in the beginning of this project, see \ref{mov_calibration} on page \pageref{mov_calibration} for more information. \\
+The danger with this approach is that it is easy to analyse the odometry error being caused by either the wheel diameters, a slightly curved movement path, or the wheelbase which would caused over or under turning. \\
+If only an unidirectional calibration approach is done either of these errors can be "fixed" by modifying either the wheel diameters or the wheelbase and the result would show a "correct" result.
+For example if the actual movement path is as displayed by the dotted line in figure \ref{sys_error}, the movement error could be "fixed" by modifying the wheelbase which would led to robot turn, say 93$^{\circ}$, which would cause the path to appear correct.\\
+However this will lead to increased odometry errors as the robot will appear to turn accurately but the odometry error is in reality caused by the uncertainty about the wheel diameters which leads to a curved movement path. Of course this can also happen the other way around.\\
+
+\subsection{Bidirectional Square Path calibration: "UMBmark"}
+As the preceding section shown an \textit{unidirectional} square path is unsuitable for testing odometry performance as it can easily conceal 2 mutually compensating odometry errors.\\
+To overcome this problem, the paper introduces a \textit{bidirectional} square path experiment, called the \textit{University of Michigan Benchmark} or for short \textit{UMBmark}. 
+
+
+
 
 
 
