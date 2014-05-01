@@ -9,31 +9,32 @@
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Directions and their corresponding Angles\relax }}{16}
 \contentsline {figure}{\numberline {3.5}{\ignorespaces Directions and their corresponding U-Turn pattern\relax }}{17}
 \contentsline {figure}{\numberline {3.6}{\ignorespaces Dotted mapping during U-Turns\relax }}{23}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces The effect of systematic odometry errors\relax }}{29}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Room 1 empty test environment\relax }}{29}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Room 1 empty environment result\relax }}{29}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Room 1 map result with marked odometry dislocation\relax }}{30}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Room 1 map result with crowing odometry error\relax }}{31}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Room 1 map result with different odometry error\relax }}{31}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Measurements of room 1 with obstacle added to it\relax }}{32}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Room 1 with obstacle map result\relax }}{33}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Obstacle mapping shortcomings\relax }}{33}
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Accumulated odometry error\relax }}{34}
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Marked spots\relax }}{35}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Room 2 measurements\relax }}{36}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Room 2 results\relax }}{37}
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Room 2 shows that the localisation error depends on environment size\relax }}{37}
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Room 2 results at a later point\relax }}{38}
-\contentsline {figure}{\numberline {4.15}{\ignorespaces Room 2 with obstacles measurements\relax }}{39}
-\contentsline {figure}{\numberline {4.16}{\ignorespaces Room 2 with obstacles result\relax }}{40}
-\contentsline {figure}{\numberline {4.17}{\ignorespaces Buggy software causes causes the robot to save wrong values\relax }}{40}
-\contentsline {figure}{\numberline {4.18}{\ignorespaces Measurements of room 3\relax }}{41}
-\contentsline {figure}{\numberline {4.19}{\ignorespaces Result of the third room\relax }}{41}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Room 1 empty test environment\relax }}{31}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Room 1 empty environment result\relax }}{31}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Room 1 map result with marked odometry dislocation\relax }}{32}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Room 1 map result with crowing odometry error\relax }}{33}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Room 1 map result with different odometry error\relax }}{33}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Measurements of room 1 with obstacle added to it\relax }}{34}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Room 1 with obstacle map result\relax }}{35}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Obstacle mapping shortcomings\relax }}{35}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Accumulated odometry error\relax }}{36}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Marked spots\relax }}{37}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Room 2 measurements\relax }}{38}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Room 2 results\relax }}{39}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Room 2 shows that the localisation error depends on environment size\relax }}{39}
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Room 2 results at a later point\relax }}{40}
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Room 2 with obstacles measurements\relax }}{41}
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Room 2 with obstacles result\relax }}{42}
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Buggy software causes causes the robot to save wrong values\relax }}{42}
+\contentsline {figure}{\numberline {4.18}{\ignorespaces Measurements of room 3\relax }}{43}
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Result of the third room\relax }}{43}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces An example of the communication link needed for rooms\relax }}{46}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces An example of the communication link\relax }}{47}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Sector based deployment pattern\relax }}{48}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Example of an advanced environment\relax }}{50}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces An example of the communication link needed for rooms\relax }}{48}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces An example of the communication link\relax }}{49}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Sector based deployment pattern\relax }}{50}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Example of an advanced environment\relax }}{52}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

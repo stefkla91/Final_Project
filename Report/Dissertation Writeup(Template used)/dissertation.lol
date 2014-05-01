@@ -9,9 +9,9 @@
 \contentsline {lstlisting}{\numberline {3.9}Refactored heading control code}{24}
 \contentsline {lstlisting}{\numberline {3.10}Code snipped of the new approach}{25}
 \contentsline {lstlisting}{\numberline {3.11}Corner detection added to the U-turn routine}{26}
-\contentsline {lstlisting}{\numberline {A.1}Mark an cell as occupied}{53}
-\contentsline {lstlisting}{\numberline {B.1}Moving forward}{55}
-\contentsline {lstlisting}{\numberline {B.2}Turning an angle}{56}
-\contentsline {lstlisting}{\numberline {B.3}Odometry struct}{58}
-\contentsline {lstlisting}{\numberline {B.4}Initializing odometry struct}{58}
-\contentsline {lstlisting}{\numberline {B.5}Updating odometry struct}{59}
+\contentsline {lstlisting}{\numberline {A.1}Mark an cell as occupied}{55}
+\contentsline {lstlisting}{\numberline {B.1}Moving forward}{57}
+\contentsline {lstlisting}{\numberline {B.2}Turning an angle}{58}
+\contentsline {lstlisting}{\numberline {B.3}Odometry struct}{60}
+\contentsline {lstlisting}{\numberline {B.4}Initializing odometry struct}{60}
+\contentsline {lstlisting}{\numberline {B.5}Updating odometry struct}{61}
