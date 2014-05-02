@@ -10,9 +10,12 @@
 \contentsline {lstlisting}{\numberline {3.10}Code snipped of the new approach}{25}
 \contentsline {lstlisting}{\numberline {3.11}Corner detection added to the U-turn routine}{26}
 \contentsline {lstlisting}{\numberline {3.12}The UMBmark experiment procedure}{30}
-\contentsline {lstlisting}{\numberline {A.1}Mark an cell as occupied}{60}
-\contentsline {lstlisting}{\numberline {B.1}Moving forward}{62}
-\contentsline {lstlisting}{\numberline {B.2}Turning an angle}{63}
-\contentsline {lstlisting}{\numberline {B.3}Odometry struct}{65}
-\contentsline {lstlisting}{\numberline {B.4}Initializing odometry struct}{65}
-\contentsline {lstlisting}{\numberline {B.5}Updating odometry struct}{66}
+\contentsline {lstlisting}{\numberline {A.1}Mark an cell as occupied}{61}
+\contentsline {lstlisting}{\numberline {B.1}Moving forward}{63}
+\contentsline {lstlisting}{\numberline {B.2}Turning an angle}{64}
+\contentsline {lstlisting}{\numberline {B.3}Odometry struct}{66}
+\contentsline {lstlisting}{\numberline {B.4}Initializing odometry struct}{66}
+\contentsline {lstlisting}{\numberline {B.5}Updating odometry struct}{67}
+\contentsline {lstlisting}{\numberline {B.6}Reference point struct}{69}
+\contentsline {lstlisting}{\numberline {B.7}Function which checks if a reference point has been reached}{69}
+\contentsline {lstlisting}{\numberline {B.8}Function to save a new reference point to the reference struct}{73}

@@ -839,12 +839,43 @@ At this point the use of reference points was considered in order the fix the lo
 The approach taken for the reference point was to use the corners of the room as reference points.
 This would be achieved by creating new functions and a \textit{struct }which use the already existing corner localisation implemented inside the U-Turn routine and save the X and Y coordinates the robot has calculated. 
 That way the robot can reset it's X and Y coordinates to the coordinates previous saved inside the struct once the same reference point is reached again.\\
+In the following subsections the functions created for this approach are being described.
 
+\subsection{Reference point struct}
+\label{ref_struct_description}
+The code for the reference point struct can be found in appendix B section \ref{ref_struct_code} on page \pageref{ref_struct_code}.\\
+To accommodate the idea of using the corner as reference points as structure was created which hold 4 members: \textit{lower\_left}, \textit{lower\_right}, \textit{upper\_left} and \textit{upper\_right}, where each member represents a corner of the environment. \\
+Every member of the struct holds 2 float variables, which represent the X and Y coordinates of the corner.
+It is worth noting that this struct has been created in correlation with the development environment which is a simple room with 4 corners.
 
+\subsection{Checking for reference points}
+\label{ref_check_description}
+The code for this function can be found in appendix B section \ref{ref_check_code} on page \pageref{ref_check_code}.\\
+It is called every time the main control loop finds a corner. \\
+This function represents the major part of the algorithm. It compares the distance sensor data to specify which corner has been encountered and after that controls if the corner has already been saved.
+Should that not be the case the function \textit{set\_reference\_point()} is called. This function will save the reference point to the struct, and is described further down. \\
+If the found corner is already set as a reference point and the robots positions is within a threshold of 20, the function will reset the robots current X and Y coordinates to the values stored inside the struct. The threshold is used to make sure that the it is the same corner, rather than an unset corner inside an environment with more than 4 corners. \\
+This function hold print statements which state at which corner the robot thinks it is resetting and to what coordinates. 
 
+\subsection{Saving a new reference point}
+\label{ref_save_description}
+The code for this function can be found in appendix B section \ref{ref_save_code} on page \pageref{ref_save_code}.\\
+This function is used to save the coordinates of a corner to the reference struct and thereby saving it as a reference point. \\
+When the function \textit{check\_reference\_points()} encounters a new corner which has not been set this function is called. It requires a pointer to the odometry struct to be able to read the current X and Y coordinates of the robot, as well as an integer value which represents which corner has been found. This is done in the function \textit{check\_reference\_points()} and then simply passed as a parameter to this function. \\
+This function then simply read the current coordinates and saves them to the corresponding values of the reference struct.\\
+This function also holds print statements to show when the algorithm saves a new corner and with what coordinates.
 
+\section{Mapping results using the new reference point approach}
+After implementing the reference point approach discussed in the previous section the mapping results improved massively.\\
+Figure \ref{ref_result} shows the mapping results after the reference point algorithm has been implemented. \\
+The improve can easily be seen by comparing figure \ref{odometry_error} on page \pageref{odometry_error} with the result of figure \ref{ref_result}.
 
-
+\begin{figure}[h]
+\centering
+\includegraphics[width = 0.5\textwidth]{../../figures/map_results/result_room1_empty.png} 
+\caption{Results after implementing the reference point algorithm}
+\label{ref_result}
+\end{figure}
 
 
 

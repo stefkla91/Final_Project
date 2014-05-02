@@ -275,4 +275,228 @@ void odometry_track_step_pos(struct odometryTrackStruct * ot, double* dEncPos){
 }
 \end{lstlisting}
 
+\section{Reference point struct}
+\label{ref_struct_code}
+This section holds the code for the reference struct.\\
+A further description of this struct can be found in chapter 3 section \ref{ref_struct_description} on page \pageref{ref_struct_description}
+\begin{lstlisting}[caption={Reference point struct}]
+ struct referencePos {
+ 	struct {
+ 		float x;
+ 		float y;
+ 	} lower_left;
+ 	struct {
+ 		float x;
+ 		float y;
+ 	} lower_right;
+ 	struct {
+ 		float x;
+ 		float y;
+ 	} upper_left;
+ 	struct {
+		float x;
+ 		float y;
+ 	} upper_right;
+ };
+\end{lstlisting}
 
+\section{Reference point check}
+\label{ref_check_code}
+This is the function which checks if a reference point has been reached and if so either saves it or resets the robot variables.\\
+A more detailed explanation of this code can be found in chapter 3 section \ref{ref_check_description} on page \pageref{ref_check_description}.
+\begin{lstlisting}[caption={Function which checks if a reference point has been reached}]
+/**
+This function checks the current robot position with the previous recorded reference position.
+If a relation is found, the current encoder position are updated with the saved encoder postions.
+The parameters are a pointer to the struct odometrtTrackStruct and refrencePos 
+and an int which defines which corner it is. 
+The corner is defined in the run() function where this function will be called.
+1 = lower_left
+2 = lower_right
+3 = upper_left
+4 = upper_right
+*/
+void check_reference_points(struct odometryTrackStruct * ot, struct referencePos * ref){
+	double dThreshold = 20.0f;
+	int i;
+	double *point_dEncPos = get_encoder_positions(); 
+	double dCurPosX = ot->result.x;
+	int *point_SensorData;
+	int corner = 0;
+	int obstacle[NUM_DIST_SENS]={0,0,0,0,0,0,0,0};
+	int ps_offset[NUM_DIST_SENS] = {35,35,35,35,35,35,35,35};
+	int direction = check_direction(ot->result.theta);
+	bool ob_front, ob_left, ob_right;
+	char message[] = "Resetting";
+
+/*	get distance sensor data*/
+	point_SensorData = get_sensor_data(NUM_DIST_SENS);
+	for(i = 0;i < NUM_DIST_SENS;i++){
+		obstacle[i] = point_SensorData[i] - ps_offset[i] > THRESHOLD_DIST;
+	}	
+
+	ob_front  = 
+	obstacle[0] ||
+	obstacle[7];
+
+	ob_right = 
+	obstacle[2];
+
+	ob_left = 
+	obstacle[5];
+
+	/*find out what corner it is */
+	//north 
+	if(direction == 1){
+		if(ob_front && ob_left){
+			corner = 3;
+		}else if(ob_front && ob_right){
+			corner = 4;
+		}
+	}
+
+	//east
+	if(direction == 2){
+		if(ob_front && ob_left){
+			corner = 4;
+		}else if(ob_front && ob_right){
+			corner = 2;
+		}
+	}
+
+	//south
+	if(direction == 3){
+		if(ob_front && ob_left){
+			corner = 2;
+		}else if(ob_front && ob_right){
+			corner = 1;
+		}
+	}
+
+	//west
+	if(direction == 4){
+		if(ob_front && ob_left){
+			corner = 1;
+		}else if(ob_front && ob_right){
+			corner = 3;
+		}
+	}
+
+	/*Check if the current corner is set to 0, if so force update*/
+	if(corner == 1){
+		if((ref->lower_left.x == 0.00) && (ref->lower_left.y == 0.00)){
+			set_reference_point(ot, ref, corner);
+			return;
+		}
+	}else if(corner == 2){
+		if((ref->lower_right.x == 0.00) && (ref->lower_right.y == 0.00)){
+			set_reference_point(ot, ref, corner);
+			return;
+		}
+	}else if(corner == 3){
+		if((ref->upper_left.x == 0.00) && (ref->upper_left.y == 0.00)){
+			set_reference_point(ot, ref, corner);
+			return;
+		}
+	}else if(corner == 4){
+		if((ref->upper_right.x == 0.00) && (ref->upper_right.y == 0.00)){
+			set_reference_point(ot, ref, corner);
+			return;
+		}
+	}
+
+	/*If the corner is set updated the odometery information of the robot */
+	if(direction == 1){ //north 
+		if(((ref->upper_left.x <= dCurPosX + dThreshold) || (ref->upper_left.x >= dCurPosX - dThreshold)) && corner == 3){
+			ot->result.x = ref->upper_left.x;
+			ot->result.y = ref->upper_left.y;
+			ot->state.pos_left_prev = point_dEncPos[0];
+			ot->state.pos_right_prev = point_dEncPos[1]; 
+			printf("%s at corner: %d with cords: %f %f\n", message, corner, ref->upper_left.x, ref->upper_left.y);
+		}else if(((ref->upper_right.x <= dCurPosX + dThreshold )|| (ref->upper_right.x >= dCurPosX - dThreshold)) && corner == 4){
+			ot->result.x = ref->upper_right.x;
+			ot->result.y = ref->upper_right.y;
+			ot->state.pos_left_prev = point_dEncPos[0];
+			ot->state.pos_right_prev = point_dEncPos[1]; 
+			printf("%s at corner: %d with cords: %f %f\n", message, corner, ref->upper_right.x, ref->upper_right.y);
+		}
+	}else if(direction == 2){//east 
+		if(((ref->upper_right.x <= dCurPosX + dThreshold) || (ref->upper_right.x >= dCurPosX - dThreshold)) && corner == 4){
+			ot->result.x = ref->upper_right.x;
+			ot->result.y = ref->upper_right.y;
+			ot->state.pos_left_prev = point_dEncPos[0];
+			ot->state.pos_right_prev = point_dEncPos[1]; 
+			printf("%s at corner: %d with cords: %f %f\n", message, corner, ref->upper_right.x, ref->upper_right.y);
+		}else if(((ref->lower_right.x <= dCurPosX + dThreshold) || (ref->lower_right.x >= dCurPosX - dThreshold)) && corner == 2){
+			ot->result.x = ref->lower_right.x;
+			ot->result.y = ref->lower_right.y;
+			ot->state.pos_left_prev = point_dEncPos[0];
+			ot->state.pos_right_prev = point_dEncPos[1]; 
+			printf("%s at corner: %d with cords: %f %f\n", message, corner, ref->lower_right.x, ref->lower_right.y);
+		}
+	}else if(direction == 3){ //south
+		if(((ref->lower_left.x <= dCurPosX + dThreshold) || (ref->lower_left.x >= dCurPosX - dThreshold)) && corner == 1){
+			ot->result.x = ref->lower_left.x;
+			ot->result.y = ref->lower_left.y;
+			ot->state.pos_left_prev = point_dEncPos[0];
+			ot->state.pos_right_prev = point_dEncPos[1]; 
+			printf("%s at corner: %d with cords: %f %f\n", message, corner, ref->lower_left.x, ref->lower_left.y);
+		}else if(((ref->lower_right.x <= dCurPosX + dThreshold) || (ref->lower_right.x >= dCurPosX - dThreshold)) && corner == 2){
+			ot->result.x = ref->lower_right.x;
+			ot->result.y = ref->lower_right.y;
+			ot->state.pos_left_prev = point_dEncPos[0];
+			ot->state.pos_right_prev = point_dEncPos[1];
+			printf("%s at corner: %d with cords: %f %f\n", message, corner, ref->lower_right.x, ref->lower_right.y);
+		}
+	}else if(direction == 4){ //west
+		if(((ref->upper_left.x <= dCurPosX + dThreshold) || (ref->upper_left.x >= dCurPosX - dThreshold)) && corner == 3){
+			ot->result.x = ref->upper_left.x;
+			ot->result.y = ref->upper_left.y;
+			ot->state.pos_left_prev = point_dEncPos[0];
+			ot->state.pos_right_prev = point_dEncPos[1]; 
+			printf("%s at corner: %d with cords: %f %f\n", message, corner, ref->upper_left.x, ref->upper_left.y);
+		}else if(((ref->lower_right.x <= dCurPosX + dThreshold) || (ref->lower_right.x >= dCurPosX - dThreshold)) && corner == 1){
+			ot->result.x = ref->lower_left.x;
+			ot->result.y = ref->lower_left.y;
+			ot->state.pos_left_prev = point_dEncPos[0];
+			ot->state.pos_right_prev = point_dEncPos[1]; 
+			printf("%s at corner: %d with cords: %f %f\n", message, corner, ref->lower_left.x, ref->lower_left.y);
+			printf("Ot is: %f and %f", ot->result.x, ot->result.y);
+		}
+	}
+}
+\end{lstlisting}
+
+\section{Saving a reference point}
+\label{ref_save_code}
+This section holds the code to save a new reference point to the reference struct.
+An explanation of this code can be found in chapter 3 section \ref{ref_save_description} on page \pageref{ref_save_description}.
+
+\begin{lstlisting}[caption={Function to save a new reference point to the reference struct}]
+/**
+Sets the reference point in the referencePos struct.
+The parameters are a pointer to the referencePos struct and an int.
+The int specifies which corner will be set.
+1 = lower_left
+2 = lower_right
+3 = upper_left
+4 = upper_right
+*/
+void set_reference_point(struct odometryTrackStruct * ot, struct referencePos * ref, int corner){
+	char text[] = "Saving";
+	printf("%s at corner: %d with cords: %f and %f\n", text, corner, ot->result.x, ot->result.y);
+	if(corner == 1){
+		ref->lower_left.x += ot->result.x;
+		ref->lower_left.y += ot->result.y;
+	}else if(corner == 2){
+		ref->lower_right.x = ot->result.x;
+		ref->lower_right.y = ot->result.y;
+	}else if(corner == 3){
+		ref->upper_left.x = ot->result.x;
+		ref->upper_left.y = ot->result.y;
+	}else if(corner == 4){
+		ref->upper_right.x = ot->result.x;
+		ref->upper_right.y = ot->result.y;
+	}
+}
+\end{lstlisting}
