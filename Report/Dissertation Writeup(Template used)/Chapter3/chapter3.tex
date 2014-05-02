@@ -813,7 +813,34 @@ $0.058 = 58mm$\\
 As it is simple to check the current calibration for a curved movement error the robot was moved the whole length of the simulation range to confirm that the movement path is indeed straight and not curved, which it was. This was done to recheck that the result from the UMBmark calibration are correct. \\[3ex]
 
 The paper suggest using larger movement patterns, where available, in order to check to correctness of the calibration. As this was easily done in the simulator the square was increased from 1x1 floor square to 2x2 and then 4x4. The results were largely the same, however by a square size from 4x4 the robot did not move full 4 squares. This shows that the squares on the floor, which until now have been expected to be FIXME(Check these values) 0.5 in code or equal to FIXME(add size), are not exactly that value but something close to it. \\
-Because of the rest amount of time available was not big by the time of this calibration process the calibration results from 1x1 and 2x2 square paths have been deemed sufficient, rather than running multiple experiments trying to figure out the exact size of the squares. 
+Because of the rest amount of time available was not big by the time of this calibration process the calibration results from 1x1 and 2x2 square paths have been deemed sufficient, rather than running multiple experiments trying to figure out the exact size of the squares. \\
+
+\section{Reference point approach}
+After the E-Puck values have been calibrated with the method described in the preceding section, the movement improvement has been checked in the development environment. \\
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 0.5\textwidth]{../../figures/odometry_error} 
+\caption{Improved mapping with the calibrated robot, but the localisation error still persists}
+\label{odometry_error}
+\end{figure}
+
+Figure \ref{odometry_error} shows the mapping result generated with the calibrated movement.\\
+It shows that program is now able to generated a map of the environment with straight walls, compared to the much more skewed wall result which were generated before. 
+FIXME(Rollback github repo and add screenshot about it)\\
+
+However it is not entirely perfect at this stage as an localisation error still persists, as the robot while mapping the lower wall maps it inside the wrong place. \\
+This is the result of noise generated inside the environment as well the nature of odometry calculations.
+Odometry is always, in best case, an estimate of the localisation, this combined with noise and friction inside the simulator environment caused the robot to never turn 100\% accurate. \\
+The algorithms implemented until this point, which compare the heading of the robot and turn it to fit the wanted heading as well as the recalibrated movement algorithms made huge improvements to the robots movements.\\
+But still a minimal odometry error persists, which accumulates over time and cause the odometry error which can be seen in figure \ref{odometry_error}. \\[3ex]
+
+At this point the use of reference points was considered in order the fix the localisation problem.\\
+The approach taken for the reference point was to use the corners of the room as reference points.
+This would be achieved by creating new functions and a \textit{struct }which use the already existing corner localisation implemented inside the U-Turn routine and save the X and Y coordinates the robot has calculated. 
+That way the robot can reset it's X and Y coordinates to the coordinates previous saved inside the struct once the same reference point is reached again.\\
+
+
 
 
 
