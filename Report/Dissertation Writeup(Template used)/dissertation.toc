@@ -13,10 +13,12 @@
 \contentsline {section}{\numberline {1.6}Process}{4}
 \contentsline {chapter}{\numberline {2}Design}{5}
 \contentsline {section}{\numberline {2.1}Environment Design}{5}
-\contentsline {section}{\numberline {2.2}Mapping and Swarm Size}{6}
+\contentsline {section}{\numberline {2.2}Mapping}{5}
 \contentsline {section}{\numberline {2.3}Deployment}{6}
 \contentsline {subsection}{\numberline {2.3.1}Considered Deployment algorithms}{6}
-\contentsline {subsection}{\numberline {2.3.2}Adopted design}{6}
+\contentsline {subsubsection}{\numberline {2.3.1.1}Strategy 1}{6}
+\contentsline {subsubsection}{\numberline {2.3.1.2}Strategy 2}{6}
+\contentsline {subsection}{\numberline {2.3.2}Adopted design}{7}
 \contentsline {chapter}{\numberline {3}Implementation}{8}
 \contentsline {section}{\numberline {3.1}Early Development}{8}
 \contentsline {subsection}{\numberline {3.1.1}Webots Tutorials}{8}
