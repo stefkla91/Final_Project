@@ -1,81 +1,86 @@
 \contentsline {chapter}{\numberline {1}Background \& Objectives}{1}
-\contentsline {subsection}{\numberline {1.0.1}SLAM - Simultaneous Localization And Mapping}{1}
-\contentsline {subsection}{\numberline {1.0.2}Deployment}{2}
-\contentsline {section}{\numberline {1.1}Analysis}{2}
-\contentsline {subsection}{\numberline {1.1.1}Deployment pattern}{2}
-\contentsline {subsection}{\numberline {1.1.2}Localisation}{2}
-\contentsline {subsection}{\numberline {1.1.3}Mapping}{3}
-\contentsline {section}{\numberline {1.2}Process}{3}
-\contentsline {chapter}{\numberline {2}Design}{4}
-\contentsline {section}{\numberline {2.1}Environment Design}{4}
-\contentsline {section}{\numberline {2.2}Mapping and Swarm Size}{5}
-\contentsline {section}{\numberline {2.3}Deployment}{5}
-\contentsline {subsection}{\numberline {2.3.1}Considered Deployment algorithms}{5}
-\contentsline {subsection}{\numberline {2.3.2}Adopted design}{5}
-\contentsline {chapter}{\numberline {3}Implementation}{7}
-\contentsline {section}{\numberline {3.1}Early Development}{7}
-\contentsline {subsection}{\numberline {3.1.1}Webots Tutorials}{7}
-\contentsline {subsection}{\numberline {3.1.2}First Program Iterations}{7}
-\contentsline {section}{\numberline {3.2}Mid stage Development}{8}
-\contentsline {subsection}{\numberline {3.2.1}Advanced tutorials}{9}
-\contentsline {section}{\numberline {3.3}Movement}{9}
-\contentsline {subsection}{\numberline {3.3.1}Moving Forward}{9}
-\contentsline {subsection}{\numberline {3.3.2}Turn a given angle}{10}
-\contentsline {section}{\numberline {3.4}Localisation using Odometry}{11}
-\contentsline {subsection}{\numberline {3.4.1}Initialising the Odometry algorithms}{12}
-\contentsline {subsection}{\numberline {3.4.2}Updating the Odometry values}{12}
-\contentsline {subsection}{\numberline {3.4.3}Minimum speed and distance calibration}{12}
-\contentsline {section}{\numberline {3.5}First results}{13}
-\contentsline {subsection}{\numberline {3.5.1}Early mapping methods and results}{13}
-\contentsline {subsection}{\numberline {3.5.2}Direction control based on heading}{15}
-\contentsline {section}{\numberline {3.6}Refactoring and improvement}{21}
-\contentsline {subsection}{\numberline {3.6.1}Deployment algorithm refactoring}{21}
-\contentsline {subsection}{\numberline {3.6.2}Deployment algorithm improvement}{22}
-\contentsline {section}{\numberline {3.7}Mapping}{23}
-\contentsline {section}{\numberline {3.8}Refactoring of the heading correction}{24}
-\contentsline {section}{\numberline {3.9}New approach tried and implemented}{25}
-\contentsline {subsection}{\numberline {3.9.1}Dynamic U-Turn approach}{25}
-\contentsline {subsection}{\numberline {3.9.2}Stop on corner detection}{26}
-\contentsline {subsection}{\numberline {3.9.3}Added odometry update function to the movement algorithm}{27}
-\contentsline {section}{\numberline {3.10}Recalibration of the movement algorithms}{27}
-\contentsline {subsection}{\numberline {3.10.1}Wheelbase and Wheel diameters}{28}
-\contentsline {subsection}{\numberline {3.10.2}Bidirectional Square Path calibration: "UMBmark"}{30}
-\contentsline {section}{\numberline {3.11}Reference point approach}{33}
-\contentsline {subsection}{\numberline {3.11.1}Reference point struct}{34}
-\contentsline {subsection}{\numberline {3.11.2}Checking for reference points}{34}
-\contentsline {subsection}{\numberline {3.11.3}Saving a new reference point}{34}
-\contentsline {section}{\numberline {3.12}Mapping results using the new reference point approach}{35}
-\contentsline {chapter}{\numberline {4}Testing}{36}
-\contentsline {section}{\numberline {4.1}Overall Approach to Testing}{36}
-\contentsline {section}{\numberline {4.2}Test environment: Room 1}{36}
-\contentsline {subsection}{\numberline {4.2.1}Obstacle free test}{37}
-\contentsline {subsubsection}{\numberline {4.2.1.1}Conclusion for this test environment}{40}
-\contentsline {subsection}{\numberline {4.2.2}Environment with obstacles}{40}
-\contentsline {subsubsection}{\numberline {4.2.2.1}Conclusion for this test environment}{43}
-\contentsline {section}{\numberline {4.3}Room 2}{44}
-\contentsline {subsection}{\numberline {4.3.1}Obstacle free test}{44}
-\contentsline {subsubsection}{\numberline {4.3.1.1}Conclusion of this test environment}{46}
-\contentsline {subsection}{\numberline {4.3.2}Environment with obstacles}{46}
-\contentsline {subsubsection}{\numberline {4.3.2.1}Conclusion of this test environment}{48}
-\contentsline {section}{\numberline {4.4}Room 3}{48}
-\contentsline {subsection}{\numberline {4.4.1}Conclusion of this test environment}{50}
-\contentsline {section}{\numberline {4.5}Conclusion}{50}
-\contentsline {chapter}{\numberline {5}Future Plans}{53}
-\contentsline {section}{\numberline {5.1}Swarm robotics}{53}
-\contentsline {subsection}{\numberline {5.1.1}Swarm communication}{53}
-\contentsline {subsection}{\numberline {5.1.2}Swarm deployment}{55}
-\contentsline {section}{\numberline {5.2}Autonomous Swarm behaviour}{57}
-\contentsline {chapter}{\numberline {6}Evaluation}{59}
-\contentsline {chapter}{Appendices}{60}
-\contentsline {chapter}{\numberline {A}Third-Party Code and Libraries}{61}
-\contentsline {section}{\numberline {1.1}Mark a cell as occupied}{61}
-\contentsline {chapter}{\numberline {B}Code samples}{63}
-\contentsline {section}{\numberline {2.1}Moving forward a given distance}{63}
-\contentsline {section}{\numberline {2.2}Turning a given Angle}{64}
-\contentsline {section}{\numberline {2.3}Odometry Struct}{66}
-\contentsline {section}{\numberline {2.4}Initializing odometry struct}{66}
-\contentsline {section}{\numberline {2.5}Odometry step}{67}
-\contentsline {section}{\numberline {2.6}Reference point struct}{69}
-\contentsline {section}{\numberline {2.7}Reference point check}{69}
-\contentsline {section}{\numberline {2.8}Saving a reference point}{73}
-\contentsline {chapter}{Annotated Bibliography}{75}
+\contentsline {section}{\numberline {1.1}Aim of the project}{1}
+\contentsline {section}{\numberline {1.2}Choice about the project}{1}
+\contentsline {subsection}{\numberline {1.2.1}Choice of development environment}{1}
+\contentsline {subsection}{\numberline {1.2.2}Choice of robot}{2}
+\contentsline {subsection}{\numberline {1.2.3}Choice of environment design}{2}
+\contentsline {section}{\numberline {1.3}SLAM - Simultaneous Localization And Mapping}{2}
+\contentsline {section}{\numberline {1.4}Deployment}{3}
+\contentsline {section}{\numberline {1.5}Analysis}{3}
+\contentsline {subsection}{\numberline {1.5.1}Deployment pattern}{3}
+\contentsline {subsection}{\numberline {1.5.2}Localisation}{4}
+\contentsline {subsection}{\numberline {1.5.3}Mapping}{4}
+\contentsline {section}{\numberline {1.6}Process}{4}
+\contentsline {chapter}{\numberline {2}Design}{5}
+\contentsline {section}{\numberline {2.1}Environment Design}{5}
+\contentsline {section}{\numberline {2.2}Mapping and Swarm Size}{6}
+\contentsline {section}{\numberline {2.3}Deployment}{6}
+\contentsline {subsection}{\numberline {2.3.1}Considered Deployment algorithms}{6}
+\contentsline {subsection}{\numberline {2.3.2}Adopted design}{6}
+\contentsline {chapter}{\numberline {3}Implementation}{8}
+\contentsline {section}{\numberline {3.1}Early Development}{8}
+\contentsline {subsection}{\numberline {3.1.1}Webots Tutorials}{8}
+\contentsline {subsection}{\numberline {3.1.2}First Program Iterations}{8}
+\contentsline {section}{\numberline {3.2}Mid stage Development}{9}
+\contentsline {subsection}{\numberline {3.2.1}Advanced tutorials}{10}
+\contentsline {section}{\numberline {3.3}Movement}{10}
+\contentsline {subsection}{\numberline {3.3.1}Moving Forward}{10}
+\contentsline {subsection}{\numberline {3.3.2}Turn a given angle}{11}
+\contentsline {section}{\numberline {3.4}Localisation using Odometry}{12}
+\contentsline {subsection}{\numberline {3.4.1}Initialising the Odometry algorithms}{13}
+\contentsline {subsection}{\numberline {3.4.2}Updating the Odometry values}{13}
+\contentsline {subsection}{\numberline {3.4.3}Minimum speed and distance calibration}{13}
+\contentsline {section}{\numberline {3.5}First results}{14}
+\contentsline {subsection}{\numberline {3.5.1}Early mapping methods and results}{14}
+\contentsline {subsection}{\numberline {3.5.2}Direction control based on heading}{16}
+\contentsline {section}{\numberline {3.6}Refactoring and improvement}{22}
+\contentsline {subsection}{\numberline {3.6.1}Deployment algorithm refactoring}{22}
+\contentsline {subsection}{\numberline {3.6.2}Deployment algorithm improvement}{23}
+\contentsline {section}{\numberline {3.7}Mapping}{24}
+\contentsline {section}{\numberline {3.8}Refactoring of the heading correction}{25}
+\contentsline {section}{\numberline {3.9}New approach tried and implemented}{26}
+\contentsline {subsection}{\numberline {3.9.1}Dynamic U-Turn approach}{26}
+\contentsline {subsection}{\numberline {3.9.2}Stop on corner detection}{27}
+\contentsline {subsection}{\numberline {3.9.3}Added odometry update function to the movement algorithm}{28}
+\contentsline {section}{\numberline {3.10}Recalibration of the movement algorithms}{28}
+\contentsline {subsection}{\numberline {3.10.1}Wheelbase and Wheel diameters}{29}
+\contentsline {subsection}{\numberline {3.10.2}Bidirectional Square Path calibration: "UMBmark"}{31}
+\contentsline {section}{\numberline {3.11}Reference point approach}{34}
+\contentsline {subsection}{\numberline {3.11.1}Reference point struct}{35}
+\contentsline {subsection}{\numberline {3.11.2}Checking for reference points}{35}
+\contentsline {subsection}{\numberline {3.11.3}Saving a new reference point}{35}
+\contentsline {section}{\numberline {3.12}Mapping results using the new reference point approach}{36}
+\contentsline {chapter}{\numberline {4}Testing}{37}
+\contentsline {section}{\numberline {4.1}Overall Approach to Testing}{37}
+\contentsline {section}{\numberline {4.2}Test environment: Room 1}{37}
+\contentsline {subsection}{\numberline {4.2.1}Obstacle free test}{38}
+\contentsline {subsubsection}{\numberline {4.2.1.1}Conclusion for this test environment}{41}
+\contentsline {subsection}{\numberline {4.2.2}Environment with obstacles}{41}
+\contentsline {subsubsection}{\numberline {4.2.2.1}Conclusion for this test environment}{44}
+\contentsline {section}{\numberline {4.3}Room 2}{45}
+\contentsline {subsection}{\numberline {4.3.1}Obstacle free test}{45}
+\contentsline {subsubsection}{\numberline {4.3.1.1}Conclusion of this test environment}{47}
+\contentsline {subsection}{\numberline {4.3.2}Environment with obstacles}{47}
+\contentsline {subsubsection}{\numberline {4.3.2.1}Conclusion of this test environment}{49}
+\contentsline {section}{\numberline {4.4}Room 3}{49}
+\contentsline {subsection}{\numberline {4.4.1}Conclusion of this test environment}{51}
+\contentsline {section}{\numberline {4.5}Conclusion}{51}
+\contentsline {chapter}{\numberline {5}Future Plans}{54}
+\contentsline {section}{\numberline {5.1}Swarm robotics}{54}
+\contentsline {subsection}{\numberline {5.1.1}Swarm communication}{54}
+\contentsline {subsection}{\numberline {5.1.2}Swarm deployment}{56}
+\contentsline {section}{\numberline {5.2}Autonomous Swarm behaviour}{58}
+\contentsline {chapter}{\numberline {6}Evaluation}{60}
+\contentsline {chapter}{Appendices}{61}
+\contentsline {chapter}{\numberline {A}Third-Party Code and Libraries}{62}
+\contentsline {section}{\numberline {1.1}Mark a cell as occupied}{62}
+\contentsline {chapter}{\numberline {B}Code samples}{64}
+\contentsline {section}{\numberline {2.1}Moving forward a given distance}{64}
+\contentsline {section}{\numberline {2.2}Turning a given Angle}{65}
+\contentsline {section}{\numberline {2.3}Odometry Struct}{67}
+\contentsline {section}{\numberline {2.4}Initializing odometry struct}{67}
+\contentsline {section}{\numberline {2.5}Odometry step}{68}
+\contentsline {section}{\numberline {2.6}Reference point struct}{70}
+\contentsline {section}{\numberline {2.7}Reference point check}{70}
+\contentsline {section}{\numberline {2.8}Saving a reference point}{74}
+\contentsline {chapter}{Annotated Bibliography}{76}

@@ -1,28 +1,46 @@
 \chapter{Background \& Objectives}
 \label{Background}
+\section{Aim of the project}
+\label{aim}
+The aim of this project is to map an environment using a single robot. \\
+The key aspects of this project is to not use GPS or compass sensors and rather calculate the position and orientation of the robot using only its sensors and odometry calculation. \\
+The inspiration for this project is taken from the idea of mapping inside areas where GPS or compass information are not always reliable enough to be used. \\[3ex]
 
-This section should discuss your preparation for the project, including background reading, your analysis of the problem and the process or method you have followed to help structure your work.  It is likely that you will reuse part of your outline project specification, but at this point in the project you should have more to talk about. 
+The task of mapping an empty room has been achieved, but in future changes need to be made to the program in order to map rooms with obstacles.\\
+In the following document the implementation and testing results are discussed in further depth.
 
-\textbf{Note}: 
+\section{Choice about the project}
+\subsection{Choice of development environment}
+Early in the year when the outline of the project was planned it was considered if a simulator should be used or rather a real robot.\\
+After consolation with the project supervisor the decision fell to use a simulator as it allowed for easy changes in the environment as well as other reasons. Such reasons were the much more apparent ease with which the robot could be located inside the environment as the approach of using only odometry calculations to located the robot has been deemed ambitious. Another reason was the ease with which multi robot usage and other changes could be implemented if enough time were available at the end of the project.\\
+It was decided to use the Webots\textsuperscript{\texttrademark} simulator as it provided a number of good modelling tools for the environment as well as already having the E-Puck robot platform integrated. The simulator also generates noise in the environment in form of friction between robot wheels and the floor as well as noise inside distance sensor readings, which made for a more challenging and interesting project.
 
-\begin{itemize}
-   \item All of the sections and text in this example are for illustration purposes. The main Chapters are a good starting point, but the content and actual sections that you include are likely to be different.
-   
-   \item Look at the document on the Structure of the Final Report for additional guidance. 
-   
-\end {itemize}
+\subsection{Choice of robot}
+For this project it has been decided to use the E-Puck robot platform. \\
+Reason for this is the range of sensors available for this platform. The E-Puck robot comes with 8 distance sensors mounted around the top, with more sensors facing to the front then to the back. This is important as this allows for finding obstacles to the front and side to the robot while movement.
+Also the E-Puck has only 2 drive wheels, which makes the odometry calculations easier than having to do work with 4 or more motor encoders. The main concern for the number of motor encoders was the time frame available for this project, and it was decided that using a 2 wheeled robot was sufficient as the environment is a clean indoor environment with even ground. And so using a 2 wheeled robot was deemed more accessible then increasing the calculation difficulty with more motors. Another bonus was that a virtual representation of the E-Puck robot has already been integrated inside the Webots\textsuperscript{\texttrademark} simulator.\\
 
-\subsection{SLAM - Simultaneous Localization And Mapping}
-The SLAM problem is a current research topic which is based on different localisation algorithms and using a range of different sensor to effectively map an target area. A lot of different approaches have been done and many research papers have been written, the one this project is based on is a paper about a SLAM solution designed for autonomous vehicles\cite{Dissanayake2001Solution}.\\
+\subsection{Choice of environment design}
+It was decided to use a simple environment design in which to implement and test the project.\\
+The reasons for that being that it would be easier to map environment with distinctive outlines and obstacles, as the movement and localisation was considered to be the largest challenge of the project.
+The decision fell to use empty environments while implementing the localisation and movement algorithms as results from these environment as quit clear to interpret, while obstacles could cause problems. However the aim of the project was not to map only empty rooms, so obstacles would be added to the environment as soon as the movement and localisation algorithms were in place. 
+More information about the environment design can be found in chapter 2. 
+
+\section{SLAM - Simultaneous Localization And Mapping}
+The SLAM problem is a current research topic which is based on different localisation algorithms and using a range of different sensor to effectively map an target area. \\
+The SLAM problems ask if it is possible for an autonomous vehicle to start in an unknown location in an unknown environment and then to incrementally build a map of this environment while simultaneously using this map to compute absolute vehicle location\cite{Dissanayake2001Solution}.
+A lot of different approaches have been done and many research papers have been written, the one this project is based on is a paper about a SLAM solution designed for autonomous vehicles\cite{Dissanayake2001Solution}.\\
 While the research area of this paper is based on a much larger scale, it does still give me an insight upon the SLAM problem.\\
-E.g. the problem with localisation in an dynamic environment, the paper tackles this problem by using global reference points and a millimetre wave radar, however for my project I do use an static environment and simple laser range finders. So this paper is only used a reference to the localisation problem, especially the idea of using "global" reference points for the created map.\\
+E.g. the problem with localisation in an dynamic environment, the paper tackles this problem by using global reference points and a millimetre wave radar. For this project an static environment and simple laser range finders are used. So this paper is only used a reference to the localisation problem, especially the idea of using "global" reference points for the created map.\\
 As the test environment and the sensors available for the E-puck sensors are limited this project will assume that the starting location of the robots is known.\\[3ex]
 
 Another paper which was read about this problem used an approach much more similar to this project, by using different mobile robots which have no GPS access and simply use 2D laser range finders. However the approach described in this paper was based around the mapping of one "lead" robot and the traversing the same map again with a second robot using the map generated by the first for localisation purposes.\\
 The second robot would then scan the target area again and refine the already generated map though using the (now stationary) first robot as an reference point. Since this project is using single a robot for mapping purposes and multi robot usage would only be added if enough time is available, this paper was not inherently useful, however gave some useful insight for information sharing between robots or sensor stations as well as localisation of robots using a global reference point.\\
 Since this project aims at real time localisation and mapping communication with a "uplink" point would be essential to achieve this in a real world setting. By using a similar implementation to the one described in the paper it would be possible to rescan a mapped area if it is traversed again, and by that refine the mapping. This is requires however very good localisation techniques.
 
-\subsection{Deployment}
+
+
+\section{Deployment}
 The deployment strategy is an important part of this project as it defines how effective the robot will cover the target area which will define how long it will take to scan and map the whole area. 
 One research paper which was read proposed an solution of a communication network where the comm nodes keep track of the robots positions and guide them in directions which have not been explored in the last time period\cite{Batalin2003Coverage}. The paper uses a solution which is based on small comm nodes deployed by the robot, to make the solution fitting for this project the developer would have to use multiple E-Pucks and define some of these as communication nodes which remain on a fast position and guide the "scout" E-puck based on area which have been least visited by the other robots.\\ 
 However since multi-robot usage is planned as an addition if enough time is available this deployment strategy is not fitting for the major part of work.\\[3ex]
