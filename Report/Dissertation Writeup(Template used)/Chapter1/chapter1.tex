@@ -10,10 +10,11 @@ The task of mapping an empty room has been achieved, but in future changes need 
 In the following document the implementation and testing results are discussed in further depth.
 
 \section{Information about the project}
-\subsection{Choice of development environment}
+\subsection{Choice of development environment and programming language}
 Early in the year when the outline of the project was planned it was considered if a simulator should be used or rather a real robot.\\
 After consolation with the project supervisor the decision fell to use a simulator as it allowed for easy changes in the environment as well as other reasons. Such reasons were the much more apparent ease with which the robot could be located inside the environment as the approach of using only odometry calculations to located the robot has been deemed ambitious. Another reason was the ease with which multi robot usage and other changes could be implemented if enough time were available at the end of the project.\\
-It was decided to use the Webots\textsuperscript{\texttrademark} simulator as it provided a number of good modelling tools for the environment as well as already having the E-Puck robot platform integrated. The simulator also generates noise in the environment in form of friction between robot wheels and the floor as well as noise inside distance sensor readings, which made for a more challenging and interesting project.
+It was decided to use the Webots\textsuperscript{\texttrademark} simulator as it provided a number of good modelling tools for the environment as well as already having the E-Puck robot platform integrated. The simulator also generates noise in the environment in form of friction between robot wheels and the floor as well as noise inside distance sensor readings, which made for a more challenging and interesting project.\\
+The programming language which this project will be developed in is C. The reason C has been chosen is the fact that a prior knowledge of C exists and the Webots\textsuperscript{\texttrademark}  C++ API is compatible with the C language.
 
 \subsection{Choice of robot}
 For this project it has been decided to use the E-Puck robot platform. \\
@@ -59,7 +60,7 @@ To be able to use the controlled movement pattern a number of functions need to 
 These functions include to be able to move an accurate distance and to be able to turn a given number of degrees, as this is needed for controlled movement of the robot. 
 
 \subsection{Localisation}
-Arguably the most important aspect of the project is to have a good localisation solution, since without the mapping will be ineffective. There are a number of different approaches which can be done for this, papers which were researched showed approaches such as using global reference points, GPS and compass data as well as approaches which do not require data from sensors like GPS or compass modules.\\
+Arguably the most important aspect of the project is to have a good localisation solution, since without the mapping will be ineffective. There are a number of different approaches which can be done for this, papers which were researched showed approaches such as using global reference points\cite{Dissanayake2001Solution, Thrun2000Realtime}, GPS and compass data as well as approaches which do not require data from sensors like GPS or compass modules\cite{Poduri2004Constrained}.\\
 One of the aspects wanted for this project is to be able to locate the robot without the use of GPS or compass data and rather use pure odometry calculations to reach a solution of the localisation problem.\\[3ex]
 
 To be able to use odometry calculations the starting position of the robot needs to be known so that the positions changes relative to the starting point can be calculated. Encoder steps of the robots stepper motors will be used to calculate the movement of the robot and the turning. \\
@@ -74,5 +75,10 @@ However the quality of the mapping is strongly dependent on the deployment patte
 The sensors used on the virtual E-Puck are standard laser range finders which are used to locate obstacles map them. As already mentioned the accuracy of the mapping depends majorly on the accuracy of the robots movement and localisation algorithms. 
 
 \section{Process}
-The life cycle model used for this project is "Feature driven development", as it seems more appropriate for this project as other models. 
+The life cycle model used for this project is "Feature driven development", as it seems more appropriate for this project as other models. \\
+The reason FDD was chosen was as this is a single person project , and the requirements allowed for easy distinguish between features which need to be developed. \\
+For example: the movement pattern needs to be in place before the localisation can be implemented. When the localisation is implemented the mapping can be implemented as the features build on each other. \\
+
+A few changes were made to it. Such as all tests are done only on one environment during the development process. The milestones for the different features were rather small and have been incrementally changed over time. E.g: the milestones for the movement changed from "move a given distance" to "move through the entire environment" in the time duration of the project.
+
 

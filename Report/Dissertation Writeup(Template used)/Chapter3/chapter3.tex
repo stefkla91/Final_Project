@@ -578,7 +578,7 @@ The code holds printout statements which allow to understand in which direction 
 
 After this function was created the threshold was calibrated in a couple of runs. The threshold which was set in the first iteration, and was gradually decreased to a value of \textit{3} at the time. The threshold value shown in the code snipped above is \textit{1}, this value was reached by recalibrating the turning and movement functions, more about that can be found in section \textbf{FIXME(enter section number)}.
 
-\section{New approach tried and implemented}
+\section{New approaches which were tried and implemented}
 In this section the different approaches which were tried at this development stage are described. While not all approaches were successful not every aspect of them was discarded.
 
 \subsection{Dynamic U-Turn approach}
@@ -825,10 +825,11 @@ to:
 $0.058 = 58mm$\\
 As it is simple to check the current calibration for a curved movement error the robot was moved the whole length of the simulation range to confirm that the movement path is indeed straight and not curved, which it was. This was done to recheck that the result from the UMBmark calibration are correct. \\[3ex]
 
-The paper suggest using larger movement patterns, where available, in order to check to correctness of the calibration. As this was easily done in the simulator the square was increased from 1x1 floor square to 2x2 and then 4x4. The results were largely the same, however by a square size from 4x4 the robot did not move full 4 squares. This shows that the squares on the floor, which until now have been expected to be FIXME(Check these values) 0.5 in code or equal to FIXME(add size), are not exactly that value but something close to it. \\
+The paper suggest using larger movement patterns, where available, in order to check to correctness of the calibration. As this was easily done in the simulator the square was increased from 1x1 floor square to 2x2 and then 4x4. The results were largely the same, however by a square size from 4x4 the robot did not move full 4 squares. This shows that the squares on the floor, which until now have been expected to be 0.1 in code or equal to 10cm x 10cm, are not exactly that value but something close to it. \\
 Because of the rest amount of time available was not big by the time of this calibration process the calibration results from 1x1 and 2x2 square paths have been deemed sufficient, rather than running multiple experiments trying to figure out the exact size of the squares. \\
 
 \section{Reference point approach}
+\label{ref_point_approach}
 After the E-Puck values have been calibrated with the method described in the preceding section, the movement improvement has been checked in the development environment. \\
 
 \begin{figure}[h]

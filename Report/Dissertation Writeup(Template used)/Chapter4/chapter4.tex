@@ -14,7 +14,7 @@ This is discussed further in the following sections.
 \section{Test environment: Room 1}
 \label{room1}
 Room 1 is the "original" environment in which the program was implemented. \\
-It is a simple, empty, room which size is 10x10 squares, figure \ref{room1_empty} shows this environment. In order to measure the environment size the chess board pattern which makes up the floor of the simulator environment is used to measure it. \textbf{FIXME(enter size of a square in code)}\\
+It is a simple, empty, room which size is 10x10 squares, figure \ref{room1_empty} shows this environment. In order to measure the environment size the chess board pattern which makes up the floor of the simulator environment is used to measure it. Each \textit{square} measures 10cm x 10cm.
 
 \begin{figure}[h]
 \centering
@@ -36,7 +36,7 @@ The results gathered in this test environment, as it is the simplest, as well as
 
 Figure \ref{room1_empty_result} shows the result of the environment after the map has been "closet". The resulting map clearly depictures the spotty nature of the U-turn mapping which is described in Chapter 3 subsection \ref{deployment_improvement} on page \pageref{deployment_improvement} . \\[3ex]
 
-The generated map shows that the program is able to generate straight and accurate mappings of an environment as long as the robot is able to reset its odometry values at some point during the run. More info of what can happen if the odometry is not reset can be found \textbf{FIXME(enter section of page of describe accumulated odometry error)}. \\
+The generated map shows that the program is able to generate straight and accurate mappings of an environment as long as the robot is able to reset its odometry values at some point during the run. More info of what can happen if the odometry is not reset can be found in chapter 3 section \ref{ref_point_approach} on page \pageref{ref_point_approach}.\\
 The reason of why the program performs this well in the test environment compared to other environment is that is able to reset its odometry values by passing \textbf{corner 1}, before it moves to the uncharted \textbf{corner 2}. More information about the corner approach can be found in chapter 3 section \ref{ref_point_approach} on page \pageref{ref_point_approach}. \\
 That the accumulated odometry error was growing constantly during program runs can be seen at the placement of the spots of the u-turn routine, these spots are marked red in figure \ref{room1_empty_marked}.
 
@@ -51,7 +51,7 @@ If these spots are compared to the one at bottom and top site of the generated m
 
 However the odometry location error was reset as the robot reached \textbf{corner 1}, which X and Y coordinates were saved as the robot traversed said corner for the first time. \\
 This reset the odometry values of the odometry struct and made it possible to continuously map the environment with good results. \\
-\textbf{FIXME(enter figure and page of the figure which shows  the location error)}.\\[3ex]
+Figure \ref{odometry_error} on page \pageref{odometry_error} shows the localisation error if the odometry values are not reset.\\[3ex]
 
 However this test environment is not without shortcomings either. If the program is allowed to keep working and mapping the environment the odometry error is increasing again.\\
 
@@ -186,9 +186,9 @@ This environment shows once more that the mapping works fine as long as the loca
 \end{figure}
 
 However figure \ref{room2_error} documents also that the increase of the localisation error strongly depends on the size of the environment and there by how far the robot traverses between each wall. \\
-The localisation error strongly changes when the robot driver longer distances, even on straight lines. Even if the robot is perfectly calibrated which prevents curves movement caused by different wheel diameters \textbf{FIXME(insert link to where this is discussed in chapter 3)}, the robot will never turn an exact amount of degrees, this is caused by the friction between the wheels and the floor. \\
+The localisation error strongly changes when the robot driver longer distances, even on straight lines. Even if the robot is perfectly calibrated which prevents curves movement caused by different wheel diameters (more on this can be found in chapter 3 section \ref{recalibration} on page \pageref{recalibration}), the robot will never turn an exact amount of degrees, this is caused by the friction between the wheels and the floor. \\
 This however, as already discussed in chapter 3, leads to the robot believing it is somewhere while it actually is somewhere else.  As figure \ref{room2_error} documents this error is reduced if the robot does not need to drive far until it has to turn again.\\
-It does so by showing clearly that localisation error, while it still persists, is much smaller than in an empty environment where to robot has to drive further distances until turning. An example of this can be seen in\textbf{ FIXME(add link to localisation error as discussed in chapter 3).} \\[3ex]
+It does so by showing clearly that localisation error, while it still persists, is much smaller than in an empty environment where to robot has to drive further distances until turning. An example of this can be seen in chapter 3 section \ref{ref_point_approach} on page \pageref{ref_point_approach}. \\[3ex]
 
 \begin{figure}[h]
 \centering

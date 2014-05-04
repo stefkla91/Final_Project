@@ -108,6 +108,14 @@
 			}
 		},
 		{
+			"file": "lib/e_puck_movement.c",
+			"settings":
+			{
+				"buffer_size": 10466,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "lib/map_building.c",
 			"settings":
 			{
@@ -140,12 +148,12 @@
 			}
 		},
 		{
-			"contents": "//mark cells as occupied\nwb_display_image_paste(display,background,0,0);\nwb_display_set_color(display,0x000000);\nfor(i = 0;i < NUM_DIST_SENS;i++){\n	if(wb_distance_sensor_get_value(ps[i]) > OCCUPANCE_DIST){\n		occupied_cell(robot_x, robot_y, ot->result.theta + angle_offset[i]);\n	}\n}\nwb_display_image_delete(display,background);\nbackground = wb_display_image_copy(display,0,0,display_width,display_height); ",
+			"contents": "if(north){\n	printf(\"%s\\n\", no);\n	turn_left(dSpeed);\n	for(it = 0;it < 5;it++){\n		if((ob_front && ob_right) || (ob_front && ob_left)){\n			state = STOP;\n			break;\n		}\n		move_forward(dSpeed, dDistance);\n\n		//mark cells as occupied\n		wb_display_image_paste(display,background,0,0);\n		wb_display_set_color(display,0x000000);\n		for(i = 0;i < NUM_DIST_SENS;i++){\n			if(wb_distance_sensor_get_value(ps[i]) > OCCUPANCE_DIST){\n				occupied_cell(robot_x, robot_y, ot->result.theta + angle_offset[i]);\n			}\n		}\n		/* wb_display_image_delete(display,background);\n		background = wb_display_image_copy(display,0,0,display_width,display_height); */\n	}\n	turn_left(dSpeed);\n	north = false;\n	state = FORWARD;\n}else if(east){[...]",
 			"settings":
 			{
-				"buffer_size": 405,
+				"buffer_size": 708,
 				"line_ending": "Windows",
-				"name": "//mark cells as occupied"
+				"name": "if(north){"
 			}
 		}
 	],
@@ -221,6 +229,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"threshold",
 			"M_PI",
 			"display",
 			"right",
@@ -314,8 +323,8 @@
 						"selection":
 						[
 							[
-								1917,
-								1907
+								2083,
+								2083
 							]
 						],
 						"settings":
@@ -435,6 +444,137 @@
 				},
 				{
 					"buffer": 1,
+					"file": "lib/e_puck_movement.c",
+					"settings":
+					{
+						"buffer_size": 10466,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8899,
+								8899
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/C++/C.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 5040.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
 					"file": "lib/map_building.c",
 					"settings":
 					{
@@ -559,13 +699,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4136.0,
+						"translation.y": 5324.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 3,
 					"file": "lib/functions.c",
 					"settings":
 					{
@@ -690,13 +830,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 291.0,
+						"translation.y": 345.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": "lib/reference_points.c",
 					"settings":
 					{
@@ -707,8 +847,8 @@
 						"selection":
 						[
 							[
-								6919,
-								6919
+								1232,
+								1232
 							]
 						],
 						"settings":
@@ -821,13 +961,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2538.0,
+						"translation.y": 195.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "lib/reference_points.h",
 					"settings":
 					{
@@ -957,23 +1097,23 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"settings":
 					{
-						"buffer_size": 405,
+						"buffer_size": 708,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								405,
-								25
+								708,
+								0
 							]
 						],
 						"settings":
 						{
-							"auto_name": "//mark cells as occupied",
+							"auto_name": "if(north){",
 							"codeintel": true,
 							"codeintel_config":
 							{

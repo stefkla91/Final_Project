@@ -8,6 +8,9 @@ The robot will slow down to a minimum speed on a minimum difference to the wante
 This method will update the global odometry information.\\
 Description can be found in chapter \ref{Implementation} at section \ref{moving_forward_description} at page \pageref{moving_forward_description}.
 \begin{lstlisting}[caption = {Moving forward}]
+#define LEFT_DIAMETER 0.0416//orig 0.0416
+#define RIGHT_DIAMETER 0.0404//orig 0.0404
+#define WHEEL_DIAMETER (LEFT_DIAMETER + RIGHT_DIAMETER)
 #define WHEELBASE 0.058 
 #define INCREMENT_STEP 1000 //how many steps the motor takes for a full wheel rotation
 #define MIN_DIST 20.0f //minimum difference to the new heading
@@ -39,7 +42,6 @@ void move_forward(double dSpeed, double dDist, struct odometryTrackStruct * ot){
 		dStopPosRight = point_dEncPos[1] + dStepCount;
 		
 		//compute odometry data
-		point_dOdometryData = compute_odometry_data();
 		odometry_track_step(ot);
 		
 		
@@ -49,7 +51,6 @@ void move_forward(double dSpeed, double dDist, struct odometryTrackStruct * ot){
 		//step tolereance test
 		while((point_dEncPos[0] < dStopPosLeft) && (point_dEncPos[1] < dStopPosRight)){
 			//get odometry data
-			point_dOdometryData = compute_odometry_data();
 			odometry_track_step(ot);
 			//get wheel encoders
 			point_dEncPos = get_encoder_positions();
@@ -63,7 +64,6 @@ void move_forward(double dSpeed, double dDist, struct odometryTrackStruct * ot){
 	stop_robot();
 	
 	//update odometry data
-	point_dOdometryData = compute_odometry_data();
 	odometry_track_step(ot);
 	wb_robot_step(TIME_STEP);
 }
