@@ -9,7 +9,7 @@ The inspiration for this project is taken from the idea of mapping inside areas 
 The task of mapping an empty room has been achieved, but in future changes need to be made to the program in order to map rooms with obstacles.\\
 In the following document the implementation and testing results are discussed in further depth.
 
-\section{Choice about the project}
+\section{Information about the project}
 \subsection{Choice of development environment}
 Early in the year when the outline of the project was planned it was considered if a simulator should be used or rather a real robot.\\
 After consolation with the project supervisor the decision fell to use a simulator as it allowed for easy changes in the environment as well as other reasons. Such reasons were the much more apparent ease with which the robot could be located inside the environment as the approach of using only odometry calculations to located the robot has been deemed ambitious. Another reason was the ease with which multi robot usage and other changes could be implemented if enough time were available at the end of the project.\\
@@ -44,23 +44,35 @@ The deployment strategy is an important part of this project as it defines how e
 One research paper which was read proposed an solution of a communication network where the comm nodes keep track of the robots positions and guide them in directions which have not been explored in the last time period\cite{Batalin2003Coverage}. The paper uses a solution which is based on small comm nodes deployed by the robot, to make the solution fitting for this project the developer would have to use multiple E-Pucks and define some of these as communication nodes which remain on a fast position and guide the "scout" E-puck based on area which have been least visited by the other robots.\\ 
 However since multi-robot usage is planned as an addition if enough time is available this deployment strategy is not fitting for the major part of work.\\[3ex]
 
+Another suitable deployment algorithm is shown on the paper \textit{"Deployment of Mobile Robots With Energy and Timing Constraints"} by Yongguo Mei \textit{at al.}\cite{Mei2006Deployment}. In this paper a controlled movement pattern of different \textit{sectors} is proposed. The paper is centred on the exploration with multiple robots. Since this project will only use a single robot, this paper is not entirely applicable however part of the deployment strategy is. In the paper the robots deploy in an \textit{scanline pattern}, a rectangular movement pattern which allows the robot to scan obstacle to the sides of the movement route. \\
+Figure \ref{Figure 3} on page \pageref{Figure 3} shows the movement pattern after being changed to single robot usage.\\
+This seems very effective in terms of complete overall environment coverage as the environment design will be suitable for single robot exploration.
+
 \section{Analysis}
 The background reading clearly showed the main aspects which were needed.\\
 These were an effective deployment pattern, localisation of the robot and sensing of obstacles to map. 
 
 \subsection{Deployment pattern}
 An effective deployment pattern is needed as it is important to traverse the whole of the environment in order to map all obstacles inside it.\\
-Characteristics for a effective deployment pattern are to traverse the whole environment and doing so in as short a time frame as possible.
+Characteristics for a effective deployment pattern are to traverse the whole environment and doing so in as short a time frame as possible. Other considerations for the deployment pattern are to be easily traceable that is, to be able to understand the choices the robot makes and thereby be able to improve the deployment algorithm during the implementation phase. For this reason a controlled movement pattern has been implemented inside the program, more information about said pattern and which other patterns were considered can be found in chapter 2. \\
+To be able to use the controlled movement pattern a number of functions need to be created. 
+These functions include to be able to move an accurate distance and to be able to turn a given number of degrees, as this is needed for controlled movement of the robot. 
 
 \subsection{Localisation}
 Arguably the most important aspect of the project is to have a good localisation solution, since without the mapping will be ineffective. There are a number of different approaches which can be done for this, papers which were researched showed approaches such as using global reference points, GPS and compass data as well as approaches which do not require data from sensors like GPS or compass modules.\\
-One of the aspects wanted for this project is to be able to locate the robot without the use of GPS or compass data and rather use pure odometry calculations to reach a solution of the localisation problem.
+One of the aspects wanted for this project is to be able to locate the robot without the use of GPS or compass data and rather use pure odometry calculations to reach a solution of the localisation problem.\\[3ex]
+
+To be able to use odometry calculations the starting position of the robot needs to be known so that the positions changes relative to the starting point can be calculated. Encoder steps of the robots stepper motors will be used to calculate the movement of the robot and the turning. \\
+To know accurately how far the robot has moved and how many degrees its turned is important in order to be create concise mapping. \\
+For this aspect functions need to be created which report the accurate movement so that the new position can be calculated. This goes hand in hand with the movement functions created for the deployment algorithm, as they are required to move and turn the robot with high accuracy, the same functions can be used to report the robots new encoder positions to the functions calculating the position. 
 
 \subsection{Mapping}
 To be able to create a map of the environment the right sensing method needs to be found, i.e. different sensors perform different in similar environments, also the range of sensors varies a lot. 
 The choice of sensors is limited as the work is based on the E-Puck robot platform.
-However the quality of the mapping is strongly dependent on the deployment pattern and the localisation solution.
+However the quality of the mapping is strongly dependent on the deployment pattern and the localisation solution.\\
+
+The sensors used on the virtual E-Puck are standard laser range finders which are used to locate obstacles map them. As already mentioned the accuracy of the mapping depends majorly on the accuracy of the robots movement and localisation algorithms. 
 
 \section{Process}
-The life cycle model used for this project is "Feature driven development", as it seams more appropriate for this project as other models. 
+The life cycle model used for this project is "Feature driven development", as it seems more appropriate for this project as other models. 
 

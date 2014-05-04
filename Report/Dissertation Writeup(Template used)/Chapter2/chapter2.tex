@@ -23,6 +23,7 @@ For mapping a occupancy grid will be used, and the occupancy will be acquired by
 One robot will be used to move around and map the environment. 
 
 \section{Deployment}
+\label{deployment_design}
 In this section the considered deployment algorithms are described, as well as the reasons as to why the one which has been implemented was chosen rather than the other. 
 
 \subsection{Considered Deployment algorithms}
@@ -30,7 +31,7 @@ In this section the considered deployment algorithms are described, as well as t
 One which is based on a random walk though the environment which will turn to a random heading when an obstacle has been reached. \\
 This approach could be combined with a wall following algorithm which would trigger a random walk when the same position is reached again. This would allow for the complete traverse of a obstacle/wall. This would require a good localisation solution as without it the robot will be stuck inside an eternal loop.\\
 \subsubsection{Strategy 2}
-The other deployment strategy would implement a more controlled movement pattern. This pattern would move the robots inside a rectangular pattern which would implement a function to move around obstacles on the way before moving back into the original pattern. \\[3ex]
+The other deployment strategy would implement a more controlled movement pattern. This pattern would move the robots inside a rectangular pattern which would implement a function to move around obstacles on the way before moving back into the original pattern. An example of such a movement pattern can be found in the paper \textit{"Deployment of Mobile Robots With Energy and Timing Constraints"} by Yongguo Mei \textit{at al.}\cite{Mei2006Deployment}, however changed to make it suitable for single robot exploration.\\[3ex]
 
 While at this point it is unsure which approach(or combination of approaches) would be more effective, out of time limitation only one algorithm will be implemented. Other approaches might be considered in future implementations. 
 

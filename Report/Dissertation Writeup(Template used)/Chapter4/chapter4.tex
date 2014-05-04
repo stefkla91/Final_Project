@@ -8,7 +8,8 @@ In this chapter the results of running the program in different environments are
 As the program requires an simulator to be run in, it is not possible to test the program in any other way than to run it in an simulator and document the results. This factor makes also automatic unit testing impossible. During implementation the program was only ever tested in a single environment called \textbf{room 1}. All changes which were done to the code and problems which were documented in early chapters have been the result of the robots performance in this environment. \\[3ex]
 
 The reason the program was never tested in different environment during implementation was since the program was not complete enough, it was assumed that before the program can be tested in multiple environments a solution for a simple environment must exist.\\
-It is worth noting at this point that the project is \textbf{not} considered finished, however time restrictions do not allow for continued development. 
+It is worth noting at this point that the project is considered finished as the mapping results for the environment it was developed for are satisfactory. However the program could still be improved in future implementations, which is also needed as the program does not perform in different environments as well as it could do if more time for further implementation would have been available. 
+This is discussed further in the following sections.
 
 \section{Test environment: Room 1}
 \label{room1}
@@ -36,7 +37,7 @@ The results gathered in this test environment, as it is the simplest, as well as
 Figure \ref{room1_empty_result} shows the result of the environment after the map has been "closet". The resulting map clearly depictures the spotty nature of the U-turn mapping which is described in Chapter 3 subsection \ref{deployment_improvement} on page \pageref{deployment_improvement} . \\[3ex]
 
 The generated map shows that the program is able to generate straight and accurate mappings of an environment as long as the robot is able to reset its odometry values at some point during the run. More info of what can happen if the odometry is not reset can be found \textbf{FIXME(enter section of page of describe accumulated odometry error)}. \\
-The reason of why the program performs this well in the test environment compared to other environment is that is able to reset its odometry values by passing \textbf{corner 1}, before it moves to the uncharted \textbf{corner 2}. More information about the corner approach can be found \textbf{FIXME(link to section and page of corner approach description)}. \\
+The reason of why the program performs this well in the test environment compared to other environment is that is able to reset its odometry values by passing \textbf{corner 1}, before it moves to the uncharted \textbf{corner 2}. More information about the corner approach can be found in chapter 3 section \ref{ref_point_approach} on page \pageref{ref_point_approach}. \\
 That the accumulated odometry error was growing constantly during program runs can be seen at the placement of the spots of the u-turn routine, these spots are marked red in figure \ref{room1_empty_marked}.
 
 \begin{figure}[h]

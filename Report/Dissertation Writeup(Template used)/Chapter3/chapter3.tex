@@ -2,17 +2,20 @@
 \label{Implementation}
 
 \section{Early Development}
-After the first weeks where background reading were done and designing a plan for the final program, work using the Webots\textsuperscript{\texttrademark} simulator was started. \\ More information about the different stages can be found in the following sub-sections.
+After the first weeks when background reading were done and designing a plan for the final program, work using the Webots\textsuperscript{\texttrademark} simulator was started. \\ More information about the different stages can be found in the following sub-sections.
 
 \subsection{Webots Tutorials}
 In the beginning different tutorials and demo following  programs included in the Webots installation were followed.
 This helped to see how the simulator works, what it can do and what possibilities the Webots API gives an developer. \\
+The API gives access to read the distance sensor and encoder sensor values as well as creating a \textit{display} in which the map can be printed using the API's drawing functions. The API also gives access to virtual modules such as GPS, accelerometer and camera sensors, however non of these were needed for this project.\\
 The tutorials used were provided by the Webots wikibooks site \footnote{\url{http://en.wikibooks.org/wiki/Cyberbotics\%27_Robot_Curriculum}}.\\
 Starting off with simple tutorials and movement and sensor reading the developer was soon able to implement simple programs which were based on simple forwards movement with obstacle avoidance functions, based on the proximity sensor values.
-After some of the more "advanced"(in comparison to what had been done to this point) tutorials which involved e.g.: reading the robot encoders look at example programs of more advanced types of movement as well as SLAM examples were taken. \\
+After some of the more "advanced"(in comparison to what had been done to this point) tutorials which involved e.g.: reading the robot encoders look at example programs of more advanced types of movement as well as SLAM examples were taken. \\[3ex]
 
 \subsection{First Program Iterations}
+\label{first_iteration}
 After that the experience of the tutorials was taken and it was started on to actually implementation the first prototype of the program. \\
+The first iterations were aimed at implementing the planned deployment pattern which would allows for implementing the localisation algorithm.  This includes getting a clearer pictures what values the distance sensors return when an obstacle is reached as well as how the motor encoders can be used to calculate the movement of the robot.\\
 The first prototype was still heavily based on a Webots example program called "Intermediate Lawn Mower" which involved a simple movement pattern based on a basic finite state machine(FSM). \\
 The first attempt was based recreating the FSM to get the same basic movement capabilities as the the program it was based upon and than changing it to achieve the level of movement control which was needed. \\[3ex]
 
@@ -21,12 +24,14 @@ However this did not work based on the overall way the program was designed at t
 
 As it was needed to be able to move a certain distance in order to effectively implement the rectangular movement pattern, various approaches which were all based around the FSM were tried.
 It was realised soon that this was not getting anywhere which this way of thinking so it decided to come back to this problem later and went to another problem: turning a given number of degrees. \\
-As the simulator simulates friction between the robot wheels and the environment the turning function, as it was in it current state, was far to inaccurate to be usable. \\
+As the simulator simulates friction between the robot wheels and the environment the turning function, as it was in it current state, was far to inaccurate. \\
 It was based on a very basic odometry calculation, taking the encoder values and calculating the turning distance based on the wheel diameter and axle length of the robot. While this is not a bad approach it had no procedures of slowing down the movement as it got closer to the target state so overshooting the wanted position or rotating far to less if the motor speed would have been set to low. \\
-It was tried to counter the problem by alternating the values it used for the odometry calculations, and while it came close to a solution it was far from accurate. Another problem with this solution was that it only worked for ~90 degree rotations based on the modified values, meaning all rotations to another point were impossible without modifying the values to fit the target heading. Which was counter productive as it would be best to have 1 function able to orientate the robot to any wanted heading. \\
+It was tried to counter the problem by alternating the values it used for the odometry calculations, and while it came close to a solution it was far from accurate. Another problem with this solution was that it only worked for ~90 degree rotations based on the modified values, meaning all rotations to another point were impossible without modifying the values to fit the target heading. Which was counter productive as it would be best to have 1 function able to orientate the robot to any wanted heading. \\[3ex]
+
+What this first iteration showed that more sophisticated movement algorithms are required in order to move the robot with the accuracy which is required. These more accurate movement algorithms were needed in order to locate the robot accurately with the odometry calculations. 
 
 \section{Mid stage Development}
-After the problems which were encountered during the first program iterations, it quickly realised that this way of thinking and understanding of the API was flawed. A lot of the problems which were encountered were the result of insufficient programming skills for what  was tried to do combined with bad understanding of how odometry worked, and how this could be used it to control the robot.\\
+After the problems which were encountered during the first program iterations, it quickly realised that this approach was not going to work and that a more sophisticated movement algorithm was needed. A lot of the problems which were encountered were the result of insufficient understating of how the API can be used and insufficient understanding of how odometry worked, and how this could be used it to control the robot.\\
 Seeing these kinds of problems it was decided to take a step back as the thought process for the program design was clearly "moving in circles" and encountering the same kind of problems over and over again with the current approach. \\
 It was decided to take once more a look at the provided example programs and to study their odometry functions in order to gain some new insight into odometry calculations, and find a new approach based on that.
 
@@ -34,7 +39,11 @@ It was decided to take once more a look at the provided example programs and to 
 The example programs provided together with the simulator are categorised after the estimate level of knowledge needed to complete them. Theses categories are: Beginner, Novice, Intermediate and Advanced. The advanced programs were already looked at before as they feature a couple of examples on odometry and slam, however they were not understood  well enough at the time.\\
 Looking closer at the odometry functions provided it was managed to understand a bit better how the advanced programs worked and how they calculated the movement of the robot. \\[3ex]
 
-A look was also taken at the code and notes which were taken during the Robotics module on the second year, while the API worked different for the Player/Stage environment the idea behind rotation and movement was still the same and had only to be applied using the Webots API.
+A look was also taken at the code and notes which were taken during the Robotics module on the second year, while the API worked different for the Player/Stage\footnote{http://playerstage.sourceforge.net/} environment the idea behind rotation and movement was still the same and had only to be applied using the Webots API.\\
+While the code developed for the Player/Stage environment used a different API it was used as inspiration for this project. E.g. the code for turning an angle developed for the Player/Stage environment calculated the degrees to turn and then slowed down the closer it rotated to the wanted heading. This approach was also implemented inside the Webots\textsuperscript{\texttrademark} simulator.
+\section{Note about the code shown in the following sections}
+While some of the code shown in the following sections are inspired by other work delivered with the simulator, if this is the case it will be clearly noted so.\\
+All of the code which has not been marked as taken or inspired from the simulator has been developed for this project and is the work of the developer.
 
 \section{Movement}
 After having studied the odometry functions of the provided programs it was decided to start a new approach to fix the movement of the robot.\\
@@ -44,7 +53,8 @@ The code of the major functions will be added as appendices, the site numbers wi
 \subsection{Moving Forward}
 \label{moving_forward_description}
 The code for this function can be found in Appendix B, section \ref{moving_forward_code} at page \pageref{moving_forward_code}.\\
-It is worth noting at that the code display in appendix B is the final version, the earlier versions of this code did not hold the odometry update function \textit{odometry\_track\_step()}.
+It is worth noting at that the code display in appendix B is the final version, the earlier versions of this code did not hold the odometry update function \textit{odometry\_track\_step()}.\\
+This function is required for the implementation of the planned deployment pattern, which involves moving small distances before turning again, as part of a U-Turn routine. See chapter 2 section \ref{deployment_design} for more information on this.\\
 The \textit{move\_forward }function takes 2 doubles as parameters, 1 being the speed with which the robot is ordered to move and the distance it should move. The last parameter is a link to the global odometry struct, this struct is used to update the odometry values.\\
 The function first checks that neither of the parameters are 0 and then calculates the number of steps each motor has to drive(1 step being 1 step of the stepper motor) to reach its target position.
 This calculation is done by dividing the number of steps needed for a full wheel rotation, 1000 in this case, by the product of $\pi$ times the wheel diameter times 2 and multiplication this result with the distance defined in the parameter of the function. The steps needed for a full rotation have been taken from the E-Puck documentation and have been confirmed during on of the odometry tutorials. \\
@@ -62,6 +72,8 @@ After the control statement was implemented it still required some testing and c
 \subsection{Turn a given angle}
 \label{turn_angle_description}
 The code for this function can be found in Appendix B, section \ref{turning_angle_code} at page \pageref{turning_angle_code}.\\
+This function is needed as the movement pattern which will be implemented requires the functionality of turning a given degree, see chapter 2 section \ref{deployment_design} for more information on this. \\
+The functionality this functions gives is also useful for calibrating the heading in which the robot moves, by specifying to turn only a few degrees in one direction. This is a functionality which will be described in a later point in this chapter.
 The turn\_angle function takes 2 doubles as parameters, one being the angle the robot will turn to the other the speed with which the robot will turn.\\
 First the factor by which the robot will turn is calculated by dividing 360, the value of a full rotation, with the defined angle.
 Once the factor has been calculated it will then the number of steps the motor have to do until the target position is reached. This is done by dividing the product of the steps needed for a full wheel rotation, 1000, and the size of the wheelbase by the product of the calculated turning factor and 2 times the wheel radius. It will then use a function to return the current motor encoder positions. This function simply uses the Webots\textsuperscript{\texttrademark}  API and returns the values. \\[3ex]
@@ -126,7 +138,7 @@ How it works is the E-Puck starts on 1 corner of a square(here the floor of the 
 The test is based on the "University of Michigan Benchmark" or UMBmark\footnote{\url{http://www.cs.columbia.edu/~allen/F13/NOTES/borenstein.pdf}}.\\[3ex]
 
 The problem with this calibration at the time was rather than using this approach to calibrate the effective wheelbase and the wheel radius at the time of this calibration the angles to turn were changed.\\
-This led to rather than updating the wheelbase from  the original 0.052(which has been done in a later stage of the project. \textbf{Note: the code which can be found in Appendix B uses the updated wheelbase}.\\
+This caused that the wheelbase was not updated at this point. The wheelbase at this stage was defined as  0.052. More about the \textit{correct} wheelbase value and how this was calibrated in a later state of the project can be found in section \ref{recalibration} on \pageref{recalibration}.\\ \textbf{Note: the code which can be found in Appendix B uses the updated wheelbase}.\\
 Using the non-updated wheelbase it was required to change specify an angle of 100$^{\circ}$ to move 90$^{\circ}$ effectively.
 
 \section{First results}
@@ -190,7 +202,8 @@ This was the stage of the project at the time of the mid-project demo.
 
 
 \subsection{Direction control based on heading}
-The approach done to fix the odometry error at this stage was done by specifying directions in which the robot is moving as north, east, south and west.
+The approach done to fix the odometry error at this stage was done by specifying directions in which the robot is moving as north, east, south and west.\\
+This is helpful as it simplifies the implementation by standardising what heading the robot should move have depending on what direction it is moving. This also helped with calibration of the movement as a standardised heading now existed and the \textit{actual} heading of the robot can be compared to the \textit{nominal} heading.
 
 \begin{figure}[h]
 \centering
@@ -272,7 +285,7 @@ This was done by checking which direction the robot is facing when an obstacle i
 \end{figure}
 
 The u-turn patterns shown in figure \ref{directions_uturn_pattern} effectively led the robot to move from right to left and from the top downward, there wasn't any particular reason for this, other than an uniformed pattern was needed. \\
-The next piece of code is a snipped from the deployment loop at that time in the project. It uses the previous shown \textit{check\_direction()} as well as the \textit{controll\_angle()} method which will be shown at a later point.\\
+The next piece of code is a snipped from the deployment loop at that time in the project. It uses the previous shown \textit{check\_direction()} as well as the \textit{controll\_angle()} method which will be shown at a later point. While this code is inspired by the switch-state control loop approach which is given by the demo program which is mentioned in section \ref{first_iteration}, the entirety of this code has been created by the developer. \\
 The control angle function is used to compare the current heading with the heading specified by the general direction the robot is moving in(north/east/south/west).
 As the code snippet shows at this point the the odometry struct is still not updated during the deployment loop, and the heading is only checked and corrected in the FORWARD state of the loop.
 The \textit{turn\_right()} and \textit{turn\_left()} functions turn the robot 90$^{\circ}$.
@@ -651,6 +664,7 @@ The code which can be found in Appendix B section \ref{moving_forward_code} on p
 While this updated function did not show any significant decrease of the localisation error, it was kept as updating the odometry functions as often as possible is helps decreasing the overall localisation error.
 
 \section{Recalibration of the movement algorithms}
+\label{recalibration}
 The approaches described in the previous section allowed to reduce the overall odometry error by small degrees, however not entirely remove it. \\
 Research was done of how to reduce the odometry error and a paper written by Johann Borenstein and Liqiang Feng was found \cite{Borenstein1996Measurement}.\\
 
@@ -864,9 +878,9 @@ When the function \textit{check\_reference\_points()} encounters a new corner wh
 This function then simply read the current coordinates and saves them to the corresponding values of the reference struct.\\
 This function also holds print statements to show when the algorithm saves a new corner and with what coordinates.
 
-\section{Mapping results using the new reference point approach}
+\section{Summary}
 After implementing the reference point approach discussed in the previous section the mapping results improved massively.\\
-Figure \ref{ref_result} shows the mapping results after the reference point algorithm has been implemented. \\
+Figure \ref{ref_result} shows the final mapping results after the reference point algorithm has been implemented. \\
 The improve can easily be seen by comparing figure \ref{odometry_error} on page \pageref{odometry_error} with the result of figure \ref{ref_result}.
 
 \begin{figure}[h]
@@ -876,4 +890,11 @@ The improve can easily be seen by comparing figure \ref{odometry_error} on page 
 \label{ref_result}
 \end{figure}
 
+By comparing figure\ref{early_mapping_result} on page \pageref{early_mapping_result} shows with figure \ref{ref_result} the improvements done between the beginning of the development progress and the end can be seen. \\[3ex]
+
+The results function \ref{ref_result} have been reached by a combination of all algorithms which has been implemented in the project.\\
+The movement algorithm allowed to implement the planned rectangular movement pattern discussed in chapter 2. However the movement algorithms are only effective because of the implementation of the heading control algorithms and the heading correction algorithm which allowed for control of the heading and correction of any errors caused by the friction between the robot wheels and the floor. \\
+After the robots variables had been calibrated correctly using the \textit{UMBmark} approach the moving and turning of the robot became a lot more accurate, which increased the accuracy of the mapping thanks to the heading control algorithms which were now able to correct the heading with smaller thresholds than previously possible.\\
+The overall localisation error however did still persist and was only corrected by implementing the reference point algorithm.\\
+As a summary it can be stated that the overall result for mapping an empty room is satisfying, however it was only possible by a combination of multiple control algorithms which prevented map and movement distortion in form of noise generated by the simulator or a insufficient calibrated robot.\\[3ex]
 This is as much work as the available time frame allowed for, the results of the program with this algorithm are further described inside the next chapter, as well as the performance of the program in different environments.
