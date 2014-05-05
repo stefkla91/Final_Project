@@ -1,4 +1,4 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{1}
 \providecommand{\url}[1]{#1}
 \csname url@rmstyle\endcsname
 \providecommand{\newblock}{\relax}
@@ -25,7 +25,9 @@ M.~Abolhasan, T.~Wysocki, and E.~Dutkiewicz, ``{A review of routing protocols
   1--22, Jan. 2004. [Online]. Available:
   \url{http://dx.doi.org/10.1016/s1570-8705(03)00043-x}
 \BIBentrySTDinterwordspacing
-
+ \begin{quotation}\noindent This paper gives a review of routing protocols
+  suitable for mobile networks. The communication strategy in the "Furture
+  Plans" chapter is based on this. \end{quotation}
 
 \bibitem{Batalin2003Coverage}
 \BIBentryALTinterwordspacing
@@ -36,7 +38,9 @@ M.~Batalin and G.~Sukhatme, ``{Coverage, Exploration, and Deployment by a
   Heidelberg, 2003, vol. 2634, pp. 376--391. [Online]. Available:
   \url{http://dx.doi.org/10.1007/3-540-36978-3\_25}
 \BIBentrySTDinterwordspacing
-
+ \begin{quotation}\noindent This paper describes how sensors beacons could be
+  deployed by a robot which then uses said beacons as reference points for
+  coverage and movement \end{quotation}
 
 \bibitem{Borenstein1996Measurement}
 \BIBentryALTinterwordspacing
@@ -45,17 +49,9 @@ J.~Borenstein and L.~Feng, ``{Measurement and correction of systematic odometry
   on}, vol.~12, no.~6, pp. 869--880, Dec. 1996. [Online]. Available:
   \url{http://dx.doi.org/10.1109/70.544770}
 \BIBentrySTDinterwordspacing
-
-
-\bibitem{Burgard2000Collaborative}
-\BIBentryALTinterwordspacing
-W.~Burgard, M.~Moors, D.~Fox, R.~Simmons, and S.~Thrun, ``{Collaborative
-  multi-robot exploration},'' in \emph{Robotics and Automation, 2000.
-  Proceedings. ICRA \&\#039;00. IEEE International Conference on},
-  vol.~1.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2000, pp. 476--481
-  vol.1. [Online]. Available: \url{http://dx.doi.org/10.1109/robot.2000.844100}
-\BIBentrySTDinterwordspacing
-
+ \begin{quotation}\noindent This paper describes the UMBmark calibration method
+  which has been used to calibrate the odometry calculations of the program. It
+  also gives a good insight as to what causes odometry errors. \end{quotation}
 
 \bibitem{Dissanayake2001Solution}
 \BIBentryALTinterwordspacing
@@ -65,16 +61,9 @@ M.~W. M.~G. Dissanayake, P.~Newman, S.~Clark, H.~F. Durrant-Whyte, and
   vol.~17, no.~3, pp. 229--241, June 2001. [Online]. Available:
   \url{http://dx.doi.org/10.1109/70.938381}
 \BIBentrySTDinterwordspacing
-
-
-\bibitem{Fox1999Markov}
-\BIBentryALTinterwordspacing
-D.~Fox, W.~Burgard, and S.~Thrun, ``{Markov Localization for Mobile Robots in
-  Dynamic Environments},'' in \emph{Journal of Artificial Intelligence
-  Research}, vol.~11, 1999, pp. 391--427. [Online]. Available:
-  \url{http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.34.372}
-\BIBentrySTDinterwordspacing
-
+ \begin{quotation}\noindent This paper gives good insighe in what exatly the
+  SLAM problem is. It also suggests a solution which uses global referrence
+  points to locate the robot. \end{quotation}
 
 \bibitem{Mei2006Deployment}
 \BIBentryALTinterwordspacing
@@ -83,7 +72,9 @@ Y.~Mei, Y.-H. Lu, Y.~C. Hu, and C.~S.~G. Lee, ``{Deployment of mobile robots
   vol.~22, no.~3, pp. 507--522, June 2006. [Online]. Available:
   \url{http://dx.doi.org/10.1109/tro.2006.875494}
 \BIBentrySTDinterwordspacing
-
+ \begin{quotation}\noindent This paper describes a deployment approach for
+  multiple robots. Said approach has been altered to single robot usage and has
+  been implemented in the project. \end{quotation}
 
 \bibitem{Poduri2004Constrained}
 \BIBentryALTinterwordspacing
@@ -93,28 +84,9 @@ S.~Poduri and G.~Sukhatme, ``{Constrained coverage for mobile sensor
   0.5em minus 0.4em\relax IEEE, Apr. 2004, pp. 165--171 Vol.1. [Online].
   Available: \url{http://dx.doi.org/10.1109/robot.2004.1307146}
 \BIBentrySTDinterwordspacing
-
-
-\bibitem{Reynolds1987Flocks}
-\BIBentryALTinterwordspacing
-C.~W. Reynolds, ``{Flocks, Herds and Schools: A Distributed Behavioral
-  Model},'' in \emph{Proceedings of the 14th Annual Conference on Computer
-  Graphics and Interactive Techniques}, ser. SIGGRAPH '87, vol.~21,
-  no.~4.\hskip 1em plus 0.5em minus 0.4em\relax New York, NY, USA: ACM, July
-  1987, pp. 25--34. [Online]. Available:
-  \url{http://dx.doi.org/10.1145/37401.37406}
-\BIBentrySTDinterwordspacing
-
-
-\bibitem{Singh1993Map}
-\BIBentryALTinterwordspacing
-K.~Singh and K.~Fujimura, ``{Map making by cooperating mobile robots},'' in
-  \emph{Robotics and Automation, 1993. Proceedings., 1993 IEEE International
-  Conference on}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, May 1993, pp.
-  254--259 vol.2. [Online]. Available:
-  \url{http://dx.doi.org/10.1109/robot.1993.292155}
-\BIBentrySTDinterwordspacing
-
+ \begin{quotation}\noindent This paper describes a K-nearest neighbour approach
+  for robot swarm deployment. This paper gave inspirations for multi robot
+  usage and deployment. \end{quotation}
 
 \bibitem{Thrun2000Realtime}
 \BIBentryALTinterwordspacing
@@ -125,41 +97,10 @@ S.~Thrun, W.~Burgard, and D.~Fox, ``{A real-time algorithm for mobile robot
   pp. 321--328 vol.1. [Online]. Available:
   \url{http://dx.doi.org/10.1109/robot.2000.844077}
 \BIBentrySTDinterwordspacing
-
-
-\bibitem{Thrun2001Learning}
-\BIBentryALTinterwordspacing
-S.~Thrun, ``{Learning Occupancy Grids with Forward Models},'' in \emph{In
-  Proceedings of the Conference on Intelligent Robots and Systems
-  (IROS\^{a}2001}, 2001, pp. 1676--1681. [Online]. Available:
-  \url{http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.19.6014}
-\BIBentrySTDinterwordspacing
-
-
-\bibitem{Thrun1998Probabilistic}
-\BIBentryALTinterwordspacing
-S.~Thrun, W.~Burgard, D.~Fox, H.~Hexmoor, and M.~Mataric, ``{A Probabilistic
-  Approach to Concurrent Mapping and Localization for Mobile Robots},'' in
-  \emph{Machine Learning}, 1998, pp. 29--53. [Online]. Available:
-  \url{http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.18.1128}
-\BIBentrySTDinterwordspacing
-
-
-\bibitem{Thrun2001Robust}
-\BIBentryALTinterwordspacing
-S.~Thrun, D.~Fox, W.~Burgard, and F.~Dellaert, ``{Robust Monte Carlo
-  Localization for Mobile Robots},'' 2001. [Online]. Available:
-  \url{http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.18.8488}
-\BIBentrySTDinterwordspacing
-
-
-\bibitem{Yang2014Adaptive}
-\BIBentryALTinterwordspacing
-H.-X. Yang and M.~Tang, ``{Adaptive routing strategy on networks of mobile
-  nodes},'' \emph{Physica A: Statistical Mechanics and its Applications}, vol.
-  402, pp. 1--7, May 2014. [Online]. Available:
-  \url{http://dx.doi.org/10.1016/j.physa.2014.01.063}
-\BIBentrySTDinterwordspacing
-
+ \begin{quotation}\noindent This paper describes an multi robot approach for
+  mapping an environment. In this approach the lead robot maps the environment
+  first and then remains stationary, serving as a reference point for a second
+  robot which maps the environment once more, therby increasing the accuracy.
+  \end{quotation}
 
 \end{thebibliography}

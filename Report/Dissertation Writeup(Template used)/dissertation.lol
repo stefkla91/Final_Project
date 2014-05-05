@@ -1,13 +1,13 @@
 \contentsline {lstlisting}{\numberline {3.1}Proximity sensor reading}{17}
 \contentsline {lstlisting}{\numberline {3.2}Converting Radians to degrees}{19}
 \contentsline {lstlisting}{\numberline {3.3}Early check of the movement direction}{20}
-\contentsline {lstlisting}{\numberline {3.4}Early Control loop snipped}{22}
+\contentsline {lstlisting}{\numberline {3.4}Early Control loop snipped}{21}
 \contentsline {lstlisting}{\numberline {3.5}Early heading correction algorithm}{23}
 \contentsline {lstlisting}{\numberline {3.6}Deployment algorithm refactoring}{25}
 \contentsline {lstlisting}{\numberline {3.7}U-turn improved with obstacle detection and mapping}{25}
-\contentsline {lstlisting}{\numberline {3.8}obstacle detection and mapping}{27}
+\contentsline {lstlisting}{\numberline {3.8}obstacle detection and mapping}{26}
 \contentsline {lstlisting}{\numberline {3.9}Refactored heading control code}{28}
-\contentsline {lstlisting}{\numberline {3.10}Code snipped of the new approach}{29}
+\contentsline {lstlisting}{\numberline {3.10}Code snippet of the new approach}{29}
 \contentsline {lstlisting}{\numberline {3.11}Corner detection added to the U-turn routine}{30}
 \contentsline {lstlisting}{\numberline {3.12}The UMBmark experiment procedure}{35}
 \contentsline {lstlisting}{\numberline {A.1}Mark an cell as occupied}{66}

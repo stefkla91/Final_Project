@@ -23,7 +23,7 @@
 \contentsline {section}{\numberline {3.1}Early Development}{10}
 \contentsline {subsection}{\numberline {3.1.1}Webots Tutorials}{10}
 \contentsline {subsection}{\numberline {3.1.2}First Program Iterations}{10}
-\contentsline {section}{\numberline {3.2}Mid stage Development}{12}
+\contentsline {section}{\numberline {3.2}Further Development}{12}
 \contentsline {subsection}{\numberline {3.2.1}Advanced tutorials}{12}
 \contentsline {section}{\numberline {3.3}Note about the code shown in the following sections}{12}
 \contentsline {section}{\numberline {3.4}Movement}{13}
@@ -37,9 +37,9 @@
 \contentsline {subsection}{\numberline {3.6.1}Early mapping methods and results}{17}
 \contentsline {subsection}{\numberline {3.6.2}Direction control based on heading}{19}
 \contentsline {section}{\numberline {3.7}Refactoring and improvement}{24}
-\contentsline {subsection}{\numberline {3.7.1}Deployment algorithm refactoring}{25}
+\contentsline {subsection}{\numberline {3.7.1}Deployment algorithm refactoring}{24}
 \contentsline {subsection}{\numberline {3.7.2}Deployment algorithm improvement}{25}
-\contentsline {section}{\numberline {3.8}Mapping}{27}
+\contentsline {section}{\numberline {3.8}Mapping}{26}
 \contentsline {section}{\numberline {3.9}Refactoring of the heading correction}{28}
 \contentsline {section}{\numberline {3.10}New approaches which were tried and implemented}{29}
 \contentsline {subsection}{\numberline {3.10.1}Dynamic U-Turn approach}{29}
@@ -52,7 +52,7 @@
 \contentsline {subsection}{\numberline {3.12.1}Reference point struct}{38}
 \contentsline {subsection}{\numberline {3.12.2}Checking for reference points}{38}
 \contentsline {subsection}{\numberline {3.12.3}Saving a new reference point}{38}
-\contentsline {section}{\numberline {3.13}Summary}{39}
+\contentsline {section}{\numberline {3.13}Summary}{38}
 \contentsline {chapter}{\numberline {4}Testing}{40}
 \contentsline {section}{\numberline {4.1}Overall Approach to Testing}{40}
 \contentsline {section}{\numberline {4.2}Test environment: Room 1}{40}
