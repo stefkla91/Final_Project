@@ -1,0 +1,106 @@
+\begin{thebibliography}{1}
+\providecommand{\url}[1]{#1}
+\csname url@rmstyle\endcsname
+\providecommand{\newblock}{\relax}
+\providecommand{\bibinfo}[2]{#2}
+\providecommand\BIBentrySTDinterwordspacing{\spaceskip=0pt\relax}
+\providecommand\BIBentryALTinterwordstretchfactor{4}
+\providecommand\BIBentryALTinterwordspacing{\spaceskip=\fontdimen2\font plus
+\BIBentryALTinterwordstretchfactor\fontdimen3\font minus
+  \fontdimen4\font\relax}
+\providecommand\BIBforeignlanguage[2]{{%
+\expandafter\ifx\csname l@#1\endcsname\relax
+\typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
+\typeout{** loaded for the language `#1'. Using the pattern for}%
+\typeout{** the default language instead.}%
+\else
+\language=\csname l@#1\endcsname
+\fi
+#2}}
+
+\bibitem{Abolhasan2004Review}
+\BIBentryALTinterwordspacing
+M.~Abolhasan, T.~Wysocki, and E.~Dutkiewicz, ``{A review of routing protocols
+  for mobile ad hoc networks},'' \emph{Ad Hoc Networks}, vol.~2, no.~1, pp.
+  1--22, Jan. 2004. [Online]. Available:
+  \url{http://dx.doi.org/10.1016/s1570-8705(03)00043-x}
+\BIBentrySTDinterwordspacing
+ \begin{quotation}\noindent This paper gives a review of routing protocols
+  suitable for mobile networks. The communication strategy in the "Furture
+  Plans" chapter is based on this. \end{quotation}
+
+\bibitem{Batalin2003Coverage}
+\BIBentryALTinterwordspacing
+M.~Batalin and G.~Sukhatme, ``{Coverage, Exploration, and Deployment by a
+  Mobile Robot and Communication Network},'' in \emph{Information Processing in
+  Sensor Networks}, ser. Lecture Notes in Computer Science, F.~Zhao and
+  L.~Guibas, Eds.\hskip 1em plus 0.5em minus 0.4em\relax Springer Berlin
+  Heidelberg, 2003, vol. 2634, pp. 376--391. [Online]. Available:
+  \url{http://dx.doi.org/10.1007/3-540-36978-3\_25}
+\BIBentrySTDinterwordspacing
+ \begin{quotation}\noindent This paper describes how sensors beacons could be
+  deployed by a robot which then uses said beacons as reference points for
+  coverage and movement \end{quotation}
+
+\bibitem{Borenstein1996Measurement}
+\BIBentryALTinterwordspacing
+J.~Borenstein and L.~Feng, ``{Measurement and correction of systematic odometry
+  errors in mobile robots},'' \emph{Robotics and Automation, IEEE Transactions
+  on}, vol.~12, no.~6, pp. 869--880, Dec. 1996. [Online]. Available:
+  \url{http://dx.doi.org/10.1109/70.544770}
+\BIBentrySTDinterwordspacing
+ \begin{quotation}\noindent This paper describes the UMBmark calibration method
+  which has been used to calibrate the odometry calculations of the program. It
+  also gives a good insight as to what causes odometry errors. \end{quotation}
+
+\bibitem{Dissanayake2001Solution}
+\BIBentryALTinterwordspacing
+M.~W. M.~G. Dissanayake, P.~Newman, S.~Clark, H.~F. Durrant-Whyte, and
+  M.~Csorba, ``{A solution to the simultaneous localization and map building
+  (SLAM) problem},'' \emph{Robotics and Automation, IEEE Transactions on},
+  vol.~17, no.~3, pp. 229--241, June 2001. [Online]. Available:
+  \url{http://dx.doi.org/10.1109/70.938381}
+\BIBentrySTDinterwordspacing
+ \begin{quotation}\noindent This paper gives good insighe in what exatly the
+  SLAM problem is. It also suggests a solution which uses global referrence
+  points to locate the robot. \end{quotation}
+
+\bibitem{Mei2006Deployment}
+\BIBentryALTinterwordspacing
+Y.~Mei, Y.-H. Lu, Y.~C. Hu, and C.~S.~G. Lee, ``{Deployment of mobile robots
+  with energy and timing constraints},'' \emph{Robotics, IEEE Transactions on},
+  vol.~22, no.~3, pp. 507--522, June 2006. [Online]. Available:
+  \url{http://dx.doi.org/10.1109/tro.2006.875494}
+\BIBentrySTDinterwordspacing
+ \begin{quotation}\noindent This paper describes a deployment approach for
+  multiple robots. Said approach has been altered to single robot usage and has
+  been implemented in the project. \end{quotation}
+
+\bibitem{Poduri2004Constrained}
+\BIBentryALTinterwordspacing
+S.~Poduri and G.~Sukhatme, ``{Constrained coverage for mobile sensor
+  networks},'' in \emph{Robotics and Automation, 2004. Proceedings. ICRA
+  \&\#039;04. 2004 IEEE International Conference on}, vol.~1.\hskip 1em plus
+  0.5em minus 0.4em\relax IEEE, Apr. 2004, pp. 165--171 Vol.1. [Online].
+  Available: \url{http://dx.doi.org/10.1109/robot.2004.1307146}
+\BIBentrySTDinterwordspacing
+ \begin{quotation}\noindent This paper describes a K-nearest neighbour approach
+  for robot swarm deployment. This paper gave inspirations for multi robot
+  usage and deployment. \end{quotation}
+
+\bibitem{Thrun2000Realtime}
+\BIBentryALTinterwordspacing
+S.~Thrun, W.~Burgard, and D.~Fox, ``{A real-time algorithm for mobile robot
+  mapping with applications to multi-robot and 3D mapping},'' in \emph{Robotics
+  and Automation, 2000. Proceedings. ICRA \&\#039;00. IEEE International
+  Conference on}, vol.~1.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2000,
+  pp. 321--328 vol.1. [Online]. Available:
+  \url{http://dx.doi.org/10.1109/robot.2000.844077}
+\BIBentrySTDinterwordspacing
+ \begin{quotation}\noindent This paper describes an multi robot approach for
+  mapping an environment. In this approach the lead robot maps the environment
+  first and then remains stationary, serving as a reference point for a second
+  robot which maps the environment once more, therby increasing the accuracy.
+  \end{quotation}
+
+\end{thebibliography}

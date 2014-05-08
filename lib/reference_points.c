@@ -1,9 +1,9 @@
 /**
  * File:          reference_points.c
  * Date:          14.03.2014
- * Description:   
+ * Description:   This files holds the algorithms for the referencepoint approach.
  * Author:        Stefan Klaus
- * Modifications: V 0.3
+ * Modifications: V 1.0
  */
 #include <webots/robot.h>
 #include <math.h>	

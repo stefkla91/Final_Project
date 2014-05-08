@@ -1,9 +1,9 @@
 /**
  * File:          reference_points.h
  * Date:          09.04.2014
- * Description:   
+ * Description:   header file for reference_points.c
  * Author:        Stefan Klaus
- * Modifications: V 0.2
+ * Modifications: V 1.0
  */
 #include "odometry.h"
 #ifndef REFERENCE_POINT_H

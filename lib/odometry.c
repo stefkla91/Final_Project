@@ -1,9 +1,10 @@
 /**
  * File:          odometry.c
  * Date:          14.03.2014
- * Description:   
+ * Description:   Odometry function of project.
+ *				  Heavily inspired by the weobots simulator, but with minor modifications.
  * Author:        Stefan Klaus
- * Modifications: V 0.3
+ * Modifications: V 1.0
  */
  
 #include <webots/differential_wheels.h>

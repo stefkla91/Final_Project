@@ -1,9 +1,10 @@
 /**
  * File:          e_puck_distance_sensors.c
  * Date:          04.04.2014
- * Description:   
+ * Description:   This source files holds functions universitally needed in different classes,
+ *				  howerever which do not belong to one of tha major algorithms
  * Author:        Stefan Klaus
- * Modifications: V 0.2
+ * Modifications: V 1.0
  */
  
 #include <webots/robot.h>

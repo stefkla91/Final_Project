@@ -4,7 +4,7 @@
  * Description:   This file holds functions which are not feature specific for the 
  				  project. 
  * Author:        Stefan Klaus
- * Modifications: v0.1
+ * Modifications: v1.0
  */
 
 #include <stdio.h>

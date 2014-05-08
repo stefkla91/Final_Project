@@ -3,7 +3,7 @@
  * Date:          11.04.2014
  * Description:   This is the header file for the functions.c file
  * Author:        Stefan Klaus
- * Modifications: v0.1
+ * Modifications: v1.0
  */
 
 /** Function to return an int representing the direction the robot is heading*/

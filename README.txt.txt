@@ -1,0 +1,36 @@
+Major Project for Stefan Klaus(stk4@aber.ac.uk)
+
+Odometry based map building.
+This project uses a simulator as well as a virtual E-Puck representation to map
+different environments.
+
+This project uses the Webots simulator.
+All code has been created and tested on a Windows system using Webots PRO 7.4.3. 
+The project might perform differently on Unix based systems or on older/newer versions of 
+the simulator. 
+
+This folder holds all the technical work as well as the 
+final and mid-project reports for the project.
+
+An overview over the folders:
+
+webots: holds the world files for the Webots simulator
+
+Report: Holds the source files(LaTeX) of the final report as well the project outline
+	specification. 
+
+Project data: holds sample video files(.mp4) of how the program performs on my system.
+
+Mid Project Presentation: holds the power point created for the mid-project presentation.
+
+lib: holds all source files(besides the main) needed for the project.
+
+figures: holds all the figures(including .odg files)  and screenshots of the project
+
+doxygen documentation: holds the documentation generated for the code, using doxygen.
+
+controllers: holds the main.c source file for the project. This structure might be confusing
+	however it was used by Webots and that's why I kept it. 
+	
+Other files: just standard files needed for git, the Sublime Text project and workspace file,
+	as well as a copy of the final report for convenience.

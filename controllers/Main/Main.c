@@ -1,9 +1,9 @@
 /**
  * File:          Main.c
  * Date:          15.03.2014
- * Description:   
+ * Description:   Main file of the project
  * Author:        Stefan Klaus
- * Modifications: V0.3
+ * Modifications: v1.0
  */
 
 /*
@@ -11,13 +11,13 @@
  * <webots/differential_wheels.h>, etc.
  */
 #include <webots/robot.h>
-#include <webots/differential_wheels.h>
-#include <webots/distance_sensor.h>
-#include <webots/light_sensor.h>
-#include <webots/camera.h>
-#include <webots/display.h>
-#include <webots/accelerometer.h>
-#include <webots/led.h>
+// #include <webots/differential_wheels.h>
+// #include <webots/distance_sensor.h>
+// #include <webots/light_sensor.h>
+// #include <webots/camera.h>
+// #include <webots/display.h>
+// #include <webots/accelerometer.h>
+// #include <webots/led.h>
 #include <math.h>
 
 #include "../../lib/functions.h"
@@ -31,21 +31,6 @@
 #define TIME_STEP 8
 #define MAP_SIZE 70
 
-//occupancy code:
-#define THRESHOLD_DIST 100
-#define OCCUPANCE_DIST 150
-#define LEFT 0        // Left side
-#define RIGHT 1       // right side
-// 8 IR proximity sensors
-#define NUM_DIST_SENS 8
-#define PS_RIGHT_10 0
-#define PS_RIGHT_45 1
-#define PS_RIGHT_90 2
-#define PS_RIGHT_REAR 3
-#define PS_LEFT_REAR 4
-#define PS_LEFT_90 5
-#define PS_LEFT_45 6
-#define PS_LEFT_10 7
 
 /* Definitions */
 //Leds
@@ -62,23 +47,23 @@ struct referencePos ref;
  * "controllerArgs" field of the Robot node
  */
 int main(int argc, char **argv){
- 	double dSpeed = 300.0f;
-	double dDistance = 0.3f;  
+	// double dSpeed = 300.0f; //only used for UMBmark
+	// double dDistance = 0.3f;  //used ofr UMBmark
 	
 	//initialize and reset all needed devices 
 	wb_robot_init();
 	reset();
 	
-	odometry_track_start(&ot);
+	odometry_track_start(&ot); //initialize the odometry struct
 
-	ref.lower_left.x = 0;
-	ref.lower_left.y = 0;
-	ref.lower_right.x = 0;
-	ref.lower_right.y = 0;
-	ref.upper_left.x = 0;
-	ref.upper_left.y = 0;
-	ref.upper_right.x = 0;
-	ref.upper_left.y = 0;
+	// ref.lower_left.x = 0;
+	// ref.lower_left.y = 0;
+	// ref.lower_right.x = 0;
+	// ref.lower_right.y = 0;
+	// ref.upper_left.x = 0;
+	// ref.upper_left.y = 0;
+	// ref.upper_right.x = 0;
+	// ref.upper_left.y = 0;
 
 	ot.result.x =0;// 0.199997;// 0.00;
 	ot.result.y = 0;//0.00133553;//0.008;

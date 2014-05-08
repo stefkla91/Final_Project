@@ -1,18 +1,19 @@
 /**
  * File:          e_puck_movement.c
  * Date:          10.03.2014
- * Description:   
+ * Description:   Holds all major movement algorithms, as well as the callibration algorithm
+ *				  UMBmark
  * Author:        Stefan Klaus
- * Modifications: V 0.3
+ * Modifications: V 1.0
  */
 
 #include <stdio.h>
 #include <webots/robot.h>
 #include <webots/differential_wheels.h>
 #include <webots/distance_sensor.h>
-#include <webots/light_sensor.h>
-#include <webots/camera.h>
-#include <webots/accelerometer.h>
+// #include <webots/light_sensor.h>
+// #include <webots/camera.h>
+// #include <webots/accelerometer.h>
 #include <webots/led.h>
 #include <math.h>
 #include "e_puck_movement.h"
@@ -24,7 +25,7 @@
 #endif
 
 #define TIME_STEP 8 
-#define WHEEL_RADIUS 0.0206625 // avg. wheel radius of the e-puck 1850.
+#define WHEEL_RADIUS 0.0206625 // according to webots
 #define LEFT_DIAMETER 0.0416//orig 0.0416
 #define RIGHT_DIAMETER 0.0404//orig 0.0404
 #define WHEEL_DIAMETER (LEFT_DIAMETER + RIGHT_DIAMETER)
@@ -62,9 +63,9 @@ void check_rotation(double cur_rot, double want_rot, double dSpeed);
 double* compute_odometry_data();
 
 // odometry UMBmark:
- void UMBmark(double dSpeed, double dDistance); //calibration 
-void measure_clockWise(double dSpeed, double dDistance);
-void measure_CounterClockWise(double dSpeed, double dDistance); 
+void UMBmark(double dSpeed, double dDistance, struct odometryTrackStruct * ot); //calibration 
+void measure_clockWise(double dSpeed, double dDistance, struct odometryTrackStruct * ot);
+void measure_CounterClockWise(double dSpeed, double dDistance, struct odometryTrackStruct * ot); 
 
 // braitenberg weights for wall following
 float weights_left[8] = {-1,-1,-1,0.5,-0.5,0.5,1,2};
@@ -177,13 +178,13 @@ void turn_angle(double dAngle, double dSpeed){
 			dStopPosLeft = point_dEncPos[0] + dStepCount;
 			dStopPosRight = point_dEncPos[1] - dStepCount;
 			
-			//point_dOdometryData = compute_odometry_data();
+			point_dOdometryData = compute_odometry_data();
 			
 			set_motor_speed(dSpeed, -dSpeed);
 			
 			while((point_dEncPos[0] < dStopPosLeft) && (point_dEncPos[1] > dStopPosRight)){
 				//get odometry data
-				//point_dOdometryData = compute_odometry_data();
+				point_dOdometryData = compute_odometry_data();
 				
 				//get wheel encoders
 				point_dEncPos = get_encoder_positions();
@@ -198,14 +199,14 @@ void turn_angle(double dAngle, double dSpeed){
 		dStopPosLeft = point_dEncPos[0] - dStepCount;
 		dStopPosRight = point_dEncPos[1] + dStepCount;
 		
-		//point_dOdometryData = compute_odometry_data();
+		point_dOdometryData = compute_odometry_data();
 
 		// turn left the robot ...
 		set_motor_speed(-dSpeed, dSpeed);
 
 		while((point_dEncPos[0] > dStopPosLeft) &&(point_dEncPos[1] < dStopPosRight)){
 
-			//point_dOdometryData = compute_odometry_data();
+			point_dOdometryData = compute_odometry_data();
 			point_dEncPos = get_encoder_positions();
 			if( fabs(dStopPosLeft - point_dEncPos[0]) <= MIN_DIST ){
 				set_motor_speed(-MIN_SPEED, MIN_SPEED); }
@@ -215,7 +216,7 @@ void turn_angle(double dAngle, double dSpeed){
 	stop_robot();
 	
 	//update odometry data
-	//point_dOdometryData = compute_odometry_data();
+	point_dOdometryData = compute_odometry_data();
 	wb_robot_step(TIME_STEP);
 }
 
@@ -245,6 +246,12 @@ double* get_encoder_positions(){
 }
 
 /**
+NOTE:
+This function has no practical use as the odometry data it generates is not used in anyway
+However removing it led to errors in the movement and turning algorithms and it was not enough
+time to fix these errors.
+
+
 Function to compute the robots current odometry data
 this includes the x and y placement as well as the rotation theta
 */
@@ -298,11 +305,11 @@ double* compute_odometry_data(){
 /**
 University of Michigan Benchmark
 */
-void UMBmark(double dSpeed, double dDistance){	
+void UMBmark(double dSpeed, double dDistance, struct odometryTrackStruct * ot){	
 	//move the robot clockwise and counterclockwise 
-	measure_clockWise(dSpeed, dDistance);
+	measure_clockWise(dSpeed, dDistance, ot);
 	
-	measure_CounterClockWise(dSpeed, dDistance);
+	measure_CounterClockWise(dSpeed, dDistance, ot);
 	
 	stop_robot();
 } 
@@ -311,12 +318,12 @@ Function to measure the movement accuracy by driving
 a clockwise square.
 This is part of the UMBmark algorithm
 */
-void measure_clockWise(double dSpeed, double dDistance){
+void measure_clockWise(double dSpeed, double dDistance, struct odometryTrackStruct * ot){
 	int i, j;
 	
 	for(i = 0;i < NUMTOURNAMENTS; i++){
 		for(j = 0;j < 4;j++){
-			move_forward(dSpeed, dDistance);
+			move_forward(dSpeed, dDistance, ot);
 			turn_right(dSpeed);
 		}
 		wb_robot_step(TIME_STEP);
@@ -328,7 +335,7 @@ Function to measure the movement accuracy by driving
 a counter-clockwise square.
 This is part of the UMBmark algorithm
 */
-void measure_CounterClockWise(double dSpeed, double dDistance){
+void measure_CounterClockWise(double dSpeed, double dDistance, struct odometryTrackStruct * ot){
 	int i, j; 
 	
 	//turn the robot right for moving the same square counter clock wise
@@ -336,7 +343,7 @@ void measure_CounterClockWise(double dSpeed, double dDistance){
 	
 	for(i = 0;i < NUMTOURNAMENTS;i++){		
 		for(j = 0;j < 4; j++){
-			move_forward(dSpeed, dDistance);
+			move_forward(dSpeed, dDistance, ot);
 			turn_left(dSpeed);
 		}
 		wb_robot_step(TIME_STEP);

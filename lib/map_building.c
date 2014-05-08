@@ -1,15 +1,16 @@
 /**
  * File:          map_building.c
  * Date:          15.03.2014
- * Description:   
+ * Description:   This file holds the main controll loop of the program.
+ *                 it holds files which are taken or inspired by the Webots simulator
  * Author:        Stefan Klaus
- * Modifications: v0.4
+ * Modifications: v1.0
  */
 
 #include <webots/robot.h>
 #include <webots/differential_wheels.h>
 #include <webots/distance_sensor.h>
-#include <webots/light_sensor.h>
+//#include <webots/light_sensor.h>
 #include <math.h>
 #include <webots/display.h> 
 #include <stdio.h>
@@ -70,6 +71,7 @@ int new_encoder;
 int state = FORWARD;
 
 /**
+ * TAKEN FROM THE WEBOTS SIMULATOR
  * Initiate the display with a white color
  for all rooms but room 3 x & y = 0
  */
@@ -82,7 +84,8 @@ void init_display(){
 }
 
 /**
- * Those 2 functions do the coordinate transform between the world coordinates (w)
+ *	TAKEN FROM THE WEBOTS SIMULATOR
+ * This function do the coordinate transform between the world coordinates (w)
  * and the map coordinates (m) in X and Y direction.
  */
 static int wtom(float x)
@@ -91,6 +94,7 @@ static int wtom(float x)
 }
 
 /**
+ * TAKEN FROM THE WEBOTS SIMULATOR
  * Set the coresponding cell to 1 (occupied)
  * and display it
  */
@@ -188,7 +192,8 @@ void checkObstacles(){
 }
 
 /**
-run function
+Main controll loop of the project.
+Takes pointers to both teh global odometry and refernce point struct as parameters
 */
 void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 	int i, it;
@@ -237,12 +242,12 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 	
 	switch(state){
 		case FORWARD:
-			direction = check_direction(ot->result.theta);
-			cur_rot = return_angle(ot->result.theta);
-			check_reference_points(ot, ref);
-		 	if(direction == 1){
-				printf("%s\n", no);
-				check_rotation(cur_rot, 90, dSpeed);
+			direction = check_direction(ot->result.theta); //check direction
+			cur_rot = return_angle(ot->result.theta); //check rotation
+			check_reference_points(ot, ref); //checks for reference point
+		 	if(direction == 1){ //if direction 1(north)
+				printf("%s\n", no); 
+				check_rotation(cur_rot, 90, dSpeed); //check if rotation is 90 degrees
 				move_forward(dSpeed, dDistance, ot);
 			}else if(direction == 2){
 				printf("%s\n", ea);
@@ -262,10 +267,10 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 				}
 			break;			
 		case STOP:
-			stop_robot();
-			printf("%s\n", text);
-			odometry_track_step(ot);
-			direction = check_direction(ot->result.theta);
+			stop_robot(); //stops he robot
+			printf("%s\n", text); 
+			odometry_track_step(ot); //updates the odometry struct
+			direction = check_direction(ot->result.theta); //check which direction the robot moves in 
 		 	if(ob_front && ob_left && direction == 1){
 				state = TURNRIGHT;
 				}
@@ -292,16 +297,21 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 			state = FORWARD;
 			break;
 		case UTURN:
-			direction = check_direction(ot->result.theta);
-			printf("%d\n",direction );
+		/*	
+			this looks very heavy and clumpsy
+			but it only repeats the same steps for each direction
+			this was the only apprent solution
+		*/
+			direction = check_direction(ot->result.theta); //check which direction to robot moves in
+			printf("%d\n",direction ); //print direction
 			if(direction == 1){
-				printf("%s\n", no);
-				turn_left(dSpeed);
-				for(it = 0;it < 5;it++){
+				printf("%s\n", no); 
+				turn_left(dSpeed); 
+				for(it = 0;it < 5;it++){ //for loop which check if refrence points are reached, obstacles encountred and cells to map
 					printf("%s\n",thinking);
 					check_reference_points(ot, ref);
 
-					if((ob_front && ob_right) || (ob_front && ob_left)){
+					if((ob_front && ob_right) || (ob_front && ob_left)){ //check if obstacles are in front, if so check for reference points and stop the robot
 						check_reference_points(ot, ref);
 						state = STOP;
 						break;
@@ -321,7 +331,7 @@ void run(struct odometryTrackStruct * ot, struct referencePos * ref){
 				}
 
 				turn_left(dSpeed);
-				odometry_track_step(ot);
+				odometry_track_step(ot); //update odometry data
 				state = FORWARD;
 			}else if(direction == 2){
 				printf("%s\n", ea);

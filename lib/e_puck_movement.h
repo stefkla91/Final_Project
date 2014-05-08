@@ -3,7 +3,7 @@
  * Date:          10.03.2014
  * Description:   Header file for e_puck_movement.c
  * Author:        Stefan Klaus
- * Modifications: V 0.3
+ * Modifications: V 1.0
  */
 
 #include "odometry.h"
@@ -26,11 +26,11 @@ double* get_encoder_positions();
 /* return a double with the computated odometry information */
 double* compute_odometry_data();
 /* initialize the UMBenchmark algorithm */
-//void UMBmark(double dSpeed, double dDistance); 
+void UMBmark(double dSpeed, double dDistance, struct odometryTrackStruct * ot); 
 /* clockwise part of the UMBenchmark */
-//void measure_clockWise(double dSpeed, double dDistance);
+void measure_clockWise(double dSpeed, double dDistance, struct odometryTrackStruct * ot);
 /* counter clockwise part of the UMBenchmark */
-//void measure_CounterClockWise(double dSpeed, double dDistance);
+void measure_CounterClockWise(double dSpeed, double dDistance, struct odometryTrackStruct * ot);
 /* set the status of the LEDs */
 void set_leds(int iActive);
 /* normalises the angle and stops the robot from moving the strong to one side */

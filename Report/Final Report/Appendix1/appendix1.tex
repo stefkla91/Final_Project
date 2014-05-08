@@ -1,0 +1,57 @@
+\chapter{Third-Party Code and Libraries}
+
+\section{Mark a cell as occupied}
+\label{occupied_cell}
+This function marks a cell of the occupancy map, an simple 2D array, as marked. 
+It is part of a demo program provided with the webots installation.
+On a normal windows installation this file can be found here:\\
+\url{C:\Program Files\Webots\projects\samples\curriculum\controllers\advanced\_slam\_1.c}
+
+\begin{lstlisting}[caption={Mark an cell as occupied}]
+#ifndef M_PI
+	#define M_PI 3.1415926535897932384626433832795L
+#endif
+
+/**
+ * Set the corresponding cell to 1 (occupied)
+ * and display it
+ */
+void occupied_cell(int x, int y, float theta){
+
+	// normalize angle
+	while (theta > M_PI) {
+		theta -= 2*M_PI;
+	}
+	while (theta < -M_PI) {
+		theta += 2*M_PI;
+	}
+
+	// front cell
+	if (-M_PI/6 <= theta && theta <= M_PI/6) {
+		if (y+1 < MAP_SIZE) {
+			map[x][y+1] = 1;
+			wb_display_draw_rectangle(display,x,display_height-y,1,1);
+		}
+	}
+	// right cell
+	if (M_PI/3 <= theta && theta <= 2*M_PI/3) {
+		if (x+1 < MAP_SIZE) {
+			map[x+1][y] = 1;
+			wb_display_draw_rectangle(display,x+1,display_height-1-y,1,1);
+		}
+	}
+	// left cell
+	if (-2*M_PI/3 <= theta && theta <= -M_PI/3) {
+		if (x-1 > 0) {
+			map[x-1][y] = 1;
+			wb_display_draw_rectangle(display,x-1,display_height-1-y,1,1);
+		}
+	}
+	// back cell
+	if (5*M_PI/6 <= theta || theta <= -5*M_PI/6) {
+		if (y-1 > 0) {
+			map[x][y-1] = 1;
+			wb_display_draw_rectangle(display,x,display_height-y-2,1,1);
+		}
+	
+\end{lstlisting}
