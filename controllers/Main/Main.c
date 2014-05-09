@@ -11,13 +11,6 @@
  * <webots/differential_wheels.h>, etc.
  */
 #include <webots/robot.h>
-// #include <webots/differential_wheels.h>
-// #include <webots/distance_sensor.h>
-// #include <webots/light_sensor.h>
-// #include <webots/camera.h>
-// #include <webots/display.h>
-// #include <webots/accelerometer.h>
-// #include <webots/led.h>
 #include <math.h>
 
 #include "../../lib/functions.h"

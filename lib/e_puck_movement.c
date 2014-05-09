@@ -11,9 +11,6 @@
 #include <webots/robot.h>
 #include <webots/differential_wheels.h>
 #include <webots/distance_sensor.h>
-// #include <webots/light_sensor.h>
-// #include <webots/camera.h>
-// #include <webots/accelerometer.h>
 #include <webots/led.h>
 #include <math.h>
 #include "e_puck_movement.h"

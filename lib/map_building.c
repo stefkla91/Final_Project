@@ -10,7 +10,6 @@
 #include <webots/robot.h>
 #include <webots/differential_wheels.h>
 #include <webots/distance_sensor.h>
-//#include <webots/light_sensor.h>
 #include <math.h>
 #include <webots/display.h> 
 #include <stdio.h>
