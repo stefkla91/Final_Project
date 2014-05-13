@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['n',['n',['../epuck__scanline_8c.html#a76f11d9a0a47b94f72c2d0e77fb32240',1,'epuck_scanline.c']]],
-  ['new_5fencoder',['new_encoder',['../backup_2map__building_8c.html#a6bb4b6b07ac2dd14c2828276cecaa78c',1,'new_encoder():&#160;map_building.c'],['../lib_2map__building_8c.html#a6bb4b6b07ac2dd14c2828276cecaa78c',1,'new_encoder():&#160;map_building.c']]],
-  ['north',['north',['../backup_2map__building_8c.html#a3840e3a5e453e024912122a97e895bc2',1,'north():&#160;map_building.c'],['../backup_2reference__points_8c.html#a3840e3a5e453e024912122a97e895bc2',1,'north():&#160;reference_points.c']]]
+  ['point_5fdodometrydata',['point_dOdometryData',['../e__puck__movement_8c.html#a8e86ce9921634121371354230eb12415',1,'e_puck_movement.c']]],
+  ['pos_5fleft_5fprev',['pos_left_prev',['../structodometry_track_struct.html#a239492167b9c9189a749caba8f4bba24',1,'odometryTrackStruct']]],
+  ['pos_5fright_5fprev',['pos_right_prev',['../structodometry_track_struct.html#a20071e254af74994c28ef0973c9b449e',1,'odometryTrackStruct']]]
 ];

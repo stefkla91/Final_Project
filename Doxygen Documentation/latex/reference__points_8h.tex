@@ -1,0 +1,41 @@
+\hypertarget{reference__points_8h}{\section{C\+:/\+Users/\+Stefan/\+Documents/\+Git\+Hub/\+Final\+\_\+\+Project/lib/reference\+\_\+points.h File Reference}
+\label{reference__points_8h}\index{C\+:/\+Users/\+Stefan/\+Documents/\+Git\+Hub/\+Final\+\_\+\+Project/lib/reference\+\_\+points.\+h@{C\+:/\+Users/\+Stefan/\+Documents/\+Git\+Hub/\+Final\+\_\+\+Project/lib/reference\+\_\+points.\+h}}
+}
+{\ttfamily \#include \char`\"{}odometry.\+h\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structreference_pos}{reference\+Pos}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{reference__points_8h_a09641263303ea6b4783a7691c66eaa81}{set\+\_\+reference\+\_\+point} (struct \hyperlink{structodometry_track_struct}{odometry\+Track\+Struct} $\ast$\hyperlink{_main_8c_a8ffe8a155701a233c11370bd93f2225d}{ot}, struct \hyperlink{structreference_pos}{reference\+Pos} $\ast$\hyperlink{_main_8c_a8136ed9afc84601aa3b8c6cd76f95fce}{ref}, int corner)
+\item 
+void \hyperlink{reference__points_8h_ae295b0f6adff6c6ac5a6a122f7a200fa}{check\+\_\+reference\+\_\+points} (struct \hyperlink{structodometry_track_struct}{odometry\+Track\+Struct} $\ast$\hyperlink{_main_8c_a8ffe8a155701a233c11370bd93f2225d}{ot}, struct \hyperlink{structreference_pos}{reference\+Pos} $\ast$\hyperlink{_main_8c_a8136ed9afc84601aa3b8c6cd76f95fce}{ref})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{reference__points_8h_ae295b0f6adff6c6ac5a6a122f7a200fa}{\index{reference\+\_\+points.\+h@{reference\+\_\+points.\+h}!check\+\_\+reference\+\_\+points@{check\+\_\+reference\+\_\+points}}
+\index{check\+\_\+reference\+\_\+points@{check\+\_\+reference\+\_\+points}!reference\+\_\+points.\+h@{reference\+\_\+points.\+h}}
+\subsubsection[{check\+\_\+reference\+\_\+points}]{\setlength{\rightskip}{0pt plus 5cm}void check\+\_\+reference\+\_\+points (
+\begin{DoxyParamCaption}
+\item[{struct {\bf odometry\+Track\+Struct} $\ast$}]{ot, }
+\item[{struct {\bf reference\+Pos} $\ast$}]{ref}
+\end{DoxyParamCaption}
+)}}\label{reference__points_8h_ae295b0f6adff6c6ac5a6a122f7a200fa}
+Function to compare the current location with the location saved in the reference points Calls the set\+\_\+reference\+\_\+point function the first time a refernce point is found
+
+This function checks the current robot position with the previous recorded reference position. If a relation is found, the current encoder position are updated with the saved encoder postions. The parameters are a pointer to the struct odometrt\+Track\+Struct and refrence\+Pos and an int which defines which corner it is. The corner is defined in the \hyperlink{map__building_8c_a462cc4f07a4f870677d6c3a8dafef598}{run()} function where this function will be called. 1 = lower\+\_\+left 2 = lower\+\_\+right 3 = upper\+\_\+left 4 = upper\+\_\+right \hypertarget{reference__points_8h_a09641263303ea6b4783a7691c66eaa81}{\index{reference\+\_\+points.\+h@{reference\+\_\+points.\+h}!set\+\_\+reference\+\_\+point@{set\+\_\+reference\+\_\+point}}
+\index{set\+\_\+reference\+\_\+point@{set\+\_\+reference\+\_\+point}!reference\+\_\+points.\+h@{reference\+\_\+points.\+h}}
+\subsubsection[{set\+\_\+reference\+\_\+point}]{\setlength{\rightskip}{0pt plus 5cm}void set\+\_\+reference\+\_\+point (
+\begin{DoxyParamCaption}
+\item[{struct {\bf odometry\+Track\+Struct} $\ast$}]{ot, }
+\item[{struct {\bf reference\+Pos} $\ast$}]{ref, }
+\item[{int}]{corner}
+\end{DoxyParamCaption}
+)}}\label{reference__points_8h_a09641263303ea6b4783a7691c66eaa81}
+Function to set the reference point in the struct
+
+Sets the reference point in the \hyperlink{structreference_pos}{reference\+Pos} struct. The parameters are a pointer to the \hyperlink{structreference_pos}{reference\+Pos} struct and an int. The int specifies which corner will be set. 1 = lower\+\_\+left 2 = lower\+\_\+right 3 = upper\+\_\+left 4 = upper\+\_\+right 

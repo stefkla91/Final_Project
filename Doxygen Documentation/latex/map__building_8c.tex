@@ -1,261 +1,221 @@
-\section{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/map\-\_\-building.c File Reference}
-\label{map__building_8c}\index{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/map\-\_\-building.\-c@{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/map\-\_\-building.\-c}}
-{\ttfamily \#include $<$webots/robot.\-h$>$}\\*
-{\ttfamily \#include $<$webots/differential\-\_\-wheels.\-h$>$}\\*
-{\ttfamily \#include $<$webots/distance\-\_\-sensor.\-h$>$}\\*
-{\ttfamily \#include $<$webots/light\-\_\-sensor.\-h$>$}\\*
-{\ttfamily \#include $<$math.\-h$>$}\\*
-{\ttfamily \#include $<$webots/display.\-h$>$}\\*
-{\ttfamily \#include \char`\"{}map\-\_\-building.\-h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}e\-\_\-puck\-\_\-movement.\-h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}odometry.\-h\char`\"{}}\\*
+\hypertarget{map__building_8c}{\section{C\+:/\+Users/\+Stefan/\+Documents/\+Git\+Hub/\+Final\+\_\+\+Project/lib/map\+\_\+building.c File Reference}
+\label{map__building_8c}\index{C\+:/\+Users/\+Stefan/\+Documents/\+Git\+Hub/\+Final\+\_\+\+Project/lib/map\+\_\+building.\+c@{C\+:/\+Users/\+Stefan/\+Documents/\+Git\+Hub/\+Final\+\_\+\+Project/lib/map\+\_\+building.\+c}}
+}
+{\ttfamily \#include $<$webots/robot.\+h$>$}\\*
+{\ttfamily \#include $<$webots/differential\+\_\+wheels.\+h$>$}\\*
+{\ttfamily \#include $<$webots/distance\+\_\+sensor.\+h$>$}\\*
+{\ttfamily \#include $<$math.\+h$>$}\\*
+{\ttfamily \#include $<$webots/display.\+h$>$}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}functions.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}reference\+\_\+points.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}map\+\_\+building.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}e\+\_\+puck\+\_\+movement.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}odometry.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}e\+\_\+puck\+\_\+distance\+\_\+sensors.\+h\char`\"{}}\\*
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define {\bf T\-I\-M\-E\-\_\-\-S\-T\-E\-P}~8
+\#define \hyperlink{map__building_8c_a65fd90f232757535f02c46a885e49012}{T\+I\+M\+E\+\_\+\+S\+T\+E\+P}~8
 \item 
-\#define {\bf M\-A\-P\-\_\-\-S\-I\-Z\-E}~70
+\#define \hyperlink{map__building_8c_a0a82fd70402bbdc2259248e735fecbca}{M\+A\+P\+\_\+\+S\+I\+Z\+E}~70
 \item 
-\#define {\bf C\-E\-L\-L\-\_\-\-S\-I\-Z\-E}~0.\-015
+\#define \hyperlink{map__building_8c_a7a4127f14f16563da90eb3c836bc404f}{C\+E\+L\+L\+\_\+\+S\+I\+Z\+E}~0.\+015
 \item 
-\#define {\bf T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T}~100
+\#define \hyperlink{map__building_8c_aa57c30c684854687626672a1cfd957fe}{T\+H\+R\+E\+S\+H\+O\+L\+D\+\_\+\+D\+I\+S\+T}~100
 \item 
-\#define {\bf O\-C\-C\-U\-P\-A\-N\-C\-E\-\_\-\-D\-I\-S\-T}~150
+\#define \hyperlink{map__building_8c_a6fe92d7b1da90203a544b43e015febe1}{O\+C\+C\+U\+P\+A\+N\+C\+E\+\_\+\+D\+I\+S\+T}~150
 \item 
-\#define {\bf L\-E\-F\-T}~0
+\#define \hyperlink{map__building_8c_a437ef08681e7210d6678427030446a54}{L\+E\+F\+T}~0
 \item 
-\#define {\bf R\-I\-G\-H\-T}~1
+\#define \hyperlink{map__building_8c_a80fb826a684cf3f0d306b22aa100ddac}{R\+I\+G\+H\+T}~1
 \item 
-\#define {\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}~8
+\#define \hyperlink{map__building_8c_a8c369921a7d778f700fa6a729d50a4db}{N\+U\+M\+\_\+\+D\+I\+S\+T\+\_\+\+S\+E\+N\+S}~8
 \item 
-\#define {\bf P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10}~0
+\#define \hyperlink{map__building_8c_a6ddfdda7a062d10cff4a72b76b44aeb8}{F\+O\+R\+W\+A\+R\+D}~0
 \item 
-\#define {\bf P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45}~1
+\#define \hyperlink{map__building_8c_ae19b6bb2940d2fbe0a79852b070eeafd}{S\+T\+O\+P}~1
 \item 
-\#define {\bf P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90}~2
+\#define \hyperlink{map__building_8c_a316758f4f11a036a0944a85052932578}{T\+U\+R\+N\+R\+I\+G\+H\+T}~2
 \item 
-\#define {\bf P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R}~3
+\#define \hyperlink{map__building_8c_a9f917b4709b1fe9cb8d8f3d7a047e004}{T\+U\+R\+N\+L\+E\+F\+T}~3
 \item 
-\#define {\bf P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R}~4
-\item 
-\#define {\bf P\-S\-\_\-\-L\-E\-F\-T\-\_\-90}~5
-\item 
-\#define {\bf P\-S\-\_\-\-L\-E\-F\-T\-\_\-45}~6
-\item 
-\#define {\bf P\-S\-\_\-\-L\-E\-F\-T\-\_\-10}~7
-\item 
-\#define {\bf F\-O\-R\-W\-A\-R\-D}~0
-\item 
-\#define {\bf T\-U\-R\-N\-R\-I\-G\-H\-T}~1
-\item 
-\#define {\bf T\-U\-R\-N\-L\-E\-F\-T}~2
-\item 
-\#define {\bf U\-T\-U\-R\-N}~3
+\#define \hyperlink{map__building_8c_ae7331b46ecf8d2b688cf4338e9014340}{U\+T\+U\+R\+N}~4
 \end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void {\bf init\-\_\-display} ()
+void \hyperlink{map__building_8c_ac079cd712ceeaf40cc0733b0f3a5d860}{init\+\_\+display} ()
 \item 
-void {\bf occupied\-\_\-cell} (int x, int y, float theta)
+void \hyperlink{map__building_8c_a768822596fca2bc36884a625ef75e6eb}{occupied\+\_\+cell} (int x, int y, float theta)
 \item 
-void {\bf reset} ()
+void \hyperlink{map__building_8c_ad20897c5c8bd47f5d4005989bead0e55}{reset} ()
 \item 
-void {\bf run} (struct {\bf odometry\-Track\-Struct} $\ast${\bf ot})
+void \hyperlink{map__building_8c_aa1b6985443eef22ac94fc154c200afe0}{check\+Obstacles} ()
 \item 
-int $\ast$ {\bf return\-\_\-sensor\-\_\-values} ()
+void \hyperlink{map__building_8c_a462cc4f07a4f870677d6c3a8dafef598}{run} (struct \hyperlink{structodometry_track_struct}{odometry\+Track\+Struct} $\ast$\hyperlink{_main_8c_a8ffe8a155701a233c11370bd93f2225d}{ot}, struct \hyperlink{structreference_pos}{reference\+Pos} $\ast$\hyperlink{_main_8c_a8136ed9afc84601aa3b8c6cd76f95fce}{ref})
 \end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-Wb\-Device\-Tag {\bf led} [3]
+Wb\+Device\+Tag \hyperlink{map__building_8c_ac6de0cb33d79790826e4b1c971d697f1}{led} \mbox{[}3\mbox{]}
 \item 
-Wb\-Device\-Tag {\bf ps} [{\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}]
+Wb\+Device\+Tag \hyperlink{map__building_8c_af4cbc4c1caf40ca4ee35b856890c61ac}{display}
 \item 
-Wb\-Device\-Tag {\bf display}
+Wb\+Image\+Ref \hyperlink{map__building_8c_ad85a4bcb66868c7de4605ff6afff9c6f}{background}
 \item 
-Wb\-Image\-Ref {\bf background}
+int \hyperlink{map__building_8c_afedb05c4f9e44664c74f86a6aecc62bd}{display\+\_\+width}
 \item 
-int {\bf display\-\_\-width}
+int \hyperlink{map__building_8c_a4d1396d7740006e1ac85a02d5a540767}{display\+\_\+height}
 \item 
-int {\bf display\-\_\-height}
+int \hyperlink{map__building_8c_a2c889027b541f6f509221b034e4b163e}{map} \mbox{[}\hyperlink{map__building_8c_a0a82fd70402bbdc2259248e735fecbca}{M\+A\+P\+\_\+\+S\+I\+Z\+E}\mbox{]}\mbox{[}\hyperlink{map__building_8c_a0a82fd70402bbdc2259248e735fecbca}{M\+A\+P\+\_\+\+S\+I\+Z\+E}\mbox{]}
 \item 
-int {\bf map} [{\bf M\-A\-P\-\_\-\-S\-I\-Z\-E}][{\bf M\-A\-P\-\_\-\-S\-I\-Z\-E}]
+int \hyperlink{map__building_8c_acebff8ec41b5f3d0a283cf41bcf648bf}{robot\+\_\+x} = \hyperlink{map__building_8c_a0a82fd70402bbdc2259248e735fecbca}{M\+A\+P\+\_\+\+S\+I\+Z\+E} / 2
 \item 
-int {\bf robot\-\_\-x} = {\bf M\-A\-P\-\_\-\-S\-I\-Z\-E} / 2
+int \hyperlink{map__building_8c_aaf0e185ed55bcdbe56e4fef32cb88195}{robot\+\_\+y} = \hyperlink{map__building_8c_a0a82fd70402bbdc2259248e735fecbca}{M\+A\+P\+\_\+\+S\+I\+Z\+E} / 2
 \item 
-int {\bf robot\-\_\-y} = {\bf M\-A\-P\-\_\-\-S\-I\-Z\-E} / 2
+int \hyperlink{map__building_8c_a4ec02f2a1ca0005f7551c18c3845df8b}{obstacle} \mbox{[}\hyperlink{reference__points_8c_a8c369921a7d778f700fa6a729d50a4db}{N\+U\+M\+\_\+\+D\+I\+S\+T\+\_\+\+S\+E\+N\+S}\mbox{]} =\{0,0,0,0,0,0,0,0\}
 \item 
-int {\bf ps\-\_\-value} [{\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}] =\{0,0,0,0,0,0,0,0\}
+bool \hyperlink{map__building_8c_abb00c592dd0a4b488bbbbeb067e8f824}{ob\+\_\+front}
 \item 
-int {\bf obstacle} [{\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}] =\{0,0,0,0,0,0,0,0\}
+bool \hyperlink{map__building_8c_a59340b79fe3dc43e6fa3e3e8c48a2e4a}{ob\+\_\+right}
 \item 
-bool {\bf ob\-\_\-front}
+bool \hyperlink{map__building_8c_a887ad3d2bbdff7f9b8f324254bef2302}{ob\+\_\+left}
 \item 
-bool {\bf ob\-\_\-right}
+float \hyperlink{map__building_8c_a2ef552c6d94ffe018c8db60b5b416e8e}{angle\+\_\+offset} \mbox{[}\hyperlink{reference__points_8c_a8c369921a7d778f700fa6a729d50a4db}{N\+U\+M\+\_\+\+D\+I\+S\+T\+\_\+\+S\+E\+N\+S}\mbox{]} = \{0.\+2793, 0.\+7854, 1.\+5708, 2.\+618, -\/2.\+618, -\/1.\+5708, -\/0.\+7854, -\/0.\+2793\}
 \item 
-bool {\bf ob\-\_\-left}
+int \hyperlink{map__building_8c_a6bb4b6b07ac2dd14c2828276cecaa78c}{new\+\_\+encoder}
 \item 
-float {\bf angle\-\_\-offset} [{\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}] = \{0.\-2793, 0.\-7854, 1.\-5708, 2.\-618, -\/2.\-618, -\/1.\-5708, -\/0.\-7854, -\/0.\-2793\}
-\item 
-int {\bf new\-\_\-encoder}
-\item 
-int {\bf state} = {\bf F\-O\-R\-W\-A\-R\-D}
+int \hyperlink{map__building_8c_a89f234133d3efe315836311cbf21c64b}{state} = \hyperlink{map__building_8c_a6ddfdda7a062d10cff4a72b76b44aeb8}{F\+O\+R\+W\+A\+R\+D}
 \end{DoxyCompactItemize}
 
 
 \subsection{Macro Definition Documentation}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!C\-E\-L\-L\-\_\-\-S\-I\-Z\-E@{C\-E\-L\-L\-\_\-\-S\-I\-Z\-E}}
-\index{C\-E\-L\-L\-\_\-\-S\-I\-Z\-E@{C\-E\-L\-L\-\_\-\-S\-I\-Z\-E}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{C\-E\-L\-L\-\_\-\-S\-I\-Z\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\-E\-L\-L\-\_\-\-S\-I\-Z\-E~0.\-015}\label{map__building_8c_a7a4127f14f16563da90eb3c836bc404f}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!F\-O\-R\-W\-A\-R\-D@{F\-O\-R\-W\-A\-R\-D}}
-\index{F\-O\-R\-W\-A\-R\-D@{F\-O\-R\-W\-A\-R\-D}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{F\-O\-R\-W\-A\-R\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-O\-R\-W\-A\-R\-D~0}\label{map__building_8c_a6ddfdda7a062d10cff4a72b76b44aeb8}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!L\-E\-F\-T@{L\-E\-F\-T}}
-\index{L\-E\-F\-T@{L\-E\-F\-T}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{L\-E\-F\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\-E\-F\-T~0}\label{map__building_8c_a437ef08681e7210d6678427030446a54}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!M\-A\-P\-\_\-\-S\-I\-Z\-E@{M\-A\-P\-\_\-\-S\-I\-Z\-E}}
-\index{M\-A\-P\-\_\-\-S\-I\-Z\-E@{M\-A\-P\-\_\-\-S\-I\-Z\-E}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{M\-A\-P\-\_\-\-S\-I\-Z\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\-A\-P\-\_\-\-S\-I\-Z\-E~70}\label{map__building_8c_a0a82fd70402bbdc2259248e735fecbca}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S@{N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}}
-\index{N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S@{N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S~8}\label{map__building_8c_a8c369921a7d778f700fa6a729d50a4db}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!O\-C\-C\-U\-P\-A\-N\-C\-E\-\_\-\-D\-I\-S\-T@{O\-C\-C\-U\-P\-A\-N\-C\-E\-\_\-\-D\-I\-S\-T}}
-\index{O\-C\-C\-U\-P\-A\-N\-C\-E\-\_\-\-D\-I\-S\-T@{O\-C\-C\-U\-P\-A\-N\-C\-E\-\_\-\-D\-I\-S\-T}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{O\-C\-C\-U\-P\-A\-N\-C\-E\-\_\-\-D\-I\-S\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\-C\-C\-U\-P\-A\-N\-C\-E\-\_\-\-D\-I\-S\-T~150}\label{map__building_8c_a6fe92d7b1da90203a544b43e015febe1}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!P\-S\-\_\-\-L\-E\-F\-T\-\_\-10@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-10}}
-\index{P\-S\-\_\-\-L\-E\-F\-T\-\_\-10@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-10}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{P\-S\-\_\-\-L\-E\-F\-T\-\_\-10}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-L\-E\-F\-T\-\_\-10~7}\label{map__building_8c_a32980ed08662d1fdc3549b1fc745f4ed}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!P\-S\-\_\-\-L\-E\-F\-T\-\_\-45@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-45}}
-\index{P\-S\-\_\-\-L\-E\-F\-T\-\_\-45@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-45}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{P\-S\-\_\-\-L\-E\-F\-T\-\_\-45}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-L\-E\-F\-T\-\_\-45~6}\label{map__building_8c_a52580588b31ee6250038534e27a35c62}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!P\-S\-\_\-\-L\-E\-F\-T\-\_\-90@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-90}}
-\index{P\-S\-\_\-\-L\-E\-F\-T\-\_\-90@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-90}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{P\-S\-\_\-\-L\-E\-F\-T\-\_\-90}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-L\-E\-F\-T\-\_\-90~5}\label{map__building_8c_a4793a42bd07955a19d8e5a7694dde889}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R}}
-\index{P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R@{P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-L\-E\-F\-T\-\_\-\-R\-E\-A\-R~4}\label{map__building_8c_a2434ac72358eb5efe4b43b27dea9fb38}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10}}
-\index{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-10~0}\label{map__building_8c_aee9f2e2ea0cc13c0ddb875534c8c08f1}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45}}
-\index{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-45~1}\label{map__building_8c_a6f2631a255c296b6df8913539e03bbe2}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90}}
-\index{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-90~2}\label{map__building_8c_a5be98e86f76540dfb90dbbcd19022c90}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R}}
-\index{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R@{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-S\-\_\-\-R\-I\-G\-H\-T\-\_\-\-R\-E\-A\-R~3}\label{map__building_8c_ad205d07f73416f4c26268dc2ece98267}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!R\-I\-G\-H\-T@{R\-I\-G\-H\-T}}
-\index{R\-I\-G\-H\-T@{R\-I\-G\-H\-T}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{R\-I\-G\-H\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\-I\-G\-H\-T~1}\label{map__building_8c_a80fb826a684cf3f0d306b22aa100ddac}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T@{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T}}
-\index{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T@{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-D\-I\-S\-T~100}\label{map__building_8c_aa57c30c684854687626672a1cfd957fe}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!T\-I\-M\-E\-\_\-\-S\-T\-E\-P@{T\-I\-M\-E\-\_\-\-S\-T\-E\-P}}
-\index{T\-I\-M\-E\-\_\-\-S\-T\-E\-P@{T\-I\-M\-E\-\_\-\-S\-T\-E\-P}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{T\-I\-M\-E\-\_\-\-S\-T\-E\-P}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-I\-M\-E\-\_\-\-S\-T\-E\-P~8}\label{map__building_8c_a65fd90f232757535f02c46a885e49012}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!T\-U\-R\-N\-L\-E\-F\-T@{T\-U\-R\-N\-L\-E\-F\-T}}
-\index{T\-U\-R\-N\-L\-E\-F\-T@{T\-U\-R\-N\-L\-E\-F\-T}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{T\-U\-R\-N\-L\-E\-F\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-U\-R\-N\-L\-E\-F\-T~2}\label{map__building_8c_a9f917b4709b1fe9cb8d8f3d7a047e004}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!T\-U\-R\-N\-R\-I\-G\-H\-T@{T\-U\-R\-N\-R\-I\-G\-H\-T}}
-\index{T\-U\-R\-N\-R\-I\-G\-H\-T@{T\-U\-R\-N\-R\-I\-G\-H\-T}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{T\-U\-R\-N\-R\-I\-G\-H\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-U\-R\-N\-R\-I\-G\-H\-T~1}\label{map__building_8c_a316758f4f11a036a0944a85052932578}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!U\-T\-U\-R\-N@{U\-T\-U\-R\-N}}
-\index{U\-T\-U\-R\-N@{U\-T\-U\-R\-N}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{U\-T\-U\-R\-N}]{\setlength{\rightskip}{0pt plus 5cm}\#define U\-T\-U\-R\-N~3}\label{map__building_8c_ae7331b46ecf8d2b688cf4338e9014340}
+\hypertarget{map__building_8c_a7a4127f14f16563da90eb3c836bc404f}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!C\+E\+L\+L\+\_\+\+S\+I\+Z\+E@{C\+E\+L\+L\+\_\+\+S\+I\+Z\+E}}
+\index{C\+E\+L\+L\+\_\+\+S\+I\+Z\+E@{C\+E\+L\+L\+\_\+\+S\+I\+Z\+E}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{C\+E\+L\+L\+\_\+\+S\+I\+Z\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\+E\+L\+L\+\_\+\+S\+I\+Z\+E~0.\+015}}\label{map__building_8c_a7a4127f14f16563da90eb3c836bc404f}
+\hypertarget{map__building_8c_a6ddfdda7a062d10cff4a72b76b44aeb8}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!F\+O\+R\+W\+A\+R\+D@{F\+O\+R\+W\+A\+R\+D}}
+\index{F\+O\+R\+W\+A\+R\+D@{F\+O\+R\+W\+A\+R\+D}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{F\+O\+R\+W\+A\+R\+D}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+O\+R\+W\+A\+R\+D~0}}\label{map__building_8c_a6ddfdda7a062d10cff4a72b76b44aeb8}
+\hypertarget{map__building_8c_a437ef08681e7210d6678427030446a54}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!L\+E\+F\+T@{L\+E\+F\+T}}
+\index{L\+E\+F\+T@{L\+E\+F\+T}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{L\+E\+F\+T}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\+E\+F\+T~0}}\label{map__building_8c_a437ef08681e7210d6678427030446a54}
+\hypertarget{map__building_8c_a0a82fd70402bbdc2259248e735fecbca}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!M\+A\+P\+\_\+\+S\+I\+Z\+E@{M\+A\+P\+\_\+\+S\+I\+Z\+E}}
+\index{M\+A\+P\+\_\+\+S\+I\+Z\+E@{M\+A\+P\+\_\+\+S\+I\+Z\+E}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{M\+A\+P\+\_\+\+S\+I\+Z\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+P\+\_\+\+S\+I\+Z\+E~70}}\label{map__building_8c_a0a82fd70402bbdc2259248e735fecbca}
+\hypertarget{map__building_8c_a8c369921a7d778f700fa6a729d50a4db}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!N\+U\+M\+\_\+\+D\+I\+S\+T\+\_\+\+S\+E\+N\+S@{N\+U\+M\+\_\+\+D\+I\+S\+T\+\_\+\+S\+E\+N\+S}}
+\index{N\+U\+M\+\_\+\+D\+I\+S\+T\+\_\+\+S\+E\+N\+S@{N\+U\+M\+\_\+\+D\+I\+S\+T\+\_\+\+S\+E\+N\+S}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{N\+U\+M\+\_\+\+D\+I\+S\+T\+\_\+\+S\+E\+N\+S}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+U\+M\+\_\+\+D\+I\+S\+T\+\_\+\+S\+E\+N\+S~8}}\label{map__building_8c_a8c369921a7d778f700fa6a729d50a4db}
+\hypertarget{map__building_8c_a6fe92d7b1da90203a544b43e015febe1}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!O\+C\+C\+U\+P\+A\+N\+C\+E\+\_\+\+D\+I\+S\+T@{O\+C\+C\+U\+P\+A\+N\+C\+E\+\_\+\+D\+I\+S\+T}}
+\index{O\+C\+C\+U\+P\+A\+N\+C\+E\+\_\+\+D\+I\+S\+T@{O\+C\+C\+U\+P\+A\+N\+C\+E\+\_\+\+D\+I\+S\+T}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{O\+C\+C\+U\+P\+A\+N\+C\+E\+\_\+\+D\+I\+S\+T}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+C\+C\+U\+P\+A\+N\+C\+E\+\_\+\+D\+I\+S\+T~150}}\label{map__building_8c_a6fe92d7b1da90203a544b43e015febe1}
+\hypertarget{map__building_8c_a80fb826a684cf3f0d306b22aa100ddac}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!R\+I\+G\+H\+T@{R\+I\+G\+H\+T}}
+\index{R\+I\+G\+H\+T@{R\+I\+G\+H\+T}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{R\+I\+G\+H\+T}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+I\+G\+H\+T~1}}\label{map__building_8c_a80fb826a684cf3f0d306b22aa100ddac}
+\hypertarget{map__building_8c_ae19b6bb2940d2fbe0a79852b070eeafd}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!S\+T\+O\+P@{S\+T\+O\+P}}
+\index{S\+T\+O\+P@{S\+T\+O\+P}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{S\+T\+O\+P}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+T\+O\+P~1}}\label{map__building_8c_ae19b6bb2940d2fbe0a79852b070eeafd}
+\hypertarget{map__building_8c_aa57c30c684854687626672a1cfd957fe}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!T\+H\+R\+E\+S\+H\+O\+L\+D\+\_\+\+D\+I\+S\+T@{T\+H\+R\+E\+S\+H\+O\+L\+D\+\_\+\+D\+I\+S\+T}}
+\index{T\+H\+R\+E\+S\+H\+O\+L\+D\+\_\+\+D\+I\+S\+T@{T\+H\+R\+E\+S\+H\+O\+L\+D\+\_\+\+D\+I\+S\+T}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{T\+H\+R\+E\+S\+H\+O\+L\+D\+\_\+\+D\+I\+S\+T}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\+H\+R\+E\+S\+H\+O\+L\+D\+\_\+\+D\+I\+S\+T~100}}\label{map__building_8c_aa57c30c684854687626672a1cfd957fe}
+\hypertarget{map__building_8c_a65fd90f232757535f02c46a885e49012}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!T\+I\+M\+E\+\_\+\+S\+T\+E\+P@{T\+I\+M\+E\+\_\+\+S\+T\+E\+P}}
+\index{T\+I\+M\+E\+\_\+\+S\+T\+E\+P@{T\+I\+M\+E\+\_\+\+S\+T\+E\+P}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{T\+I\+M\+E\+\_\+\+S\+T\+E\+P}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\+I\+M\+E\+\_\+\+S\+T\+E\+P~8}}\label{map__building_8c_a65fd90f232757535f02c46a885e49012}
+File\+: \hyperlink{map__building_8c}{map\+\_\+building.\+c} Date\+: 15.\+03.\+2014 Description\+: This file holds the main controll loop of the program. it holds files which are taken or inspired by the Webots simulator Author\+: Stefan Klaus Modifications\+: v1.\+0 \hypertarget{map__building_8c_a9f917b4709b1fe9cb8d8f3d7a047e004}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!T\+U\+R\+N\+L\+E\+F\+T@{T\+U\+R\+N\+L\+E\+F\+T}}
+\index{T\+U\+R\+N\+L\+E\+F\+T@{T\+U\+R\+N\+L\+E\+F\+T}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{T\+U\+R\+N\+L\+E\+F\+T}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\+U\+R\+N\+L\+E\+F\+T~3}}\label{map__building_8c_a9f917b4709b1fe9cb8d8f3d7a047e004}
+\hypertarget{map__building_8c_a316758f4f11a036a0944a85052932578}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!T\+U\+R\+N\+R\+I\+G\+H\+T@{T\+U\+R\+N\+R\+I\+G\+H\+T}}
+\index{T\+U\+R\+N\+R\+I\+G\+H\+T@{T\+U\+R\+N\+R\+I\+G\+H\+T}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{T\+U\+R\+N\+R\+I\+G\+H\+T}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\+U\+R\+N\+R\+I\+G\+H\+T~2}}\label{map__building_8c_a316758f4f11a036a0944a85052932578}
+\hypertarget{map__building_8c_ae7331b46ecf8d2b688cf4338e9014340}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!U\+T\+U\+R\+N@{U\+T\+U\+R\+N}}
+\index{U\+T\+U\+R\+N@{U\+T\+U\+R\+N}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{U\+T\+U\+R\+N}]{\setlength{\rightskip}{0pt plus 5cm}\#define U\+T\+U\+R\+N~4}}\label{map__building_8c_ae7331b46ecf8d2b688cf4338e9014340}
 
 
 \subsection{Function Documentation}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!init\-\_\-display@{init\-\_\-display}}
-\index{init\-\_\-display@{init\-\_\-display}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{init\-\_\-display}]{\setlength{\rightskip}{0pt plus 5cm}void init\-\_\-display (
+\hypertarget{map__building_8c_aa1b6985443eef22ac94fc154c200afe0}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!check\+Obstacles@{check\+Obstacles}}
+\index{check\+Obstacles@{check\+Obstacles}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{check\+Obstacles}]{\setlength{\rightskip}{0pt plus 5cm}void check\+Obstacles (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}\label{map__building_8c_ac079cd712ceeaf40cc0733b0f3a5d860}
-Initiate the display with a white color \index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!occupied\-\_\-cell@{occupied\-\_\-cell}}
-\index{occupied\-\_\-cell@{occupied\-\_\-cell}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{occupied\-\_\-cell}]{\setlength{\rightskip}{0pt plus 5cm}void occupied\-\_\-cell (
+)}}\label{map__building_8c_aa1b6985443eef22ac94fc154c200afe0}
+Function to check for obstacles, sets the global boolean values Used the make the \hyperlink{map__building_8c_a462cc4f07a4f870677d6c3a8dafef598}{run()} code cleaner \hypertarget{map__building_8c_ac079cd712ceeaf40cc0733b0f3a5d860}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!init\+\_\+display@{init\+\_\+display}}
+\index{init\+\_\+display@{init\+\_\+display}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{init\+\_\+display}]{\setlength{\rightskip}{0pt plus 5cm}void init\+\_\+display (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{map__building_8c_ac079cd712ceeaf40cc0733b0f3a5d860}
+T\+A\+K\+E\+N F\+R\+O\+M T\+H\+E W\+E\+B\+O\+T\+S S\+I\+M\+U\+L\+A\+T\+O\+R Initiate the display with a white color for all rooms but room 3 x \& y = 0 \hypertarget{map__building_8c_a768822596fca2bc36884a625ef75e6eb}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!occupied\+\_\+cell@{occupied\+\_\+cell}}
+\index{occupied\+\_\+cell@{occupied\+\_\+cell}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{occupied\+\_\+cell}]{\setlength{\rightskip}{0pt plus 5cm}void occupied\+\_\+cell (
 \begin{DoxyParamCaption}
 \item[{int}]{x, }
 \item[{int}]{y, }
 \item[{float}]{theta}
 \end{DoxyParamCaption}
-)}\label{map__building_8c_a768822596fca2bc36884a625ef75e6eb}
-Set the coresponding cell to 1 (occu\-M\-\_\-\-P\-Ied) and display it \index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!reset@{reset}}
-\index{reset@{reset}!map_building.c@{map\-\_\-building.\-c}}
+)}}\label{map__building_8c_a768822596fca2bc36884a625ef75e6eb}
+T\+A\+K\+E\+N F\+R\+O\+M T\+H\+E W\+E\+B\+O\+T\+S S\+I\+M\+U\+L\+A\+T\+O\+R Set the coresponding cell to 1 (occupied) and display it \hypertarget{map__building_8c_ad20897c5c8bd47f5d4005989bead0e55}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!reset@{reset}}
+\index{reset@{reset}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
 \subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void reset (
-\begin{DoxyParamCaption}
-\item[{void}]{}
-\end{DoxyParamCaption}
-)}\label{map__building_8c_ad20897c5c8bd47f5d4005989bead0e55}
-enables the needed sensor devices \index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!return\-\_\-sensor\-\_\-values@{return\-\_\-sensor\-\_\-values}}
-\index{return\-\_\-sensor\-\_\-values@{return\-\_\-sensor\-\_\-values}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{return\-\_\-sensor\-\_\-values}]{\setlength{\rightskip}{0pt plus 5cm}int$\ast$ return\-\_\-sensor\-\_\-values (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}\label{map__building_8c_a9f9c7a24acce6dcffa5bce855790b125}
-returns a pointer to an array of the current sensor values \index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!run@{run}}
-\index{run@{run}!map_building.c@{map\-\_\-building.\-c}}
+)}}\label{map__building_8c_ad20897c5c8bd47f5d4005989bead0e55}
+enables the needed sensor devices \hypertarget{map__building_8c_a462cc4f07a4f870677d6c3a8dafef598}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!run@{run}}
+\index{run@{run}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
 \subsubsection[{run}]{\setlength{\rightskip}{0pt plus 5cm}void run (
 \begin{DoxyParamCaption}
-\item[{struct {\bf odometry\-Track\-Struct} $\ast$}]{ot}
+\item[{struct {\bf odometry\+Track\+Struct} $\ast$}]{ot, }
+\item[{struct {\bf reference\+Pos} $\ast$}]{ref}
 \end{DoxyParamCaption}
-)}\label{map__building_8c_a703ca17dd82f3200c33b48069a96097c}
-
+)}}\label{map__building_8c_a462cc4f07a4f870677d6c3a8dafef598}
+Main controll loop of the project. Takes pointers to both teh global odometry and refernce point struct as parameters 
 
 \subsection{Variable Documentation}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!angle\-\_\-offset@{angle\-\_\-offset}}
-\index{angle\-\_\-offset@{angle\-\_\-offset}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{angle\-\_\-offset}]{\setlength{\rightskip}{0pt plus 5cm}float angle\-\_\-offset[{\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}] = \{0.\-2793, 0.\-7854, 1.\-5708, 2.\-618, -\/2.\-618, -\/1.\-5708, -\/0.\-7854, -\/0.\-2793\}}\label{map__building_8c_a2ef552c6d94ffe018c8db60b5b416e8e}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!background@{background}}
-\index{background@{background}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{background}]{\setlength{\rightskip}{0pt plus 5cm}Wb\-Image\-Ref background}\label{map__building_8c_ad85a4bcb66868c7de4605ff6afff9c6f}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!display@{display}}
-\index{display@{display}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{display}]{\setlength{\rightskip}{0pt plus 5cm}Wb\-Device\-Tag display}\label{map__building_8c_af4cbc4c1caf40ca4ee35b856890c61ac}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!display\-\_\-height@{display\-\_\-height}}
-\index{display\-\_\-height@{display\-\_\-height}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{display\-\_\-height}]{\setlength{\rightskip}{0pt plus 5cm}int display\-\_\-height}\label{map__building_8c_a4d1396d7740006e1ac85a02d5a540767}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!display\-\_\-width@{display\-\_\-width}}
-\index{display\-\_\-width@{display\-\_\-width}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{display\-\_\-width}]{\setlength{\rightskip}{0pt plus 5cm}int display\-\_\-width}\label{map__building_8c_afedb05c4f9e44664c74f86a6aecc62bd}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!led@{led}}
-\index{led@{led}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{led}]{\setlength{\rightskip}{0pt plus 5cm}Wb\-Device\-Tag led[3]}\label{map__building_8c_ac6de0cb33d79790826e4b1c971d697f1}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!map@{map}}
-\index{map@{map}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{map}]{\setlength{\rightskip}{0pt plus 5cm}int map[{\bf M\-A\-P\-\_\-\-S\-I\-Z\-E}][{\bf M\-A\-P\-\_\-\-S\-I\-Z\-E}]}\label{map__building_8c_a2c889027b541f6f509221b034e4b163e}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!new\-\_\-encoder@{new\-\_\-encoder}}
-\index{new\-\_\-encoder@{new\-\_\-encoder}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{new\-\_\-encoder}]{\setlength{\rightskip}{0pt plus 5cm}int new\-\_\-encoder}\label{map__building_8c_a6bb4b6b07ac2dd14c2828276cecaa78c}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!ob\-\_\-front@{ob\-\_\-front}}
-\index{ob\-\_\-front@{ob\-\_\-front}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{ob\-\_\-front}]{\setlength{\rightskip}{0pt plus 5cm}bool ob\-\_\-front}\label{map__building_8c_abb00c592dd0a4b488bbbbeb067e8f824}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!ob\-\_\-left@{ob\-\_\-left}}
-\index{ob\-\_\-left@{ob\-\_\-left}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{ob\-\_\-left}]{\setlength{\rightskip}{0pt plus 5cm}bool ob\-\_\-left}\label{map__building_8c_a887ad3d2bbdff7f9b8f324254bef2302}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!ob\-\_\-right@{ob\-\_\-right}}
-\index{ob\-\_\-right@{ob\-\_\-right}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{ob\-\_\-right}]{\setlength{\rightskip}{0pt plus 5cm}bool ob\-\_\-right}\label{map__building_8c_a59340b79fe3dc43e6fa3e3e8c48a2e4a}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!obstacle@{obstacle}}
-\index{obstacle@{obstacle}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{obstacle}]{\setlength{\rightskip}{0pt plus 5cm}int obstacle[{\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}] =\{0,0,0,0,0,0,0,0\}}\label{map__building_8c_a4ec02f2a1ca0005f7551c18c3845df8b}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!ps@{ps}}
-\index{ps@{ps}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{ps}]{\setlength{\rightskip}{0pt plus 5cm}Wb\-Device\-Tag ps[{\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}]}\label{map__building_8c_a474c5f292c061c0a11a224021a9a61de}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!ps\-\_\-value@{ps\-\_\-value}}
-\index{ps\-\_\-value@{ps\-\_\-value}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{ps\-\_\-value}]{\setlength{\rightskip}{0pt plus 5cm}int ps\-\_\-value[{\bf N\-U\-M\-\_\-\-D\-I\-S\-T\-\_\-\-S\-E\-N\-S}] =\{0,0,0,0,0,0,0,0\}}\label{map__building_8c_a942844b8c29e4d68af81e074242b5463}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!robot\-\_\-x@{robot\-\_\-x}}
-\index{robot\-\_\-x@{robot\-\_\-x}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{robot\-\_\-x}]{\setlength{\rightskip}{0pt plus 5cm}int robot\-\_\-x = {\bf M\-A\-P\-\_\-\-S\-I\-Z\-E} / 2}\label{map__building_8c_acebff8ec41b5f3d0a283cf41bcf648bf}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!robot\-\_\-y@{robot\-\_\-y}}
-\index{robot\-\_\-y@{robot\-\_\-y}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{robot\-\_\-y}]{\setlength{\rightskip}{0pt plus 5cm}int robot\-\_\-y = {\bf M\-A\-P\-\_\-\-S\-I\-Z\-E} / 2}\label{map__building_8c_aaf0e185ed55bcdbe56e4fef32cb88195}
-\index{map\-\_\-building.\-c@{map\-\_\-building.\-c}!state@{state}}
-\index{state@{state}!map_building.c@{map\-\_\-building.\-c}}
-\subsubsection[{state}]{\setlength{\rightskip}{0pt plus 5cm}int state = {\bf F\-O\-R\-W\-A\-R\-D}}\label{map__building_8c_a89f234133d3efe315836311cbf21c64b}
+\hypertarget{map__building_8c_a2ef552c6d94ffe018c8db60b5b416e8e}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!angle\+\_\+offset@{angle\+\_\+offset}}
+\index{angle\+\_\+offset@{angle\+\_\+offset}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{angle\+\_\+offset}]{\setlength{\rightskip}{0pt plus 5cm}float angle\+\_\+offset\mbox{[}{\bf N\+U\+M\+\_\+\+D\+I\+S\+T\+\_\+\+S\+E\+N\+S}\mbox{]} = \{0.\+2793, 0.\+7854, 1.\+5708, 2.\+618, -\/2.\+618, -\/1.\+5708, -\/0.\+7854, -\/0.\+2793\}}}\label{map__building_8c_a2ef552c6d94ffe018c8db60b5b416e8e}
+\hypertarget{map__building_8c_ad85a4bcb66868c7de4605ff6afff9c6f}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!background@{background}}
+\index{background@{background}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{background}]{\setlength{\rightskip}{0pt plus 5cm}Wb\+Image\+Ref background}}\label{map__building_8c_ad85a4bcb66868c7de4605ff6afff9c6f}
+\hypertarget{map__building_8c_af4cbc4c1caf40ca4ee35b856890c61ac}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!display@{display}}
+\index{display@{display}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{display}]{\setlength{\rightskip}{0pt plus 5cm}Wb\+Device\+Tag display}}\label{map__building_8c_af4cbc4c1caf40ca4ee35b856890c61ac}
+\hypertarget{map__building_8c_a4d1396d7740006e1ac85a02d5a540767}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!display\+\_\+height@{display\+\_\+height}}
+\index{display\+\_\+height@{display\+\_\+height}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{display\+\_\+height}]{\setlength{\rightskip}{0pt plus 5cm}int display\+\_\+height}}\label{map__building_8c_a4d1396d7740006e1ac85a02d5a540767}
+\hypertarget{map__building_8c_afedb05c4f9e44664c74f86a6aecc62bd}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!display\+\_\+width@{display\+\_\+width}}
+\index{display\+\_\+width@{display\+\_\+width}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{display\+\_\+width}]{\setlength{\rightskip}{0pt plus 5cm}int display\+\_\+width}}\label{map__building_8c_afedb05c4f9e44664c74f86a6aecc62bd}
+\hypertarget{map__building_8c_ac6de0cb33d79790826e4b1c971d697f1}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!led@{led}}
+\index{led@{led}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{led}]{\setlength{\rightskip}{0pt plus 5cm}Wb\+Device\+Tag led\mbox{[}3\mbox{]}}}\label{map__building_8c_ac6de0cb33d79790826e4b1c971d697f1}
+\hypertarget{map__building_8c_a2c889027b541f6f509221b034e4b163e}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!map@{map}}
+\index{map@{map}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{map}]{\setlength{\rightskip}{0pt plus 5cm}int map\mbox{[}{\bf M\+A\+P\+\_\+\+S\+I\+Z\+E}\mbox{]}\mbox{[}{\bf M\+A\+P\+\_\+\+S\+I\+Z\+E}\mbox{]}}}\label{map__building_8c_a2c889027b541f6f509221b034e4b163e}
+\hypertarget{map__building_8c_a6bb4b6b07ac2dd14c2828276cecaa78c}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!new\+\_\+encoder@{new\+\_\+encoder}}
+\index{new\+\_\+encoder@{new\+\_\+encoder}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{new\+\_\+encoder}]{\setlength{\rightskip}{0pt plus 5cm}int new\+\_\+encoder}}\label{map__building_8c_a6bb4b6b07ac2dd14c2828276cecaa78c}
+\hypertarget{map__building_8c_abb00c592dd0a4b488bbbbeb067e8f824}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!ob\+\_\+front@{ob\+\_\+front}}
+\index{ob\+\_\+front@{ob\+\_\+front}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{ob\+\_\+front}]{\setlength{\rightskip}{0pt plus 5cm}bool ob\+\_\+front}}\label{map__building_8c_abb00c592dd0a4b488bbbbeb067e8f824}
+\hypertarget{map__building_8c_a887ad3d2bbdff7f9b8f324254bef2302}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!ob\+\_\+left@{ob\+\_\+left}}
+\index{ob\+\_\+left@{ob\+\_\+left}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{ob\+\_\+left}]{\setlength{\rightskip}{0pt plus 5cm}bool ob\+\_\+left}}\label{map__building_8c_a887ad3d2bbdff7f9b8f324254bef2302}
+\hypertarget{map__building_8c_a59340b79fe3dc43e6fa3e3e8c48a2e4a}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!ob\+\_\+right@{ob\+\_\+right}}
+\index{ob\+\_\+right@{ob\+\_\+right}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{ob\+\_\+right}]{\setlength{\rightskip}{0pt plus 5cm}bool ob\+\_\+right}}\label{map__building_8c_a59340b79fe3dc43e6fa3e3e8c48a2e4a}
+\hypertarget{map__building_8c_a4ec02f2a1ca0005f7551c18c3845df8b}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!obstacle@{obstacle}}
+\index{obstacle@{obstacle}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{obstacle}]{\setlength{\rightskip}{0pt plus 5cm}int obstacle\mbox{[}{\bf N\+U\+M\+\_\+\+D\+I\+S\+T\+\_\+\+S\+E\+N\+S}\mbox{]} =\{0,0,0,0,0,0,0,0\}}}\label{map__building_8c_a4ec02f2a1ca0005f7551c18c3845df8b}
+\hypertarget{map__building_8c_acebff8ec41b5f3d0a283cf41bcf648bf}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!robot\+\_\+x@{robot\+\_\+x}}
+\index{robot\+\_\+x@{robot\+\_\+x}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{robot\+\_\+x}]{\setlength{\rightskip}{0pt plus 5cm}int robot\+\_\+x = {\bf M\+A\+P\+\_\+\+S\+I\+Z\+E} / 2}}\label{map__building_8c_acebff8ec41b5f3d0a283cf41bcf648bf}
+\hypertarget{map__building_8c_aaf0e185ed55bcdbe56e4fef32cb88195}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!robot\+\_\+y@{robot\+\_\+y}}
+\index{robot\+\_\+y@{robot\+\_\+y}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{robot\+\_\+y}]{\setlength{\rightskip}{0pt plus 5cm}int robot\+\_\+y = {\bf M\+A\+P\+\_\+\+S\+I\+Z\+E} / 2}}\label{map__building_8c_aaf0e185ed55bcdbe56e4fef32cb88195}
+\hypertarget{map__building_8c_a89f234133d3efe315836311cbf21c64b}{\index{map\+\_\+building.\+c@{map\+\_\+building.\+c}!state@{state}}
+\index{state@{state}!map\+\_\+building.\+c@{map\+\_\+building.\+c}}
+\subsubsection[{state}]{\setlength{\rightskip}{0pt plus 5cm}int state = {\bf F\+O\+R\+W\+A\+R\+D}}}\label{map__building_8c_a89f234133d3efe315836311cbf21c64b}

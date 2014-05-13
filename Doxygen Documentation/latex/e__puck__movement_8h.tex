@@ -1,105 +1,153 @@
-\section{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/lib/e\-\_\-puck\-\_\-movement.h File Reference}
-\label{e__puck__movement_8h}\index{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/lib/e\-\_\-puck\-\_\-movement.\-h@{C\-:/\-Users/\-Stefan/\-Documents/\-Git\-Hub/\-Final\-\_\-\-Project/lib/e\-\_\-puck\-\_\-movement.\-h}}
+\hypertarget{e__puck__movement_8h}{\section{C\+:/\+Users/\+Stefan/\+Documents/\+Git\+Hub/\+Final\+\_\+\+Project/lib/e\+\_\+puck\+\_\+movement.h File Reference}
+\label{e__puck__movement_8h}\index{C\+:/\+Users/\+Stefan/\+Documents/\+Git\+Hub/\+Final\+\_\+\+Project/lib/e\+\_\+puck\+\_\+movement.\+h@{C\+:/\+Users/\+Stefan/\+Documents/\+Git\+Hub/\+Final\+\_\+\+Project/lib/e\+\_\+puck\+\_\+movement.\+h}}
+}
+{\ttfamily \#include \char`\"{}odometry.\+h\char`\"{}}\\*
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void {\bf stop\-\_\-robot} ()
+void \hyperlink{e__puck__movement_8h_ae06729b4d38e1378544b43f69e6d07b3}{stop\+\_\+robot} ()
 \item 
-void {\bf turn\-\_\-left} (double d\-Speed)
+void \hyperlink{e__puck__movement_8h_ade400f59ef55b2b57712db90ba871bc9}{move\+\_\+forward} (double d\+Sped, double d\+Dis, struct \hyperlink{structodometry_track_struct}{odometry\+Track\+Struct} $\ast$\hyperlink{_main_8c_a8ffe8a155701a233c11370bd93f2225d}{ot})
 \item 
-void {\bf turn\-\_\-right} (double d\-Speed)
+void \hyperlink{e__puck__movement_8h_a52df61e7e792cf4c167b5b53a524c717}{turn\+\_\+left} (double d\+Speed)
 \item 
-void {\bf turn\-\_\-angle} (double d\-Angle, double d\-Speed)
+void \hyperlink{e__puck__movement_8h_a8753cbe45ab440b5e87c9905b3242e5a}{turn\+\_\+right} (double d\+Speed)
 \item 
-void {\bf set\-\_\-motor\-\_\-speed} (double d\-Speed\-L, double d\-Speed\-R)
+void \hyperlink{e__puck__movement_8h_a9f3c2696496f92472f46061f56a254f0}{turn\+\_\+angle} (double d\+Angle, double d\+Speed)
 \item 
-double $\ast$ {\bf get\-\_\-encoder\-\_\-positions} ()
+void \hyperlink{e__puck__movement_8h_a9b00dec871b65c437b7e1fe703fd04df}{set\+\_\+motor\+\_\+speed} (double d\+Speed\+L, double d\+Speed\+R)
 \item 
-double $\ast$ {\bf compute\-\_\-odometry\-\_\-data} ()
+double $\ast$ \hyperlink{e__puck__movement_8h_a752a375670e236acbdefe853a4640ccf}{get\+\_\+encoder\+\_\+positions} ()
 \item 
-void {\bf set\-\_\-leds} (int i\-Active)
+double $\ast$ \hyperlink{e__puck__movement_8h_a0fa0142462aaecb3d506e91835bd80d5}{compute\+\_\+odometry\+\_\+data} ()
 \item 
-void {\bf controll\-\_\-angle} ()
+void \hyperlink{e__puck__movement_8h_a3336236c14c05ddcc32f5389dfe6b33c}{U\+M\+Bmark} (double d\+Speed, double d\+Distance, struct \hyperlink{structodometry_track_struct}{odometry\+Track\+Struct} $\ast$\hyperlink{_main_8c_a8ffe8a155701a233c11370bd93f2225d}{ot})
 \item 
-void {\bf check\-\_\-rotation} (double cur\-\_\-rot, double want\-\_\-rot, double d\-Speed)
+void \hyperlink{e__puck__movement_8h_a72c8316ffa6aca4d316fe015d10c9e1d}{measure\+\_\+clock\+Wise} (double d\+Speed, double d\+Distance, struct \hyperlink{structodometry_track_struct}{odometry\+Track\+Struct} $\ast$\hyperlink{_main_8c_a8ffe8a155701a233c11370bd93f2225d}{ot})
+\item 
+void \hyperlink{e__puck__movement_8h_a123b1b2ccb51988cd4dba6dd8a142849}{measure\+\_\+\+Counter\+Clock\+Wise} (double d\+Speed, double d\+Distance, struct \hyperlink{structodometry_track_struct}{odometry\+Track\+Struct} $\ast$\hyperlink{_main_8c_a8ffe8a155701a233c11370bd93f2225d}{ot})
+\item 
+void \hyperlink{e__puck__movement_8h_ae3574666f129d82ba027d505d18ce57c}{set\+\_\+leds} (int i\+Active)
+\item 
+void \hyperlink{e__puck__movement_8h_a8fbbffa073c23744f687c646196f7b23}{controll\+\_\+angle} ()
+\item 
+void \hyperlink{e__puck__movement_8h_aaf4d026845195a1a7d3bf58445213292}{check\+\_\+rotation} (double cur\+\_\+rot, double want\+\_\+rot, double d\+Speed)
 \end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
-\index{e\-\_\-puck\-\_\-movement.\-h@{e\-\_\-puck\-\_\-movement.\-h}!check\-\_\-rotation@{check\-\_\-rotation}}
-\index{check\-\_\-rotation@{check\-\_\-rotation}!e_puck_movement.h@{e\-\_\-puck\-\_\-movement.\-h}}
-\subsubsection[{check\-\_\-rotation}]{\setlength{\rightskip}{0pt plus 5cm}void check\-\_\-rotation (
+\hypertarget{e__puck__movement_8h_aaf4d026845195a1a7d3bf58445213292}{\index{e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}!check\+\_\+rotation@{check\+\_\+rotation}}
+\index{check\+\_\+rotation@{check\+\_\+rotation}!e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}}
+\subsubsection[{check\+\_\+rotation}]{\setlength{\rightskip}{0pt plus 5cm}void check\+\_\+rotation (
 \begin{DoxyParamCaption}
-\item[{double}]{cur\-\_\-rot, }
-\item[{double}]{want\-\_\-rot, }
-\item[{double}]{d\-Speed}
+\item[{double}]{cur\+\_\+rot, }
+\item[{double}]{want\+\_\+rot, }
+\item[{double}]{d\+Speed}
 \end{DoxyParamCaption}
-)}\label{e__puck__movement_8h_aaf4d026845195a1a7d3bf58445213292}
-F\-Unction to compare the current heading to the wanted heading and fix the heading should it surpass a threshold \index{e\-\_\-puck\-\_\-movement.\-h@{e\-\_\-puck\-\_\-movement.\-h}!compute\-\_\-odometry\-\_\-data@{compute\-\_\-odometry\-\_\-data}}
-\index{compute\-\_\-odometry\-\_\-data@{compute\-\_\-odometry\-\_\-data}!e_puck_movement.h@{e\-\_\-puck\-\_\-movement.\-h}}
-\subsubsection[{compute\-\_\-odometry\-\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ compute\-\_\-odometry\-\_\-data (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\label{e__puck__movement_8h_a0fa0142462aaecb3d506e91835bd80d5}
-Function to compute the robots current odometry data this includes the x and y placement as well as the rotation theta \index{e\-\_\-puck\-\_\-movement.\-h@{e\-\_\-puck\-\_\-movement.\-h}!controll\-\_\-angle@{controll\-\_\-angle}}
-\index{controll\-\_\-angle@{controll\-\_\-angle}!e_puck_movement.h@{e\-\_\-puck\-\_\-movement.\-h}}
-\subsubsection[{controll\-\_\-angle}]{\setlength{\rightskip}{0pt plus 5cm}void controll\-\_\-angle (
+)}}\label{e__puck__movement_8h_aaf4d026845195a1a7d3bf58445213292}
+Function to compare the current heading to the wanted heading and fix the heading should it surpass a threshold \hypertarget{e__puck__movement_8h_a0fa0142462aaecb3d506e91835bd80d5}{\index{e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}!compute\+\_\+odometry\+\_\+data@{compute\+\_\+odometry\+\_\+data}}
+\index{compute\+\_\+odometry\+\_\+data@{compute\+\_\+odometry\+\_\+data}!e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}}
+\subsubsection[{compute\+\_\+odometry\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ compute\+\_\+odometry\+\_\+data (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}\label{e__puck__movement_8h_a8fbbffa073c23744f687c646196f7b23}
-\index{e\-\_\-puck\-\_\-movement.\-h@{e\-\_\-puck\-\_\-movement.\-h}!get\-\_\-encoder\-\_\-positions@{get\-\_\-encoder\-\_\-positions}}
-\index{get\-\_\-encoder\-\_\-positions@{get\-\_\-encoder\-\_\-positions}!e_puck_movement.h@{e\-\_\-puck\-\_\-movement.\-h}}
-\subsubsection[{get\-\_\-encoder\-\_\-positions}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ get\-\_\-encoder\-\_\-positions (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\label{e__puck__movement_8h_a752a375670e236acbdefe853a4640ccf}
-Function to get and return the current encoder position of the wheels \index{e\-\_\-puck\-\_\-movement.\-h@{e\-\_\-puck\-\_\-movement.\-h}!set\-\_\-leds@{set\-\_\-leds}}
-\index{set\-\_\-leds@{set\-\_\-leds}!e_puck_movement.h@{e\-\_\-puck\-\_\-movement.\-h}}
-\subsubsection[{set\-\_\-leds}]{\setlength{\rightskip}{0pt plus 5cm}void set\-\_\-leds (
-\begin{DoxyParamCaption}
-\item[{int}]{i\-Active}
-\end{DoxyParamCaption}
-)}\label{e__puck__movement_8h_ae3574666f129d82ba027d505d18ce57c}
-University of Michigan Benchmark Function to measure the movement accuracy by driving a clockwise square. This is part of the U\-M\-Bmark algorithm Function to measure the movement accuracy by driving a counter-\/clockwise square. This is part of the U\-M\-Bmark algorithm set the status of the L\-E\-Ds \index{e\-\_\-puck\-\_\-movement.\-h@{e\-\_\-puck\-\_\-movement.\-h}!set\-\_\-motor\-\_\-speed@{set\-\_\-motor\-\_\-speed}}
-\index{set\-\_\-motor\-\_\-speed@{set\-\_\-motor\-\_\-speed}!e_puck_movement.h@{e\-\_\-puck\-\_\-movement.\-h}}
-\subsubsection[{set\-\_\-motor\-\_\-speed}]{\setlength{\rightskip}{0pt plus 5cm}void set\-\_\-motor\-\_\-speed (
-\begin{DoxyParamCaption}
-\item[{double}]{d\-Speed\-L, }
-\item[{double}]{d\-Speed\-R}
-\end{DoxyParamCaption}
-)}\label{e__puck__movement_8h_a9b00dec871b65c437b7e1fe703fd04df}
-Function to set the motor speed of the robot \index{e\-\_\-puck\-\_\-movement.\-h@{e\-\_\-puck\-\_\-movement.\-h}!stop\-\_\-robot@{stop\-\_\-robot}}
-\index{stop\-\_\-robot@{stop\-\_\-robot}!e_puck_movement.h@{e\-\_\-puck\-\_\-movement.\-h}}
-\subsubsection[{stop\-\_\-robot}]{\setlength{\rightskip}{0pt plus 5cm}void stop\-\_\-robot (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\label{e__puck__movement_8h_ae06729b4d38e1378544b43f69e6d07b3}
-File\-: \doxyref{e\-\_\-puck\-\_\-movement.\-h}{p.}{e__puck__movement_8h} Date\-: 10.\-03.\-2014 Description\-: Header file for \doxyref{e\-\_\-puck\-\_\-movement.\-c}{p.}{e__puck__movement_8c} Author\-: Stefan Klaus Modifications\-: V 0.\-3\-Stops the robot
+)}}\label{e__puck__movement_8h_a0fa0142462aaecb3d506e91835bd80d5}
+N\+O\+T\+E\+: This function has no practical use as the odometry data it generates is not used in anyway However removing it led to errors in the movement and turning algorithms and it was not enough time to fix these errors.
 
-Function to stop the robot \index{e\-\_\-puck\-\_\-movement.\-h@{e\-\_\-puck\-\_\-movement.\-h}!turn\-\_\-angle@{turn\-\_\-angle}}
-\index{turn\-\_\-angle@{turn\-\_\-angle}!e_puck_movement.h@{e\-\_\-puck\-\_\-movement.\-h}}
-\subsubsection[{turn\-\_\-angle}]{\setlength{\rightskip}{0pt plus 5cm}void turn\-\_\-angle (
+Function to compute the robots current odometry data this includes the x and y placement as well as the rotation theta \hypertarget{e__puck__movement_8h_a8fbbffa073c23744f687c646196f7b23}{\index{e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}!controll\+\_\+angle@{controll\+\_\+angle}}
+\index{controll\+\_\+angle@{controll\+\_\+angle}!e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}}
+\subsubsection[{controll\+\_\+angle}]{\setlength{\rightskip}{0pt plus 5cm}void controll\+\_\+angle (
 \begin{DoxyParamCaption}
-\item[{double}]{d\-Angle, }
-\item[{double}]{d\-Speed}
+{}
 \end{DoxyParamCaption}
-)}\label{e__puck__movement_8h_a9f3c2696496f92472f46061f56a254f0}
-Function to turn the robot a given angle with a given speed \index{e\-\_\-puck\-\_\-movement.\-h@{e\-\_\-puck\-\_\-movement.\-h}!turn\-\_\-left@{turn\-\_\-left}}
-\index{turn\-\_\-left@{turn\-\_\-left}!e_puck_movement.h@{e\-\_\-puck\-\_\-movement.\-h}}
-\subsubsection[{turn\-\_\-left}]{\setlength{\rightskip}{0pt plus 5cm}void turn\-\_\-left (
+)}}\label{e__puck__movement_8h_a8fbbffa073c23744f687c646196f7b23}
+\hypertarget{e__puck__movement_8h_a752a375670e236acbdefe853a4640ccf}{\index{e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}!get\+\_\+encoder\+\_\+positions@{get\+\_\+encoder\+\_\+positions}}
+\index{get\+\_\+encoder\+\_\+positions@{get\+\_\+encoder\+\_\+positions}!e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}}
+\subsubsection[{get\+\_\+encoder\+\_\+positions}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ get\+\_\+encoder\+\_\+positions (
 \begin{DoxyParamCaption}
-\item[{double}]{d\-Speed}
+{}
 \end{DoxyParamCaption}
-)}\label{e__puck__movement_8h_a52df61e7e792cf4c167b5b53a524c717}
-Function to turn left \index{e\-\_\-puck\-\_\-movement.\-h@{e\-\_\-puck\-\_\-movement.\-h}!turn\-\_\-right@{turn\-\_\-right}}
-\index{turn\-\_\-right@{turn\-\_\-right}!e_puck_movement.h@{e\-\_\-puck\-\_\-movement.\-h}}
-\subsubsection[{turn\-\_\-right}]{\setlength{\rightskip}{0pt plus 5cm}void turn\-\_\-right (
+)}}\label{e__puck__movement_8h_a752a375670e236acbdefe853a4640ccf}
+Function to get and return the current encoder position of the wheels \hypertarget{e__puck__movement_8h_a72c8316ffa6aca4d316fe015d10c9e1d}{\index{e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}!measure\+\_\+clock\+Wise@{measure\+\_\+clock\+Wise}}
+\index{measure\+\_\+clock\+Wise@{measure\+\_\+clock\+Wise}!e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}}
+\subsubsection[{measure\+\_\+clock\+Wise}]{\setlength{\rightskip}{0pt plus 5cm}void measure\+\_\+clock\+Wise (
 \begin{DoxyParamCaption}
-\item[{double}]{d\-Speed}
+\item[{double}]{d\+Speed, }
+\item[{double}]{d\+Distance, }
+\item[{struct {\bf odometry\+Track\+Struct} $\ast$}]{ot}
 \end{DoxyParamCaption}
-)}\label{e__puck__movement_8h_a8753cbe45ab440b5e87c9905b3242e5a}
-Function to turn right 
+)}}\label{e__puck__movement_8h_a72c8316ffa6aca4d316fe015d10c9e1d}
+Function to measure the movement accuracy by driving a clockwise square. This is part of the U\+M\+Bmark algorithm \hypertarget{e__puck__movement_8h_a123b1b2ccb51988cd4dba6dd8a142849}{\index{e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}!measure\+\_\+\+Counter\+Clock\+Wise@{measure\+\_\+\+Counter\+Clock\+Wise}}
+\index{measure\+\_\+\+Counter\+Clock\+Wise@{measure\+\_\+\+Counter\+Clock\+Wise}!e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}}
+\subsubsection[{measure\+\_\+\+Counter\+Clock\+Wise}]{\setlength{\rightskip}{0pt plus 5cm}void measure\+\_\+\+Counter\+Clock\+Wise (
+\begin{DoxyParamCaption}
+\item[{double}]{d\+Speed, }
+\item[{double}]{d\+Distance, }
+\item[{struct {\bf odometry\+Track\+Struct} $\ast$}]{ot}
+\end{DoxyParamCaption}
+)}}\label{e__puck__movement_8h_a123b1b2ccb51988cd4dba6dd8a142849}
+Function to measure the movement accuracy by driving a counter-\/clockwise square. This is part of the U\+M\+Bmark algorithm \hypertarget{e__puck__movement_8h_ade400f59ef55b2b57712db90ba871bc9}{\index{e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}!move\+\_\+forward@{move\+\_\+forward}}
+\index{move\+\_\+forward@{move\+\_\+forward}!e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}}
+\subsubsection[{move\+\_\+forward}]{\setlength{\rightskip}{0pt plus 5cm}void move\+\_\+forward (
+\begin{DoxyParamCaption}
+\item[{double}]{d\+Sped, }
+\item[{double}]{d\+Dis, }
+\item[{struct {\bf odometry\+Track\+Struct} $\ast$}]{ot}
+\end{DoxyParamCaption}
+)}}\label{e__puck__movement_8h_ade400f59ef55b2b57712db90ba871bc9}
+Function to move the robot forward a given distance at a given speed \hypertarget{e__puck__movement_8h_ae3574666f129d82ba027d505d18ce57c}{\index{e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}!set\+\_\+leds@{set\+\_\+leds}}
+\index{set\+\_\+leds@{set\+\_\+leds}!e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}}
+\subsubsection[{set\+\_\+leds}]{\setlength{\rightskip}{0pt plus 5cm}void set\+\_\+leds (
+\begin{DoxyParamCaption}
+\item[{int}]{i\+Active}
+\end{DoxyParamCaption}
+)}}\label{e__puck__movement_8h_ae3574666f129d82ba027d505d18ce57c}
+set the status of the L\+E\+Ds \hypertarget{e__puck__movement_8h_a9b00dec871b65c437b7e1fe703fd04df}{\index{e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}!set\+\_\+motor\+\_\+speed@{set\+\_\+motor\+\_\+speed}}
+\index{set\+\_\+motor\+\_\+speed@{set\+\_\+motor\+\_\+speed}!e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}}
+\subsubsection[{set\+\_\+motor\+\_\+speed}]{\setlength{\rightskip}{0pt plus 5cm}void set\+\_\+motor\+\_\+speed (
+\begin{DoxyParamCaption}
+\item[{double}]{d\+Speed\+L, }
+\item[{double}]{d\+Speed\+R}
+\end{DoxyParamCaption}
+)}}\label{e__puck__movement_8h_a9b00dec871b65c437b7e1fe703fd04df}
+Function to set the motor speed of the robot \hypertarget{e__puck__movement_8h_ae06729b4d38e1378544b43f69e6d07b3}{\index{e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}!stop\+\_\+robot@{stop\+\_\+robot}}
+\index{stop\+\_\+robot@{stop\+\_\+robot}!e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}}
+\subsubsection[{stop\+\_\+robot}]{\setlength{\rightskip}{0pt plus 5cm}void stop\+\_\+robot (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{e__puck__movement_8h_ae06729b4d38e1378544b43f69e6d07b3}
+File\+: \hyperlink{e__puck__movement_8h}{e\+\_\+puck\+\_\+movement.\+h} Date\+: 10.\+03.\+2014 Description\+: Header file for \hyperlink{e__puck__movement_8c}{e\+\_\+puck\+\_\+movement.\+c} Author\+: Stefan Klaus Modifications\+: V 1.\+0\+Stops the robot
+
+Function to stop the robot \hypertarget{e__puck__movement_8h_a9f3c2696496f92472f46061f56a254f0}{\index{e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}!turn\+\_\+angle@{turn\+\_\+angle}}
+\index{turn\+\_\+angle@{turn\+\_\+angle}!e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}}
+\subsubsection[{turn\+\_\+angle}]{\setlength{\rightskip}{0pt plus 5cm}void turn\+\_\+angle (
+\begin{DoxyParamCaption}
+\item[{double}]{d\+Angle, }
+\item[{double}]{d\+Speed}
+\end{DoxyParamCaption}
+)}}\label{e__puck__movement_8h_a9f3c2696496f92472f46061f56a254f0}
+Function to turn the robot a given angle with a given speed \hypertarget{e__puck__movement_8h_a52df61e7e792cf4c167b5b53a524c717}{\index{e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}!turn\+\_\+left@{turn\+\_\+left}}
+\index{turn\+\_\+left@{turn\+\_\+left}!e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}}
+\subsubsection[{turn\+\_\+left}]{\setlength{\rightskip}{0pt plus 5cm}void turn\+\_\+left (
+\begin{DoxyParamCaption}
+\item[{double}]{d\+Speed}
+\end{DoxyParamCaption}
+)}}\label{e__puck__movement_8h_a52df61e7e792cf4c167b5b53a524c717}
+Function to turn left \hypertarget{e__puck__movement_8h_a8753cbe45ab440b5e87c9905b3242e5a}{\index{e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}!turn\+\_\+right@{turn\+\_\+right}}
+\index{turn\+\_\+right@{turn\+\_\+right}!e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}}
+\subsubsection[{turn\+\_\+right}]{\setlength{\rightskip}{0pt plus 5cm}void turn\+\_\+right (
+\begin{DoxyParamCaption}
+\item[{double}]{d\+Speed}
+\end{DoxyParamCaption}
+)}}\label{e__puck__movement_8h_a8753cbe45ab440b5e87c9905b3242e5a}
+Function to turn right \hypertarget{e__puck__movement_8h_a3336236c14c05ddcc32f5389dfe6b33c}{\index{e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}!U\+M\+Bmark@{U\+M\+Bmark}}
+\index{U\+M\+Bmark@{U\+M\+Bmark}!e\+\_\+puck\+\_\+movement.\+h@{e\+\_\+puck\+\_\+movement.\+h}}
+\subsubsection[{U\+M\+Bmark}]{\setlength{\rightskip}{0pt plus 5cm}void U\+M\+Bmark (
+\begin{DoxyParamCaption}
+\item[{double}]{d\+Speed, }
+\item[{double}]{d\+Distance, }
+\item[{struct {\bf odometry\+Track\+Struct} $\ast$}]{ot}
+\end{DoxyParamCaption}
+)}}\label{e__puck__movement_8h_a3336236c14c05ddcc32f5389dfe6b33c}
+University of Michigan Benchmark 
